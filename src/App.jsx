@@ -10,7 +10,6 @@ import useScrollToHash from "./hooks/useScrollToHash";
 
 
 const WebsiteAb = lazy(() => import("./pages/About/WebsiteAb"));
-const ServiceDetail = lazy(() => import("./pages/Services/ServiceDetail"));
 const Home = lazy(() => import("./pages/Home"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 

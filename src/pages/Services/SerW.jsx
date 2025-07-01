@@ -10,10 +10,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { useParams } from "react-router-dom";
 
 const SerW = () => {
-  const location = useLocation();
-  const currentUrl = location.pathname;
+  const { url } = useParams();
 
   const [expanded, setExpanded] = useState(false);
 
@@ -21,7 +21,7 @@ const SerW = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const service = wordSlid.find((service) => service.url === currentUrl) || {
+  const service = wordSlid.find((service) => service.url === `/${url}`) || {
     image: "",
     name: "Service Not Found",
     detail: "The requested service could not be found.",
@@ -46,7 +46,7 @@ const SerW = () => {
   const faqs = [Q1, Q2, Q3];
 
   const filteredServices = wordSlid.filter(
-    (service) => service.url !== currentUrl
+    (serviceItem) => serviceItem.url !== `/${url}`
   );
 
   // Dynamically set the hero image based on the current service
@@ -131,9 +131,9 @@ const SerW = () => {
               <h3 className="s-primaryText">Main Services</h3>
               <div className="c-main">
                 {filteredServices.map((service, index) => (
-                  <a key={index} href={service.url} className="m-choose">
+                  <Link key={index} to={service.url} className="m-choose">
                     <p className="h-choose">{service.name}</p>
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>

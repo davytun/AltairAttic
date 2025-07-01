@@ -1,6 +1,6 @@
 import React from "react";
 import SEO from "../components/SEO";
-import Companies from "../components/Companies/Companies";
+// import Companies from "../components/Companies/Companies";
 import Details from "../components/Details/Details";
 import Footer from "../components/Footer/Footer";
 import GetStarted from "../components/GetStarted/GetStarted";
@@ -10,7 +10,7 @@ import Hero from "../components/Hero/Hero";
 import Value from "../components/Value/Value";
 import MissionVision from "../components/MissionVision";
 import AboutUs from "../components/About/About";
-import "../App.css";
+// import "../App.css";
 import Subsidiary from "../components/subsidiary/subsidiary";
 import ExSer from "../components/Work/Work";
 
@@ -33,8 +33,7 @@ function Home() {
       {/* <Subsidiary/> */}
       <Value />
       <Details />
-      {/*       <GetStarted />
-       */}{" "}
+      <GetStarted />
       <Footer />
     </div>
   );

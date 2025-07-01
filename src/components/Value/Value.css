@@ -22,6 +22,7 @@
   overflow: hidden;
   margin-bottom: 20px;
   transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+  padding-inline: 20px;
 }
 
 .accordionItem.expanded {
