@@ -35,10 +35,10 @@ export const ContactInfo = () => {
           {contactDetails.map((detail, i) => (
             <div
               key={i}
-              className="group p-10 rounded-[2.5rem] bg-obsidian-surface border border-white/5 hover:border-bronze/30 transition-all duration-700"
+              className="group p-10 rounded-[2.5rem] bg-obsidian-surface border border-white/5 hover:border-accent/30 transition-all duration-700"
             >
-              <div className="w-12 h-12 rounded-2xl bg-bronze/5 flex items-center justify-center mb-8 group-hover:bg-bronze group-hover:rotate-12 transition-all duration-700">
-                <detail.icon className="w-5 h-5 text-bronze group-hover:text-obsidian transition-colors" />
+              <div className="w-12 h-12 rounded-2xl bg-accent/5 flex items-center justify-center mb-8 group-hover:bg-accent group-hover:rotate-12 transition-all duration-700">
+                <detail.icon className="w-5 h-5 text-accent group-hover:text-obsidian transition-colors" />
               </div>
               <div className="space-y-2">
                 <span className="text-[10px] font-black uppercase tracking-widest text-white/20">

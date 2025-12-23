@@ -29,10 +29,10 @@ export const ServiceList = () => {
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     {/* Index & Icon */}
                     <div className="lg:col-span-1 flex items-center gap-6 lg:flex-col lg:items-start">
-                      <span className="text-[10px] font-black tracking-widest text-white/20 group-hover:text-bronze transition-colors">
+                      <span className="text-[10px] font-black tracking-widest text-white/20 group-hover:text-accent transition-colors">
                         / 0{index + 1}
                       </span>
-                      <Icon className="w-6 h-6 text-white/10 group-hover:text-bronze group-hover:rotate-12 transition-all duration-700" />
+                      <Icon className="w-6 h-6 text-white/10 group-hover:text-accent group-hover:rotate-12 transition-all duration-700" />
                     </div>
 
                     {/* Content */}
@@ -45,27 +45,37 @@ export const ServiceList = () => {
                       </p>
                     </div>
 
-                    {/* Image Preview (Visible on Hover in Desktop) */}
-                    <div className="lg:col-span-3 hidden lg:block overflow-hidden relative aspect-video rounded-xl bg-obsidian-surface group-hover:scale-105 transition-transform duration-1000">
-                      <img
+                    {/* Image Preview (Visible on Hover in Desktop, Scroll on Mobile) */}
+                    <div className="lg:col-span-3 overflow-hidden relative aspect-video rounded-xl bg-obsidian-surface transition-transform duration-1000 group-hover:scale-105">
+                      <motion.img
                         src={service.image}
                         alt={service.name}
-                        className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                        initial={{ filter: "grayscale(100%)", opacity: 0.2 }}
+                        whileInView={{ filter: "grayscale(0%)", opacity: 1 }}
+                        transition={{ duration: 1.5 }}
+                        viewport={{ once: true, amount: 0.8 }}
+                        className="w-full h-full object-cover transition-all duration-1000 group-hover:grayscale-0 group-hover:opacity-100"
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     </div>
 
                     {/* Arrow */}
                     <div className="lg:col-span-1 flex justify-end">
-                      <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-bronze group-hover:border-bronze transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2">
+                      <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2">
                         <ArrowUpRight className="w-6 h-6 text-white group-hover:text-obsidian transition-colors" />
                       </div>
                     </div>
                   </div>
                 </Link>
 
-                {/* Horizontal Progress bar for hover */}
-                <div className="absolute bottom-0 left-0 h-px bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left z-20" />
+                {/* Horizontal Progress bar for hover/view */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ duration: 1.5 }}
+                  viewport={{ once: true }}
+                  className="absolute bottom-0 left-0 h-px bg-accent transition-transform duration-1000 origin-left z-20"
+                />
               </motion.div>
             );
           })}

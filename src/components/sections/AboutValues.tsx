@@ -58,7 +58,7 @@ export const AboutValues = () => {
                     key={word}
                     whileHover={{
                       scale: 1.1,
-                      color: "var(--color-bronze)",
+                      color: "var(--color-accent)",
                       textShadow: "0 0 20px rgba(205, 127, 50, 0.4)",
                     }}
                     className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-white/3 tracking-tighter leading-none cursor-default transition-colors duration-500"
@@ -90,17 +90,25 @@ export const AboutValues = () => {
 
               <div className="grid grid-cols-2 gap-6 items-end">
                 <div className="aspect-square rounded-2xl overflow-hidden border border-white/5">
-                  <img
+                  <motion.img
                     src="/human-tech-philosophy.png"
                     alt="Innovation"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    initial={{ filter: "grayscale(100%)" }}
+                    whileInView={{ filter: "grayscale(0%)" }}
+                    transition={{ duration: 2 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    className="w-full h-full object-cover transition-all duration-700"
                   />
                 </div>
                 <div className="aspect-3/4 rounded-2xl overflow-hidden border border-white/5">
-                  <img
+                  <motion.img
                     src="/human-tech-design.png"
                     alt="Values"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    initial={{ filter: "grayscale(100%)" }}
+                    whileInView={{ filter: "grayscale(0%)" }}
+                    transition={{ duration: 2 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    className="w-full h-full object-cover transition-all duration-700"
                   />
                 </div>
               </div>
@@ -116,21 +124,31 @@ export const AboutValues = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative border-b border-white/5 pb-10 hover:border-bronze transition-colors duration-700"
+                className="group relative border-b border-white/5 pb-10 transition-colors duration-700 hover:border-accent/40"
               >
                 <div className="flex justify-between items-start gap-8">
                   <div className="space-y-4">
-                    <h4 className="text-3xl font-display uppercase tracking-tight group-hover:text-bronze transition-colors flex items-center gap-4">
+                    <motion.h4
+                      initial={{ opacity: 0.7 }}
+                      whileInView={{ opacity: 1 }}
+                      className="text-3xl font-display uppercase tracking-tight group-hover:text-accent transition-colors flex items-center gap-4"
+                    >
                       <span className="text-[10px] uppercase tracking-widest text-white/20">
                         / 0{i + 1}
                       </span>
                       {v.title}
-                    </h4>
+                    </motion.h4>
                     <p className="text-sm text-gray-500 font-light max-w-sm group-hover:text-white transition-colors">
                       {v.desc}
                     </p>
                   </div>
-                  <div className="w-12 h-px bg-white/5 group-hover:w-24 group-hover:bg-bronze transition-all duration-700 mt-4" />
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="w-12 h-px bg-white/10 group-hover:w-24 group-hover:bg-accent transition-all duration-700 mt-4 origin-left"
+                  />
                 </div>
               </motion.div>
             ))}

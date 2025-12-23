@@ -34,7 +34,7 @@ export const ProjectsHero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           >
-            <span className="text-label mb-12 block tracking-[0.8em] text-bronze uppercase">
+            <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
               Archive / Works
             </span>
             <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-16">
@@ -49,7 +49,7 @@ export const ProjectsHero = () => {
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "100%", opacity: 1 }}
             transition={{ delay: 0.8, duration: 1.5, ease: "circOut" }}
-            className="max-w-px h-24 bg-linear-to-b from-bronze to-transparent mb-12"
+            className="max-w-px h-24 bg-linear-to-b from-accent to-transparent mb-12"
           />
 
           <motion.p

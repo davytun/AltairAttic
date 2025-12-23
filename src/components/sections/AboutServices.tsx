@@ -48,7 +48,7 @@ export const AboutServices = () => {
             </span>
             <h2 className="text-7xl md:text-[8vw] font-display font-black leading-[0.85] uppercase tracking-tighter">
               Bespoke <br />{" "}
-              <span className="text-bronze italic font-serif lowercase tracking-normal">
+              <span className="text-accent italic font-serif lowercase tracking-normal">
                 mastery.
               </span>
             </h2>
@@ -74,21 +74,30 @@ export const AboutServices = () => {
               viewport={{ once: true }}
               className="group relative bg-obsidian p-16 md:p-20 flex flex-col justify-between aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
             >
-              {/* Background Glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-bronze/5 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              {/* Cinematic Glow - Animated on mobile Viewport */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 2 }}
+                className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 group-hover:bg-accent/10 transition-colors duration-1000"
+              />
 
               <div className="space-y-16 relative z-10">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-black tracking-[0.5em] text-bronze uppercase">
+                  <span className="text-[10px] font-black tracking-[0.5em] text-accent uppercase">
                     / 0{i + 1}
                   </span>
-                  <s.icon className="w-8 h-8 text-white/10 group-hover:text-bronze transition-all duration-700 group-hover:rotate-12" />
+                  <s.icon className="w-8 h-8 text-white/10 group-hover:text-accent transition-all duration-700 group-hover:rotate-12" />
                 </div>
 
                 <div className="space-y-8">
-                  <h3 className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-bronze transition-colors">
+                  <motion.h3
+                    initial={{ opacity: 0.7 }}
+                    whileInView={{ opacity: 1 }}
+                    className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-accent transition-colors"
+                  >
                     {s.title}
-                  </h3>
+                  </motion.h3>
                   <p className="text-sm text-white/40 font-light leading-relaxed group-hover:text-white/70 transition-colors">
                     {s.detail}
                   </p>
@@ -102,8 +111,14 @@ export const AboutServices = () => {
                 </button>
               </div>
 
-              {/* Hover Image Reveal Concept (Optional, or just a subtle texture) */}
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left" />
+              {/* Progress Line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 1.5, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="absolute inset-x-0 bottom-0 h-px bg-accent origin-left"
+              />
             </motion.div>
           ))}
         </div>

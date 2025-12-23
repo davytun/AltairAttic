@@ -28,7 +28,7 @@ export const Process = () => {
     <section className="bg-obsidian py-48 px-[6vw] border-t border-white/5">
       <div className="container-luxury">
         <div className="mb-40 space-y-8 text-center md:text-left">
-          <span className="text-[10px] uppercase tracking-[0.5em] text-bronze font-bold block">
+          <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-bold block">
             Methodology
           </span>
           <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none">
@@ -45,16 +45,16 @@ export const Process = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1.5, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="bg-obsidian group p-12 space-y-16 hover:bg-bronze transition-all duration-1000 cursor-default"
+              className="bg-obsidian group p-12 space-y-16 hover:bg-accent transition-all duration-1000 cursor-default"
             >
-              <span className="text-7xl font-display font-black text-white/[0.03] group-hover:text-obsidian/10 transition-colors uppercase">
+              <span className="text-7xl font-display font-black text-white/3 group-hover:text-obsidian/10 transition-colors uppercase">
                 {step.num}
               </span>
               <div className="space-y-6">
                 <h3 className="text-2xl font-display uppercase tracking-tight group-hover:text-obsidian transition-colors">
                   {step.title}
                 </h3>
-                <div className="h-[1px] w-full bg-white/10 group-hover:bg-obsidian/20 animate-[scaleIn_1s_ease]" />
+                <div className="h-px w-full bg-white/10 group-hover:bg-obsidian/20 animate-[scaleIn_1s_ease]" />
                 <p className="text-sm font-light text-gray-500 group-hover:text-obsidian transition-colors leading-relaxed">
                   {step.desc}
                 </p>

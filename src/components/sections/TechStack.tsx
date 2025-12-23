@@ -35,9 +35,9 @@ export const TechStack = () => {
     >
       {/* Cinematic Background: Animated Grid & Lines */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-bronze/50 to-transparent" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-linear-to-b from-transparent via-bronze/50 to-transparent" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute top-1/2 left-0 w-full h-px bg-linear-to-r from-transparent via-accent/50 to-transparent" />
+        <div className="absolute top-0 left-1/2 w-px h-full bg-linear-to-b from-transparent via-accent/50 to-transparent" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[60px_60px]" />
       </div>
 
       <div className="container-luxury relative z-10">
@@ -58,21 +58,25 @@ export const TechStack = () => {
           {/* Central Hub Node (Always visible, center of layout) */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] }}
-            className="relative z-20 w-48 h-48 rounded-full border border-bronze/30 bg-obsidian-surface flex items-center justify-center p-8 group shadow-[0_0_100px_rgba(205,127,50,0.1)] lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
+            viewport={{ once: true }}
+            className="relative z-20 w-48 h-48 rounded-full border border-accent/30 bg-obsidian-surface flex items-center justify-center p-8 group shadow-[0_0_100px_rgba(0,159,255,0.1)] lg:absolute lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
           >
-            <div className="w-full h-full rounded-full border-2 border-dashed border-bronze/20 animate-[spin_30s_linear_infinite]" />
+            <div className="w-full h-full rounded-full border-2 border-dashed border-accent/20 animate-[spin_30s_linear_infinite]" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-xs font-black tracking-widest text-bronze uppercase">
+              <span className="text-xs font-black tracking-widest text-accent uppercase">
                 Core
               </span>
             </div>
           </motion.div>
 
+          {/* Mobile Connection Lines (Vertical) */}
+          <div className="absolute left-1/2 top-48 bottom-0 w-px bg-linear-to-b from-accent/30 via-accent/10 to-transparent -translate-x-1/2 lg:hidden z-0" />
+
           {/* Schematic Connection Lines (SVG) - Desktop Only */}
           <svg
-            className="absolute inset-0 w-full h-full pointer-events-none stroke-bronze/10 fill-none hidden lg:block"
+            className="absolute inset-0 w-full h-full pointer-events-none stroke-accent/10 fill-none hidden lg:block"
             viewBox="0 0 1200 600"
           >
             <motion.path
@@ -85,14 +89,15 @@ export const TechStack = () => {
           </svg>
 
           {/* Nodes (Groups) - Responsive Layout */}
-          <div className="relative lg:absolute lg:inset-0 w-full lg:h-full flex flex-col lg:block gap-8 px-4 lg:px-0">
+          <div className="relative lg:absolute lg:inset-0 w-full lg:h-full flex flex-col lg:block gap-12 px-4 lg:px-0 z-10">
             {groups.map((g, i) => (
               <motion.div
                 key={g.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 1, delay: 0.8 + i * 0.2 }}
-                className={`w-full lg:w-72 p-10 bg-obsidian-surface border border-white/5 rounded-3xl group hover:border-bronze hover:bg-bronze transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
+                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                className={`w-full lg:w-72 p-10 bg-obsidian-surface border border-white/5 rounded-3xl group hover:border-accent hover:bg-accent transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
                   i === 0
                     ? "lg:top-0 lg:left-0"
                     : i === 1
@@ -102,8 +107,15 @@ export const TechStack = () => {
                     : "lg:bottom-0 lg:right-0"
                 }`}
               >
+                {/* Connector Dot for Mobile */}
+                <div
+                  className={`absolute lg:hidden top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border border-accent/30 bg-obsidian ${
+                    i % 2 === 0 ? "-right-2" : "-left-2"
+                  }`}
+                />
+
                 <div className="space-y-6">
-                  <span className="text-[10px] font-mono text-bronze group-hover:text-obsidian transition-colors block uppercase tracking-widest">
+                  <span className="text-[10px] font-mono text-accent group-hover:text-obsidian transition-colors block uppercase tracking-widest">
                     / Layer.0{i + 1}
                   </span>
                   <h3 className="text-2xl font-display uppercase tracking-tight text-white group-hover:text-obsidian transition-colors">
@@ -132,15 +144,22 @@ export const TechStack = () => {
             { label: "Nodes Managed", val: "140k+" },
             { label: "Deployment Speed", val: "2.4ms" },
             { label: "Security Level", val: "EAL6+" },
-          ].map((stat) => (
-            <div key={stat.label} className="space-y-2">
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="space-y-2"
+            >
               <span className="text-[9px] uppercase tracking-[0.4em] text-white/20 block">
                 {stat.label}
               </span>
               <span className="text-3xl font-display text-white font-medium">
                 {stat.val}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

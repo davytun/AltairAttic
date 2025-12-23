@@ -20,11 +20,23 @@ export const ProjectsGrid = () => {
               className="group cursor-pointer"
             >
               {/* Architectural Card */}
-              <div className="relative aspect-4/5 md:aspect-square overflow-hidden rounded-[2.5rem] bg-obsidian-surface border border-white/5 transition-all duration-1000 group-hover:border-bronze/40 group-hover:shadow-[0_0_80px_rgba(205,127,50,0.05)]">
-                <img
+              <div className="relative aspect-4/5 md:aspect-square overflow-hidden rounded-[2.5rem] bg-obsidian-surface border border-white/5 transition-all duration-1000 group-hover:border-accent/40 group-hover:shadow-[0_0_80px_rgba(0,159,255,0.05)]">
+                <motion.img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
+                  initial={{
+                    filter: "grayscale(100%)",
+                    opacity: 0.6,
+                    scale: 1.1,
+                  }}
+                  whileInView={{
+                    filter: "grayscale(0%)",
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  transition={{ duration: 1.5 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                 />
 
                 {/* Gradient Overlays */}
@@ -33,14 +45,24 @@ export const ProjectsGrid = () => {
 
                 {/* Floating Meta */}
                 <div className="absolute top-10 left-10 z-20 flex flex-col items-start gap-4">
-                  <span className="text-[10px] font-black tracking-[0.5em] text-bronze uppercase block mb-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-700">
+                  <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-[10px] font-black tracking-[0.5em] text-accent uppercase block mb-2"
+                  >
                     / MMXXIV
-                  </span>
-                  <div className="px-4 py-2 border border-white/10 rounded-full bg-obsidian/40 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                  </motion.span>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="px-4 py-2 border border-white/10 rounded-full bg-obsidian/40 backdrop-blur-xl"
+                  >
                     <span className="text-[8px] font-black uppercase tracking-[0.3em] text-white/60">
                       {project.category}
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Main Identity */}
@@ -48,7 +70,12 @@ export const ProjectsGrid = () => {
                   <h3 className="text-4xl md:text-5xl font-display uppercase tracking-tight leading-none mb-6">
                     {project.title}
                   </h3>
-                  <div className="w-12 h-px bg-bronze group-hover:w-full transition-all duration-1000" />
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 1.5 }}
+                    className="w-full h-px bg-accent origin-left"
+                  />
                 </div>
               </div>
 

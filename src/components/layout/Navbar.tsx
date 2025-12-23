@@ -20,6 +20,8 @@ const Navbar = () => {
     { name: "Philosophy", path: "/" },
     { name: "Expertise", path: "/services" },
     { name: "Works", path: "/projects" },
+    { name: "Events", path: "/events" },
+    { name: "Activities", path: "/activities" },
     { name: "Manifesto", path: "/about" },
   ];
 
@@ -46,13 +48,13 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/50 hover:text-white transition-colors"
+                className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/50 hover:text-accent transition-colors"
               >
                 {link.name}
               </Link>
             ))}
             <Link to="/contact">
-              <button className="text-[10px] uppercase font-bold tracking-[0.3em] px-6 py-2 border border-white/10 hover:border-white/40 transition-all">
+              <button className="text-[10px] uppercase font-bold tracking-[0.3em] px-6 py-2 border border-white/10 hover:border-accent hover:text-accent transition-all">
                 Inquire
               </button>
             </Link>

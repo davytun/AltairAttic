@@ -75,7 +75,7 @@ export const Hero = () => {
           className="flex flex-col items-start gap-12"
         >
           <div className="overflow-hidden">
-            <span className="text-[10px] uppercase tracking-[1em] text-bronze font-black mb-4 block">
+            <span className="text-[10px] uppercase tracking-[1em] text-accent font-black mb-4 block">
               Altair Attic Limited
             </span>
           </div>
@@ -87,13 +87,13 @@ export const Hero = () => {
             <div className="overflow-hidden mb-[2vw]">
               {splitText("INNOVATIVE")}
             </div>
-            <div className="overflow-hidden text-bronze">
-              {splitText("LIFE_TECH")}
+            <div className="overflow-hidden text-accent">
+              {splitText("LIFE TECH")}
             </div>
           </h1>
 
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-12 mt-8">
-            <p className="max-w-xl text-lg md:text-xl font-light text-white/50 leading-relaxed border-l border-bronze/30 pl-8">
+            <p className="max-w-xl text-lg md:text-xl font-light text-white/50 leading-relaxed border-l border-accent/30 pl-8">
               Empowering homes, businesses, and individuals with smart solutions
               in automation, software, and IoT integration.
             </p>
@@ -101,7 +101,7 @@ export const Hero = () => {
             <div className="flex items-center gap-8">
               <Button
                 size="lg"
-                className="h-24 px-12 rounded-full bg-bronze text-obsidian hover:bg-white hover:text-obsidian transition-all duration-700 font-black uppercase tracking-widest text-xs group"
+                className="h-24 px-12 rounded-full bg-accent text-obsidian hover:bg-white hover:text-obsidian transition-all duration-700 font-black uppercase tracking-widest text-xs group"
               >
                 Get Started{" "}
                 <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-3 transition-transform" />

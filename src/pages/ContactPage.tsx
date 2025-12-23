@@ -6,7 +6,7 @@ import { ContactInfo } from "@/components/sections/ContactInfo";
 
 const ContactPage = () => {
   return (
-    <main className="bg-obsidian selection:bg-bronze selection:text-obsidian min-h-screen">
+    <main className="bg-obsidian selection:bg-accent selection:text-obsidian min-h-screen">
       <Navbar />
 
       <ContactHero />

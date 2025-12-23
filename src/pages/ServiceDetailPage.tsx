@@ -16,7 +16,7 @@ const ServiceDetailPage = () => {
   }
 
   return (
-    <main className="bg-obsidian selection:bg-bronze selection:text-obsidian">
+    <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
 
       <ServiceDetailHero service={service} />

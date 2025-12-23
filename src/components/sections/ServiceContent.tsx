@@ -35,7 +35,7 @@ export const ServiceContent = ({ service }: Props) => {
             </div>
 
             <div className="pt-16 border-t border-white/5">
-              <h3 className="text-xl font-display uppercase text-bronze mb-12 tracking-widest">
+              <h3 className="text-xl font-display uppercase text-accent mb-12 tracking-widest">
                 Key Capabilities
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -47,7 +47,7 @@ export const ServiceContent = ({ service }: Props) => {
                     transition={{ delay: i * 0.1 }}
                     className="flex items-start gap-4 p-6 rounded-2xl bg-obsidian-surface border border-white/5"
                   >
-                    <CheckCircle2 className="w-5 h-5 text-bronze shrink-0 mt-1" />
+                    <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-1" />
                     <span className="text-sm text-white/60 font-medium leading-relaxed">
                       {info}
                     </span>
@@ -60,7 +60,7 @@ export const ServiceContent = ({ service }: Props) => {
           {/* Sidebar (FAQ & Stats) */}
           <div className="lg:col-span-5 space-y-16">
             <div className="p-12 rounded-3xl bg-linear-to-br from-obsidian-surface to-obsidian border border-white/5 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-bronze/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
               <h3 className="text-2xl font-display uppercase mb-12 relative z-10">
                 Common Inquiries
@@ -77,7 +77,7 @@ export const ServiceContent = ({ service }: Props) => {
                         {faq.Question}
                       </span>
                       {openFaq === i ? (
-                        <Minus className="w-4 h-4 text-bronze" />
+                        <Minus className="w-4 h-4 text-accent" />
                       ) : (
                         <Plus className="w-4 h-4 text-white/20" />
                       )}
@@ -98,13 +98,13 @@ export const ServiceContent = ({ service }: Props) => {
               </div>
             </div>
 
-            <div className="p-12 rounded-3xl border border-bronze/10 flex flex-col items-center text-center gap-8 group hover:border-bronze transition-colors duration-700">
+            <div className="p-12 rounded-3xl border border-accent/10 flex flex-col items-center text-center gap-8 group hover:border-accent transition-colors duration-700">
               <span className="text-[10px] uppercase font-black tracking-[0.6em] text-white/20">
                 Ready to initiate?
               </span>
               <h4 className="text-3xl font-display uppercase">
                 Craft your bespoke <br />{" "}
-                <span className="text-bronze">solution now.</span>
+                <span className="text-accent">solution now.</span>
               </h4>
               <button className="px-12 py-4 border border-white/10 text-[10px] font-black uppercase tracking-[0.5em] group-hover:bg-white group-hover:text-black transition-all">
                 Start Consultation

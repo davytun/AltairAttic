@@ -19,8 +19,8 @@ export const CaseStudy = () => {
                 lighting.
               </p>
               <div className="pt-8 flex flex-col gap-4">
-                <div className="h-[1px] w-full bg-white/5" />
-                <span className="text-[10px] text-bronze font-bold tracking-[0.3em] uppercase">
+                <div className="h-px w-full bg-white/5" />
+                <span className="text-[10px] text-accent font-bold tracking-[0.3em] uppercase">
                   Built: May 2024
                 </span>
                 <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase">
@@ -37,11 +37,15 @@ export const CaseStudy = () => {
               whileInView={{ clipPath: "inset(0 0% 0 0)" }}
               transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
               viewport={{ once: true }}
-              className="aspect-[4/5] bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl"
+              className="aspect-4/5 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl"
             >
-              <img
+              <motion.img
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[3s]"
+                initial={{ filter: "grayscale(100%)" }}
+                whileInView={{ filter: "grayscale(0%)" }}
+                transition={{ duration: 2 }}
+                viewport={{ once: true, amount: 0.5 }}
+                className="w-full h-full object-cover transition-all duration-[3s]"
                 alt="Case Study 01"
               />
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
@@ -62,7 +66,7 @@ export const CaseStudy = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <div className="aspect-[4/3] bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl">
+              <div className="aspect-4/3 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200"
                   className="w-full h-full object-cover hover:scale-105 transition-all duration-[3s]"
@@ -76,9 +80,9 @@ export const CaseStudy = () => {
                   that a guest could walk in and use it without a manual. We
                   delivered a zero-interface home."
                 </p>
-                <button className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-bronze group">
+                <button className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group">
                   Full Study{" "}
-                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-bronze group-hover:text-obsidian transition-all">
+                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </button>
@@ -89,8 +93,8 @@ export const CaseStudy = () => {
       </div>
 
       {/* Architectural Border Decoration */}
-      <div className="absolute top-0 right-0 w-[1px] h-full bg-white/5 hidden lg:block" />
-      <div className="absolute top-0 left-0 w-[1px] h-full bg-white/5 hidden lg:block" />
+      <div className="absolute top-0 right-0 w-px h-full bg-white/5 hidden lg:block" />
+      <div className="absolute top-0 left-0 w-px h-full bg-white/5 hidden lg:block" />
     </section>
   );
 };

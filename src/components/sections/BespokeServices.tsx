@@ -31,6 +31,67 @@ const services = [
   },
 ];
 
+const ServiceCard = ({ s, i }: { s: any; i: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.2, delay: i * 0.1 }}
+      viewport={{ once: true, margin: "-10%" }}
+      className="group relative flex flex-col md:flex-row h-full md:min-h-[500px] bg-obsidian-surface border border-white/5 rounded-[3rem] overflow-hidden hover:border-accent/30 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
+    >
+      {/* Image Section (40%) */}
+      <div className="w-full md:w-2/5 aspect-square md:aspect-auto overflow-hidden relative">
+        <motion.img
+          src={s.image}
+          initial={{ filter: "grayscale(100%)", scale: 1.1 }}
+          whileInView={{ filter: "grayscale(0%)", scale: 1 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.5 }}
+          className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
+          alt={s.title}
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-obsidian-surface hidden md:block" />
+        <div className="absolute inset-0 bg-linear-to-t from-obsidian-surface via-transparent to-transparent md:hidden" />
+      </div>
+
+      {/* Content Section (60%) */}
+      <div className="w-full md:w-3/5 p-12 md:p-20 flex flex-col justify-between relative z-10">
+        <div className="space-y-12">
+          <div className="flex justify-between items-start">
+            <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black">
+              / Service.0{s.id}
+            </span>
+            <s.icon className="w-8 h-8 text-white/10 group-hover:text-accent transition-colors duration-700" />
+          </div>
+          <div className="space-y-6">
+            <motion.h3
+              initial={{ opacity: 0.5 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-none group-hover:text-white transition-colors"
+            >
+              {s.title}
+            </motion.h3>
+            <p className="text-lg font-light text-gray-500 leading-relaxed max-w-xl group-hover:text-white/80 transition-colors">
+              {s.desc}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 md:mt-0 flex justify-end">
+          <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn">
+            Launch Module
+            <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-obsidian transition-all duration-700">
+              <ArrowUpRight className="w-6 h-6" />
+            </div>
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 export const BespokeServices = () => {
   return (
     <section className="bg-obsidian py-48 relative overflow-hidden">
@@ -44,7 +105,7 @@ export const BespokeServices = () => {
             </h2>
           </div>
           <div className="md:w-1/3 pt-10">
-            <p className="text-xl font-light text-white/40 leading-relaxed border-l border-bronze/30 pl-10 mb-8">
+            <p className="text-xl font-light text-white/40 leading-relaxed border-l border-accent/30 pl-10 mb-8">
               Altair Attic Limited is a cutting-edge technology company
               committed to making advanced technology accessible, beneficial,
               and fundamentally human.
@@ -55,54 +116,7 @@ export const BespokeServices = () => {
         {/* Large Cinematic Cards Layout */}
         <div className="space-y-12">
           {services.map((s, i) => (
-            <motion.div
-              key={s.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: i * 0.1 }}
-              viewport={{ once: true, margin: "-10%" }}
-              className="group relative flex flex-col md:flex-row h-full md:min-h-[500px] bg-obsidian-surface border border-white/5 rounded-[3rem] overflow-hidden hover:border-bronze/30 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
-            >
-              {/* Image Section (40%) */}
-              <div className="w-full md:w-2/5 aspect-square md:aspect-auto overflow-hidden relative">
-                <img
-                  src={s.image}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                  alt={s.title}
-                />
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-transparent to-obsidian-surface hidden md:block" />
-                <div className="absolute inset-0 bg-linear-to-t from-obsidian-surface via-transparent to-transparent md:hidden" />
-              </div>
-
-              {/* Content Section (60%) */}
-              <div className="w-full md:w-3/5 p-12 md:p-20 flex flex-col justify-between relative z-10">
-                <div className="space-y-12">
-                  <div className="flex justify-between items-start">
-                    <span className="text-[10px] uppercase tracking-[0.5em] text-bronze font-black">
-                      / Service.0{s.id}
-                    </span>
-                    <s.icon className="w-8 h-8 text-white/10 group-hover:text-bronze transition-colors duration-700" />
-                  </div>
-                  <div className="space-y-6">
-                    <h3 className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-none group-hover:text-white transition-colors">
-                      {s.title}
-                    </h3>
-                    <p className="text-lg font-light text-gray-500 leading-relaxed max-w-xl group-hover:text-white/80 transition-colors">
-                      {s.desc}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-12 md:mt-0 flex justify-end">
-                  <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn">
-                    Launch Module
-                    <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-bronze group-hover:bg-bronze group-hover:text-obsidian transition-all duration-700">
-                      <ArrowUpRight className="w-6 h-6" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+            <ServiceCard key={s.id} s={s} i={i} />
           ))}
         </div>
       </div>

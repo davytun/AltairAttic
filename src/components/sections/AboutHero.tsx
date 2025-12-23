@@ -20,10 +20,17 @@ export const AboutHero = () => {
       {/* Cinematic Background with Parallax */}
       <motion.div style={{ y, scale }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-linear-to-b from-obsidian/20 via-obsidian/60 to-obsidian z-10" />
-        <img
+        <motion.img
           src="/about-hero-bg.png"
+          style={{
+            filter: useTransform(
+              scrollYProgress,
+              [0, 0.5],
+              ["grayscale(100%)", "grayscale(0%)"]
+            ),
+          }}
           alt="Cinematic Background"
-          className="w-full h-full object-cover opacity-40 grayscale"
+          className="w-full h-full object-cover opacity-40"
         />
       </motion.div>
 
@@ -47,7 +54,7 @@ export const AboutHero = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-label mb-12 px-8 py-3 border border-bronze/30 rounded-full bg-obsidian/50 backdrop-blur-xl"
+            className="text-label mb-12 px-8 py-3 border border-accent/30 rounded-full bg-obsidian/50 backdrop-blur-xl"
           >
             Digital Architecture
           </motion.span>
@@ -57,11 +64,11 @@ export const AboutHero = () => {
             <span className="text-white/20 italic font-serif lowercase tracking-normal">
               forefront
             </span>
-            <br /> <span className="text-bronze">of tech.</span>
+            <br /> <span className="text-accent">of tech.</span>
           </h1>
 
           <div className="max-w-4xl pt-16 border-t border-white/10 relative">
-            <div className="absolute -top-px left-1/2 -translate-x-1/2 w-40 h-px bg-bronze" />
+            <div className="absolute -top-px left-1/2 -translate-x-1/2 w-40 h-px bg-accent" />
 
             <p className="text-2xl md:text-3xl font-light text-white/60 leading-relaxed italic mb-10">
               "Altair Attic Limited is at the forefront of technological
@@ -75,7 +82,7 @@ export const AboutHero = () => {
                 <span className="text-[10px] uppercase tracking-[0.4em] text-white/30">
                   Established
                 </span>
-                <span className="text-xl font-display text-bronze">MMXXIV</span>
+                <span className="text-xl font-display text-accent">MMXXIV</span>
               </div>
               <div className="w-px h-12 bg-white/10 hidden md:block" />
               <p className="max-w-md text-sm text-white/30 uppercase tracking-[0.2em] font-medium">
@@ -97,7 +104,7 @@ export const AboutHero = () => {
         <span className="text-[10px] uppercase tracking-[0.5em] text-white/20 font-bold">
           Discover
         </span>
-        <div className="w-px h-24 bg-linear-to-b from-bronze to-transparent animate-pulse" />
+        <div className="w-px h-24 bg-linear-to-b from-accent to-transparent animate-pulse" />
       </motion.div>
     </section>
   );

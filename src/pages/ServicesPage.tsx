@@ -6,7 +6,7 @@ import { Contact } from "@/components/sections/Contact";
 
 const ServicesPage = () => {
   return (
-    <main className="bg-obsidian selection:bg-bronze selection:text-obsidian">
+    <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
 
       <ServicesHero />

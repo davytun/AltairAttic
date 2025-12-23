@@ -7,11 +7,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-base-dark pt-32 pb-16 px-[6vw] border-t border-white/5">
+    <footer className="bg-obsidian pt-32 pb-16 px-[6vw] border-t border-white/5">
       <div className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-20 mb-32 items-end">
           <div className="md:col-span-6 space-y-12">
-            <h2 className="text-4xl md:text-7xl font-display leading-[0.9] uppercase tracking-tighter">
+            <h2 className="text-4xl md:text-7xl font-display leading-[0.9] uppercase tracking-tighter text-white">
               Empowering <br /> Your World.
             </h2>
             <div className="flex gap-8">
@@ -33,18 +33,24 @@ const Footer = () => {
                 Company
               </span>
               <ul className="space-y-4">
-                {["Home", "Services", "About", "Values", "Contact"].map(
-                  (item) => (
-                    <li key={item}>
-                      <Link
-                        to="#"
-                        className="text-sm uppercase tracking-widest text-white/50 hover:text-accent-amber transition-colors"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  )
-                )}
+                {[
+                  "Home",
+                  "Services",
+                  "Projects",
+                  "Events",
+                  "Activities",
+                  "About",
+                  "Contact",
+                ].map((item) => (
+                  <li key={item}>
+                    <Link
+                      to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                      className="text-sm uppercase tracking-widest text-white/50 hover:text-accent transition-colors"
+                    >
+                      {item}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="space-y-8">
@@ -86,7 +92,7 @@ const Footer = () => {
             className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-white/50 hover:text-white transition-colors group"
           >
             Back to Top{" "}
-            <div className="p-3 rounded-full border border-white/10 group-hover:bg-accent-amber group-hover:text-base-dark transition-all">
+            <div className="p-3 rounded-full border border-white/10 group-hover:bg-accent group-hover:text-obsidian transition-all">
               <ArrowUp className="w-3 h-3" />
             </div>
           </button>

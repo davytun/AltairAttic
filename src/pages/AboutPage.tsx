@@ -8,7 +8,7 @@ import { Contact } from "@/components/sections/Contact";
 
 const AboutPage = () => {
   return (
-    <main className="bg-obsidian selection:bg-bronze selection:text-obsidian">
+    <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
 
       <AboutHero />

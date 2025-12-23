@@ -7,10 +7,11 @@ import { TechStack } from "@/components/sections/TechStack";
 import { Process } from "@/components/sections/Process";
 import { Contact } from "@/components/sections/Contact";
 import { CaseStudy } from "@/components/sections/CaseStudy";
+import { EventsSection } from "@/components/sections/EventsSection";
 
 const Home = () => {
   return (
-    <main className="bg-obsidian selection:bg-bronze selection:text-obsidian">
+    <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
 
       {/* Narrative Section 1: Intro */}
@@ -25,13 +26,16 @@ const Home = () => {
       {/* Narrative Section 4: The Philosophy */}
       <AboutValues />
 
-      {/* Narrative Section 5: Internal Engine (Architecture) */}
+      {/* Narrative Section 5: The Pulse */}
+      <EventsSection />
+
+      {/* Narrative Section 6: Internal Engine (Architecture) */}
       <TechStack />
 
-      {/* Narrative Section 6: Path to Reality */}
+      {/* Narrative Section 7: Path to Reality */}
       <Process />
 
-      {/* Narrative Section 7: Final Conversion */}
+      {/* Narrative Section 8: Final Conversion */}
       <Contact />
 
       <Footer />

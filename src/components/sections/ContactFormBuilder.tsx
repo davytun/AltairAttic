@@ -48,7 +48,7 @@ export const ContactFormBuilder = () => {
   };
 
   const inputClasses =
-    "w-full bg-transparent border-b border-white/10 py-6 text-xl font-light text-white focus:border-bronze focus:outline-hidden transition-all duration-700 placeholder:text-white/10";
+    "w-full bg-transparent border-b border-white/10 py-6 text-xl font-light text-white focus:border-accent focus:outline-hidden transition-all duration-700 placeholder:text-white/10";
 
   return (
     <div className="relative">
@@ -126,9 +126,9 @@ export const ContactFormBuilder = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group relative flex items-center gap-6 px-12 py-6 border border-white/10 rounded-full overflow-hidden transition-all duration-700 hover:border-bronze disabled:opacity-50"
+            className="group relative flex items-center gap-6 px-12 py-6 border border-white/10 rounded-full overflow-hidden transition-all duration-700 hover:border-accent disabled:opacity-50"
           >
-            <div className="absolute inset-0 bg-bronze translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
             <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-obsidian transition-colors">
               {isSubmitting ? "Processing..." : "Submit Inquiry"}
             </span>

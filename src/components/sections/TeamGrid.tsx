@@ -23,10 +23,10 @@ export const TeamGrid = () => {
             </span>
             <h2 className="text-huge md:text-8xl! font-display uppercase tracking-tight leading-none text-balance">
               The Minds <br /> <span className="text-gray-600">Driving</span>{" "}
-              <br /> <span className="text-bronze">Innovation.</span>
+              <br /> <span className="text-accent">Innovation.</span>
             </h2>
           </div>
-          <p className="text-xl font-light text-white/30 max-w-sm border-l border-bronze/20 pl-10 mb-6 italic">
+          <p className="text-xl font-light text-white/30 max-w-sm border-l border-accent/20 pl-10 mb-6 italic">
             "Meet the architects of innovation driving Altair Attic forward."
           </p>
         </div>
@@ -45,18 +45,35 @@ export const TeamGrid = () => {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="aspect-3/4 overflow-hidden rounded-4xl bg-obsidian-surface border border-white/5 group-hover:border-bronze transition-all duration-1000 relative">
-                <img
+              <div className="aspect-3/4 overflow-hidden rounded-4xl bg-obsidian-surface border border-white/5 transition-all duration-1000 relative group-hover:border-accent">
+                <motion.img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                  initial={{
+                    filter: "grayscale(100%)",
+                    opacity: 0.6,
+                    scale: 1.1,
+                  }}
+                  whileInView={{
+                    filter: "grayscale(0%)",
+                    opacity: 1,
+                    scale: 1,
+                  }}
+                  transition={{ duration: 1.5 }}
+                  viewport={{ once: true, amount: 0.5 }}
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-obsidian via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-1000" />
 
                 <div className="absolute bottom-10 left-10 transition-transform duration-700 group-hover:-translate-y-2">
-                  <span className="text-[10px] uppercase tracking-[0.5em] text-bronze font-black block mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="text-[10px] uppercase tracking-[0.5em] text-accent font-black block mb-2"
+                  >
                     / 0{index + 1}
-                  </span>
+                  </motion.span>
                   <h3 className="text-2xl font-display uppercase text-white/90">
                     {member.name}
                   </h3>
@@ -67,7 +84,13 @@ export const TeamGrid = () => {
                 <p className="text-sm font-light tracking-[0.3em] uppercase text-white/40">
                   {member.title}
                 </p>
-                <div className="h-px bg-white/10 w-12 group-hover:w-full group-hover:bg-bronze transition-all duration-1000" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ duration: 1.2, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="h-px bg-white/10 w-full origin-left group-hover:bg-accent transition-colors"
+                />
               </div>
             </motion.div>
           ))}
