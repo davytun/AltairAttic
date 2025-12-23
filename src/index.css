@@ -1,146 +1,123 @@
 @import "tailwindcss";
 
-/* Add your custom styles below */
-:root {
-  --primary: #0055e9;
-  --secondary: rgba(7, 7, 7, 0.78);
-  --black: #ffffff;
-  --blue-gradient: linear-gradient(97.05deg, #0055e9 3.76%, #4066ff 100%);
-  --orange-gradient: linear-gradient(270deg, #4066ff 0%, #0055e9 100%);
-  --blue: #4066ff;
-  --lightBlue: #eeeeff;
-  --shadow: 0px 23px 21px -8px rgba(136, 160, 255, 0.25);
-  --icon-color: #040f1f;
+@theme {
+  /* $1M Obsidian & Bronze Palette */
+  --color-obsidian: #050505;
+  --color-obsidian-surface: #0a0a0a;
+  --color-obsidian-muted: #121212;
+  --color-bronze: #cd7f32;
+  --color-gold-dust: #d4a574;
+  --color-silk-white: #fafafa;
+  --color-border-dim: rgba(255, 255, 255, 0.03);
+
+  /* Architectural Typography */
+  --font-display: "Clash Display", "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", "Manrope", sans-serif;
+
+  /* Luxury Motion */
+  --ease-editorial: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-@layer base {
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    scroll-behavior: smooth;
-  }
+:root {
+  color-scheme: dark;
+}
 
-  .wrapper {
-    background-color: white;
-  }
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-silk-white);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+/* Premium Texture Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
 
-  .paddings {
-    padding: 1.5rem;
-  }
+/* 
+   ARCHITECTURAL PATTERN SYSTEM 
+   Every section uses this to maintain rhythm.
+*/
+.arch-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
 
-  .innerWidth {
-    width: 100%;
-  }
+.section-spacing {
+  padding: 160px 0;
+}
 
-  .flexCenter {
-    display: flex;
-    row-gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+@utility text-huge {
+  font-size: clamp(4rem, 12vw, 15rem);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-  .flexStart {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
+@utility text-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6em;
+  font-weight: 900;
+  color: var(--color-bronze);
+}
 
-  .flexEnd {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
+/* Decorative Vertical Patterns */
+.vertical-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-border-dim),
+    transparent
+  );
+}
 
-  .flexColCenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+/* Reveal Animations */
+.reveal-up {
+  overflow: hidden;
+}
 
-  .flexColStart {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
+.reveal-up > * {
+  transform: translateY(100%);
+  animation: revealUp 1.2s var(--ease-editorial) forwards;
+}
 
-  .flexColEnd {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+@keyframes revealUp {
+  to {
+    transform: translateY(0);
   }
+}
 
-  .primaryText {
-    color: #1f3e72;
-    font-weight: bold;
-    font-size: 2rem;
-  }
+/* Custom Scrollbar (Million Dollar Minimal) */
+::-webkit-scrollbar {
+  width: 2px;
+}
 
-  .secondaryText {
-    color: rgb(10, 10, 10);
-    font-size: 0.9rem;
-  }
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
 
-  .orangeText {
-    color: orange;
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
+::-webkit-scrollbar-thumb {
+  background: var(--color-bronze);
+}
 
-  @media (min-width: 1536px) {
-    .innerWidth {
-      max-width: 1280px;
-      margin: auto;
-    }
-  }
-
-  @media (min-width: 640px) {
-    .paddings {
-      padding: 4rem;
-    }
-  }
-
-  @media (min-width: 1280px), (min-width: 768px) {
-    .paddings {
-      padding: 2rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .primaryText {
-      font-size: 1.5rem;
-    }
-    .orangeText {
-      font-size: 1.2rem;
-    }
-  }
-
-  .button {
-    font-weight: 500;
-    padding: 0.6rem 1.4rem;
-    color: white;
-    background: var(--blue-gradient);
-    border: none;
-    border-radius: 4px;
-    transition: all 300ms ease-in;
-  }
-
-  .button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-
-  i {
-    color: var(--icon-color);
-  }
+/* Magnetic Hover Cursor Target */
+.magnetic-btn {
+  @apply transition-transform duration-500 ease-out;
 }

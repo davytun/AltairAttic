@@ -1,0 +1,113 @@
+import { motion } from "framer-motion";
+import { Home, Code2, Cpu, ArrowRight } from "lucide-react";
+
+const services = [
+  {
+    id: "01",
+    label: "Automation",
+    title: "Smart Home Automation",
+    desc: "We specialize in creating intelligent living environments that provide comfort, security, and energy efficiency.",
+    image:
+      "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
+    icon: Home,
+    detail:
+      "Intelligent lighting, climate control, and security systems integrated seamlessly into your lifestyle.",
+  },
+  {
+    id: "02",
+    label: "Development",
+    title: "Software Development",
+    desc: "Our software development team delivers tailored enterprise-grade applications.",
+    image:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200",
+    icon: Code2,
+    detail:
+      "Scalable, secure, and high-performance software solutions for web, mobile, and desktop.",
+  },
+  {
+    id: "03",
+    label: "Integration",
+    title: "IoT & Embedded Systems",
+    desc: "We provide solutions that bring intelligence to your devices.",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    icon: Cpu,
+    detail:
+      "Connecting physical hardware to the digital world through bespoke sensor integration and data analytics.",
+  },
+];
+
+export const AboutServices = () => {
+  return (
+    <section className="bg-obsidian-surface py-64 relative overflow-hidden">
+      <div className="container-luxury px-[4vw]">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-24 mb-48">
+          <div className="max-w-3xl">
+            <span className="text-label mb-10 block tracking-[0.8em]">
+              Technological Pillars
+            </span>
+            <h2 className="text-7xl md:text-[8vw] font-display font-black leading-[0.85] uppercase tracking-tighter">
+              Bespoke <br />{" "}
+              <span className="text-bronze italic font-serif lowercase tracking-normal">
+                mastery.
+              </span>
+            </h2>
+          </div>
+          <div className="lg:max-w-sm pt-12 border-l border-white/10 pl-12">
+            <p className="text-lg text-white/40 leading-relaxed uppercase tracking-widest font-bold mb-8">
+              Architecting the <br /> future of intelligence.
+            </p>
+            <p className="text-sm font-light text-white/30 leading-relaxed text-balance">
+              We don't just build technology; we engineer experiences that
+              bridge the gap between human intuition and digital precision.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1px bg-white/5 border border-white/5">
+          {services.map((s, i) => (
+            <motion.div
+              key={s.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: i * 0.2 }}
+              viewport={{ once: true }}
+              className="group relative bg-obsidian p-16 md:p-20 flex flex-col justify-between aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
+            >
+              {/* Background Glow */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-bronze/5 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+
+              <div className="space-y-16 relative z-10">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-black tracking-[0.5em] text-bronze uppercase">
+                    / 0{i + 1}
+                  </span>
+                  <s.icon className="w-8 h-8 text-white/10 group-hover:text-bronze transition-all duration-700 group-hover:rotate-12" />
+                </div>
+
+                <div className="space-y-8">
+                  <h3 className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-bronze transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-sm text-white/40 font-light leading-relaxed group-hover:text-white/70 transition-colors">
+                    {s.detail}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-16 pt-12 border-t border-white/5 relative z-10">
+                <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-white/20 group-hover:text-white transition-all">
+                  Inspect Capability
+                  <ArrowRight className="w-4 h-4 translate-x-0 group-hover:translate-x-2 transition-transform duration-700" />
+                </button>
+              </div>
+
+              {/* Hover Image Reveal Concept (Optional, or just a subtle texture) */}
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left" />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

@@ -1,0 +1,76 @@
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import wordSlid, { ServiceData } from "@/utils/wordSlid";
+import { ArrowUpRight, Zap, Target, Shield } from "lucide-react";
+
+// Mapping icons to generic service themes since wordSlid doesn't provide them
+const serviceIcons = [Zap, Target, Shield];
+
+export const ServiceList = () => {
+  return (
+    <section className="bg-obsidian py-48 px-[4vw]">
+      <div className="container-luxury">
+        <div className="grid grid-cols-1 gap-px bg-white/5 border border-white/5">
+          {(wordSlid as ServiceData[]).map((service, index) => {
+            const Icon = serviceIcons[index % serviceIcons.length];
+            return (
+              <motion.div
+                key={service.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-obsidian hover:bg-obsidian-surface transition-colors duration-700"
+              >
+                <Link
+                  to={`/services${service.url}`}
+                  className="block p-12 md:p-24"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    {/* Index & Icon */}
+                    <div className="lg:col-span-1 flex items-center gap-6 lg:flex-col lg:items-start">
+                      <span className="text-[10px] font-black tracking-widest text-white/20 group-hover:text-bronze transition-colors">
+                        / 0{index + 1}
+                      </span>
+                      <Icon className="w-6 h-6 text-white/10 group-hover:text-bronze group-hover:rotate-12 transition-all duration-700" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="lg:col-span-7">
+                      <h2 className="text-4xl md:text-6xl font-display uppercase tracking-tighter mb-6 group-hover:text-white transition-colors">
+                        {service.name}
+                      </h2>
+                      <p className="text-lg text-white/40 font-light max-w-xl group-hover:text-white/60 transition-colors">
+                        {service.define}
+                      </p>
+                    </div>
+
+                    {/* Image Preview (Visible on Hover in Desktop) */}
+                    <div className="lg:col-span-3 hidden lg:block overflow-hidden relative aspect-video rounded-xl bg-obsidian-surface group-hover:scale-105 transition-transform duration-1000">
+                      <img
+                        src={service.image}
+                        alt={service.name}
+                        className="w-full h-full object-cover grayscale opacity-20 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="lg:col-span-1 flex justify-end">
+                      <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-bronze group-hover:border-bronze transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2">
+                        <ArrowUpRight className="w-6 h-6 text-white group-hover:text-obsidian transition-colors" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* Horizontal Progress bar for hover */}
+                <div className="absolute bottom-0 left-0 h-px bg-bronze scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-left z-20" />
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
