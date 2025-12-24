@@ -19,7 +19,7 @@ const services = [
     title: "Software Development",
     desc: "Our software development team delivers tailored enterprise-grade applications.",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
     icon: Code2,
     detail:
       "Scalable, secure, and high-performance software solutions for web, mobile, and desktop.",
@@ -30,7 +30,7 @@ const services = [
     title: "IoT & Embedded Systems",
     desc: "We provide solutions that bring intelligence to your devices.",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=1200",
     icon: Cpu,
     detail:
       "Connecting physical hardware to the digital world through bespoke sensor integration and data analytics.",
@@ -54,10 +54,10 @@ export const AboutServices = () => {
             </h2>
           </div>
           <div className="lg:max-w-sm pt-12 border-l border-white/10 pl-12">
-            <p className="text-lg text-white/40 leading-relaxed uppercase tracking-widest font-bold mb-8">
+            <p className="text-lg text-white/80 leading-relaxed uppercase tracking-widest font-bold mb-8">
               Architecting the <br /> future of intelligence.
             </p>
-            <p className="text-sm font-light text-white/30 leading-relaxed text-balance">
+            <p className="text-sm font-light text-white/70 leading-relaxed text-balance">
               We don't just build technology; we engineer experiences that
               bridge the gap between human intuition and digital precision.
             </p>
@@ -92,20 +92,20 @@ export const AboutServices = () => {
 
                 <div className="space-y-8">
                   <motion.h3
-                    initial={{ opacity: 0.7 }}
+                    initial={{ opacity: 0.8 }}
                     whileInView={{ opacity: 1 }}
                     className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-accent transition-colors"
                   >
                     {s.title}
                   </motion.h3>
-                  <p className="text-sm text-white/40 font-light leading-relaxed group-hover:text-white/70 transition-colors">
+                  <p className="text-sm text-white/70 font-light leading-relaxed group-hover:text-white transition-colors">
                     {s.detail}
                   </p>
                 </div>
               </div>
 
               <div className="mt-16 pt-12 border-t border-white/5 relative z-10">
-                <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-white/20 group-hover:text-white transition-all">
+                <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-white/50 group-hover:text-white transition-all">
                   Inspect Capability
                   <ArrowRight className="w-4 h-4 translate-x-0 group-hover:translate-x-2 transition-transform duration-700" />
                 </button>

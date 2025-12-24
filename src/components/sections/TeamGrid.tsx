@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import teamData from "@/utils/teamData.ts";
+import teamData from "@/utils/teamData";
 
 interface TeamMember {
   name: string;
@@ -26,7 +26,7 @@ export const TeamGrid = () => {
               <br /> <span className="text-accent">Innovation.</span>
             </h2>
           </div>
-          <p className="text-xl font-light text-white/30 max-w-sm border-l border-accent/20 pl-10 mb-6 italic">
+          <p className="text-xl font-light text-white/70 max-w-sm border-l border-accent/20 pl-10 mb-6 italic">
             "Meet the architects of innovation driving Altair Attic forward."
           </p>
         </div>
@@ -50,8 +50,8 @@ export const TeamGrid = () => {
                   src={member.image}
                   alt={member.name}
                   initial={{
-                    filter: "grayscale(100%)",
-                    opacity: 0.6,
+                    filter: "grayscale(40%)",
+                    opacity: 0.8,
                     scale: 1.1,
                   }}
                   whileInView={{
@@ -81,7 +81,7 @@ export const TeamGrid = () => {
               </div>
 
               <div className="mt-8 space-y-4">
-                <p className="text-sm font-light tracking-[0.3em] uppercase text-white/40">
+                <p className="text-sm font-light tracking-[0.3em] uppercase text-white/70">
                   {member.title}
                 </p>
                 <motion.div

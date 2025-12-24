@@ -61,7 +61,7 @@ export const EventsSection = () => {
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest text-white/30">
+                <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest text-white/70">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3 h-3 text-accent" />
                     {item.date}
@@ -72,13 +72,13 @@ export const EventsSection = () => {
                   </div>
                 </div>
                 <motion.h3
-                  initial={{ opacity: 0.7 }}
+                  initial={{ opacity: 0.8 }}
                   whileInView={{ opacity: 1 }}
                   className="text-2xl font-display uppercase tracking-tight group-hover:text-accent transition-colors"
                 >
                   {item.title}
                 </motion.h3>
-                <p className="text-sm font-light text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
+                <p className="text-sm font-light text-white/70 leading-relaxed group-hover:text-white transition-colors">
                   {item.description}
                 </p>
               </div>

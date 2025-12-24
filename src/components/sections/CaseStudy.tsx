@@ -13,7 +13,7 @@ export const CaseStudy = () => {
               <h2 className="text-5xl font-display leading-[0.8] tracking-tighter uppercase">
                 The <br /> Lagos <br /> Annex.
               </h2>
-              <p className="text-sm text-white/40 font-light leading-relaxed">
+              <p className="text-sm text-white/70 font-light leading-relaxed">
                 A complete intelligent renovation of a 4,500 sq ft smart-ready
                 villa. Focused on invisible technology and architectural
                 lighting.
@@ -23,7 +23,7 @@ export const CaseStudy = () => {
                 <span className="text-[10px] text-accent font-bold tracking-[0.3em] uppercase">
                   Built: May 2024
                 </span>
-                <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase">
+                <span className="text-[10px] text-white/70 tracking-[0.3em] uppercase">
                   Client: Private Residencies
                 </span>
               </div>
@@ -41,7 +41,7 @@ export const CaseStudy = () => {
             >
               <motion.img
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200"
-                initial={{ filter: "grayscale(100%)" }}
+                initial={{ filter: "grayscale(40%)" }}
                 whileInView={{ filter: "grayscale(0%)" }}
                 transition={{ duration: 2 }}
                 viewport={{ once: true, amount: 0.5 }}
@@ -50,7 +50,7 @@ export const CaseStudy = () => {
               />
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
               <div className="absolute bottom-10 left-10">
-                <span className="text-[10px] text-white/40 tracking-widest uppercase mb-2 block">
+                <span className="text-[10px] text-white/70 tracking-widest uppercase mb-2 block">
                   Interior Detail
                 </span>
                 <h4 className="text-xl font-display uppercase tracking-tight">
@@ -68,14 +68,14 @@ export const CaseStudy = () => {
             >
               <div className="aspect-4/3 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200"
-                  className="w-full h-full object-cover hover:scale-105 transition-all duration-[3s]"
+                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80&w=1200"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[3s]"
                   alt="Case Study 02"
                 />
               </div>
 
               <div className="space-y-6 lg:pl-8">
-                <p className="text-xl font-light text-white/60 leading-snug">
+                <p className="text-xl font-light text-white/80 leading-snug">
                   "The challenge was making complex automation simple enough
                   that a guest could walk in and use it without a manual. We
                   delivered a zero-interface home."

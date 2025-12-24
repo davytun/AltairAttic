@@ -40,7 +40,7 @@ export const ServiceList = () => {
                       <h2 className="text-4xl md:text-6xl font-display uppercase tracking-tighter mb-6 group-hover:text-white transition-colors">
                         {service.name}
                       </h2>
-                      <p className="text-lg text-white/40 font-light max-w-xl group-hover:text-white/60 transition-colors">
+                      <p className="text-lg text-white/70 font-light max-w-xl group-hover:text-white transition-colors">
                         {service.define}
                       </p>
                     </div>

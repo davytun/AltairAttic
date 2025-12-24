@@ -55,7 +55,7 @@ export const Process = () => {
                   {step.title}
                 </h3>
                 <div className="h-px w-full bg-white/10 group-hover:bg-obsidian/20 animate-[scaleIn_1s_ease]" />
-                <p className="text-sm font-light text-gray-500 group-hover:text-obsidian transition-colors leading-relaxed">
+                <p className="text-sm font-light text-white/70 group-hover:text-obsidian transition-colors leading-relaxed">
                   {step.desc}
                 </p>
               </div>

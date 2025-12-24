@@ -7,6 +7,8 @@ import ProjectsPage from "@/pages/ProjectsPage";
 import ContactPage from "@/pages/ContactPage";
 import EventsPage from "@/pages/EventsPage";
 import ActivitiesPage from "@/pages/ActivitiesPage";
+import ProductDetailPage from "@/pages/ProductDetailPage";
+import ProductsPage from "@/pages/ProductsPage";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:url" element={<ServiceDetailPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />

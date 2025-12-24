@@ -31,7 +31,7 @@ const wordSlid: ServiceData[] = [
     detail: "Transform Your Living Space",
     define:
       "We specialize in creating intelligent living environments that provide comfort, security, and energy efficiency.",
-    image: "/service-smart-home.png",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
     video: "/Home Automation.mp4",
     additionalInfo: [
       "Home Security Systems: Automated locks, cameras, and alarm systems.",
@@ -72,7 +72,7 @@ const wordSlid: ServiceData[] = [
     detail: "Custom Solutions for Your Business Needs",
     define:
       "Our software development team delivers tailored applications to meet your specific requirements.",
-    image: "/service-software-dev.png",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
     additionalInfo: [
       "Web Development: Responsive websites and web applications.",
       "Mobile App Development: iOS and Android apps.",
@@ -113,7 +113,7 @@ const wordSlid: ServiceData[] = [
     detail: "Connecting the World Around You",
     define:
       "We provide IoT and embedded systems solutions that bring intelligence to your devices and systems.",
-    image: "/service-iot.png",
+    image: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=1200",
     additionalInfo: [
       "Device Design and Prototyping: From concept to creation.",
       "Firmware Development: Custom firmware for your devices.",

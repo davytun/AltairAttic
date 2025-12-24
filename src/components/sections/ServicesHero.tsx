@@ -26,7 +26,7 @@ export const ServicesHero = () => {
               </span>
             </h1>
           </motion.div>
-          <p className="max-w-2xl text-xl text-white/40 font-light leading-relaxed text-balance">
+          <p className="max-w-2xl text-xl text-white/70 font-light leading-relaxed text-balance">
             Crafting the future through precision engineering, intelligent
             design, and a relentless pursuit of technological excellence.
           </p>

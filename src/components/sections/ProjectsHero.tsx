@@ -56,7 +56,7 @@ export const ProjectsHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="max-w-2xl text-lg md:text-xl font-light text-white/40 leading-relaxed uppercase tracking-widest text-balance"
+            className="max-w-2xl text-lg md:text-xl font-light text-white/70 leading-relaxed uppercase tracking-widest text-balance"
           >
             A curated showcase of technological excellence and architectural
             precision.

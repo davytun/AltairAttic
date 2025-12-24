@@ -5,8 +5,8 @@ const services = [
   {
     id: "01",
     label: "Automation",
-    title: "Smart Home Automation",
-    desc: "We specialize in creating intelligent living environments that provide comfort, security, and energy efficiency.",
+    title: "Smarter Homes",
+    desc: "Tired of tech that feels like a full-time job? We design invisible automation that simplifies your life, energy, and security.",
     image:
       "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
     icon: Home,
@@ -14,24 +14,32 @@ const services = [
   {
     id: "02",
     label: "Development",
-    title: "Software Development",
-    desc: "Our software development team delivers tailored enterprise-grade applications to meet your specific requirements efficiently.",
+    title: "Custom Software",
+    desc: "Off-the-shelf software holding you back? We build custom digital tools that solve your specific business bottlenecks.",
     image:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
     icon: Code2,
   },
   {
     id: "03",
     label: "Integration",
-    title: "IoT and Embedded Systems Integration",
-    desc: "We provide IoT and embedded systems solutions that bring intelligence to your devices and systems.",
+    title: "Connected Devices",
+    desc: "Drowning in data you can't use? We sync your hardware and software for real-time clarity and total system control.",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+      "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=1200",
     icon: Cpu,
   },
 ];
 
-const ServiceCard = ({ s, i }: { s: any; i: number }) => {
+const ServiceCard = ({
+  s,
+  i,
+  onInquire,
+}: {
+  s: any;
+  i: number;
+  onInquire?: (name: string) => void;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -44,9 +52,9 @@ const ServiceCard = ({ s, i }: { s: any; i: number }) => {
       <div className="w-full md:w-2/5 aspect-square md:aspect-auto overflow-hidden relative">
         <motion.img
           src={s.image}
-          initial={{ filter: "grayscale(100%)", scale: 1.1 }}
-          whileInView={{ filter: "grayscale(0%)", scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          initial={{ filter: "brightness(0.8)", scale: 1.1 }}
+          whileInView={{ filter: "brightness(1)", scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.5 }}
           className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
           alt={s.title}
@@ -66,22 +74,25 @@ const ServiceCard = ({ s, i }: { s: any; i: number }) => {
           </div>
           <div className="space-y-6">
             <motion.h3
-              initial={{ opacity: 0.5 }}
+              initial={{ opacity: 0.8 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
-              className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-none group-hover:text-white transition-colors"
+              className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-[0.9] group-hover:text-white transition-colors"
             >
               {s.title}
             </motion.h3>
-            <p className="text-lg font-light text-gray-500 leading-relaxed max-w-xl group-hover:text-white/80 transition-colors">
+            <p className="text-lg font-light text-white/70 leading-relaxed max-w-xl group-hover:text-white transition-colors">
               {s.desc}
             </p>
           </div>
         </div>
 
         <div className="mt-12 md:mt-0 flex justify-end">
-          <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn">
-            Launch Module
+          <button
+            onClick={() => onInquire?.(s.title)}
+            className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn text-accent cursor-pointer"
+          >
+            Explore Solution
             <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-obsidian transition-all duration-700">
               <ArrowUpRight className="w-6 h-6" />
             </div>
@@ -92,23 +103,27 @@ const ServiceCard = ({ s, i }: { s: any; i: number }) => {
   );
 };
 
-export const BespokeServices = () => {
+export const BespokeServices = ({
+  onInquire,
+}: {
+  onInquire?: (name: string) => void;
+}) => {
   return (
     <section className="bg-obsidian py-48 relative overflow-hidden">
       <div className="container-luxury px-[6vw]">
         <div className="mb-40 flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="max-w-4xl">
             <span className="text-label mb-8 block">Disciplines</span>
-            <h2 className="text-huge md:text-[10vw] font-display leading-[0.8] mb-8">
+            <h2 className="text-huge md:text-[10vw] font-display leading-[0.85] mb-8">
               Bridging <br />{" "}
               <span className="text-gray-700">Digital & Life.</span>
             </h2>
           </div>
           <div className="md:w-1/3 pt-10">
             <p className="text-xl font-light text-white/40 leading-relaxed border-l border-accent/30 pl-10 mb-8">
-              Altair Attic Limited is a cutting-edge technology company
-              committed to making advanced technology accessible, beneficial,
-              and fundamentally human.
+              We help you skip the frustration of generic tech. Altair Attic
+              Limited builds custom intelligence that fits your life and scales
+              your business.
             </p>
           </div>
         </div>
@@ -116,7 +131,7 @@ export const BespokeServices = () => {
         {/* Large Cinematic Cards Layout */}
         <div className="space-y-12">
           {services.map((s, i) => (
-            <ServiceCard key={s.id} s={s} i={i} />
+            <ServiceCard key={s.id} s={s} i={i} onInquire={onInquire} />
           ))}
         </div>
       </div>

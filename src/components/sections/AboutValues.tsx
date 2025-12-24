@@ -4,23 +4,23 @@ import { motion } from "framer-motion";
 const values = [
   {
     title: "Innovation",
-    desc: "Pushing digital boundaries to create forward-thinking physical solutions.",
+    desc: "We don't just follow trends. We build what's next for your business.",
   },
   {
     title: "Quality",
-    desc: "Driven by absolute excellence in every line of code and hardware deployment.",
+    desc: "Every system we build is designed for industrial-grade reliability.",
   },
   {
-    title: "Customer Focus",
-    desc: "Bespoke orchestration tailored to the individual rhythms of your life.",
+    title: "Human Focus",
+    desc: "Technology that works with you, not against you. Simple and intuitive.",
   },
   {
     title: "Integrity",
-    desc: "Rooted in transparency, ethical automation, and long-term trust.",
+    desc: "Transparent pricing and honest advice. We build for the long term.",
   },
   {
-    title: "Sustainability",
-    desc: "Building resilient technology that respects the future and evolves with it.",
+    title: "Stability",
+    desc: "Systems that stay up so you can stay focused on your work.",
   },
 ];
 
@@ -61,7 +61,7 @@ export const AboutValues = () => {
                       color: "var(--color-accent)",
                       textShadow: "0 0 20px rgba(205, 127, 50, 0.4)",
                     }}
-                    className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-white/3 tracking-tighter leading-none cursor-default transition-colors duration-500"
+                    className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-white/10 tracking-tighter leading-none cursor-default transition-colors duration-500"
                   >
                     {word} <span className="text-white/5 opacity-50">—</span>
                   </motion.span>
@@ -82,7 +82,7 @@ export const AboutValues = () => {
                 Human <br /> <span className="text-gray-600">Centered</span>{" "}
                 <br /> Tech.
               </h3>
-              <p className="text-xl font-light text-white/40 leading-relaxed max-w-xl mb-12">
+              <p className="text-xl font-light text-white/70 leading-relaxed max-w-xl mb-12">
                 Altair Attic Limited is dedicated to bridging the gap between
                 complexity and daily life. We believe technology should be felt,
                 not seen.
@@ -91,9 +91,9 @@ export const AboutValues = () => {
               <div className="grid grid-cols-2 gap-6 items-end">
                 <div className="aspect-square rounded-2xl overflow-hidden border border-white/5">
                   <motion.img
-                    src="/human-tech-philosophy.png"
+                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200"
                     alt="Innovation"
-                    initial={{ filter: "grayscale(100%)" }}
+                    initial={{ filter: "grayscale(40%)" }}
                     whileInView={{ filter: "grayscale(0%)" }}
                     transition={{ duration: 2 }}
                     viewport={{ once: true, amount: 0.5 }}
@@ -102,9 +102,9 @@ export const AboutValues = () => {
                 </div>
                 <div className="aspect-3/4 rounded-2xl overflow-hidden border border-white/5">
                   <motion.img
-                    src="/human-tech-design.png"
+                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200"
                     alt="Values"
-                    initial={{ filter: "grayscale(100%)" }}
+                    initial={{ filter: "grayscale(40%)" }}
                     whileInView={{ filter: "grayscale(0%)" }}
                     transition={{ duration: 2 }}
                     viewport={{ once: true, amount: 0.5 }}
@@ -138,7 +138,7 @@ export const AboutValues = () => {
                       </span>
                       {v.title}
                     </motion.h4>
-                    <p className="text-sm text-gray-500 font-light max-w-sm group-hover:text-white transition-colors">
+                    <p className="text-sm text-white/60 font-light max-w-sm group-hover:text-white transition-colors">
                       {v.desc}
                     </p>
                   </div>

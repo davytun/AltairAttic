@@ -24,10 +24,10 @@ export const ServiceContent = ({ service }: Props) => {
               </h2>
               {service.explain.map((p, i) => (
                 <div key={i} className="space-y-6">
-                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                  <p className="text-xl font-light text-white/80 leading-relaxed">
                     {p.e_p1}
                   </p>
-                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                  <p className="text-xl font-light text-white/80 leading-relaxed">
                     {p.e_p2}
                   </p>
                 </div>
@@ -48,7 +48,7 @@ export const ServiceContent = ({ service }: Props) => {
                     className="flex items-start gap-4 p-6 rounded-2xl bg-obsidian-surface border border-white/5"
                   >
                     <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-1" />
-                    <span className="text-sm text-white/60 font-medium leading-relaxed">
+                    <span className="text-sm text-white/80 font-medium leading-relaxed">
                       {info}
                     </span>
                   </motion.div>
@@ -88,7 +88,7 @@ export const ServiceContent = ({ service }: Props) => {
                         animate={{ height: "auto", opacity: 1 }}
                         className="overflow-hidden"
                       >
-                        <p className="text-sm text-white/40 leading-relaxed pb-6">
+                        <p className="text-sm text-white/70 leading-relaxed pb-6">
                           {faq.Answer}
                         </p>
                       </motion.div>
@@ -99,7 +99,7 @@ export const ServiceContent = ({ service }: Props) => {
             </div>
 
             <div className="p-12 rounded-3xl border border-accent/10 flex flex-col items-center text-center gap-8 group hover:border-accent transition-colors duration-700">
-              <span className="text-[10px] uppercase font-black tracking-[0.6em] text-white/20">
+              <span className="text-[10px] uppercase font-black tracking-[0.6em] text-white/50">
                 Ready to initiate?
               </span>
               <h4 className="text-3xl font-display uppercase">

@@ -21,16 +21,16 @@ export const AboutHero = () => {
       <motion.div style={{ y, scale }} className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-linear-to-b from-obsidian/20 via-obsidian/60 to-obsidian z-10" />
         <motion.img
-          src="/about-hero-bg.png"
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2400"
           style={{
             filter: useTransform(
               scrollYProgress,
               [0, 0.5],
-              ["grayscale(100%)", "grayscale(0%)"]
+              ["grayscale(40%)", "grayscale(0%)"]
             ),
           }}
           alt="Cinematic Background"
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-60"
         />
       </motion.div>
 

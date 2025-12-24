@@ -47,7 +47,7 @@ export const TechStack = () => {
             The <span className="text-gray-700">Digital</span> <br />{" "}
             Foundation.
           </h2>
-          <p className="max-w-2xl text-xl font-light text-white/40 leading-relaxed mx-auto">
+          <p className="max-w-2xl text-xl font-light text-white/70 leading-relaxed mx-auto">
             We architect intelligence from the electrical impulse to the final
             user interaction. Zero compromises on industrial-grade reliability.
           </p>
@@ -125,7 +125,7 @@ export const TechStack = () => {
                     {g.items.map((item) => (
                       <span
                         key={item}
-                        className="text-[8px] uppercase tracking-widest px-3 py-1 border border-white/10 rounded-full text-white/40 group-hover:text-obsidian/60 group-hover:border-obsidian/20"
+                        className="text-[8px] uppercase tracking-widest px-3 py-1 border border-white/10 rounded-full text-white/70 group-hover:text-obsidian/60 group-hover:border-obsidian/20"
                       >
                         {item}
                       </span>
@@ -153,7 +153,7 @@ export const TechStack = () => {
               viewport={{ once: true }}
               className="space-y-2"
             >
-              <span className="text-[9px] uppercase tracking-[0.4em] text-white/20 block">
+              <span className="text-[9px] uppercase tracking-[0.4em] text-white/50 block">
                 {stat.label}
               </span>
               <span className="text-3xl font-display text-white font-medium">

@@ -1,10 +1,51 @@
-import { motion } from "framer-motion";
-import { Send, MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Send,
+  MapPin,
+  Mail,
+  Phone,
+  ArrowUpRight,
+  CheckCircle2,
+} from "lucide-react";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { Button } from "@/components/ui/Button";
 
-export const Contact = () => {
+export const Contact = ({
+  initialSubject = "",
+}: {
+  initialSubject?: string;
+}) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: initialSubject,
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    if (initialSubject) {
+      setFormData((prev) => ({ ...prev, message: initialSubject }));
+    }
+  }, [initialSubject]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setIsSuccess(false), 5000);
+  };
+
   return (
-    <section className="bg-obsidian py-48 px-[6vw] relative border-t border-white/5 overflow-hidden">
+    <section
+      id="contact"
+      className="bg-obsidian py-48 px-[6vw] relative border-t border-white/5 overflow-hidden"
+    >
       {/* Viewport Safety: Ensure no spillover */}
       <div className="absolute top-0 left-0 w-full h-[30vh] bg-linear-to-b from-accent/5 to-transparent pointer-events-none" />
 
@@ -15,15 +56,15 @@ export const Contact = () => {
             <div className="space-y-8">
               <span className="text-label block">Next Steps</span>
               <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter">
-                Start the <br />{" "}
+                Let's Talk <br />{" "}
                 <span className="text-gray-600 italic font-serif lowercase">
-                  Inquiry
+                  Solutions
                 </span>
                 .
               </h2>
-              <p className="text-lg font-light text-white/40 leading-relaxed max-w-sm">
-                Ready to bridge the gap between architectural intent and
-                intelligent reality?
+              <p className="text-lg font-light text-white/70 leading-relaxed max-w-sm">
+                Ready to stop struggling with tech and start growing your
+                vision?
               </p>
             </div>
 
@@ -33,10 +74,10 @@ export const Contact = () => {
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[9px] uppercase tracking-widest text-white/20 block mb-2 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-white/50 block mb-2 font-black">
                     Location
                   </span>
-                  <p className="text-sm font-light text-white/60 group-hover:text-white transition-colors">
+                  <p className="text-sm font-light text-white/80 group-hover:text-white transition-colors">
                     3rd floor, Opposite Cathedral of St. Peter, Abeokuta.
                   </p>
                 </div>
@@ -44,7 +85,7 @@ export const Contact = () => {
 
               <div className="grid grid-cols-1 gap-8 pt-4">
                 <div className="space-y-2 group">
-                  <span className="text-[9px] uppercase tracking-widest text-white/20 flex items-center gap-4 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-white/50 flex items-center gap-4 font-black">
                     <Mail className="w-3 h-3 text-accent" /> Email
                   </span>
                   <a
@@ -55,7 +96,7 @@ export const Contact = () => {
                   </a>
                 </div>
                 <div className="space-y-2 group">
-                  <span className="text-[9px] uppercase tracking-widest text-white/20 flex items-center gap-4 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-white/50 flex items-center gap-4 font-black">
                     <Phone className="w-3 h-3 text-accent" /> Line
                   </span>
                   <a
@@ -89,49 +130,102 @@ export const Contact = () => {
                 className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent/10 blur-[100px] rounded-full group-hover:bg-accent/20 transition-all duration-1000"
               />
 
-              <form className="space-y-12 relative z-10 w-full">
-                <div className="space-y-4">
-                  <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
-                    Identity
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
-                    placeholder="Enter name"
-                  />
-                </div>
-                <div className="space-y-4">
-                  <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
-                    Electronic Mail
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div className="space-y-4">
-                  <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
-                    Briefing
-                  </label>
-                  <textarea
-                    rows={1}
-                    className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-white/5"
-                    placeholder="Architectural intent"
-                  />
-                </div>
+              <AnimatePresence mode="wait">
+                {isSuccess ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    className="flex flex-col items-center justify-center py-20 text-center space-y-6"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center text-accent">
+                      <CheckCircle2 className="w-10 h-10" />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-display uppercase tracking-tight text-white">
+                        Inquiry Received
+                      </h3>
+                      <p className="text-white/50 text-sm">
+                        We'll get back to you within 24 hours.
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => setIsSuccess(false)}
+                      variant="outline"
+                      className="border-white/10 text-white/50 hover:text-white"
+                    >
+                      Send Another
+                    </Button>
+                  </motion.div>
+                ) : (
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-12 relative z-10 w-full"
+                  >
+                    <div className="space-y-4">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                        Identity
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
+                        placeholder="Enter name"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                        Electronic Mail
+                      </label>
+                      <input
+                        required
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                        Briefing
+                      </label>
+                      <textarea
+                        required
+                        rows={1}
+                        value={formData.message}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
+                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-white/5"
+                        placeholder="Tell us your biggest tech challenge"
+                      />
+                    </div>
 
-                <div className="pt-8">
-                  <Magnetic>
-                    <button className="h-20 px-12 bg-white text-obsidian rounded-full font-black uppercase tracking-widest text-[10px] flex items-center gap-6 hover:bg-accent transition-all duration-700 shadow-2xl group/btn">
-                      Dispatch Studio{" "}
-                      <div className="p-2 bg-obsidian text-white rounded-full group-hover/btn:bg-white group-hover/btn:text-obsidian transition-all">
-                        <Send className="w-3 h-3" />
-                      </div>
-                    </button>
-                  </Magnetic>
-                </div>
-              </form>
+                    <div className="pt-8">
+                      <Magnetic>
+                        <button
+                          disabled={isSubmitting}
+                          type="submit"
+                          className="h-20 px-12 bg-white text-obsidian rounded-full font-black uppercase tracking-widest text-[10px] flex items-center gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
+                        >
+                          {isSubmitting ? "Dispatching..." : "Send My Inquiry"}{" "}
+                          <div className="p-2 bg-obsidian text-white rounded-full group-hover/btn:bg-white group-hover/btn:text-obsidian transition-all">
+                            <Send className="w-3 h-3" />
+                          </div>
+                        </button>
+                      </Magnetic>
+                    </div>
+                  </form>
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </div>

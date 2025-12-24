@@ -15,54 +15,54 @@ export interface Project {
 const projectsData: Project[] = [
   {
     id: "01",
-    title: "The Obsidian Villa",
-    category: "Smart Home Automation",
+    title: "Eco-Smart Luxury Villa",
+    category: "Automation",
     year: "2024",
-    description: "A flagship integration project featuring complete architectural lighting and adaptive climate control for a luxury private estate.",
-    image: "/Aboutus.jpg",
+    description: "Full-scale luxury automation featuring adaptive climate control and intelligent architectural lighting for a 5-bedroom estate.",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
     details: {
-      client: "Private Client",
+      client: "Private Developer",
       location: "Lagos, Nigeria",
-      scope: ["Lighting Control", "Multi-room Audio", "Security Systems"]
+      scope: ["Lighting Control", "Multi-room Audio", "Climate Automation"]
     }
   },
   {
     id: "02",
-    title: "Nexus Enterprise Cloud",
-    category: "Software Development",
+    title: "Logistics Cloud Platform",
+    category: "Software",
     year: "2024",
-    description: "Custom-built ERP and inventory management system designed for seamless cross-border logistics and real-time tracking.",
-    image: "/Hero.jpg",
+    description: "Custom ERP system built to handle cross-border tracking and automated inventory for international logistics.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
     details: {
-      client: "Logistics Corp",
+      client: "Global Logistics Ltd",
       location: "Remote",
-      scope: ["Architecture Design", "Cloud Migration", "API Integration"]
+      scope: ["System Architecture", "Cloud Database", "API Network"]
     }
   },
   {
     id: "03",
-    title: "Smart Grid Monitor",
-    category: "IoT Integration",
+    title: "Industrial Power Monitor",
+    category: "IoT",
     year: "2023",
-    description: "Developing intelligent sensor arrays and real-time analytics for industrial power distribution and fault detection.",
-    image: "/S1.jpg",
+    description: "Real-time fault detection and smart grid analytics for high-voltage industrial power distribution.",
+    image: "https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&q=80&w=1200",
     details: {
-      client: "Tech Solutions Ltd",
+      client: "Industrial Power Corp",
       location: "Ibadan, Nigeria",
-      scope: ["Hardware Design", "Data Analytics", "Firmware Development"]
+      scope: ["Sensor Arrays", "Data Analytics", "Remote Monitoring"]
     }
   },
   {
     id: "04",
-    title: "Aura Residence",
-    category: "Home Automation",
+    title: "Voice-Controlled Residence",
+    category: "Automation",
     year: "2023",
-    description: "Seamless voice-controlled environment integration focusing on accessibility and intuitive human-centered design.",
-    image: "/value.jpeg",
+    description: "Intuitive voice-activated environments designed for senior living and accessible smart home interaction.",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
     details: {
-      client: "Aura Homes",
+      client: "Aura Healthcare",
       location: "Abuja, Nigeria",
-      scope: ["Voice Control", "Curtain Automation", "Adaptive Presence"]
+      scope: ["Voice Control", "Presence Sensing", "Smart Security"]
     }
   }
 ];

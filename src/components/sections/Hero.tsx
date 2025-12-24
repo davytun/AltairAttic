@@ -59,13 +59,13 @@ export const Hero = () => {
         style={{ scale }}
         className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-obsidian/60 z-10" />
+        <div className="absolute inset-0 bg-obsidian/40 z-10" />
         <img
-          src="https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=2400"
-          alt="Cyberpunk Smart City"
-          className="w-full h-full object-cover grayscale opacity-40"
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2400"
+          alt="Sustainable Smart Architecture"
+          className="w-full h-full object-cover filter grayscale-20 opacity-70"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-obsidian z-20" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-obsidian/20 to-obsidian z-20" />
       </motion.div>
 
       {/* Architectural Layout Area */}
@@ -82,28 +82,34 @@ export const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="text-[14vw] lg:text-[12vw] font-display leading-[0.75] tracking-tighter text-white perspective-[1000px]"
+            className="text-[10vw] sm:text-[11vw] lg:text-[9vw] font-display leading-[0.85] tracking-tighter text-white perspective-[1000px]"
           >
-            <div className="overflow-hidden mb-[2vw]">
-              {splitText("INNOVATIVE")}
+            <div className="overflow-hidden mb-[2vw] whitespace-nowrap">
+              {splitText("YOU BUILD THE VISION.")}
             </div>
-            <div className="overflow-hidden text-accent">
-              {splitText("LIFE TECH")}
+            <div className="overflow-hidden text-accent whitespace-nowrap">
+              {splitText("WE BUILD THE ENGINE.")}
             </div>
           </h1>
 
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-12 mt-8">
             <p className="max-w-xl text-lg md:text-xl font-light text-white/50 leading-relaxed border-l border-accent/30 pl-8">
-              Empowering homes, businesses, and individuals with smart solutions
-              in automation, software, and IoT integration.
+              Technology should serve your life, not complicate it. We design
+              smart systems and custom software that actually work—fast,
+              reliable, and human-centered.
             </p>
 
             <div className="flex items-center gap-8">
               <Button
                 size="lg"
-                className="h-24 px-12 rounded-full bg-accent text-obsidian hover:bg-white hover:text-obsidian transition-all duration-700 font-black uppercase tracking-widest text-xs group"
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="h-24 px-12 rounded-full bg-accent text-obsidian hover:bg-white hover:text-obsidian transition-all duration-700 font-black uppercase tracking-widest text-xs group cursor-pointer"
               >
-                Get Started{" "}
+                Start Your Technology Audit{" "}
                 <ArrowRight className="ml-4 w-5 h-5 group-hover:translate-x-3 transition-transform" />
               </Button>
             </div>
@@ -113,12 +119,12 @@ export const Hero = () => {
 
       {/* Decorative Grid / Lines */}
       <div className="absolute inset-0 z-10 opacity-10 pointer-events-none">
-        <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-[size:100px_100px]" />
+        <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-size-[100px_100px]" />
       </div>
 
       {/* Scroll Anchor */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-        <div className="w-[1px] h-12 bg-linear-to-b from-white to-transparent animate-bounce" />
+        <div className="w-px h-12 bg-linear-to-b from-white to-transparent animate-bounce" />
       </div>
     </section>
   );
