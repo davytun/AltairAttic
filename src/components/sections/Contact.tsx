@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Button } from "@/components/ui/Button";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 export const Contact = ({
   initialSubject = "",
@@ -46,6 +47,12 @@ export const Contact = ({
       id="contact"
       className="bg-obsidian py-48 px-[6vw] relative border-t border-white/5 overflow-hidden"
     >
+      <GridBackground
+        gridSize={55}
+        gridColor="rgba(139, 92, 246, 0.06)"
+        fade={true}
+      />
+
       {/* Viewport Safety: Ensure no spillover */}
       <div className="absolute top-0 left-0 w-full h-[30vh] bg-linear-to-b from-accent/5 to-transparent pointer-events-none" />
 

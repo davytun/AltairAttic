@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ShoppingCart, ArrowRight, ShieldCheck, Zap, Cog } from "lucide-react";
+import { ShoppingCart, ArrowRight, Camera, Lock, Speaker } from "lucide-react";
 import { Link } from "react-router-dom";
 import { products } from "@/utils/productsData";
 import { Button } from "@/components/ui/Button";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 export const ProductShowcase = ({
   onInquire,
@@ -11,7 +12,15 @@ export const ProductShowcase = ({
 }) => {
   return (
     <section className="bg-obsidian-surface py-48 px-[6vw] relative border-y border-white/5 overflow-hidden">
-      <div className="container-luxury">
+      {/* Grid Background Pattern */}
+      <GridBackground
+        gridSize={70}
+        gridColor="rgba(139, 92, 246, 0.08)"
+        fade={true}
+        className="z-0"
+      />
+
+      <div className="container-luxury relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-32">
           <div className="max-w-3xl">
             <span className="text-label mb-8 block">Hardware Collection</span>
@@ -50,11 +59,11 @@ export const ProductShowcase = ({
                 </div>
                 <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-obsidian transition-all">
                   {i === 0 ? (
-                    <ShieldCheck className="w-5 h-5" />
+                    <Camera className="w-5 h-5" />
                   ) : i === 1 ? (
-                    <Cog className="w-5 h-5" />
+                    <Lock className="w-5 h-5" />
                   ) : (
-                    <Zap className="w-5 h-5" />
+                    <Speaker className="w-5 h-5" />
                   )}
                 </div>
               </div>

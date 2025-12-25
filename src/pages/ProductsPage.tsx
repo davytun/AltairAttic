@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer";
 import { ProductShowcase } from "@/components/sections/ProductShowcase";
 import { Contact } from "@/components/sections/Contact";
 import { motion } from "framer-motion";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 const ProductsPage = () => {
   return (
@@ -30,7 +31,13 @@ const ProductsPage = () => {
         </div>
 
         {/* Background Decor */}
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/5 blur-[150px] rounded-full pointer-events-none" />
+        <DotBackground
+          dotSize={1.3}
+          gap={37}
+          dotColor="rgba(139, 92, 246, 0.1)"
+          fade={true}
+        />
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/5 blur-[150px] rounded-full pointer-events-none z-0" />
       </section>
 
       {/* Reuse ProductShowcase for the list */}

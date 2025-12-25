@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Home, Code2, Cpu } from "lucide-react";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 const services = [
   {
@@ -110,7 +111,16 @@ export const BespokeServices = ({
 }) => {
   return (
     <section className="bg-obsidian py-48 relative overflow-hidden">
-      <div className="container-luxury px-[6vw]">
+      {/* Dot Background Pattern */}
+      <DotBackground
+        dotSize={1}
+        gap={40}
+        dotColor="rgba(139, 92, 246, 0.1)"
+        fade={true}
+        className="z-0"
+      />
+
+      <div className="container-luxury px-[6vw] relative z-10">
         <div className="mb-40 flex flex-col md:flex-row justify-between items-start gap-12">
           <div className="max-w-4xl">
             <span className="text-label mb-8 block">Disciplines</span>

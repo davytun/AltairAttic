@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 const stats = [
   {
@@ -22,7 +23,13 @@ const stats = [
 export const ProofSection = () => {
   return (
     <section className="bg-obsidian py-32 border-y border-white/5 relative overflow-hidden">
-      <div className="container-luxury px-[6vw]">
+      <GridBackground
+        gridSize={60}
+        gridColor="rgba(139, 92, 246, 0.06)"
+        fade={true}
+      />
+
+      <div className="container-luxury px-[6vw] relative z-10">
         <div className="mb-20 text-center lg:text-left">
           <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black block mb-4">
             Trusted Expertise

@@ -18,7 +18,7 @@ export const eventsData: EventData[] = [
     time: "10:00 AM",
     location: "Virtual / Lagos Annex",
     description: "A deep dive into sustainable architecture and carbon-neutral smart systems.",
-    image: "https://images.unsplash.com/photo-1475721027187-4024733923f9?auto=format&fit=crop&q=80&w=1200",
+    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200",
     category: "event",
     url: "/events/eco-tech-symposium-2024",
   },

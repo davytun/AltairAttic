@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 export const AboutHero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -33,6 +34,14 @@ export const AboutHero = () => {
           className="w-full h-full object-cover opacity-60"
         />
       </motion.div>
+
+      <DotBackground
+        dotSize={1.2}
+        gap={33}
+        dotColor="rgba(139, 92, 246, 0.11)"
+        fade={true}
+        className="z-5"
+      />
 
       {/* Floating Elements (Particles/Lines) */}
       <div className="absolute inset-0 z-5 pointer-events-none">

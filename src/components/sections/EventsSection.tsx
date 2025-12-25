@@ -2,13 +2,21 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Calendar, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { eventsData } from "@/utils/eventsData";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 export const EventsSection = () => {
   const featured = eventsData.slice(0, 3);
 
   return (
     <section className="bg-obsidian py-48 px-[6vw] relative overflow-hidden border-t border-white/5">
-      <div className="container-luxury">
+      <DotBackground
+        dotSize={1}
+        gap={38}
+        dotColor="rgba(139, 92, 246, 0.08)"
+        fade={true}
+      />
+
+      <div className="container-luxury relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
           <div className="max-w-2xl">
             <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black mb-8 block">

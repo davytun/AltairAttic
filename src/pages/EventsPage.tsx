@@ -4,6 +4,7 @@ import { EventsHero } from "@/components/sections/EventsHero";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { eventsData } from "@/utils/eventsData";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 const EventsPage = () => {
   const events = eventsData.filter((item) => item.category === "event");
@@ -13,8 +14,14 @@ const EventsPage = () => {
       <Navbar />
       <EventsHero />
 
-      <section className="py-32 px-[6vw]">
-        <div className="container-luxury">
+      <section className="py-32 px-[6vw] relative overflow-hidden">
+        <GridBackground
+          gridSize={58}
+          gridColor="rgba(139, 92, 246, 0.07)"
+          fade={true}
+        />
+
+        <div className="container-luxury relative z-10">
           <div className="grid grid-cols-1 gap-12">
             {events.map((event, i) => (
               <motion.div

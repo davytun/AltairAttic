@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 const values = [
   {
@@ -32,6 +33,11 @@ export const AboutValues = () => {
       ref={containerRef}
       className="bg-obsidian py-48 relative overflow-hidden border-t border-white/5"
     >
+      <GridBackground
+        gridSize={80}
+        gridColor="rgba(139, 92, 246, 0.05)"
+        fade={true}
+      />
       {/* Massive Infinite Marquee Header */}
       <div className="relative w-full mb-32 md:mb-48 overflow-hidden select-none">
         <div className="flex whitespace-nowrap">

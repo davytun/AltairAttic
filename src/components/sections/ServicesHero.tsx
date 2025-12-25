@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 export const ServicesHero = () => {
   return (
@@ -8,6 +9,12 @@ export const ServicesHero = () => {
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-white/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
       </div>
+
+      <GridBackground
+        gridSize={75}
+        gridColor="rgba(139, 92, 246, 0.06)"
+        fade={true}
+      />
 
       <div className="container-luxury relative z-10 px-[4vw]">
         <div className="flex flex-col items-center text-center">

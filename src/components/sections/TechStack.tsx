@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 const groups = [
   {
@@ -33,6 +34,11 @@ export const TechStack = () => {
       ref={ref}
       className="bg-obsidian py-64 px-[6vw] relative overflow-hidden border-t border-white/5"
     >
+      <GridBackground
+        gridSize={50}
+        gridColor="rgba(139, 92, 246, 0.07)"
+        fade={true}
+      />
       {/* Cinematic Background: Animated Grid & Lines */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
         <div className="absolute top-1/2 left-0 w-full h-px bg-linear-to-r from-transparent via-accent/50 to-transparent" />

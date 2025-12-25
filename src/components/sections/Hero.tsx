@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 export const Hero = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -67,6 +68,15 @@ export const Hero = () => {
         />
         <div className="absolute inset-0 bg-linear-to-b from-transparent via-obsidian/20 to-obsidian z-20" />
       </motion.div>
+
+      {/* Dot Background Pattern */}
+      <DotBackground
+        dotSize={1.5}
+        gap={35}
+        dotColor="rgba(139, 92, 246, 0.12)"
+        fade={true}
+        className="z-20"
+      />
 
       {/* Architectural Layout Area */}
       <div className="container-luxury relative z-30 w-full px-[6vw]">

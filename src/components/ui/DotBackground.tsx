@@ -1,35 +1,30 @@
-import React from "react";
-
-interface GridBackgroundProps {
-  children?: React.ReactNode;
-  className?: string;
-  gridSize?: number;
-  gridColor?: string;
+interface DotBackgroundProps {
+  dotSize?: number;
+  dotColor?: string;
   backgroundColor?: string;
-  fade?: boolean;
+  gap?: number;
+  className?: string;
   maskClassName?: string;
+  fade?: boolean;
 }
 
-export const GridBackground = ({
-  children,
-  className = "",
-  gridSize = 50,
-  gridColor = "rgba(255, 255, 255, 0.08)",
+export function DotBackground({
+  dotSize = 1,
+  dotColor = "rgba(255, 255, 255, 0.15)",
   backgroundColor = "transparent",
-  fade = true,
+  gap = 25,
+  className = "",
   maskClassName = "",
-}: GridBackgroundProps) => {
+  fade = true,
+}: DotBackgroundProps) {
   return (
     <div
       className={`absolute inset-0 ${className}`}
       style={{
         backgroundColor,
-        backgroundImage: `
-          linear-gradient(${gridColor} 1px, transparent 1px),
-          linear-gradient(90deg, ${gridColor} 1px, transparent 1px)
-        `,
-        backgroundSize: `${gridSize}px ${gridSize}px`,
-        filter: "blur(0.4px)", // Subtle blur for smooth lines
+        backgroundImage: `radial-gradient(circle, ${dotColor} ${dotSize}px, transparent ${dotSize}px)`,
+        backgroundSize: `${gap}px ${gap}px`,
+        filter: "blur(0.3px)", // Subtle blur for smoothness
       }}
     >
       {fade && (
@@ -56,7 +51,6 @@ export const GridBackground = ({
           />
         </>
       )}
-      {children}
     </div>
   );
-};
+}

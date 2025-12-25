@@ -13,6 +13,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { Contact } from "@/components/sections/Contact";
+import { DotBackground } from "@/components/ui/DotBackground";
+import { GridBackground } from "@/components/ui/GridBackground";
 
 const ProductDetailPage = () => {
   const { id: slug } = useParams();
@@ -36,6 +38,14 @@ const ProductDetailPage = () => {
           />
           <div className="absolute inset-0 bg-linear-to-b from-obsidian via-transparent to-obsidian" />
         </div>
+
+        <DotBackground
+          dotSize={1.4}
+          gap={34}
+          dotColor="rgba(139, 92, 246, 0.11)"
+          fade={true}
+          className="z-5"
+        />
 
         <div className="container-luxury relative z-10 px-[6vw] w-full">
           <Link
@@ -75,8 +85,14 @@ const ProductDetailPage = () => {
       </section>
 
       {/* Details & Specs */}
-      <section className="py-32 px-[6vw] bg-obsidian-surface border-y border-white/5">
-        <div className="container-luxury grid grid-cols-1 lg:grid-cols-2 gap-24">
+      <section className="py-32 px-[6vw] bg-obsidian-surface border-y border-white/5 relative overflow-hidden">
+        <GridBackground
+          gridSize={65}
+          gridColor="rgba(139, 92, 246, 0.07)"
+          fade={true}
+        />
+
+        <div className="container-luxury grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
           <div className="space-y-12">
             <h2 className="text-4xl font-display uppercase tracking-tight text-white">
               Technical Excellence

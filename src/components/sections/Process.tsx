@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 const steps = [
   {
@@ -25,8 +26,15 @@ const steps = [
 
 export const Process = () => {
   return (
-    <section className="bg-obsidian py-48 px-[6vw] border-t border-white/5">
-      <div className="container-luxury">
+    <section className="bg-obsidian py-48 px-[6vw] border-t border-white/5 relative overflow-hidden">
+      <DotBackground
+        dotSize={1.3}
+        gap={36}
+        dotColor="rgba(139, 92, 246, 0.09)"
+        fade={true}
+      />
+
+      <div className="container-luxury relative z-10">
         <div className="mb-40 space-y-8 text-center md:text-left">
           <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-bold block">
             Methodology

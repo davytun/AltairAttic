@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { DotBackground } from "@/components/ui/DotBackground";
 
 export const CaseStudy = () => {
   return (
     <section className="bg-obsidian py-48 px-[6vw] relative border-y border-white/5">
-      <div className="container-luxury">
+      <DotBackground
+        dotSize={1.2}
+        gap={32}
+        dotColor="rgba(139, 92, 246, 0.09)"
+        fade={true}
+      />
+
+      <div className="container-luxury relative z-10">
         <div className="flex flex-col lg:flex-row gap-24 items-start">
           {/* Fixed Sidebar for Case Study Label */}
           <div className="lg:w-1/4 pt-4">
