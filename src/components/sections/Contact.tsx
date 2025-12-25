@@ -64,7 +64,7 @@ export const Contact = ({
               <span className="text-label block">Next Steps</span>
               <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter">
                 Let's Talk <br />{" "}
-                <span className="text-gray-600 italic font-serif lowercase">
+                <span className="text-white/40 italic font-serif lowercase">
                   Solutions
                 </span>
                 .

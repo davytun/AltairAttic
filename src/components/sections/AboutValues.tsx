@@ -85,7 +85,7 @@ export const AboutValues = () => {
             <div>
               <span className="text-label mb-8 block">Our Philosophy</span>
               <h3 className="text-huge text-6xl! md:text-8xl! mb-12">
-                Human <br /> <span className="text-gray-600">Centered</span>{" "}
+                Human <br /> <span className="text-white/40">Centered</span>{" "}
                 <br /> Tech.
               </h3>
               <p className="text-xl font-light text-white/70 leading-relaxed max-w-xl mb-12">

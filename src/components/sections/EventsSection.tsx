@@ -24,7 +24,7 @@ export const EventsSection = () => {
             </span>
             <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none">
               Culture & <br />{" "}
-              <span className="text-gray-700 italic font-serif lowercase tracking-normal">
+              <span className="text-white/40 italic font-serif lowercase tracking-normal">
                 Momentum.
               </span>
             </h2>

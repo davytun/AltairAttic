@@ -15,7 +15,16 @@ const groups = [
   },
   {
     name: "Execution Stack",
-    items: ["Node.js", "Flutter", "Next.js", "PHP", "Python", "React Native", "Figma", "Rust"],
+    items: [
+      "Node.js",
+      "Flutter",
+      "Next.js",
+      "PHP",
+      "Python",
+      "React Native",
+      "Figma",
+      "Rust",
+    ],
     pos: "top-0 right-0",
   },
   {
@@ -50,7 +59,7 @@ export const TechStack = () => {
         <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-48 space-y-8">
           <span className="text-label">System Architecture</span>
           <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4">
-            The <span className="text-gray-700">Digital</span> <br />{" "}
+            The <span className="text-white/40">Digital</span> <br />{" "}
             Foundation.
           </h2>
           <p className="max-w-2xl text-lg md:text-xl font-light text-white/70 leading-relaxed md:mx-auto">

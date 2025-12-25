@@ -41,7 +41,7 @@ export const Process = () => {
           </span>
           <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none">
             Blueprint to <br />{" "}
-            <span className="text-gray-700">Execution.</span>
+            <span className="text-white/40">Execution.</span>
           </h2>
         </div>
 

@@ -126,7 +126,7 @@ export const BespokeServices = ({
             <span className="text-label mb-8 block">Disciplines</span>
             <h2 className="text-huge md:text-[10vw] font-display leading-[0.85] mb-8">
               Bridging <br />{" "}
-              <span className="text-gray-700">Digital & Life.</span>
+              <span className="text-white/40">Digital & Life.</span>
             </h2>
           </div>
           <div className="md:w-1/3 pt-10">

@@ -32,7 +32,7 @@ export const ActivitiesHero = () => {
             className="text-huge md:text-[10vw] font-display leading-[0.85] uppercase tracking-tighter mb-12"
           >
             Tactical <br />{" "}
-            <span className="text-gray-700 italic font-serif lowercase tracking-normal">
+            <span className="text-white/40 italic font-serif lowercase tracking-normal">
               Endeavors.
             </span>
           </motion.h1>

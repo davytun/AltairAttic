@@ -36,7 +36,7 @@ export const ProofSection = () => {
           </span>
           <h2 className="text-4xl md:text-5xl font-display uppercase tracking-tight text-white max-w-2xl">
             Reliability Built Into Every{" "}
-            <span className="text-gray-600">Line of Code.</span>
+            <span className="text-white/40">Line of Code.</span>
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-24">

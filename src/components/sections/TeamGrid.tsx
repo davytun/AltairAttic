@@ -22,7 +22,7 @@ export const TeamGrid = () => {
               Our Architects
             </span>
             <h2 className="text-huge md:text-8xl! font-display uppercase tracking-tight leading-none text-balance">
-              The Minds <br /> <span className="text-gray-600">Driving</span>{" "}
+              The Minds <br /> <span className="text-white/40">Driving</span>{" "}
               <br /> <span className="text-accent">Innovation.</span>
             </h2>
           </div>
