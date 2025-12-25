@@ -85,7 +85,8 @@ export const Contact = ({
                     Location
                   </span>
                   <p className="text-sm font-light text-white/80 group-hover:text-white transition-colors">
-                    3rd floor, Opposite Cathedral of St. Peter, Abeokuta.
+                    3rd floor, Opposite Cathedral of St. Peter Ang. Sec. Sch,
+                    Along Oba Ademola Maternity Hospital, Ake, Abeokuta.{" "}
                   </p>
                 </div>
               </div>

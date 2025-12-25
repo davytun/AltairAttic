@@ -15,7 +15,7 @@ const groups = [
   },
   {
     name: "Execution Stack",
-    items: ["React & Node.js", "Python Core", "TypeScript", "Rust"],
+    items: ["Node.js", "Flutter", "Next.js", "PHP", "Python", "React Native", "Figma", "Rust"],
     pos: "top-0 right-0",
   },
   {
@@ -47,13 +47,13 @@ export const TechStack = () => {
       </div>
 
       <div className="container-luxury relative z-10">
-        <div className="flex flex-col items-center justify-center text-center mb-48 space-y-8">
+        <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-48 space-y-8">
           <span className="text-label">System Architecture</span>
-          <h2 className="text-huge md:text-[10vw] leading-none mb-4">
+          <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4">
             The <span className="text-gray-700">Digital</span> <br />{" "}
             Foundation.
           </h2>
-          <p className="max-w-2xl text-xl font-light text-white/70 leading-relaxed mx-auto">
+          <p className="max-w-2xl text-lg md:text-xl font-light text-white/70 leading-relaxed md:mx-auto">
             We architect intelligence from the electrical impulse to the final
             user interaction. Zero compromises on industrial-grade reliability.
           </p>

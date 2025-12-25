@@ -92,12 +92,12 @@ export const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="text-[10vw] sm:text-[11vw] lg:text-[9vw] font-display leading-[0.85] tracking-tighter text-white perspective-[1000px]"
+            className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] font-display leading-[0.85] tracking-tighter text-white perspective-[1000px]"
           >
-            <div className="overflow-hidden mb-[2vw] whitespace-nowrap">
+            <div className="overflow-hidden mb-[2vw] md:whitespace-nowrap">
               {splitText("YOU BUILD THE VISION.")}
             </div>
-            <div className="overflow-hidden text-accent whitespace-nowrap">
+            <div className="overflow-hidden text-accent md:whitespace-nowrap">
               {splitText("WE BUILD THE ENGINE.")}
             </div>
           </h1>

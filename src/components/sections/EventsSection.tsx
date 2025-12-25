@@ -17,7 +17,7 @@ export const EventsSection = () => {
       />
 
       <div className="container-luxury relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-32 gap-12">
           <div className="max-w-2xl">
             <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black mb-8 block">
               / The Calendar
