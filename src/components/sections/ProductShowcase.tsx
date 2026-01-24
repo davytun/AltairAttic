@@ -84,7 +84,7 @@ export const ProductShowcase = ({
                   </span>
                 </div>
                 <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-[10px] uppercase font-black bg-white text-obsidian px-6 py-3 rounded-full tracking-widest translate-y-4 group-hover/img:translate-y-0 transition-transform">
+                  <span className="text-[10px] uppercase font-black bg-white text-obsidian px-6 py-3 rounded-xl tracking-widest translate-y-4 group-hover/img:translate-y-0 transition-transform">
                     View Details
                   </span>
                 </div>

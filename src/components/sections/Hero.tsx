@@ -84,11 +84,11 @@ export const Hero = () => {
           style={{ y, opacity }}
           className="flex flex-col items-start gap-12"
         >
-          <div className="overflow-hidden">
+          {/* <div className="overflow-hidden">
             <span className="text-[10px] uppercase tracking-[1em] text-accent font-black mb-4 block">
               Altair Attic Limited
             </span>
-          </div>
+          </div> */}
 
           <h1
             ref={titleRef}
@@ -116,7 +116,7 @@ export const Hero = () => {
                   href="https://wa.me/2347077195098?text=Hi%2C%20I%20need%20help%20with%20my%20tech%20project"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative h-16 px-10 rounded-full bg-accent text-obsidian hover:bg-white transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center overflow-hidden"
+                  className="group relative h-16 px-10 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     <svg
@@ -135,7 +135,7 @@ export const Hero = () => {
                   href="https://calendly.com/davytun/book-a-call"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group h-16 px-10 rounded-full border-2 border-white/20 text-white hover:border-accent hover:bg-accent/10 transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center"
+                  className="group h-16 px-10 rounded-xl border-2 border-white/20 text-white hover:border-accent hover:bg-accent/10 transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center"
                 >
                   <span className="flex items-center gap-3">
                     <svg

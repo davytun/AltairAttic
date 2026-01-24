@@ -222,7 +222,7 @@ export const Contact = ({
                         <button
                           disabled={isSubmitting}
                           type="submit"
-                          className="h-20 px-12 bg-white text-obsidian rounded-full font-black uppercase tracking-widest text-[10px] flex items-center gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
+                          className="h-20 px-12 bg-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
                         >
                           {isSubmitting ? "Dispatching..." : "Send My Inquiry"}{" "}
                           <div className="p-2 bg-obsidian text-white rounded-full group-hover/btn:bg-white group-hover/btn:text-obsidian transition-all">

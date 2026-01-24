@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-full font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -32,11 +32,12 @@ const buttonVariants = cva(
       variant: "primary",
       size: "md",
     },
-  }
+  },
 );
 
 export interface ButtonProps
-  extends Omit<HTMLMotionProps<"button">, "children">,
+  extends
+    Omit<HTMLMotionProps<"button">, "children">,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
   children?: React.ReactNode;
@@ -56,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </motion.button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

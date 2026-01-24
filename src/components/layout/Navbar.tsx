@@ -31,7 +31,7 @@ const Navbar = () => {
           "fixed top-0 left-0 right-0 z-100 transition-all duration-700",
           isScrolled
             ? "py-3 bg-obsidian/95 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-b border-white/5"
-            : "py-6 bg-obsidian/0 backdrop-blur-none"
+            : "py-6 bg-obsidian/0 backdrop-blur-none",
         )}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 flex items-center justify-between">
@@ -62,7 +62,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link to="/contact">
-              <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-full bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500">
+              <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500">
                 Contact Us
               </button>
             </Link>
@@ -119,7 +119,7 @@ const Navbar = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-full bg-accent text-obsidian hover:bg-white transition-all duration-500">
+                  <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500">
                     Start Inquiry
                   </button>
                 </Link>
