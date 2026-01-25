@@ -9,6 +9,8 @@ import EventsPage from "@/pages/EventsPage";
 import ActivitiesPage from "@/pages/ActivitiesPage";
 import ProductDetailPage from "@/pages/ProductDetailPage";
 import ProductsPage from "@/pages/ProductsPage";
+import BlogPage from "@/pages/BlogPage";
+import BlogDetailPage from "@/pages/BlogDetailPage";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/events" element={<EventsPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogDetailPage />} />
       </Routes>
     </div>
   );

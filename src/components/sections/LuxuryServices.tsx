@@ -53,7 +53,7 @@ export const LuxuryServices = () => {
                 <span className="font-mono text-[10px] text-muted tracking-widest uppercase">
                   / {service.index}
                 </span>
-                <span className="w-8 h-[1px] bg-white/10 group-hover:w-12 transition-all duration-500" />
+                <span className="w-8 h-px bg-white/10 group-hover:w-12 transition-all duration-500" />
                 <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase">
                   {service.label}
                 </span>

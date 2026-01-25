@@ -8,7 +8,7 @@ import { TechStack } from "@/components/sections/TechStack";
 import { Process } from "@/components/sections/Process";
 import { Contact } from "@/components/sections/Contact";
 import { CaseStudy } from "@/components/sections/CaseStudy";
-import { EventsSection } from "@/components/sections/EventsSection";
+import { BlogSection } from "@/components/sections/BlogSection";
 import { ProductShowcase } from "@/components/sections/ProductShowcase";
 
 import { useState } from "react";
@@ -44,7 +44,7 @@ const Home = () => {
       <AboutValues />
 
       {/* Narrative Section 5: The Pulse */}
-      <EventsSection />
+      <BlogSection />
 
       {/* Narrative Section 6: Internal Engine (Architecture) */}
       <TechStack />

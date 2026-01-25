@@ -40,7 +40,7 @@ export const LuxuryHero = () => {
       className="relative min-h-screen flex flex-col justify-center bg-black overflow-hidden px-[4vw]"
     >
       {/* Background Subtle Gradient */}
-      <div className="absolute top-0 right-0 w-1/2 h-screen bg-gradient-to-l from-white/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-screen bg-linear-to-l from-white/2 to-transparent pointer-events-none" />
 
       <div className="z-10 mt-[-5vh]">
         <h1
@@ -75,7 +75,7 @@ export const LuxuryHero = () => {
 
           <div className="flex items-center gap-12 text-xs tracking-[0.3em] font-light text-white/40 uppercase">
             <span>Est. 2025</span>
-            <div className="w-12 h-[1px] bg-white/20" />
+            <div className="w-12 h-px bg-white/20" />
             <span>London — Global</span>
           </div>
 
@@ -104,7 +104,7 @@ export const LuxuryHero = () => {
 
       <div className="absolute bottom-12 right-[4vw] flex flex-col items-end gap-2 text-[10px] text-muted font-mono uppercase">
         <span>Scroll to Explore</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
+        <div className="w-px h-12 bg-linear-to-b from-white/40 to-transparent" />
       </div>
     </section>
   );
