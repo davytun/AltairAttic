@@ -79,7 +79,7 @@ export const Hero = () => {
       />
 
       {/* Architectural Layout Area */}
-      <div className="container-luxury relative z-30 w-full px-[6vw]">
+      <div className="container-luxury relative z-30 w-full px-[6vw] pt-32 md:pt-0">
         <motion.div
           style={{ y, opacity }}
           className="flex flex-col items-start gap-12"

@@ -45,7 +45,7 @@ const projectsData: Project[] = [
     category: "Web Development",
     year: "2025",
     description: "The official website of Altair Attic, designed to showcase the company’s expertise in software development, smart home automation, IoT, and embedded systems. The site features clean UI, smooth animations, responsive layouts, and optimized performance across devices.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
+    image: "/altair.png",
     link: "https://www.altairattic.com/",
   },
   {
@@ -54,8 +54,8 @@ const projectsData: Project[] = [
     category: "Web Development",
     year: "2023",
     description: "A professional business consulting website developed using Bootstrap 5. The project involved full template customization, content structuring, service presentation, contact integration, and deployment delivering a polished digital presence for a consulting and training brand.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
-    link: "https://www.rexayo.com/",
+    image: "/rexayo.png",
+    link: "https://www.rexayoconcept.biz",
   },
 
   // Home Automation Projects
@@ -65,7 +65,7 @@ const projectsData: Project[] = [
     category: "Automation",
     year: "2024",
     description: "Installed smart door locks with app control, keyless entry, and instant alerts for better security and convenience.",
-    image: "https://images.unsplash.com/photo-1558002038-1091a1661116?auto=format&fit=crop&q=80&w=1200",
+    image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/33/0651914/1.jpg?1102",
   },
   {
     id: "07",
@@ -73,7 +73,7 @@ const projectsData: Project[] = [
     category: "Automation",
     year: "2024",
     description: "Set up smart CCTV systems with remote viewing, motion alerts, and night vision for full home monitoring.",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
+    image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/31/0223814/1.jpg?8842",
   },
   {
     id: "08",
@@ -81,7 +81,7 @@ const projectsData: Project[] = [
     category: "Automation",
     year: "2024",
     description: "Replaced regular switches and sockets with smart ones control lights and appliances from your phone or by voice.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200",
+    image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/90/9568804/1.jpg?4224",
   },
   {
     id: "09",
@@ -89,7 +89,7 @@ const projectsData: Project[] = [
     category: "Automation",
     year: "2024",
     description: "Installed wireless solar cameras for outdoor security no wiring needed, works day and night with solar charging.",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=1200",
+    image: "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/72/2277814/1.jpg?3665",
   }
 ];
 
