@@ -28,12 +28,7 @@ export const ServiceList = () => {
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     {/* Index & Icon */}
-                    <div className="lg:col-span-1 flex items-center gap-6 lg:flex-col lg:items-start">
-                      <span className="text-[10px] font-black tracking-widest text-white/20 group-hover:text-accent transition-colors">
-                        / 0{index + 1}
-                      </span>
-                      <Icon className="w-6 h-6 text-white/10 group-hover:text-accent group-hover:rotate-12 transition-all duration-700" />
-                    </div>
+                    {/* Icon removed */}
 
                     {/* Content */}
                     <div className="lg:col-span-7">

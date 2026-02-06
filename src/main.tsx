@@ -6,14 +6,20 @@ import App from "./App";
 import "./index.css";
 import { SmoothScroll } from "./components/layout/SmoothScroll";
 
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
-      <BrowserRouter>
-        <SmoothScroll>
-          <App />
-        </SmoothScroll>
-      </BrowserRouter>
+      <ErrorBoundary>
+        <BrowserRouter
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
+          <SmoothScroll>
+            <App />
+          </SmoothScroll>
+        </BrowserRouter>
+      </ErrorBoundary>
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

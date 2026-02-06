@@ -37,10 +37,11 @@ export const ProjectsHero = () => {
             <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
               Archive / Works
             </span>
-            <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-16">
+            <h1 className="text-huge md:text-[10vw] font-display font-black leading-[0.85] tracking-tighter uppercase mb-16">
               Our <br />
+              Completed <br />
               <span className="text-white/10 italic font-serif lowercase tracking-normal">
-                works.
+                Projects.
               </span>
             </h1>
           </motion.div>
@@ -67,7 +68,7 @@ export const ProjectsHero = () => {
       {/* Side Decorative Text */}
       <div className="absolute right-[2vw] top-1/2 -translate-y-1/2 hidden lg:block vertical-text">
         <span className="text-[10px] font-black tracking-[1em] text-white/5 uppercase">
-          ALTAIR ARCHIVE MMXXIV
+          ALTAIR ARCHIVE COLLECTION
         </span>
       </div>
     </section>

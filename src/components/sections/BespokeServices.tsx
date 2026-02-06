@@ -67,12 +67,6 @@ const ServiceCard = ({
       {/* Content Section (60%) */}
       <div className="w-full md:w-3/5 p-12 md:p-20 flex flex-col justify-between relative z-10">
         <div className="space-y-12">
-          <div className="flex justify-between items-start">
-            <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black">
-              / Service.0{s.id}
-            </span>
-            <s.icon className="w-8 h-8 text-white/10 group-hover:text-accent transition-colors duration-700" />
-          </div>
           <div className="space-y-6">
             <motion.h3
               initial={{ opacity: 0.8 }}

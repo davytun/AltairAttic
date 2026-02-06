@@ -12,6 +12,8 @@ import { Magnetic } from "@/components/ui/Magnetic";
 import { Button } from "@/components/ui/Button";
 import { GridBackground } from "@/components/ui/GridBackground";
 
+import { contactService, ContactData } from "@/services/contactService";
+
 export const Contact = ({
   initialSubject = "",
 }: {
@@ -24,6 +26,7 @@ export const Contact = ({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (initialSubject) {
@@ -34,12 +37,18 @@ export const Contact = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setIsSuccess(false), 5000);
+    setError(null);
+    try {
+      await contactService.submitContact(formData);
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err: any) {
+      setError("Failed to send message. Please try again.");
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -217,7 +226,12 @@ export const Contact = ({
                       />
                     </div>
 
-                    <div className="pt-8">
+                    <div className="pt-8 space-y-4">
+                      {error && (
+                        <p className="text-red-400 text-xs font-bold uppercase tracking-widest">
+                          {error}
+                        </p>
+                      )}
                       <Magnetic>
                         <button
                           disabled={isSubmitting}

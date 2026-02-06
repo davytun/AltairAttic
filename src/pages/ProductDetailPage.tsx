@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -8,7 +9,8 @@ import {
   ShoppingCart,
   ArrowRight,
 } from "lucide-react";
-import { products } from "@/utils/productsData";
+import { productService } from "@/services/productService";
+import { Product } from "@/utils/productsData";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
@@ -18,10 +20,40 @@ import { GridBackground } from "@/components/ui/GridBackground";
 
 const ProductDetailPage = () => {
   const { id: slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!slug) return;
+      try {
+        setIsLoading(true);
+        const data = await productService.getProductBySlug(slug);
+        setProduct(data);
+      } catch (error) {
+        console.error("Failed to fetch product:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <main className="bg-obsidian min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6" />
+          <p className="text-white/40 font-display uppercase tracking-widest text-xs">
+            Deep Loading...
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   if (!product) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/products" replace />;
   }
 
   return (
@@ -98,7 +130,7 @@ const ProductDetailPage = () => {
               Technical Excellence
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {product.specs.map((spec, i) => (
+              {(product.specs || []).map((spec, i) => (
                 <div
                   key={spec}
                   className="p-8 bg-obsidian border border-white/5 rounded-3xl space-y-4"

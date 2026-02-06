@@ -83,13 +83,6 @@ export const AboutServices = () => {
               />
 
               <div className="space-y-16 relative z-10">
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-black tracking-[0.5em] text-accent uppercase">
-                    / 0{i + 1}
-                  </span>
-                  <s.icon className="w-8 h-8 text-white/10 group-hover:text-accent transition-all duration-700 group-hover:rotate-12" />
-                </div>
-
                 <div className="space-y-8">
                   <motion.h3
                     initial={{ opacity: 0.8 }}

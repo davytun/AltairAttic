@@ -16,23 +16,21 @@ export const CaseStudy = () => {
         <div className="flex flex-col lg:flex-row gap-24 items-start">
           {/* Fixed Sidebar for Case Study Label */}
           <div className="lg:w-1/4 pt-4">
-            <span className="text-label mb-12 block">Featured Narrative</span>
             <div className="space-y-12">
               <h2 className="text-5xl font-display leading-[0.8] tracking-tighter uppercase">
-                The <br /> Lagos <br /> Annex.
+                Tender <br /> App.
               </h2>
               <p className="text-sm text-white/70 font-light leading-relaxed">
-                A complete intelligent renovation of a 4,500 sq ft smart-ready
-                villa. Focused on invisible technology and architectural
-                lighting.
+                Buy Airtime and Data Plan, Pay Bills, and Trade Crypto and
+                Giftcard on Tender App.
               </p>
               <div className="pt-8 flex flex-col gap-4">
                 <div className="h-px w-full bg-white/5" />
                 <span className="text-[10px] text-accent font-bold tracking-[0.3em] uppercase">
-                  Built: May 2024
+                  Year: 2024
                 </span>
                 <span className="text-[10px] text-white/70 tracking-[0.3em] uppercase">
-                  Client: Private Residencies
+                  Category: Software
                 </span>
               </div>
             </div>
@@ -48,21 +46,21 @@ export const CaseStudy = () => {
               className="aspect-4/5 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl"
             >
               <motion.img
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200"
+                src="/case.png"
                 initial={{ filter: "grayscale(40%)" }}
                 whileInView={{ filter: "grayscale(0%)" }}
                 transition={{ duration: 2 }}
                 viewport={{ once: true, amount: 0.5 }}
                 className="w-full h-full object-cover transition-all duration-[3s]"
-                alt="Case Study 01"
+                alt="Tender App Interface"
               />
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
               <div className="absolute bottom-10 left-10">
                 <span className="text-[10px] text-white/70 tracking-widest uppercase mb-2 block">
-                  Interior Detail
+                  Core Functionality
                 </span>
                 <h4 className="text-xl font-display uppercase tracking-tight">
-                  Kinetic Lighting Setup
+                  Real-time Notifications
                 </h4>
               </div>
             </motion.div>
@@ -76,21 +74,23 @@ export const CaseStudy = () => {
             >
               <div className="aspect-4/3 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&q=80&w=1200"
+                  src="/case2.png"
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[3s]"
-                  alt="Case Study 02"
+                  alt="Data Analytics Dashboard"
                 />
               </div>
 
               <div className="space-y-6 lg:pl-8">
                 <p className="text-xl font-light text-white/80 leading-snug">
-                  "The challenge was making complex automation simple enough
-                  that a guest could walk in and use it without a manual. We
-                  delivered a zero-interface home."
+                  A digital procurement platform designed to simplify tender
+                  discovery, submission, and management. The app enables
+                  real-time tender notifications, secure document uploads, user
+                  authentication, and payment processing—helping suppliers and
+                  organizations manage procurement transparently and efficiently
                 </p>
-                <button className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group">
-                  Full Study{" "}
-                  <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
+                <button onClick={() => window.open("https://play.google.com/store/apps/details?id=co.tenderpay.mobile", "_blank")} className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group">
+                  Full Study
+                  <div className="w-10 h-10 rounded-full border cursor-pointer border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </button>

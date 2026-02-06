@@ -24,7 +24,7 @@ export const ServicesHero = () => {
             transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           >
             <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
-              Capabilities / 01
+              Capabilities
             </span>
             <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-20">
               Our <br />

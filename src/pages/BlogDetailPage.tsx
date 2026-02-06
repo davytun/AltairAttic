@@ -1,11 +1,12 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ArrowLeft, Clock, Calendar, User, Tag } from "lucide-react";
-import { blogData } from "@/utils/blogData";
+import { blogService } from "@/services/blogService";
+import { BlogPost } from "@/utils/blogData";
 import { DotBackground } from "@/components/ui/DotBackground";
 
 const BlogDetailPage = () => {
@@ -13,14 +14,36 @@ const BlogDetailPage = () => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const post = blogData.find((p) => p.slug === slug);
-  const relatedPosts = blogData.filter((p) => p.slug !== slug).slice(0, 2);
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!post) {
-      navigate("/blog");
-      return;
-    }
+    const fetchPost = async () => {
+      if (!slug) return;
+      try {
+        setIsLoading(true);
+        const data = await blogService.getBlogBySlug(slug);
+        if (data) {
+          setPost(data);
+          // Fetch related posts (could be another service call or filtered from a list)
+          const allBlogs = await blogService.getBlogs();
+          setRelatedPosts(allBlogs.filter((p) => p.slug !== slug).slice(0, 2));
+        } else {
+          navigate("/blog");
+        }
+      } catch (error) {
+        console.error("Failed to fetch blog post:", error);
+        navigate("/blog");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPost();
+  }, [slug, navigate]);
+
+  useEffect(() => {
+    if (!post) return;
 
     const ctx = gsap.context(() => {
       gsap.from(".hero-content", {
@@ -35,7 +58,20 @@ const BlogDetailPage = () => {
 
     window.scrollTo(0, 0);
     return () => ctx.revert();
-  }, [post, navigate]);
+  }, [post]);
+
+  if (isLoading) {
+    return (
+      <main className="bg-obsidian min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6" />
+          <p className="text-white/40 font-display uppercase tracking-widest text-xs">
+            Deep Loading...
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   if (!post) return null;
 
