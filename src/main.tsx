@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
       <ErrorBoundary>
-        <BrowserRouter basename="/altair-attic">
+        <BrowserRouter>
           <SmoothScroll>
             <App />
           </SmoothScroll>
