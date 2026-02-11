@@ -9,24 +9,24 @@ interface TeamMember {
 
 export const TeamGrid = () => {
   return (
-    <section className="bg-obsidian py-48 px-[4vw] relative overflow-hidden">
+    <section className="bg-obsidian py-20 md:py-32 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[40px_40px]" />
       </div>
 
       <div className="container-luxury relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-32 gap-12">
           <div className="max-w-3xl">
             <span className="text-label mb-8 block tracking-[0.6em]">
               Our Architects
             </span>
-            <h2 className="text-huge md:text-8xl! font-display uppercase tracking-tight leading-none text-balance">
+            <h2 className="text-huge font-display uppercase tracking-tight leading-none text-balance">
               The Minds <br /> <span className="text-white/40">Driving</span>{" "}
               <br /> <span className="text-accent">Innovation.</span>
             </h2>
           </div>
-          <p className="text-xl font-light text-white/70 max-w-sm border-l border-accent/20 pl-10 mb-6 italic">
+          <p className="text-lg md:text-xl font-light text-white/70 max-w-sm border-l border-accent/20 pl-8 md:pl-10 mb-6 italic">
             "Meet the architects of innovation driving Altair Attic forward."
           </p>
         </div>

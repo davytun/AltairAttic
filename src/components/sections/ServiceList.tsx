@@ -8,7 +8,7 @@ const serviceIcons = [Zap, Target, Shield];
 
 export const ServiceList = () => {
   return (
-    <section className="bg-obsidian py-48 px-[4vw]">
+    <section className="bg-obsidian py-20 md:py-32">
       <div className="container-luxury">
         <div className="grid grid-cols-1 gap-px bg-white/5 border border-white/5">
           {(wordSlid as ServiceData[]).map((service, index) => {
@@ -24,7 +24,7 @@ export const ServiceList = () => {
               >
                 <Link
                   to={`/services${service.url}`}
-                  className="block p-12 md:p-24"
+                  className="block p-8 md:p-24"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     {/* Index & Icon */}
@@ -32,7 +32,7 @@ export const ServiceList = () => {
 
                     {/* Content */}
                     <div className="lg:col-span-7">
-                      <h2 className="text-4xl md:text-6xl font-display uppercase tracking-tighter mb-6 group-hover:text-white transition-colors">
+                      <h2 className="text-3xl md:text-6xl font-display uppercase tracking-tighter mb-4 md:mb-6 group-hover:text-white transition-colors">
                         {service.name}
                       </h2>
                       <p className="text-lg text-white/70 font-light max-w-xl group-hover:text-white transition-colors">

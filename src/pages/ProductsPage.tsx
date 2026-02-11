@@ -1,6 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ProductShowcase } from "@/components/sections/ProductShowcase";
+import ProductCatalogGrid from "@/components/product/ProductCatalogGrid";
 import { Contact } from "@/components/sections/Contact";
 import { motion } from "framer-motion";
 import { DotBackground } from "@/components/ui/DotBackground";
@@ -11,7 +11,7 @@ const ProductsPage = () => {
       <Navbar />
 
       {/* Hardware Hero */}
-      <section className="pt-64 pb-32 px-[6vw] relative overflow-hidden">
+      <section className="pt-40 md:pt-64 pb-16 md:pb-32 relative overflow-hidden">
         <div className="container-luxury relative z-10 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -19,10 +19,10 @@ const ProductsPage = () => {
             transition={{ duration: 1 }}
           >
             <span className="text-label mb-8 block">Hardware Ecosystem</span>
-            <h1 className="text-huge md:text-[12vw] font-display leading-[0.85] mb-8">
+            <h1 className="text-huge font-display leading-[0.85] mb-8">
               The <span className="text-accent">Collection.</span>
             </h1>
-            <p className="text-2xl font-light text-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+            <p className="text-xl md:text-2xl font-light text-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
               Engineering the physical layer of your environment.
               Precision-crafted hardware designed to integrate flawlessly with
               your life.
@@ -40,9 +40,9 @@ const ProductsPage = () => {
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/5 blur-[150px] rounded-full pointer-events-none z-0" />
       </section>
 
-      {/* Reuse ProductShowcase for the list */}
-      <div className="border-t border-white/5">
-        <ProductShowcase />
+      {/* Product Grid */}
+      <div className="border-t border-white/5 bg-[#0B0F19]">
+        <ProductCatalogGrid />
       </div>
 
       <Contact />

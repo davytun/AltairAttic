@@ -8,6 +8,13 @@ export interface Project {
   link?: string;
 }
 
+import caseImg from "/public/case.png";
+import pfosImg from "/public/pfos.png";
+import altairImg from "/public/altair.png";
+import rexayoImg from "/public/rexayo.png";
+
+// ... interface
+
 const projectsData: Project[] = [
   // Software Development Projects
   {
@@ -16,7 +23,7 @@ const projectsData: Project[] = [
     category: "Software",
     year: "2024",
     description: "A digital procurement platform designed to simplify tender discovery, submission, and management. The app enables real-time tender notifications, secure document uploads, user authentication, and payment processing—helping suppliers and organizations manage procurement transparently and efficiently.",
-    image: "/case.png",
+    image: caseImg,
     link: "https://play.google.com/store/apps/details?id=co.tenderpay.mobile",
   },
   {
@@ -25,7 +32,7 @@ const projectsData: Project[] = [
     category: "Software",
     year: "2024",
     description: "A smart fashion-tech solution built for designers to manage client measurements, orders, inventory, and events digitally. Fittingz replaces manual record-keeping with a secure, user-friendly system that improves accuracy, customer engagement, and workflow efficiency.",
-    image: "/pfos.png",
+    image: pfosImg,
     link: "https://fittingz.vercel.app/",
   },
 
@@ -36,7 +43,7 @@ const projectsData: Project[] = [
     category: "Web Development",
     year: "2024",
     description: "A scalable digital solution for a solar energy company, combining a customer-facing interface with backend systems for product management and filtering. The platform supports smooth data handling and presents renewable energy products and services in a clear, engaging way.",
-    image: "/pfos.png",
+    image: pfosImg,
     link: "https://www.pfossolar.com/",
   },
   {
@@ -45,7 +52,7 @@ const projectsData: Project[] = [
     category: "Web Development",
     year: "2025",
     description: "The official website of Altair Attic, designed to showcase the company’s expertise in software development, smart home automation, IoT, and embedded systems. The site features clean UI, smooth animations, responsive layouts, and optimized performance across devices.",
-    image: "/altair.png",
+    image: altairImg,
     link: "https://www.altairattic.com/",
   },
   {
@@ -54,7 +61,7 @@ const projectsData: Project[] = [
     category: "Web Development",
     year: "2023",
     description: "A professional business consulting website developed using Bootstrap 5. The project involved full template customization, content structuring, service presentation, contact integration, and deployment delivering a polished digital presence for a consulting and training brand.",
-    image: "/rexayo.png",
+    image: rexayoImg,
     link: "https://www.rexayoconcept.biz",
   },
 

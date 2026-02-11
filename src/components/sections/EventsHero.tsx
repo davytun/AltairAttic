@@ -15,13 +15,13 @@ export const EventsHero = () => {
         <div className="absolute bottom-0 right-0 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] translate-y-1/2 translate-x-1/2 z-20" />
       </div>
 
-      <div className="container-luxury px-[6vw] relative z-10">
+      <div className="container-luxury relative z-10">
         <div className="max-w-5xl">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-[10px] uppercase tracking-[0.6em] text-accent font-black mb-8 block"
+            className="text-label mb-8 block"
           >
             / Engagement & Insights
           </motion.span>
@@ -29,7 +29,7 @@ export const EventsHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-huge md:text-[10vw] font-display leading-[0.85] uppercase tracking-tighter mb-12"
+            className="text-huge font-display leading-[0.85] uppercase tracking-tighter mb-12"
           >
             Curated <br />{" "}
             <span className="text-white/40 italic font-serif lowercase tracking-normal">

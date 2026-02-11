@@ -14,7 +14,7 @@ export const ProjectsHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-obsidian pt-32"
+      className="relative min-h-[70svh] md:min-h-[90vh] flex items-center justify-center overflow-hidden bg-obsidian pt-24 md:pt-32"
     >
       {/* Cinematic Background Layer */}
       <motion.div style={{ y }} className="absolute inset-0 z-0 opacity-10">
@@ -24,7 +24,7 @@ export const ProjectsHero = () => {
         <div className="vertical-line left-[80%] opacity-20" />
       </motion.div>
 
-      <div className="container-luxury relative z-10 px-[4vw]">
+      <div className="container-luxury relative z-10">
         <motion.div
           style={{ opacity }}
           className="flex flex-col items-center text-center"
@@ -37,7 +37,7 @@ export const ProjectsHero = () => {
             <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
               Archive / Works
             </span>
-            <h1 className="text-huge md:text-[10vw] font-display font-black leading-[0.85] tracking-tighter uppercase mb-16">
+            <h1 className="text-huge font-display font-black leading-[0.85] tracking-tighter uppercase mb-16">
               Our <br />
               Completed <br />
               <span className="text-white/10 italic font-serif lowercase tracking-normal">

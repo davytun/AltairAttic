@@ -41,7 +41,7 @@ export const TechStack = () => {
   return (
     <section
       ref={ref}
-      className="bg-obsidian py-64 px-[6vw] relative overflow-hidden border-t border-white/5"
+      className="bg-obsidian py-32 md:py-64 relative overflow-hidden border-t border-white/5"
     >
       <GridBackground
         gridSize={50}
@@ -56,7 +56,7 @@ export const TechStack = () => {
       </div>
 
       <div className="container-luxury relative z-10">
-        <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-48 space-y-8">
+        <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-24 md:mb-48 space-y-8">
           <span className="text-label">System Architecture</span>
           <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4">
             The <span className="text-white/40">Digital</span> <br />{" "}
@@ -69,7 +69,7 @@ export const TechStack = () => {
         </div>
 
         {/* The Schematic Core Layout */}
-        <div className="relative min-h-[600px] lg:h-[600px] w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
+        <div className="relative min-h-[500px] lg:h-[600px] w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-0">
           {/* Central Hub Node (Always visible, center of layout) */}
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
@@ -112,14 +112,14 @@ export const TechStack = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
                 viewport={{ once: true, amount: 0.5 }}
-                className={`w-full lg:w-72 p-10 bg-obsidian-surface border border-white/5 rounded-3xl group hover:border-accent hover:bg-accent transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
+                className={`w-full lg:w-72 p-6 md:p-10 bg-obsidian-surface border border-white/5 rounded-3xl group hover:border-accent hover:bg-accent transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
                   i === 0
                     ? "lg:top-0 lg:left-0"
                     : i === 1
-                    ? "lg:bottom-0 lg:left-0"
-                    : i === 2
-                    ? "lg:top-0 lg:right-0"
-                    : "lg:bottom-0 lg:right-0"
+                      ? "lg:bottom-0 lg:left-0"
+                      : i === 2
+                        ? "lg:top-0 lg:right-0"
+                        : "lg:bottom-0 lg:right-0"
                 }`}
               >
                 {/* Connector Dot for Mobile */}
@@ -153,7 +153,7 @@ export const TechStack = () => {
         </div>
 
         {/* System Stats (Million Dollar Detail) */}
-        <div className="mt-48 grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-white/5 pt-16">
+        <div className="mt-24 md:mt-48 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/5 pt-16">
           {[
             { label: "Stability Rate", val: "99.98%" },
             { label: "Nodes Managed", val: "140k+" },

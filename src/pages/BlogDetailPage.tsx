@@ -79,7 +79,10 @@ const BlogDetailPage = () => {
     <main className="bg-obsidian min-h-screen selection:bg-accent selection:text-obsidian">
       <Navbar />
 
-      <div ref={containerRef} className="pt-32 pb-20 relative">
+      <div
+        ref={containerRef}
+        className="pt-24 md:pt-32 pb-12 md:pb-20 relative"
+      >
         <DotBackground
           dotSize={1}
           gap={35}
@@ -110,7 +113,7 @@ const BlogDetailPage = () => {
                 <Clock className="w-3 h-3" /> {post.readTime}
               </span>
             </div>
-            <h1 className="hero-content text-4xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-8 tracking-tighter leading-[1.1]">
+            <h1 className="hero-content text-3xl md:text-6xl lg:text-7xl font-display font-medium text-white mb-6 md:mb-8 tracking-tighter leading-[1.1]">
               {post.title}
             </h1>
             <div className="hero-content flex items-center justify-center gap-8 text-white/50 text-sm font-light">
@@ -127,7 +130,7 @@ const BlogDetailPage = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-full aspect-21/9 md:aspect-2/1 rounded-4xl overflow-hidden border border-white/10 shadow-2xl relative"
+            className="w-full aspect-21/9 md:aspect-2/1 rounded-2xl md:rounded-4xl overflow-hidden border border-white/10 shadow-2xl relative"
           >
             <img
               src={post.image}

@@ -3,10 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import logo from "/public/logo.png";
+
+import { useCartStore } from "@/store/useCartStore";
+import { ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const getCartCount = useCartStore((state) => state.getCartCount);
+  const cartCount = getCartCount();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +47,7 @@ const Navbar = () => {
                 {/* Subtle glow effect on logo */}
                 <div className="absolute inset-0 bg-accent/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <img
-                  src="/logo.png"
+                  src={logo}
                   alt="Altair Attic Limited"
                   className="h-9 md:h-11 w-auto object-contain relative z-10 group-hover:scale-105 transition-transform duration-500"
                 />
@@ -50,7 +56,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8 lg:gap-10">
+          <div className="hidden lg:flex items-center gap-8 lg:gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -61,6 +67,16 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 right-0 h-px bg-accent scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
               </Link>
             ))}
+
+            <Link to="/cart" className="relative group p-2">
+              <ShoppingCart className="w-5 h-5 text-white/70 group-hover:text-accent transition-colors" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent text-obsidian text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
             <Link to="/contact">
               <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500">
                 Contact Us
@@ -68,12 +84,22 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <button
-            className="md:hidden p-2.5 rounded-lg bg-white/5 border border-white/10 hover:border-accent hover:bg-accent/10 text-white hover:text-accent transition-all duration-300"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-4">
+            <Link to="/cart" className="relative p-2">
+              <ShoppingCart className="w-5 h-5 text-white/70" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent text-obsidian text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+            <button
+              className="p-2.5 rounded-lg bg-white/5 border border-white/10 hover:border-accent hover:bg-accent/10 text-white hover:text-accent transition-all duration-300"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </nav>
 

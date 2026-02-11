@@ -31,7 +31,7 @@ export const AboutValues = () => {
   return (
     <section
       ref={containerRef}
-      className="bg-obsidian py-48 relative overflow-hidden border-t border-white/5"
+      className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-white/5"
     >
       <GridBackground
         gridSize={80}
@@ -78,7 +78,7 @@ export const AboutValues = () => {
         </div>
       </div>
 
-      <div className="container-luxury px-[6vw] relative z-10">
+      <div className="container-luxury relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           {/* Narrative Core */}
           <div className="lg:col-span-6 space-y-16">

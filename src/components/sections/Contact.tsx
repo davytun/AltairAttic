@@ -54,7 +54,7 @@ export const Contact = ({
   return (
     <section
       id="contact"
-      className="bg-obsidian py-48 px-[6vw] relative border-t border-white/5 overflow-hidden"
+      className="bg-obsidian py-20 md:py-32 relative border-t border-white/5 overflow-hidden"
     >
       <GridBackground
         gridSize={55}
@@ -66,9 +66,9 @@ export const Contact = ({
       <div className="absolute top-0 left-0 w-full h-[30vh] bg-linear-to-b from-accent/5 to-transparent pointer-events-none" />
 
       <div className="container-luxury max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start lg:items-center">
           {/* Narrative Content: Reduced width for safety */}
-          <div className="lg:col-span-5 space-y-16">
+          <div className="lg:col-span-5 space-y-12 md:space-y-16">
             <div className="space-y-8">
               <span className="text-label block">Next Steps</span>
               <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter">
@@ -134,7 +134,7 @@ export const Contact = ({
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
               viewport={{ once: true, amount: 0.2 }}
-              className="bg-obsidian-surface border border-white/5 p-10 md:p-16 lg:p-20 rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.8)] relative overflow-hidden group w-full max-w-[700px] ml-auto"
+              className="bg-obsidian-surface border border-white/5 p-8 md:p-16 lg:p-20 rounded-[2rem] md:rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.8)] relative overflow-hidden group w-full max-w-[700px] ml-auto"
             >
               <motion.div
                 initial={{ opacity: 0.1, scale: 0.8 }}
@@ -236,7 +236,7 @@ export const Contact = ({
                         <button
                           disabled={isSubmitting}
                           type="submit"
-                          className="h-20 px-12 bg-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
+                          className="h-16 md:h-20 px-8 md:px-12 bg-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center md:justify-start gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
                         >
                           {isSubmitting ? "Dispatching..." : "Send My Inquiry"}{" "}
                           <div className="p-2 bg-obsidian text-white rounded-full group-hover/btn:bg-white group-hover/btn:text-obsidian transition-all">

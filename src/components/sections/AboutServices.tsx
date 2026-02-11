@@ -39,9 +39,9 @@ const services = [
 
 export const AboutServices = () => {
   return (
-    <section className="bg-obsidian-surface py-64 relative overflow-hidden">
-      <div className="container-luxury px-[4vw]">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-24 mb-48">
+    <section className="bg-obsidian-surface py-24 md:py-64 relative overflow-hidden">
+      <div className="container-luxury">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-24 mb-20 md:mb-48">
           <div className="max-w-3xl">
             <span className="text-label mb-10 block tracking-[0.8em]">
               Technological Pillars
@@ -53,7 +53,7 @@ export const AboutServices = () => {
               </span>
             </h2>
           </div>
-          <div className="lg:max-w-sm pt-12 border-l border-white/10 pl-12">
+          <div className="lg:max-w-sm pt-0 lg:pt-12 border-l-0 lg:border-l border-white/10 pl-0 lg:pl-12">
             <p className="text-lg text-white/80 leading-relaxed uppercase tracking-widest font-bold mb-8">
               Architecting the <br /> future of intelligence.
             </p>
@@ -72,7 +72,7 @@ export const AboutServices = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="group relative bg-obsidian p-16 md:p-20 flex flex-col justify-between aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
+              className="group relative bg-obsidian p-10 md:p-20 flex flex-col justify-between aspect-[4/5] md:aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
             >
               {/* Cinematic Glow - Animated on mobile Viewport */}
               <motion.div

@@ -1,42 +1,51 @@
+import team1 from "/public/Team1.jpg";
+import team2 from "/public/Team2.jpg";
+import team3 from "/public/Team3.jpg";
+import team4 from "/public/Team4.jpg";
+import team5 from "/public/Team5.jpeg";
+import team6 from "/public/Team6.jpg";
+import team7 from "/public/Team7.jpg";
+import team8 from "/public/Team8.png";
+
 const teamData = [
   {
     name: "Timothy Ogunfowora",
     title: "Managing Director",
-    image: "/Team1.jpg"
+    image: team1
   },
   {
     name: "Ajayi Damilola",
     title: "HR/ADMIN",
-    image: "/Team2.jpg"
+    image: team2
   },
   {
     name: "Atinuke Arogundade",
     title: "Project Manager",
-    image: "/Team6.jpg"
+    image: team6
   },
   {
     name: "David Akintunde",
     title: "Web Developer",
-    image: "/Team3.jpg"
+    image: team3
   },
   {
     name: "Peter Adebayo",
     title: "Mobile Developer",
-    image: "/Team5.jpeg"
+    image: team5
   }, {
     name: "Ogunbo Adedoyin",
     title: "UI/UX Designer",
-    image: "/Team7.jpg"
+    image: team7
   },
   {
     name: "Precious Adebayo",
     title: "Social Media Manager",
-    image: "/Team4.jpg"
+    image: team4
   },
   {
     name: "Barnabas Oyedele",
     title: "Technician",
-    image: "/Team8.png"
+    image: team8
   }
 ];
 

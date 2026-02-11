@@ -16,7 +16,7 @@ export const AboutHero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-obsidian pt-32"
+      className="relative min-h-[90svh] md:min-h-screen flex items-center justify-center overflow-hidden bg-obsidian pt-24 md:pt-32"
     >
       {/* Cinematic Background with Parallax */}
       <motion.div style={{ y, scale }} className="absolute inset-0 z-0">
@@ -27,7 +27,7 @@ export const AboutHero = () => {
             filter: useTransform(
               scrollYProgress,
               [0, 0.5],
-              ["grayscale(40%)", "grayscale(0%)"]
+              ["grayscale(40%)", "grayscale(0%)"],
             ),
           }}
           alt="Cinematic Background"
@@ -51,7 +51,7 @@ export const AboutHero = () => {
         <div className="vertical-line left-[90%] opacity-20" />
       </div>
 
-      <div className="container-luxury relative z-20 px-[4vw]">
+      <div className="container-luxury">
         <motion.div
           style={{ opacity }}
           initial={{ opacity: 0, y: 50 }}
@@ -68,7 +68,7 @@ export const AboutHero = () => {
             Digital Architecture
           </motion.span>
 
-          <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-20 text-balance">
+          <h1 className="text-huge font-display font-black leading-[0.75] tracking-tighter uppercase mb-12 md:mb-20 text-balance">
             At the <br />
             <span className="text-white/20 italic font-serif lowercase tracking-normal">
               forefront
@@ -76,10 +76,10 @@ export const AboutHero = () => {
             <br /> <span className="text-accent">of tech.</span>
           </h1>
 
-          <div className="max-w-4xl pt-16 border-t border-white/10 relative">
+          <div className="max-w-4xl pt-10 md:pt-16 border-t border-white/10 relative">
             <div className="absolute -top-px left-1/2 -translate-x-1/2 w-40 h-px bg-accent" />
 
-            <p className="text-2xl md:text-3xl font-light text-white/60 leading-relaxed italic mb-10">
+            <p className="text-xl md:text-3xl font-light text-white/60 leading-relaxed italic mb-10">
               "Altair Attic Limited is at the forefront of technological
               innovation, delivering cutting-edge solutions in smart home
               automation, software development, IoT, and embedded systems

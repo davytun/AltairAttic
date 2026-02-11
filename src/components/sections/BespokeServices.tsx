@@ -47,10 +47,10 @@ const ServiceCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, delay: i * 0.1 }}
       viewport={{ once: true, margin: "-10%" }}
-      className="group relative flex flex-col md:flex-row h-full md:min-h-[500px] bg-obsidian-surface border border-white/5 rounded-[3rem] overflow-hidden hover:border-accent/30 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
+      className="group relative flex flex-col md:flex-row h-full md:min-h-[450px] lg:min-h-[500px] bg-obsidian-surface border border-white/5 rounded-[2rem] md:rounded-[3rem] overflow-hidden hover:border-accent/30 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
     >
       {/* Image Section (40%) */}
-      <div className="w-full md:w-2/5 aspect-square md:aspect-auto overflow-hidden relative">
+      <div className="w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden relative">
         <motion.img
           src={s.image}
           initial={{ filter: "brightness(0.8)", scale: 1.1 }}
@@ -65,7 +65,7 @@ const ServiceCard = ({
       </div>
 
       {/* Content Section (60%) */}
-      <div className="w-full md:w-3/5 p-12 md:p-20 flex flex-col justify-between relative z-10">
+      <div className="w-full md:w-3/5 p-8 md:p-12 lg:p-20 flex flex-col justify-between relative z-10">
         <div className="space-y-12">
           <div className="space-y-6">
             <motion.h3
@@ -104,7 +104,7 @@ export const BespokeServices = ({
   onInquire?: (name: string) => void;
 }) => {
   return (
-    <section className="bg-obsidian py-48 relative overflow-hidden">
+    <section className="bg-obsidian py-20 md:py-32 relative overflow-hidden">
       {/* Dot Background Pattern */}
       <DotBackground
         dotSize={1}
@@ -114,17 +114,17 @@ export const BespokeServices = ({
         className="z-0"
       />
 
-      <div className="container-luxury px-[6vw] relative z-10">
-        <div className="mb-40 flex flex-col md:flex-row justify-between items-start gap-12">
-          <div className="max-w-4xl">
+      <div className="container-luxury relative z-10 w-full">
+        <div className="mb-20 md:mb-32 flex flex-col xl:flex-row justify-between items-start xl:items-end gap-16 xl:gap-24">
+          <div className="max-w-5xl">
             <span className="text-label mb-8 block">Disciplines</span>
-            <h2 className="text-huge md:text-[10vw] font-display leading-[0.85] mb-8">
+            <h2 className="text-huge font-display leading-[0.85] mb-8">
               Bridging <br />{" "}
               <span className="text-white/40">Digital & Life.</span>
             </h2>
           </div>
-          <div className="md:w-1/3 pt-10">
-            <p className="text-xl font-light text-white/40 leading-relaxed border-l border-accent/30 pl-10 mb-8">
+          <div className="xl:w-1/3 pt-0 pb-4">
+            <p className="text-xl font-light text-white/40 leading-relaxed border-l border-accent/30 pl-10 mb-8 max-w-lg">
               We help you skip the frustration of generic tech. Altair Attic
               Limited builds custom intelligence that fits your life and scales
               your business.

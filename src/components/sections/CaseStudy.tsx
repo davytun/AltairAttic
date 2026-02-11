@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { DotBackground } from "@/components/ui/DotBackground";
+import caseImg from "/case.png";
+import case2Img from "/case2.png";
 
 export const CaseStudy = () => {
   return (
-    <section className="bg-obsidian py-48 px-[6vw] relative border-y border-white/5">
+    <section className="bg-obsidian py-20 md:py-32 relative border-y border-white/5">
       <DotBackground
         dotSize={1.2}
         gap={32}
@@ -13,7 +15,7 @@ export const CaseStudy = () => {
       />
 
       <div className="container-luxury relative z-10">
-        <div className="flex flex-col lg:flex-row gap-24 items-start">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           {/* Fixed Sidebar for Case Study Label */}
           <div className="lg:w-1/4 pt-4">
             <div className="space-y-12">
@@ -46,7 +48,7 @@ export const CaseStudy = () => {
               className="aspect-4/5 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl"
             >
               <motion.img
-                src="/case.png"
+                src={caseImg}
                 initial={{ filter: "grayscale(40%)" }}
                 whileInView={{ filter: "grayscale(0%)" }}
                 transition={{ duration: 2 }}
@@ -55,7 +57,7 @@ export const CaseStudy = () => {
                 alt="Tender App Interface"
               />
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
-              <div className="absolute bottom-10 left-10">
+              <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10">
                 <span className="text-[10px] text-white/70 tracking-widest uppercase mb-2 block">
                   Core Functionality
                 </span>
@@ -74,7 +76,7 @@ export const CaseStudy = () => {
             >
               <div className="aspect-4/3 bg-obsidian-surface rounded-3xl overflow-hidden relative shadow-2xl">
                 <img
-                  src="/case2.png"
+                  src={case2Img}
                   className="w-full h-full object-cover group-hover:scale-110 transition-all duration-[3s]"
                   alt="Data Analytics Dashboard"
                 />
@@ -88,7 +90,15 @@ export const CaseStudy = () => {
                   authentication, and payment processing—helping suppliers and
                   organizations manage procurement transparently and efficiently
                 </p>
-                <button onClick={() => window.open("https://play.google.com/store/apps/details?id=co.tenderpay.mobile", "_blank")} className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group">
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://play.google.com/store/apps/details?id=co.tenderpay.mobile",
+                      "_blank",
+                    )
+                  }
+                  className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group"
+                >
                   Full Study
                   <div className="w-10 h-10 rounded-full border cursor-pointer border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
                     <ArrowUpRight className="w-4 h-4" />

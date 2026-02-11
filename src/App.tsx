@@ -11,6 +11,8 @@ import ProductDetailPage from "@/pages/ProductDetailPage";
 import ProductsPage from "@/pages/ProductsPage";
 import BlogPage from "@/pages/BlogPage";
 import BlogDetailPage from "@/pages/BlogDetailPage";
+import ShoppingCartPage from "@/pages/ShoppingCartPage";
+import CheckoutPage from "@/pages/CheckoutPage";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
+        <Route path="/cart" element={<ShoppingCartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </div>
   );

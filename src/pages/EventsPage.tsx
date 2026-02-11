@@ -12,9 +12,10 @@ const EventsPage = () => {
   return (
     <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
+
       <EventsHero />
 
-      <section className="py-32 px-[6vw] relative overflow-hidden">
+      <section className="py-20 md:py-32 relative overflow-hidden">
         <GridBackground
           gridSize={58}
           gridColor="rgba(139, 92, 246, 0.07)"
@@ -30,7 +31,7 @@ const EventsPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative flex flex-col md:flex-row gap-12 p-8 md:p-12 rounded-[3rem] bg-obsidian-surface border border-white/5 hover:border-accent/30 transition-all duration-700"
+                className="group relative flex flex-col md:flex-row gap-8 md:gap-12 p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] bg-obsidian-surface border border-white/5 hover:border-accent/30 transition-all duration-700"
               >
                 <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-2xl overflow-hidden relative">
                   <img
@@ -65,9 +66,9 @@ const EventsPage = () => {
                     </p>
                   </div>
 
-                  <button className="flex items-center gap-4 text-[10px] uppercase tracking-[0.5em] font-black group/btn">
+                  <button className="flex items-center gap-4 text-[10px] uppercase tracking-[0.5em] font-black group/btn text-accent">
                     Register Interest
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-2 text-accent" />
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-2" />
                   </button>
                 </div>
               </motion.div>

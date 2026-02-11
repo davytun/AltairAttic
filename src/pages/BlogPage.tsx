@@ -77,7 +77,10 @@ const BlogPage = () => {
     <main className="bg-obsidian min-h-screen selection:bg-accent selection:text-obsidian">
       <Navbar />
 
-      <div ref={containerRef} className="pt-28 pb-20 relative">
+      <div
+        ref={containerRef}
+        className="pt-20 md:pt-28 pb-10 md:pb-20 relative"
+      >
         <DotBackground
           dotSize={1}
           gap={35}
@@ -88,7 +91,7 @@ const BlogPage = () => {
 
         {/* === SIMPLE HEADER === */}
         {/* === SIMPLE HEADER === */}
-        <div className="pt-32 pb-20 px-[4vw] text-center relative z-10 flex flex-col items-center">
+        <div className="pt-20 md:pt-32 pb-12 md:pb-20 px-[4vw] text-center relative z-10 flex flex-col items-center">
           <span className="text-accent text-[10px] uppercase font-black tracking-[0.4em] mb-6 block">
             / Insights
           </span>
@@ -101,7 +104,7 @@ const BlogPage = () => {
         </div>
 
         {/* === FILTERS & SEARCH === */}
-        <div className="z-40 border-y border-white/5 py-6 mb-24 transition-all duration-300">
+        <div className="z-40 border-y border-white/5 py-6 mb-12 md:mb-24 transition-all duration-300">
           <div className="container-luxury px-[4vw] flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Categories */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar scroll-smooth">
@@ -144,7 +147,7 @@ const BlogPage = () => {
         </div>
 
         {/* === GRID LAYOUT === */}
-        <section className="px-[4vw] container-luxury relative z-10">
+        <section className="container-luxury relative z-10">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-40">
               <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6" />
@@ -153,7 +156,7 @@ const BlogPage = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-12 md:gap-y-20">
               <AnimatePresence>
                 {filteredPosts.map((post, i) => (
                   <motion.div

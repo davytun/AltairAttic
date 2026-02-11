@@ -52,7 +52,7 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen min-h-[800px] flex flex-col justify-center items-center bg-obsidian overflow-hidden"
+      className="relative min-h-[100svh] py-20 md:py-0 flex flex-col justify-center items-center bg-obsidian overflow-hidden"
     >
       {/* Cinematic Background Media */}
       <motion.div
@@ -79,7 +79,7 @@ export const Hero = () => {
       />
 
       {/* Architectural Layout Area */}
-      <div className="container-luxury relative z-30 w-full px-[6vw] pt-32 md:pt-0">
+      <div className="container-luxury relative z-30 w-full pt-32 pb-20 md:pt-48 md:pb-0">
         <motion.div
           style={{ y, opacity }}
           className="flex flex-col items-start gap-12"
@@ -92,17 +92,18 @@ export const Hero = () => {
 
           <h1
             ref={titleRef}
-            className="text-[13vw] sm:text-[11vw] md:text-[10vw] lg:text-[9vw] font-display leading-[0.85] tracking-tighter text-white perspective-[1000px]"
+            className="relative perspective-[1000px] text-white font-display font-black leading-[0.8] tracking-tighter uppercase text-[clamp(2.5rem,5.5vw,9rem)]"
           >
-            <div className="overflow-hidden mb-[2vw] md:whitespace-nowrap">
+            <div className="overflow-hidden mb-[1vw]">
               {splitText("YOU BUILD THE VISION.")}
             </div>
-            <div className="overflow-hidden text-accent md:whitespace-nowrap">
+            <br />
+            <div className="overflow-hidden text-accent">
               {splitText("WE BUILD THE ENGINE.")}
             </div>
           </h1>
 
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-12 mt-8">
+          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-12 lg:gap-20 mt-8">
             <p className="max-w-xl text-lg md:text-xl font-light text-white/50 leading-relaxed border-l border-accent/30 pl-8">
               Technology should serve your life, not complicate it. We design
               smart systems and custom software that actually work—fast,

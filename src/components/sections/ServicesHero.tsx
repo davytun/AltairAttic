@@ -3,7 +3,7 @@ import { GridBackground } from "@/components/ui/GridBackground";
 
 export const ServicesHero = () => {
   return (
-    <section className="relative pt-64 pb-32 overflow-hidden bg-obsidian">
+    <section className="relative pt-40 md:pt-64 pb-16 md:pb-32 overflow-hidden bg-obsidian">
       {/* Background Decor */}
       <div className="absolute inset-0 z-0 opacity-20">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
@@ -16,7 +16,7 @@ export const ServicesHero = () => {
         fade={true}
       />
 
-      <div className="container-luxury relative z-10 px-[4vw]">
+      <div className="container-luxury relative z-10">
         <div className="flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

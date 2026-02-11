@@ -29,7 +29,7 @@ const ServiceDetail = () => {
       <img src={service.image} alt={service.name} className="service-image" />
       <div className="service-header">
         <h1 className="service-title">{service.name}</h1>
-        {service.price && <p className="service-price">${service.price}</p>}
+        {service.price && <p className="service-price">₦{service.price}</p>}
       </div>
       <p className="service-description">{service.detail}</p>
       {service.additionalInfo && (

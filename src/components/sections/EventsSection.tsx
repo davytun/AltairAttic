@@ -8,7 +8,7 @@ export const EventsSection = () => {
   const featured = eventsData.slice(0, 3);
 
   return (
-    <section className="bg-obsidian py-48 px-[6vw] relative overflow-hidden border-t border-white/5">
+    <section className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-white/5">
       <DotBackground
         dotSize={1}
         gap={38}

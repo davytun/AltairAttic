@@ -7,9 +7,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-obsidian pt-32 pb-16 px-[6vw] border-t border-white/5">
-      <div className="section-container">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-20 mb-32 items-end">
+    <footer className="bg-obsidian py-16 md:py-32 border-t border-white/5">
+      <div className="container-luxury">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-20 mb-20 md:mb-32 items-end">
           <div className="md:col-span-6 space-y-12">
             <h2 className="text-4xl md:text-7xl font-display leading-[0.9] uppercase tracking-tighter text-white">
               Empowering <br /> Your World.

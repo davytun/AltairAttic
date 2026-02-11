@@ -32,7 +32,7 @@ export const ProjectsGrid = () => {
       className="group cursor-pointer"
     >
       {/* Architectural Card */}
-      <div className="relative aspect-4/5 md:aspect-square overflow-hidden rounded-[2.5rem] bg-obsidian-surface border border-white/5 transition-all duration-1000 group-hover:border-accent/40 group-hover:shadow-[0_0_80px_rgba(0,159,255,0.05)]">
+      <div className="relative aspect-4/5 md:aspect-square overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-obsidian-surface border border-white/5 transition-all duration-1000 group-hover:border-accent/40 group-hover:shadow-[0_0_80px_rgba(0,159,255,0.05)]">
         <motion.img
           src={project.image}
           alt={project.title}
@@ -56,7 +56,7 @@ export const ProjectsGrid = () => {
         <div className="absolute inset-0 bg-linear-to-t from-obsidian/40 to-transparent z-10" />
 
         {/* Floating Meta */}
-        <div className="absolute top-10 left-10 z-20 flex flex-col items-start gap-4">
+        <div className="absolute top-6 md:top-10 left-6 md:left-10 z-20 flex flex-col items-start gap-4">
           <motion.span
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -78,7 +78,7 @@ export const ProjectsGrid = () => {
         </div>
 
         {/* Main Identity */}
-        <div className="absolute bottom-12 left-12 right-12 z-20">
+        <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12 right-8 md:right-12 z-20">
           <h3 className="text-3xl md:text-4xl font-display uppercase tracking-tight leading-none mb-6">
             {project.title}
           </h3>
@@ -101,8 +101,8 @@ export const ProjectsGrid = () => {
   );
 
   return (
-    <section className="bg-obsidian pb-64 px-[4vw]">
-      <div className="container-luxury space-y-32">
+    <section className="bg-obsidian pb-32 md:pb-64 px-[4vw]">
+      <div className="container-luxury space-y-20 md:space-y-32">
         {/* Software Development Section */}
         <div>
           <div className="flex items-center gap-6 mb-16">
@@ -111,7 +111,7 @@ export const ProjectsGrid = () => {
             </h2>
             <div className="h-px bg-white/10 flex-grow" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
             {softwareProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
@@ -126,7 +126,7 @@ export const ProjectsGrid = () => {
             </h2>
             <div className="h-px bg-white/10 flex-grow" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
             {webProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
@@ -141,7 +141,7 @@ export const ProjectsGrid = () => {
             </h2>
             <div className="h-px bg-white/10 flex-grow" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
             {automationProjects.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
