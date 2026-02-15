@@ -14,10 +14,9 @@ export const GridBackground = ({
   children,
   className = "",
   gridSize = 50,
-  gridColor = "rgba(255, 255, 255, 0.08)",
+  gridColor = "rgba(234, 234, 234, 0.08)", // Softer white for less harsh contrast
   backgroundColor = "transparent",
   fade = true,
-  maskClassName = "",
 }: GridBackgroundProps) => {
   return (
     <div
@@ -30,32 +29,16 @@ export const GridBackground = ({
         `,
         backgroundSize: `${gridSize}px ${gridSize}px`,
         filter: "blur(0.4px)", // Subtle blur for smooth lines
+        WebkitMaskImage: fade
+          ? "radial-gradient(ellipse at center, black 40%, transparent 100%), linear-gradient(to bottom, black 60%, transparent 100%)"
+          : "none",
+        maskImage: fade
+          ? "radial-gradient(ellipse at center, black 40%, transparent 100%), linear-gradient(to bottom, black 60%, transparent 100%)"
+          : "none",
+        WebkitMaskComposite: fade ? "source-in" : "none",
+        maskComposite: fade ? "intersect" : "none",
       }}
     >
-      {fade && (
-        <>
-          {/* Very subtle gradient fade */}
-          <div
-            className={`absolute inset-0 ${maskClassName}`}
-            style={{
-              background: `linear-gradient(to bottom, 
-                rgba(0, 0, 0, 0) 0%, 
-                rgba(0, 0, 0, 0) 50%, 
-                rgba(0, 0, 0, 0.1) 75%,
-                rgba(0, 0, 0, 0.25) 90%,
-                rgba(0, 0, 0, 0.4) 100%
-              )`,
-            }}
-          />
-          {/* Very subtle vignette */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.08) 100%)`,
-            }}
-          />
-        </>
-      )}
       {children}
     </div>
   );

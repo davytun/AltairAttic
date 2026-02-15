@@ -6,13 +6,15 @@ import { ServiceDetailHero } from "@/components/sections/ServiceDetailHero";
 import { ServiceContent } from "@/components/sections/ServiceContent";
 import { Contact } from "@/components/sections/Contact";
 
+import NotFoundPage from "@/pages/NotFoundPage";
+
 const ServiceDetailPage = () => {
   const { url } = useParams();
 
   const service = (wordSlid as ServiceData[]).find((s) => s.url === `/${url}`);
 
   if (!service) {
-    return <Navigate to="/services" replace />;
+    return <NotFoundPage />;
   }
 
   return (

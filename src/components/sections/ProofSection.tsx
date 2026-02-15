@@ -5,7 +5,7 @@ const stats: { label: string; val: string; detail: string }[] = [];
 
 export const ProofSection = () => {
   return (
-    <section className="bg-obsidian py-32 border-y border-white/5 relative overflow-hidden hidden">
+    <section className="bg-obsidian py-32 border-y border-border-dim relative overflow-hidden hidden">
       <GridBackground
         gridSize={60}
         gridColor="rgba(139, 92, 246, 0.06)"
@@ -17,9 +17,9 @@ export const ProofSection = () => {
           <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black block mb-4">
             Trusted Expertise
           </span>
-          <h2 className="text-4xl md:text-5xl font-display uppercase tracking-tight text-white max-w-2xl">
+          <h2 className="text-4xl md:text-5xl font-display uppercase tracking-tight text-silk-white max-w-2xl">
             Reliability Built Into Every{" "}
-            <span className="text-white/40">Line of Code.</span>
+            <span className="text-text-muted">Line of Code.</span>
           </h2>
         </div>
       </div>

@@ -90,21 +90,20 @@ const BlogPage = () => {
         />
 
         {/* === SIMPLE HEADER === */}
-        {/* === SIMPLE HEADER === */}
         <div className="pt-20 md:pt-32 pb-12 md:pb-20 px-[4vw] text-center relative z-10 flex flex-col items-center">
           <span className="text-accent text-[10px] uppercase font-black tracking-[0.4em] mb-6 block">
             / Insights
           </span>
-          <h1 className="blog-header text-5xl md:text-8xl font-display font-medium text-white mb-8 tracking-tighter">
+          <h1 className="blog-header text-5xl md:text-8xl font-display font-medium text-silk-white mb-8 tracking-tighter">
             Our Blog
           </h1>
-          <p className="blog-header text-lg md:text-xl text-white/50 font-light max-w-2xl leading-relaxed">
+          <p className="blog-header text-lg md:text-xl text-silk-white/50 font-light max-w-2xl leading-relaxed">
             Simple tips and advice for a smarter, safer home.
           </p>
         </div>
 
         {/* === FILTERS & SEARCH === */}
-        <div className="z-40 border-y border-white/5 py-6 mb-12 md:mb-24 transition-all duration-300">
+        <div className="z-40 border-y border-border-dim py-6 mb-12 md:mb-24 transition-all duration-300">
           <div className="container-luxury px-[4vw] flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Categories */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto no-scrollbar scroll-smooth">
@@ -116,8 +115,8 @@ const BlogPage = () => {
                           px-6 py-3 rounded-full text-[10px] uppercase font-bold tracking-widest transition-all whitespace-nowrap border
                           ${
                             activeCategory === cat
-                              ? "bg-white text-obsidian border-white scale-105"
-                              : "bg-white/5 text-white/50 border-white/5 hover:bg-white/10 hover:text-white"
+                              ? "bg-silk-white text-obsidian border-silk-white scale-105"
+                              : "bg-silk-white/5 text-silk-white/50 border-silk-white/5 hover:bg-silk-white/10 hover:text-silk-white"
                           }
                        `}
                 >
@@ -131,7 +130,7 @@ const BlogPage = () => {
               className={`relative flex items-center transition-all duration-500 ${isSearchFocused ? "w-full md:w-96" : "w-full md:w-64"}`}
             >
               <Search
-                className={`absolute left-4 w-4 h-4 pointer-events-none transition-colors ${isSearchFocused ? "text-accent" : "text-white/30"}`}
+                className={`absolute left-4 w-4 h-4 pointer-events-none transition-colors ${isSearchFocused ? "text-accent" : "text-silk-white/30"}`}
               />
               <input
                 type="text"
@@ -140,7 +139,7 @@ const BlogPage = () => {
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
                 placeholder="Search articles..."
-                className="w-full bg-obsidian-muted border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all font-light"
+                className="w-full bg-obsidian-muted border border-border-dim rounded-xl py-3 pl-12 pr-4 text-sm text-silk-white placeholder:text-silk-white/20 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all font-light"
               />
             </div>
           </div>
@@ -151,7 +150,7 @@ const BlogPage = () => {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-40">
               <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6" />
-              <p className="text-white/40 font-display uppercase tracking-widest text-xs">
+              <p className="text-silk-white/40 font-display uppercase tracking-widest text-xs">
                 Syncing Insights...
               </p>
             </div>
@@ -166,11 +165,11 @@ const BlogPage = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ duration: 0.5, delay: i * 0.05 }}
-                    className="group cursor-pointer flex flex-col h-full bg-obsidian-surface p-6 rounded-[2.5rem] border border-white/5 hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,159,255,0.05)]"
+                    className="group cursor-pointer flex flex-col h-full bg-obsidian-surface p-6 rounded-[2.5rem] border border-border-dim hover:border-accent/30 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,159,255,0.05)]"
                   >
                     <Link to={`/blog/${post.slug}`} className="contents">
                       {/* Image */}
-                      <div className="relative aspect-16/10 rounded-3xl overflow-hidden mb-8 border border-white/5 bg-obsidian-muted">
+                      <div className="relative aspect-16/10 rounded-3xl overflow-hidden mb-8 border border-border-dim bg-obsidian-muted">
                         <div className="absolute inset-0 bg-obsidian/10 z-10 group-hover:bg-transparent transition-colors duration-500" />
                         <img
                           src={post.image}
@@ -180,9 +179,9 @@ const BlogPage = () => {
 
                         {/* Floating Category Pits */}
                         <div className="absolute top-4 left-4 z-20 flex gap-2">
-                          <div className="px-3 py-1.5 bg-obsidian/90 backdrop-blur-md rounded-lg border border-white/10 flex items-center gap-2">
+                          <div className="px-3 py-1.5 bg-obsidian/90 backdrop-blur-md rounded-lg border border-border-dim flex items-center gap-2">
                             <Tag className="w-3 h-3 text-accent" />
-                            <span className="text-[9px] uppercase font-bold text-white/80 tracking-wider">
+                            <span className="text-[9px] uppercase font-bold text-silk-white/80 tracking-wider">
                               {post.category || "Insight"}
                             </span>
                           </div>
@@ -190,12 +189,12 @@ const BlogPage = () => {
                       </div>
 
                       {/* Meta Info */}
-                      <div className="flex items-center gap-4 mb-4 text-[10px] uppercase tracking-widest text-white/40 font-medium">
+                      <div className="flex items-center gap-4 mb-4 text-[10px] uppercase tracking-widest text-silk-white/40 font-medium">
                         <span className="flex items-center gap-2">
                           <Calendar className="w-3 h-3 text-accent" />
                           {post.date}
                         </span>
-                        <span className="w-1 h-1 rounded-full bg-white/20" />
+                        <span className="w-1 h-1 rounded-full bg-silk-white/20" />
                         <span className="flex items-center gap-2">
                           <Clock className="w-3 h-3 text-accent" />
                           {post.readTime}
@@ -203,19 +202,19 @@ const BlogPage = () => {
                       </div>
 
                       {/* Text */}
-                      <h3 className="text-2xl font-display font-medium text-white group-hover:text-accent transition-colors duration-300 leading-tight mb-4">
+                      <h3 className="text-2xl font-display font-medium text-silk-white group-hover:text-accent transition-colors duration-300 leading-tight mb-4">
                         {post.title}
                       </h3>
-                      <p className="text-sm font-light text-white/60 leading-relaxed line-clamp-3 mb-8">
+                      <p className="text-sm font-light text-silk-white/60 leading-relaxed line-clamp-3 mb-8">
                         {post.excerpt}
                       </p>
 
                       {/* Spacer to push button down */}
-                      <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between group/link">
-                        <span className="text-[10px] uppercase font-black tracking-widest text-white group-hover/link:text-accent transition-colors">
+                      <div className="mt-auto pt-6 border-t border-border-dim flex items-center justify-between group/link">
+                        <span className="text-[10px] uppercase font-black tracking-widest text-silk-white group-hover/link:text-accent transition-colors">
                           Read Full Story
                         </span>
-                        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover/link:bg-accent group-hover/link:text-obsidian transition-all">
+                        <div className="w-8 h-8 rounded-full border border-border-dim flex items-center justify-center group-hover/link:bg-accent group-hover/link:text-obsidian transition-all">
                           <ArrowUpRight className="w-3 h-3" />
                         </div>
                       </div>
@@ -228,10 +227,10 @@ const BlogPage = () => {
 
           {!isLoading && filteredPosts.length === 0 && (
             <div className="py-20 text-center">
-              <h3 className="text-2xl font-display text-white mb-2">
+              <h3 className="text-2xl font-display text-silk-white mb-2">
                 No Articles Found
               </h3>
-              <p className="text-white/40 font-light">
+              <p className="text-silk-white/40 font-light">
                 Try searching for different keywords or categories.
               </p>
             </div>

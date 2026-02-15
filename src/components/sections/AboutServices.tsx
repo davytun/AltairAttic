@@ -46,25 +46,25 @@ export const AboutServices = () => {
             <span className="text-label mb-10 block tracking-[0.8em]">
               Technological Pillars
             </span>
-            <h2 className="text-7xl md:text-[8vw] font-display font-black leading-[0.85] uppercase tracking-tighter">
+            <h2 className="text-7xl md:text-[8vw] font-display font-black leading-[0.85] uppercase tracking-tighter text-silk-white">
               Bespoke <br />{" "}
               <span className="text-accent italic font-serif lowercase tracking-normal">
                 mastery.
               </span>
             </h2>
           </div>
-          <div className="lg:max-w-sm pt-0 lg:pt-12 border-l-0 lg:border-l border-white/10 pl-0 lg:pl-12">
-            <p className="text-lg text-white/80 leading-relaxed uppercase tracking-widest font-bold mb-8">
+          <div className="lg:max-w-sm pt-0 lg:pt-12 border-l-0 lg:border-l border-border-dim pl-0 lg:pl-12">
+            <p className="text-lg text-silk-white/80 leading-relaxed uppercase tracking-widest font-bold mb-8">
               Architecting the <br /> future of intelligence.
             </p>
-            <p className="text-sm font-light text-white/70 leading-relaxed text-balance">
+            <p className="text-sm font-light text-silk-white/70 leading-relaxed text-balance">
               We don't just build technology; we engineer experiences that
               bridge the gap between human intuition and digital precision.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-1px bg-silk-white/5 border border-border-dim">
           {services.map((s, i) => (
             <motion.div
               key={s.id}
@@ -72,7 +72,7 @@ export const AboutServices = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="group relative bg-obsidian p-10 md:p-20 flex flex-col justify-between aspect-[4/5] md:aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
+              className="group relative bg-obsidian p-10 md:p-20 flex flex-col justify-between aspect-4/5 md:aspect-3/4 hover:bg-obsidian-surface transition-colors duration-700 overflow-hidden"
             >
               {/* Cinematic Glow - Animated on mobile Viewport */}
               <motion.div
@@ -87,18 +87,18 @@ export const AboutServices = () => {
                   <motion.h3
                     initial={{ opacity: 0.8 }}
                     whileInView={{ opacity: 1 }}
-                    className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-accent transition-colors"
+                    className="text-4xl font-display uppercase tracking-tight leading-none group-hover:text-accent transition-colors text-silk-white"
                   >
                     {s.title}
                   </motion.h3>
-                  <p className="text-sm text-white/70 font-light leading-relaxed group-hover:text-white transition-colors">
+                  <p className="text-sm text-silk-white/70 font-light leading-relaxed group-hover:text-silk-white transition-colors">
                     {s.detail}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-16 pt-12 border-t border-white/5 relative z-10">
-                <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-white/50 group-hover:text-white transition-all">
+              <div className="mt-16 pt-12 border-t border-border-dim relative z-10">
+                <button className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] text-silk-white/50 group-hover:text-silk-white transition-all">
                   Inspect Capability
                   <ArrowRight className="w-4 h-4 translate-x-0 group-hover:translate-x-2 transition-transform duration-700" />
                 </button>

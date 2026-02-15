@@ -7,7 +7,7 @@ export const ServicesHero = () => {
       {/* Background Decor */}
       <div className="absolute inset-0 z-0 opacity-20">
         <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-accent/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-white/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-silk-white/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
       </div>
 
       <GridBackground
@@ -26,14 +26,14 @@ export const ServicesHero = () => {
             <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
               Capabilities
             </span>
-            <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-20">
+            <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-20 text-silk-white">
               Our <br />
-              <span className="text-white/10 italic font-serif lowercase tracking-normal">
+              <span className="text-silk-white/10 italic font-serif lowercase tracking-normal">
                 expertise.
               </span>
             </h1>
           </motion.div>
-          <p className="max-w-2xl text-xl text-white/70 font-light leading-relaxed text-balance">
+          <p className="max-w-2xl text-xl text-silk-white/70 font-light leading-relaxed text-balance">
             Crafting the future through precision engineering, intelligent
             design, and a relentless pursuit of technological excellence.
           </p>

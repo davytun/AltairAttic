@@ -6,7 +6,7 @@ import case2Img from "/case2.png";
 
 export const CaseStudy = () => {
   return (
-    <section className="bg-obsidian py-20 md:py-32 relative border-y border-white/5">
+    <section className="bg-obsidian py-20 md:py-32 relative border-y border-border-dim">
       <DotBackground
         dotSize={1.2}
         gap={32}
@@ -19,19 +19,19 @@ export const CaseStudy = () => {
           {/* Fixed Sidebar for Case Study Label */}
           <div className="lg:w-1/4 pt-4">
             <div className="space-y-12">
-              <h2 className="text-5xl font-display leading-[0.8] tracking-tighter uppercase">
+              <h2 className="text-5xl font-display leading-[0.8] tracking-tighter uppercase text-silk-white">
                 Tender <br /> App.
               </h2>
-              <p className="text-sm text-white/70 font-light leading-relaxed">
+              <p className="text-sm text-silk-white/70 font-light leading-relaxed">
                 Buy Airtime and Data Plan, Pay Bills, and Trade Crypto and
                 Giftcard on Tender App.
               </p>
               <div className="pt-8 flex flex-col gap-4">
-                <div className="h-px w-full bg-white/5" />
+                <div className="h-px w-full bg-border-dim" />
                 <span className="text-[10px] text-accent font-bold tracking-[0.3em] uppercase">
                   Year: 2024
                 </span>
-                <span className="text-[10px] text-white/70 tracking-[0.3em] uppercase">
+                <span className="text-[10px] text-silk-white/70 tracking-[0.3em] uppercase">
                   Category: Software
                 </span>
               </div>
@@ -58,10 +58,10 @@ export const CaseStudy = () => {
               />
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
               <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10">
-                <span className="text-[10px] text-white/70 tracking-widest uppercase mb-2 block">
+                <span className="text-[10px] text-silk-white/70 tracking-widest uppercase mb-2 block">
                   Core Functionality
                 </span>
-                <h4 className="text-xl font-display uppercase tracking-tight">
+                <h4 className="text-xl font-display uppercase tracking-tight text-silk-white">
                   Real-time Notifications
                 </h4>
               </div>
@@ -83,7 +83,7 @@ export const CaseStudy = () => {
               </div>
 
               <div className="space-y-6 lg:pl-8">
-                <p className="text-xl font-light text-white/80 leading-snug">
+                <p className="text-xl font-light text-silk-white/80 leading-snug">
                   A digital procurement platform designed to simplify tender
                   discovery, submission, and management. The app enables
                   real-time tender notifications, secure document uploads, user
@@ -100,7 +100,7 @@ export const CaseStudy = () => {
                   className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group"
                 >
                   Full Study
-                  <div className="w-10 h-10 rounded-full border cursor-pointer border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
+                  <div className="w-10 h-10 rounded-full border cursor-pointer border-border-dim flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </button>
@@ -111,8 +111,8 @@ export const CaseStudy = () => {
       </div>
 
       {/* Architectural Border Decoration */}
-      <div className="absolute top-0 right-0 w-px h-full bg-white/5 hidden lg:block" />
-      <div className="absolute top-0 left-0 w-px h-full bg-white/5 hidden lg:block" />
+      <div className="absolute top-0 right-0 w-px h-full bg-border-dim hidden lg:block" />
+      <div className="absolute top-0 left-0 w-px h-full bg-border-dim hidden lg:block" />
     </section>
   );
 };

@@ -12,14 +12,14 @@ const buttonVariants = cva(
         primary:
           "bg-secondary text-[#0A1128] hover:shadow-[0_0_20px_rgba(0,212,255,0.5)] active:scale-95",
         secondary:
-          "bg-white/5 border border-white/10 text-white hover:bg-white/10 backdrop-blur-md active:scale-95",
+          "bg-silk-white/5 border border-border-dim text-silk-white hover:bg-silk-white/10 backdrop-blur-md active:scale-95",
         outline:
           "border-2 border-secondary text-secondary hover:bg-secondary hover:text-[#0A1128] active:scale-95",
         ghost:
-          "hover:bg-white/5 text-gray-300 hover:text-white active:scale-95",
+          "hover:bg-silk-white/5 text-silk-white/60 hover:text-silk-white active:scale-95",
         link: "text-secondary underline-offset-4 hover:underline",
         shimmer:
-          "animate-shimmer bg-gradient-to-r from-[var(--color-primary)] via-white/20 to-[var(--color-primary)] bg-[length:200%_100%] text-white border border-white/10",
+          "animate-shimmer bg-gradient-to-r from-[var(--color-primary)] via-silk-white/20 to-[var(--color-primary)] bg-[length:200%_100%] text-silk-white border border-border-dim",
       },
       size: {
         sm: "h-9 px-4 text-xs",

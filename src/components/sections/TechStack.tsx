@@ -41,7 +41,7 @@ export const TechStack = () => {
   return (
     <section
       ref={ref}
-      className="bg-obsidian py-32 md:py-64 relative overflow-hidden border-t border-white/5"
+      className="bg-obsidian py-32 md:py-64 relative overflow-hidden border-t border-border-dim"
     >
       <GridBackground
         gridSize={50}
@@ -58,11 +58,11 @@ export const TechStack = () => {
       <div className="container-luxury relative z-10">
         <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-24 md:mb-48 space-y-8">
           <span className="text-label">System Architecture</span>
-          <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4">
-            The <span className="text-white/40">Digital</span> <br />{" "}
+          <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4 text-silk-white">
+            The <span className="text-text-muted">Digital</span> <br />{" "}
             Foundation.
           </h2>
-          <p className="max-w-2xl text-lg md:text-xl font-light text-white/70 leading-relaxed md:mx-auto">
+          <p className="max-w-2xl text-lg md:text-xl font-light text-light-gray leading-relaxed md:mx-auto">
             We architect intelligence from the electrical impulse to the final
             user interaction. Zero compromises on industrial-grade reliability.
           </p>
@@ -112,7 +112,7 @@ export const TechStack = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: 0.2 + i * 0.1 }}
                 viewport={{ once: true, amount: 0.5 }}
-                className={`w-full lg:w-72 p-6 md:p-10 bg-obsidian-surface border border-white/5 rounded-3xl group hover:border-accent hover:bg-accent transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
+                className={`w-full lg:w-72 p-6 md:p-10 bg-obsidian-surface border border-border-dim rounded-3xl group hover:border-accent hover:bg-accent transition-all duration-700 shadow-2xl relative lg:absolute pointer-events-auto ${
                   i === 0
                     ? "lg:top-0 lg:left-0"
                     : i === 1
@@ -133,14 +133,14 @@ export const TechStack = () => {
                   <span className="text-[10px] font-mono text-accent group-hover:text-obsidian transition-colors block uppercase tracking-widest">
                     / Layer.0{i + 1}
                   </span>
-                  <h3 className="text-2xl font-display uppercase tracking-tight text-white group-hover:text-obsidian transition-colors">
+                  <h3 className="text-2xl font-display uppercase tracking-tight text-silk-white group-hover:text-obsidian transition-colors">
                     {g.name}
                   </h3>
                   <div className="flex flex-wrap gap-2 pt-2">
                     {g.items.map((item) => (
                       <span
                         key={item}
-                        className="text-[8px] uppercase tracking-widest px-3 py-1 border border-white/10 rounded-full text-white/70 group-hover:text-obsidian/60 group-hover:border-obsidian/20"
+                        className="text-[8px] uppercase tracking-widest px-3 py-1 border border-border-dim rounded-full text-light-gray group-hover:text-obsidian/60 group-hover:border-obsidian/20"
                       >
                         {item}
                       </span>
@@ -153,7 +153,7 @@ export const TechStack = () => {
         </div>
 
         {/* System Stats (Million Dollar Detail) */}
-        <div className="mt-24 md:mt-48 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-white/5 pt-16">
+        <div className="mt-24 md:mt-48 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border-dim pt-16">
           {[
             { label: "Stability Rate", val: "99.98%" },
             { label: "Nodes Managed", val: "140k+" },
@@ -168,10 +168,10 @@ export const TechStack = () => {
               viewport={{ once: true }}
               className="space-y-2"
             >
-              <span className="text-[9px] uppercase tracking-[0.4em] text-white/50 block">
+              <span className="text-[9px] uppercase tracking-[0.4em] text-text-muted block">
                 {stat.label}
               </span>
-              <span className="text-3xl font-display text-white font-medium">
+              <span className="text-3xl font-display text-silk-white font-medium">
                 {stat.val}
               </span>
             </motion.div>

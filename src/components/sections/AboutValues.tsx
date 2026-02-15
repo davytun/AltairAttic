@@ -31,7 +31,7 @@ export const AboutValues = () => {
   return (
     <section
       ref={containerRef}
-      className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-white/5"
+      className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-border-dim"
     >
       <GridBackground
         gridSize={80}
@@ -67,9 +67,10 @@ export const AboutValues = () => {
                       color: "var(--color-accent)",
                       textShadow: "0 0 20px rgba(205, 127, 50, 0.4)",
                     }}
-                    className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-white/10 tracking-tighter leading-none cursor-default transition-colors duration-500"
+                    className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-silk-white/10 tracking-tighter leading-none cursor-default transition-colors duration-500"
                   >
-                    {word} <span className="text-white/5 opacity-50">—</span>
+                    {word}{" "}
+                    <span className="text-silk-white/5 opacity-50">—</span>
                   </motion.span>
                 ))}
               </div>
@@ -84,18 +85,18 @@ export const AboutValues = () => {
           <div className="lg:col-span-6 space-y-16">
             <div>
               <span className="text-label mb-8 block">Our Philosophy</span>
-              <h3 className="text-huge text-6xl! md:text-8xl! mb-12">
-                Human <br /> <span className="text-white/40">Centered</span>{" "}
+              <h3 className="text-huge text-6xl! md:text-8xl! mb-12 text-silk-white">
+                Human <br /> <span className="text-text-muted">Centered</span>{" "}
                 <br /> Tech.
               </h3>
-              <p className="text-xl font-light text-white/70 leading-relaxed max-w-xl mb-12">
+              <p className="text-xl font-light text-silk-white/70 leading-relaxed max-w-xl mb-12">
                 Altair Attic Limited is dedicated to bridging the gap between
                 complexity and daily life. We believe technology should be felt,
                 not seen.
               </p>
 
               <div className="grid grid-cols-2 gap-6 items-end">
-                <div className="aspect-square rounded-2xl overflow-hidden border border-white/5">
+                <div className="aspect-square rounded-2xl overflow-hidden border border-border-dim">
                   <motion.img
                     src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200"
                     alt="Innovation"
@@ -106,7 +107,7 @@ export const AboutValues = () => {
                     className="w-full h-full object-cover transition-all duration-700"
                   />
                 </div>
-                <div className="aspect-3/4 rounded-2xl overflow-hidden border border-white/5">
+                <div className="aspect-3/4 rounded-2xl overflow-hidden border border-border-dim">
                   <motion.img
                     src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200"
                     alt="Values"
@@ -130,21 +131,21 @@ export const AboutValues = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative border-b border-white/5 pb-10 transition-colors duration-700 hover:border-accent/40"
+                className="group relative border-b border-border-dim pb-10 transition-colors duration-700 hover:border-accent/40"
               >
                 <div className="flex justify-between items-start gap-8">
                   <div className="space-y-4">
                     <motion.h4
                       initial={{ opacity: 0.7 }}
                       whileInView={{ opacity: 1 }}
-                      className="text-3xl font-display uppercase tracking-tight group-hover:text-accent transition-colors flex items-center gap-4"
+                      className="text-3xl font-display uppercase tracking-tight group-hover:text-accent transition-colors flex items-center gap-4 text-silk-white"
                     >
-                      <span className="text-[10px] uppercase tracking-widest text-white/20">
+                      <span className="text-[10px] uppercase tracking-widest text-silk-white/20">
                         / 0{i + 1}
                       </span>
                       {v.title}
                     </motion.h4>
-                    <p className="text-sm text-white/60 font-light max-w-sm group-hover:text-white transition-colors">
+                    <p className="text-sm text-silk-white/60 font-light max-w-sm group-hover:text-silk-white transition-colors">
                       {v.desc}
                     </p>
                   </div>
@@ -153,7 +154,7 @@ export const AboutValues = () => {
                     whileInView={{ scaleX: 1 }}
                     transition={{ duration: 1.5, delay: 0.5 + i * 0.1 }}
                     viewport={{ once: true }}
-                    className="w-12 h-px bg-white/10 group-hover:w-24 group-hover:bg-accent transition-all duration-700 mt-4 origin-left"
+                    className="w-12 h-px bg-silk-white/10 group-hover:w-24 group-hover:bg-accent transition-all duration-700 mt-4 origin-left"
                   />
                 </div>
               </motion.div>

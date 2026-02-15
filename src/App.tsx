@@ -13,17 +13,18 @@ import BlogPage from "@/pages/BlogPage";
 import BlogDetailPage from "@/pages/BlogDetailPage";
 import ShoppingCartPage from "@/pages/ShoppingCartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 function App() {
   return (
-    <div className="bg-black selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-obsidian text-silk-white selection:bg-accent selection:text-obsidian">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:url" element={<ServiceDetailPage />} />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/product/:slug" element={<ProductDetailPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />
@@ -32,6 +33,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );

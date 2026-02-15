@@ -369,7 +369,7 @@
       "IP66 weatherproof rating"
     ],
     "badges": [
-      { "type": "premium", "text": "💎 PREMIUM", "color": "obsidian" },
+      { "type": "premium", "text": "� PREMIUM", "color": "obsidian" },
       { "type": "stock", "text": "⚡ LOW STOCK", "color": "orange" }
     ],
     "socialProof": {

@@ -1,54 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Navigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useParams, Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
-  Check,
-  ShieldCheck,
-  Zap,
-  Cog,
-  ShoppingCart,
+  Loader2,
+  CheckCircle2,
   Star,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import productsData from "@/data/products.json";
-import { Product, useCartStore } from "@/store/useCartStore";
-import QuantitySelector from "@/components/cart/QuantitySelector";
-import AddToCartModal from "@/components/cart/AddToCartModal";
 import { Helmet } from "react-helmet-async";
 
-const calculateTimeLeft = () => {
-  const now = new Date();
-  const target = new Date();
-  target.setHours(17, 0, 0, 0); // 5:00 PM deadline
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { ProductContentSections } from "@/components/product/ProductContentSections";
 
-  // If it's already past 5 PM, target 5 PM tomorrow
-  if (now > target) {
-    target.setDate(target.getDate() + 1);
-  }
-
-  const diff = target.getTime() - now.getTime();
-
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-
-  const format = (num: number) => num.toString().padStart(2, "0");
-  return `${format(hours)}:${format(minutes)}:${format(seconds)}`;
-};
+import { productService } from "@/services/productService";
+import { orderService, CreateOrderData } from "@/services/orderService";
+import { Product } from "@/store/useCartStore";
+import { useViewingCount } from "@/hooks/useProductPageEffects";
+import { formatCurrency } from "@/lib/formatCurrency";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 const ProductDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  const [activeImage, setActiveImage] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("Description");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [activeTab, setActiveTab] = useState<
+    "description" | "features" | "reviews"
+  >("description");
 
-  const addToCart = useCartStore((state) => state.addToCart);
+  const viewingCount = useViewingCount();
 
-  // Form State
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -58,31 +48,25 @@ const ProductDetailPage = () => {
     city: "",
     notes: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(false);
-
-  // Countdown Timer Logic
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    const fetchProduct = async () => {
+      if (!slug) return;
 
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    if (id) {
-      const foundProduct = (productsData as unknown as Product[]).find(
-        (p) => p.id === Number(id),
-      );
-      if (foundProduct) {
-        setProduct(foundProduct);
-        setActiveImage(foundProduct.images[0]);
+      try {
+        setIsLoading(true);
+        const data = await productService.getProductBySlug(slug);
+        setProduct(data);
+      } catch (err) {
+        console.error("Failed to fetch product:", err);
+        setError("Failed to load product details");
+      } finally {
+        setIsLoading(false);
       }
-    }
-  }, [id]);
+    };
+
+    fetchProduct();
+  }, [slug]);
 
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -91,487 +75,478 @@ const ProductDetailPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleDirectOrder = (e: React.FormEvent) => {
+  const handleDirectOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!product) return;
 
     setIsSubmitting(true);
+    setError(null);
 
-    // Simulate API call
-    setTimeout(() => {
-      const orderData = {
-        orderNumber: `ORD-${Date.now()}`,
-        orderType: "DIRECT_ORDER",
-        orderDate: new Date().toISOString(),
-        product: {
-          productId: product.id,
-          productName: product.name,
-          quantity: quantity,
-          pricePerUnit: product.price,
-          subtotal: product.price * quantity,
-        },
-        customerDetails: formData,
-        totalAmount: product.price * quantity,
-        status: "pending",
+    try {
+      const orderData: CreateOrderData = {
+        customer_name: formData.fullName,
+        customer_email: formData.email,
+        customer_phone: formData.phone,
+        customer_address: `${formData.address}, ${formData.city}, ${formData.state}`,
+        notes: formData.notes,
+        items: [{ product_id: product.id, quantity }],
       };
 
-      console.log("Direct Order Placed:", orderData);
+      await orderService.createOrder(orderData);
       setOrderSuccess(true);
-      setIsSubmitting(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 2000);
-  };
-
-  const handleAddToCart = () => {
-    if (product) {
-      // Logic handled in modal mostly, but we trigger it here if needed or just open modal
-      // actually the modal takes product and quantity.
-      // We can reuse the modal component or just call the store directly and show a toast?
-      // The AddToCartModal in components/cart seems to be a self-contained button+modal?
-      // Let's check AddToCartModal usage.
-      // Previous usage in ProductCard was <AddToCartModal product={product} />
-      // Here we want a custom button that opens the modal or potentially just adds to cart.
-      // Let's use the store directly for a custom "Add to Cart" button here to match the design.
-      addToCart(product, quantity);
-      setIsAddToCartModalOpen(true);
+    } catch (err: any) {
+      console.error("Direct Order Failed:", err);
+      setError("Failed to place order. Please check your details.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  if (!product && id) {
-    // If searching/loading.. but for local JSON it's instant.
-  }
+  const nextImage = () => {
+    if (product) {
+      setSelectedImage((prev) => (prev + 1) % product.images.length);
+    }
+  };
 
-  if (!product)
+  const prevImage = () => {
+    if (product) {
+      setSelectedImage(
+        (prev) => (prev - 1 + product.images.length) % product.images.length,
+      );
+    }
+  };
+
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-obsidian flex items-center justify-center text-white font-display">
-        Product not found
+      <div className="min-h-screen bg-white dark:bg-obsidian flex items-center justify-center">
+        <Navbar />
+        <Loader2 className="w-12 h-12 text-accent animate-spin" />
       </div>
     );
-
-  if (orderSuccess) {
-    return (
-      <main className="bg-obsidian min-h-screen flex flex-col items-center justify-center selection:bg-accent selection:text-obsidian">
-        <Navbar />
-        <div className="p-4 w-full max-w-lg">
-          <div className="bg-obsidian-surface border border-white/10 rounded-3xl p-8 text-center space-y-6 shadow-2xl shadow-black/50">
-            <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto text-accent border border-accent/20">
-              <Check className="w-10 h-10" />
-            </div>
-            <h2 className="text-3xl font-display font-bold text-white">
-              Order Submitted!
-            </h2>
-            <p className="text-white/60">
-              Thank you for your order. Our customer service team will contact
-              you shortly to confirm the details.
-            </p>
-            <div className="pt-4">
-              <Link
-                to="/products"
-                className="block w-full py-4 bg-accent text-obsidian rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-colors"
-              >
-                Continue Shopping
-              </Link>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </main>
-    );
   }
+
+  if (error || !product) {
+    return <NotFoundPage />;
+  }
+
+  const totalPrice = product.price * quantity;
 
   return (
-    <main className="bg-obsidian min-h-screen selection:bg-accent selection:text-obsidian overflow-x-hidden">
+    <>
       <Helmet>
-        <title>{product.name} - Altair Attic</title>
+        <title>{product.name} | Altair Attic</title>
+        <meta
+          name="description"
+          content={product.shortDescription?.replace(/<[^>]*>/g, "")}
+        />
       </Helmet>
-      <Navbar />
 
-      {/* Background Elements */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px]" />
-      </div>
+      <div className="min-h-screen bg-white dark:bg-obsidian">
+        <Navbar />
 
-      <div className="pt-32 pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Back Button */}
-        <Link
-          to="/products"
-          className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-white/50 hover:text-accent mb-8 transition-colors group"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />{" "}
-          Back to Catalog
-        </Link>
-
-        {/* Product Info Section */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-x-16">
-          {/* Image Gallery */}
-          <div className="mb-12 lg:mb-0">
+        {/* Success Message */}
+        <AnimatePresence>
+          {orderSuccess && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="aspect-square bg-obsidian-surface rounded-3xl overflow-hidden mb-6 border border-white/5 relative group"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-3"
             >
-              <img
-                src={activeImage}
-                alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <CheckCircle2 className="w-6 h-6" />
+              <span className="font-bold">
+                Order placed successfully! We'll contact you soon.
+              </span>
             </motion.div>
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {product.images.map((img, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveImage(img)}
-                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImage === img ? "border-accent scale-95" : "border-transparent opacity-60 hover:opacity-100 bg-obsidian-surface"}`}
-                  >
-                    <img
-                      src={img}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
+          )}
+        </AnimatePresence>
+
+        {/* Image Modal */}
+        <AnimatePresence>
+          {showImageModal && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+              onClick={() => setShowImageModal(false)}
+            >
+              <button
+                onClick={() => setShowImageModal(false)}
+                className="absolute top-4 right-4 text-white hover:text-accent transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+              <img
+                src={product.images[selectedImage]}
+                alt={product.name}
+                className="max-w-full max-h-[90vh] object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <main className="pt-20 pb-20">
+          {/* Breadcrumb */}
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-silk-white/60 hover:text-gray-900 dark:hover:text-accent transition-colors group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Shop
+            </Link>
           </div>
 
-          {/* Product Details & Tabs */}
-          <div>
-            {/* Product Header Info */}
-            <div className="mb-10">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-accent/10 text-accent border border-accent/20">
-                  {product.category}
-                </span>
-                {product.stockDetails?.status === "low" && (
-                  <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-orange-500/10 text-orange-400 border border-orange-500/20 animate-pulse">
-                    ⚡ Only {product.stock} Left
-                  </span>
-                )}
-                {product.socialProof?.viewingNow && (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-red-400">
-                    🔥 {product.socialProof.viewingNow} viewing now
-                  </span>
-                )}
-              </div>
+          {/* Product Hero */}
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+              {/* Left: Images */}
+              <div className="space-y-4">
+                {/* Main Image */}
+                <div
+                  className="relative aspect-square bg-gray-50 dark:bg-obsidian-surface rounded-2xl overflow-hidden cursor-zoom-in group"
+                  onClick={() => setShowImageModal(true)}
+                >
+                  <img
+                    src={product.images[selectedImage]}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
-              <h1 className="text-3xl sm:text-5xl font-display font-medium text-white mb-4 leading-tight">
-                {product.name}
-              </h1>
-
-              {/* Price & Rating */}
-              <div className="flex flex-col sm:flex-row sm:items-end gap-6 mb-6">
-                <div className="flex items-end gap-3">
-                  <span className="text-3xl sm:text-4xl font-display font-bold text-accent">
-                    ₦{product.price.toFixed(2)}
-                  </span>
-                  {product.originalPrice && (
-                    <span className="text-xl text-white/30 line-through mb-1">
-                      ₦{product.originalPrice.toFixed(2)}
-                    </span>
+                  {/* Navigation */}
+                  {product.images.length > 1 && (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prevImage();
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white dark:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-black transition-all opacity-0 group-hover:opacity-100 shadow-lg"
+                      >
+                        <ChevronLeft className="w-5 h-5 text-gray-900 dark:text-white" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          nextImage();
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white dark:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-black transition-all opacity-0 group-hover:opacity-100 shadow-lg"
+                      >
+                        <ChevronRight className="w-5 h-5 text-gray-900 dark:text-white" />
+                      </button>
+                    </>
                   )}
+
+                  {/* Discount Badge */}
                   {product.discount && (
-                    <span className="mb-2 px-2 py-0.5 bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-wide rounded">
-                      Save {product.discount.percentage}%
-                    </span>
+                    <div className="absolute top-4 right-4 bg-accent text-white px-3 py-1.5 rounded-full font-bold text-sm">
+                      -{product.discount.percentage}%
+                    </div>
                   )}
                 </div>
 
-                <div className="flex items-center gap-1 text-yellow-500 pb-2">
-                  <div className="flex">
+                {/* Thumbnails */}
+                {product.images.length > 1 && (
+                  <div className="grid grid-cols-5 gap-3">
+                    {product.images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSelectedImage(idx)}
+                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                          selectedImage === idx
+                            ? "border-accent ring-2 ring-accent/20"
+                            : "border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30"
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Right: Product Info */}
+              <div className="space-y-6">
+                {/* Rating */}
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <Star
                         key={i}
-                        className={`w-4 h-4 ${i <= Math.round(product.socialProof?.rating || 0) ? "fill-yellow-500 text-yellow-500" : "text-yellow-500/30"}`}
+                        className={`w-4 h-4 ${
+                          i <= Math.round(product.socialProof?.rating ?? 0)
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "text-gray-300 dark:text-white/20"
+                        }`}
                       />
                     ))}
                   </div>
-                  <span className="text-xs text-white/40 ml-2 font-mono">
-                    ({product.socialProof?.rating || 4.8} /{" "}
-                    {product.socialProof?.reviewCount || 0} reviews)
+                  <span className="text-sm text-gray-600 dark:text-silk-white/60">
+                    {product.socialProof?.rating ?? 5} (
+                    {product.socialProof?.reviewCount ?? 0} reviews)
                   </span>
                 </div>
-              </div>
 
-              {/* Urgency Countdown */}
-              {product.shipping?.sameDay && (
-                <div className="bg-blue-900/20 border border-blue-500/20 rounded-lg p-3 inline-flex items-center gap-2 mb-6">
-                  <div className="shrink-0 animate-pulse w-2 h-2 rounded-full bg-blue-400"></div>
-                  <p className="text-sm text-blue-200">
-                    Order within{" "}
-                    <span className="font-mono font-bold text-white">
-                      {timeLeft}
-                    </span>{" "}
-                    for{" "}
-                    <span className="font-bold text-white">
-                      Same-Day Dispatch
-                    </span>
-                  </p>
+                {/* Title */}
+                <div>
+                  <h1 className="text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-silk-white">
+                    {product.name}
+                  </h1>
+                  <div
+                    className="text-gray-600 dark:text-silk-white/70 leading-relaxed"
+                    dangerouslySetInnerHTML={{
+                      __html: product.shortDescription,
+                    }}
+                  />
                 </div>
-              )}
-            </div>
 
-            {/* Tabs Navigation */}
-            <div className="border-b border-white/10 mb-8">
-              <div className="flex gap-8 overflow-x-auto pb-1 custom-scrollbar">
-                {["Description", "Benefits", "How to Use", "Offers"].map(
-                  (tab) => (
-                    <button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      className={`relative pb-4 text-sm font-bold uppercase tracking-widest transition-colors whitespace-nowrap ${
-                        activeTab === tab
-                          ? "text-white"
-                          : "text-white/40 hover:text-white"
-                      }`}
-                    >
-                      {tab}
-                      {activeTab === tab && (
-                        <motion.div
-                          layoutId="activeTab"
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
-                        />
-                      )}
-                    </button>
-                  ),
+                {/* Price */}
+                <div className="flex items-baseline gap-3 py-4 border-y border-gray-200 dark:border-white/10">
+                  <span className="text-3xl font-bold text-gray-900 dark:text-accent">
+                    {formatCurrency(product.price)}
+                  </span>
+                  {product.originalPrice && (
+                    <span className="text-xl text-gray-400 dark:text-silk-white/40 line-through">
+                      {formatCurrency(product.originalPrice)}
+                    </span>
+                  )}
+                </div>
+
+                {/* Key Features */}
+                {product.features && product.features.length > 0 && (
+                  <div className="space-y-2.5">
+                    {product.features.slice(0, 5).map((feature, idx) => (
+                      <div key={idx} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                        <span className="text-gray-700 dark:text-silk-white/80 text-sm leading-relaxed">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 )}
+
+                {/* Quantity */}
+                <div className="space-y-3 pt-4">
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-silk-white/60">
+                    Quantity
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-10 h-10 rounded-lg border border-gray-300 dark:border-white/20 hover:border-accent dark:hover:border-accent hover:bg-gray-50 dark:hover:bg-accent/10 transition-all flex items-center justify-center text-lg font-semibold text-gray-900 dark:text-silk-white"
+                    >
+                      −
+                    </button>
+                    <span className="text-xl font-semibold w-12 text-center text-gray-900 dark:text-silk-white">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-10 h-10 rounded-lg border border-gray-300 dark:border-white/20 hover:border-accent dark:hover:border-accent hover:bg-gray-50 dark:hover:bg-accent/10 transition-all flex items-center justify-center text-lg font-semibold text-gray-900 dark:text-silk-white"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button
+                  onClick={() => {
+                    const form = document.getElementById("order-form");
+                    form?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
+                  className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:bg-accent/90 transition-all transform hover:scale-[1.01] shadow-lg"
+                >
+                  Order Now — Cash on Delivery
+                </button>
+
+                {/* Social Proof */}
+                {viewingCount > 0 && (
+                  <div className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-silk-white/60 bg-orange-50 dark:bg-orange-500/10 px-4 py-3 rounded-lg border border-orange-100 dark:border-orange-500/20">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+                    <span>
+                      <strong className="text-gray-900 dark:text-silk-white">
+                        {viewingCount}
+                      </strong>{" "}
+                      people viewing right now
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Tabs Section */}
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
+            {/* Tab Navigation */}
+            <div className="border-b border-gray-200 dark:border-white/10">
+              <div className="flex gap-8 justify-center">
+                {[
+                  { key: "description", label: "Description" },
+                  { key: "features", label: "How to Use" },
+                  { key: "reviews", label: "Ingredient" },
+                ].map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key as any)}
+                    className={`pb-4 text-sm font-medium transition-colors relative ${
+                      activeTab === tab.key
+                        ? "text-gray-900 dark:text-accent"
+                        : "text-gray-500 dark:text-silk-white/40 hover:text-gray-700 dark:hover:text-silk-white/70"
+                    }`}
+                  >
+                    {tab.label}
+                    {activeTab === tab.key && (
+                      <motion.div
+                        layoutId="activeTabUnderline"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900 dark:bg-accent"
+                      />
+                    )}
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* Tab Content */}
-            <div className="min-h-[300px]">
-              {activeTab === "Description" && (
+            <div className="py-12">
+              {activeTab === "description" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-8"
+                  className="space-y-12 max-w-4xl mx-auto"
                 >
-                  <p className="text-white/70 text-lg leading-relaxed border-l-2 border-accent/30 pl-6">
-                    {product.fullDescription}
-                  </p>
+                  {(product.fullDescription || product.shortDescription) && (
+                    <div
+                      className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-silk-white/80 leading-relaxed"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          product.fullDescription || product.shortDescription,
+                      }}
+                    />
+                  )}
+                </motion.div>
+              )}
 
-                  <div>
-                    <h3 className="text-lg font-display font-medium text-white mb-6 flex items-center gap-2">
-                      <Cog className="w-5 h-5 text-accent" /> Specifications
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {Object.entries(product.specifications).map(
-                        ([key, value]) => (
-                          <div
-                            key={key}
-                            className="flex flex-col p-4 bg-obsidian-surface rounded-xl border border-white/5 hover:border-white/10 transition-colors"
-                          >
-                            <dt className="text-[10px] text-white/40 uppercase tracking-widest mb-1">
-                              {key}
-                            </dt>
-                            <dd className="text-sm font-medium text-white">
-                              {value}
-                            </dd>
+              {activeTab === "features" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="max-w-4xl mx-auto"
+                >
+                  {product.howToUse ? (
+                    <div
+                      className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-silk-white/80 leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: product.howToUse }}
+                    />
+                  ) : (
+                    <div className="space-y-4">
+                      {product.features?.map((feature, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
+                            <span className="text-accent text-sm font-bold">
+                              {idx + 1}
+                            </span>
                           </div>
-                        ),
-                      )}
+                          <p className="text-gray-700 dark:text-silk-white/80 leading-relaxed">
+                            {feature}
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                  </div>
+                  )}
                 </motion.div>
               )}
 
-              {activeTab === "Benefits" && (
+              {activeTab === "reviews" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  className="max-w-4xl mx-auto"
                 >
-                  <h3 className="text-lg font-display font-medium text-white mb-6 flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-accent" /> Key Features
-                  </h3>
-                  <ul className="space-y-4">
-                    {product.features.map((feature, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start text-white/80 group p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors"
-                      >
-                        <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center mr-4 shrink-0 text-accent">
-                          <Check className="w-4 h-4" />
-                        </div>
-                        <span className="mt-1 font-medium">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              )}
-
-              {activeTab === "How to Use" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-6 text-white/70"
-                >
-                  <p>
-                    Ensure you get the most out of your {product.name} with
-                    these simple steps:
-                  </p>
-                  <ol className="list-decimal list-inside space-y-4 marker:text-accent marker:font-bold">
-                    <li className="pl-2">
-                      Unbox the device carefully and check for all included
-                      components.
-                    </li>
-                    <li className="pl-2">
-                      Connect to a power source or insert batteries as required.
-                    </li>
-                    <li className="pl-2">
-                      Download the companion app from the App Store or Google
-                      Play.
-                    </li>
-                    <li className="pl-2">
-                      Follow the in-app instructions to pair your device.
-                    </li>
-                    <li className="pl-2">
-                      Customize your settings and enjoy your new smart home
-                      experience!
-                    </li>
-                  </ol>
-                  <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-200 text-sm mt-6">
-                    Note: For detailed installation instructions, please refer
-                    to the included user manual inside the box.
-                  </div>
-                </motion.div>
-              )}
-
-              {activeTab === "Offers" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="space-y-4"
-                >
-                  <div className="bg-linear-to-br from-obsidian-surface to-black border border-white/10 rounded-2xl overflow-hidden p-6 relative">
-                    <h3 className="text-xl font-display font-bold text-white mb-6 uppercase tracking-wider text-center">
-                      Buy More, Save More
-                    </h3>
-
-                    <div className="grid gap-4">
-                      {/* Option 1: Buy 1 */}
-                      <div
-                        onClick={() => setQuantity(1)}
-                        className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${quantity === 1 ? "border-accent bg-accent/5" : "border-white/10 bg-white/5 hover:border-white/20"}`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h4 className="font-bold text-white text-lg">
-                              Buy 1
-                            </h4>
-                            <p className="text-sm text-green-400 font-medium">
-                              You save ₦{product.price.toFixed(2)}
-                            </p>
+                  {product.reviews && product.reviews.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {product.reviews.map((review) => (
+                        <div
+                          key={review.id}
+                          className="p-6 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10"
+                        >
+                          <div className="flex items-center gap-1 mb-3">
+                            {[1, 2, 3, 4, 5].map((i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i <= review.rating
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "text-gray-300 dark:text-white/20"
+                                }`}
+                              />
+                            ))}
                           </div>
-                          <div className="text-right">
-                            <div className="text-xl font-bold text-white">
-                              ₦{product.price.toFixed(2)}
-                            </div>
-                            <div className="text-sm text-white/40 line-through">
-                              ₦{(product.price * 2).toFixed(2)}
-                            </div>
+                          <p className="text-gray-700 dark:text-silk-white/80 leading-relaxed mb-4">
+                            {review.content}
+                          </p>
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-gray-600 dark:text-silk-white/60 font-medium">
+                              {review.author}
+                            </span>
+                            {review.verified && (
+                              <span className="text-accent flex items-center gap-1 text-xs">
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                Verified
+                              </span>
+                            )}
                           </div>
                         </div>
-                      </div>
-
-                      {/* Option 2: Buy 2 (Most Popular) */}
-                      <div
-                        onClick={() => setQuantity(2)}
-                        className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${quantity === 2 ? "border-accent bg-accent/5" : "border-white/10 bg-white/5 hover:border-white/20"}`}
-                      >
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-obsidian text-[10px] font-bold uppercase py-1 px-3 rounded-full tracking-widest shadow-lg shadow-accent/20">
-                          Most Popular
-                        </div>
-                        <div className="flex justify-between items-center pt-2">
-                          <div>
-                            <h4 className="font-bold text-white text-lg">
-                              Buy 2
-                            </h4>
-                            <p className="text-sm text-accent font-medium">
-                              Only ₦{product.price.toFixed(2)} per Item
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-xl font-bold text-white">
-                              ₦{(product.price * 2).toFixed(2)}
-                            </div>
-                            <div className="text-sm text-white/40 line-through">
-                              ₦{(product.price * 4).toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Option 3: Buy 3 */}
-                      <div
-                        onClick={() => setQuantity(3)}
-                        className={`relative p-4 rounded-xl border-2 cursor-pointer transition-all ${quantity === 3 ? "border-accent bg-accent/5" : "border-white/10 bg-white/5 hover:border-white/20"}`}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h4 className="font-bold text-white text-lg">
-                              Buy 3
-                            </h4>
-                            <p className="text-sm text-green-400 font-medium">
-                              You save ₦{(product.price * 3).toFixed(2)}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <div className="text-xl font-bold text-white">
-                              ₦{(product.price * 3).toFixed(2)}
-                            </div>
-                            <div className="text-sm text-white/40 line-through">
-                              ₦{(product.price * 6).toFixed(2)}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
-                  </div>
+                  ) : (
+                    <p className="text-center text-gray-500 dark:text-silk-white/40 py-12">
+                      No reviews yet
+                    </p>
+                  )}
                 </motion.div>
               )}
             </div>
           </div>
-        </div>
 
-        {/* Integration of Order Form and Cart Actions */}
-        <div className="mt-20 pt-16 border-t border-white/5">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-x-16">
-            {/* Direct Order Form (Left) */}
-            <div className="lg:col-span-7 mb-12 lg:mb-0">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
-                  <ShieldCheck className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-display font-bold text-white">
-                    Express Checkout
-                  </h2>
-                  <p className="text-white/40 text-sm">
-                    Directly order this item without creating an account.
-                  </p>
-                </div>
+          {/* Content Sections */}
+          {product.contentSections && (
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
+              <ProductContentSections sections={product.contentSections} />
+            </div>
+          )}
+
+          {/* Order Form */}
+          <div
+            id="order-form"
+            className="max-w-7xl mx-auto px-6 lg:px-12 mt-20"
+          >
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold mb-3 text-gray-900 dark:text-silk-white">
+                  Complete Your Order
+                </h2>
+                <p className="text-gray-600 dark:text-silk-white/60">
+                  Fill in your details for cash on delivery
+                </p>
               </div>
 
-              <div className="bg-obsidian-surface border border-white/5 rounded-3xl p-8">
-                <form
-                  id="direct-order-form"
-                  onSubmit={handleDirectOrder}
-                  className="space-y-6"
-                >
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
+              <div className="bg-gray-50 dark:bg-obsidian-surface rounded-2xl p-8 lg:p-10 border border-gray-200 dark:border-white/10">
+                <form onSubmit={handleDirectOrder} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
                         Full Name *
                       </label>
                       <input
@@ -580,25 +555,12 @@ const ProductDetailPage = () => {
                         required
                         value={formData.fullName}
                         onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
                         placeholder="John Doe"
                       />
                     </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
+                    <div>
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
                         Phone Number *
                       </label>
                       <input
@@ -607,39 +569,39 @@ const ProductDetailPage = () => {
                         required
                         value={formData.phone}
                         onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                        placeholder="+123..."
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
+                        placeholder="+1234567890"
                       />
                     </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
                         Address *
                       </label>
                       <textarea
                         name="address"
-                        rows={3}
                         required
                         value={formData.address}
                         onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                        placeholder="Enter full delivery address"
+                        rows={3}
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors resize-none text-gray-900 dark:text-silk-white"
+                        placeholder="Street address"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
-                        State *
-                      </label>
-                      <input
-                        type="text"
-                        name="state"
-                        required
-                        value={formData.state}
-                        onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
                         City *
                       </label>
                       <input
@@ -648,138 +610,93 @@ const ProductDetailPage = () => {
                         required
                         value={formData.city}
                         onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                      />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">
-                        Note
-                      </label>
-                      <textarea
-                        name="notes"
-                        rows={2}
-                        value={formData.notes}
-                        onChange={handleFormChange}
-                        className="block w-full bg-obsidian border border-white/10 rounded-xl text-white px-4 py-3 focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            {/* Order Summary / Actions (Right) */}
-            <div className="lg:col-span-5 relative">
-              <div className="sticky top-32">
-                <div className="bg-obsidian-surface/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
-                  <h3 className="text-xl font-display font-medium text-white mb-8 border-b border-white/5 pb-4">
-                    Action Center
-                  </h3>
-
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="w-20 h-20 bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-                      <img
-                        src={product.images[0]}
-                        alt=""
-                        className="w-full h-full object-cover"
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
                       />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white line-clamp-1 mb-1">
-                        {product.name}
-                      </h4>
-                      <p className="text-sm text-accent">
-                        ₦{product.price.toFixed(2)}
-                      </p>
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
+                        State *
+                      </label>
+                      <input
+                        type="text"
+                        name="state"
+                        required
+                        value={formData.state}
+                        onChange={handleFormChange}
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
+                        Order Notes (Optional)
+                      </label>
+                      <textarea
+                        name="notes"
+                        value={formData.notes}
+                        onChange={handleFormChange}
+                        rows={2}
+                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors resize-none text-gray-900 dark:text-silk-white"
+                        placeholder="Any special instructions?"
+                      />
                     </div>
                   </div>
 
-                  <div className="mb-8">
-                    <label className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-3">
-                      Quantity
-                    </label>
-                    <QuantitySelector
-                      quantity={quantity}
-                      onIncrease={() => setQuantity((q) => q + 1)}
-                      onDecrease={() => setQuantity((q) => Math.max(1, q - 1))}
-                      max={product.stock}
-                    />
-                  </div>
+                  {error && (
+                    <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg text-red-600 dark:text-red-400">
+                      <X className="w-5 h-5 shrink-0" />
+                      <p className="text-sm">{error}</p>
+                    </div>
+                  )}
 
-                  <div className="space-y-4 border-t border-white/5 pt-6 mb-8">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-white/60">Subtotal</span>
-                      <span className="text-white font-mono">
-                        ₦{(product.price * quantity).toFixed(2)}
+                  {/* Order Summary */}
+                  <div className="bg-white dark:bg-white/5 rounded-xl p-6 space-y-3 border border-gray-200 dark:border-white/10">
+                    <div className="flex justify-between text-gray-700 dark:text-silk-white/70">
+                      <span>Subtotal</span>
+                      <span className="font-semibold text-gray-900 dark:text-silk-white">
+                        {formatCurrency(totalPrice)}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-white/60">Shipping</span>
-                      <span className="text-accent font-mono text-xs uppercase tracking-wider bg-accent/10 px-2 py-1 rounded">
-                        Free
-                      </span>
+                    <div className="flex justify-between text-gray-700 dark:text-silk-white/70">
+                      <span>Shipping</span>
+                      <span className="font-semibold text-green-500">Free</span>
                     </div>
-                    <div className="flex justify-between items-center pt-4 border-t border-white/5">
-                      <span className="text-base font-bold text-white">
+                    <div className="border-t border-gray-200 dark:border-white/10 pt-3 flex justify-between items-baseline">
+                      <span className="text-lg font-bold text-gray-900 dark:text-silk-white">
                         Total
                       </span>
-                      <span className="text-2xl font-bold text-accent font-display">
-                        ₦{(product.price * quantity).toFixed(2)}
+                      <span className="text-2xl font-bold text-accent">
+                        {formatCurrency(totalPrice)}
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid gap-4">
-                    <button
-                      type="submit"
-                      form="direct-order-form"
-                      disabled={isSubmitting}
-                      className={`w-full py-4 px-6 bg-accent text-obsidian font-bold uppercase tracking-widest rounded-xl hover:bg-white transition-all transform hover:scale-[1.02] shadow-lg shadow-accent/20 ${isSubmitting ? "opacity-70 cursor-wait" : ""}`}
-                    >
-                      {isSubmitting ? "Processing..." : "Submit Order"}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full py-4 bg-accent text-white font-bold rounded-xl transition-all transform hover:scale-[1.01] shadow-lg ${
+                      isSubmitting
+                        ? "opacity-70 cursor-wait"
+                        : "hover:bg-accent/90"
+                    }`}
+                  >
+                    {isSubmitting
+                      ? "Processing..."
+                      : "Place Order — Cash on Delivery"}
+                  </button>
 
-                  <div className="mt-6 flex items-center justify-center gap-2 text-[10px] text-white/30 uppercase tracking-widest">
-                    <ShieldCheck className="w-3 h-3" /> Secure Transaction
-                  </div>
-                </div>
+                  <p className="text-center text-sm text-gray-500 dark:text-silk-white/40">
+                    <CheckCircle2 className="w-4 h-4 inline mr-1" />
+                    Your information is secure and will never be shared
+                  </p>
+                </form>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </main>
 
-      <Footer />
-
-      <AddToCartModal
-        isOpen={isAddToCartModalOpen}
-        onClose={() => setIsAddToCartModalOpen(false)}
-        product={product}
-        initialQuantity={quantity}
-      />
-      {/* Sticky Mobile Checkout Bar */}
-      <div className="fixed bottom-0 left-0 w-full bg-obsidian-surface border-t border-white/10 p-4 lg:hidden z-50">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-col">
-            <span className="text-xs text-white/50 uppercase tracking-wider">
-              Total
-            </span>
-            <span className="text-xl font-bold text-white font-display">
-              ₦{(product.price * quantity).toFixed(2)}
-            </span>
-          </div>
-          <button
-            type="submit"
-            form="direct-order-form"
-            disabled={isSubmitting}
-            className={`flex-1 py-3 px-6 bg-accent text-obsidian font-bold uppercase tracking-widest rounded-xl hover:bg-white transition-all transform active:scale-95 shadow-lg shadow-accent/20 ${isSubmitting ? "opacity-70 cursor-wait" : ""}`}
-          >
-            {isSubmitting ? "Wait..." : "Submit Order"}
-          </button>
-        </div>
+        <Footer />
       </div>
-    </main>
+    </>
   );
 };
 

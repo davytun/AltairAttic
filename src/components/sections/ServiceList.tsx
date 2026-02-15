@@ -10,7 +10,7 @@ export const ServiceList = () => {
   return (
     <section className="bg-obsidian py-20 md:py-32">
       <div className="container-luxury">
-        <div className="grid grid-cols-1 gap-px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 gap-px bg-silk-white/5 border border-border-dim">
           {(wordSlid as ServiceData[]).map((service, index) => {
             const Icon = serviceIcons[index % serviceIcons.length];
             return (
@@ -32,10 +32,10 @@ export const ServiceList = () => {
 
                     {/* Content */}
                     <div className="lg:col-span-7">
-                      <h2 className="text-3xl md:text-6xl font-display uppercase tracking-tighter mb-4 md:mb-6 group-hover:text-white transition-colors">
+                      <h2 className="text-3xl md:text-6xl font-display uppercase tracking-tighter mb-4 md:mb-6 group-hover:text-silk-white transition-colors text-silk-white">
                         {service.name}
                       </h2>
-                      <p className="text-lg text-white/70 font-light max-w-xl group-hover:text-white transition-colors">
+                      <p className="text-lg text-silk-white/70 font-light max-w-xl group-hover:text-silk-white transition-colors">
                         {service.define}
                       </p>
                     </div>
@@ -56,8 +56,8 @@ export const ServiceList = () => {
 
                     {/* Arrow */}
                     <div className="lg:col-span-1 flex justify-end">
-                      <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2">
-                        <ArrowUpRight className="w-6 h-6 text-white group-hover:text-obsidian transition-colors" />
+                      <div className="w-16 h-16 rounded-full border border-border-dim flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-700 group-hover:-translate-y-2 group-hover:translate-x-2">
+                        <ArrowUpRight className="w-6 h-6 text-silk-white group-hover:text-obsidian transition-colors" />
                       </div>
                     </div>
                   </div>

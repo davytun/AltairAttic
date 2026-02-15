@@ -47,7 +47,7 @@ const ServiceCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.2, delay: i * 0.1 }}
       viewport={{ once: true, margin: "-10%" }}
-      className="group relative flex flex-col md:flex-row h-full md:min-h-[450px] lg:min-h-[500px] bg-obsidian-surface border border-white/5 rounded-[2rem] md:rounded-[3rem] overflow-hidden hover:border-accent/30 transition-all duration-1000 shadow-[0_50px_100px_rgba(0,0,0,0.5)]"
+      className="group relative flex flex-col md:flex-row h-full md:min-h-[450px] lg:min-h-[500px] bg-obsidian-surface border border-border-dim rounded-4xl md:rounded-[3rem] overflow-hidden hover:border-accent/30 transition-all duration-1000 shadow-2xl"
     >
       {/* Image Section (40%) */}
       <div className="w-full md:w-2/5 aspect-video md:aspect-auto overflow-hidden relative">
@@ -72,11 +72,11 @@ const ServiceCard = ({
               initial={{ opacity: 0.8 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
-              className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-[0.9] group-hover:text-white transition-colors"
+              className="text-4xl md:text-6xl font-display uppercase tracking-tighter leading-[0.9] group-hover:text-silk-white transition-colors"
             >
               {s.title}
             </motion.h3>
-            <p className="text-lg font-light text-white/70 leading-relaxed max-w-xl group-hover:text-white transition-colors">
+            <p className="text-lg font-light text-light-gray leading-relaxed max-w-xl group-hover:text-silk-white transition-colors">
               {s.desc}
             </p>
           </div>
@@ -88,7 +88,7 @@ const ServiceCard = ({
             className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn text-accent cursor-pointer"
           >
             Explore Solution
-            <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-obsidian transition-all duration-700">
+            <div className="w-16 h-16 rounded-full border border-border-dim flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-obsidian transition-all duration-700">
               <ArrowUpRight className="w-6 h-6" />
             </div>
           </button>
@@ -118,13 +118,13 @@ export const BespokeServices = ({
         <div className="mb-20 md:mb-32 flex flex-col xl:flex-row justify-between items-start xl:items-end gap-16 xl:gap-24">
           <div className="max-w-5xl">
             <span className="text-label mb-8 block">Disciplines</span>
-            <h2 className="text-huge font-display leading-[0.85] mb-8">
+            <h2 className="text-huge font-display leading-[0.85] mb-8 text-silk-white">
               Bridging <br />{" "}
-              <span className="text-white/40">Digital & Life.</span>
+              <span className="text-text-muted">Digital & Life.</span>
             </h2>
           </div>
           <div className="xl:w-1/3 pt-0 pb-4">
-            <p className="text-xl font-light text-white/40 leading-relaxed border-l border-accent/30 pl-10 mb-8 max-w-lg">
+            <p className="text-xl font-light text-text-muted leading-relaxed border-l border-accent/30 pl-10 mb-8 max-w-lg">
               We help you skip the frustration of generic tech. Altair Attic
               Limited builds custom intelligence that fits your life and scales
               your business.

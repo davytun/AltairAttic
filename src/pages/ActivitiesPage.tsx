@@ -27,7 +27,7 @@ const ActivitiesPage = () => {
       <section className="pt-40 pb-20">
         <div className="container-luxury">
           <h1 className="text-huge font-display font-black tracking-tighter uppercase mb-12">
-            Our <br /> <span className="text-white/20">Activities.</span>
+            Our <br /> <span className="text-silk-white/20">Activities.</span>
           </h1>
         </div>
       </section>
@@ -44,7 +44,7 @@ const ActivitiesPage = () => {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <div className="aspect-video rounded-[2rem] md:rounded-[3rem] overflow-hidden mb-8 md:mb-12 border border-white/5 relative group-hover:border-accent/20 transition-all duration-1000">
+                <div className="aspect-video rounded-4xl md:rounded-[3rem] overflow-hidden mb-8 md:mb-12 border border-silk-white/5 relative group-hover:border-accent/20 transition-all duration-1000">
                   <img
                     src={activity.image}
                     className="w-full h-full object-cover group-hover:scale-105 transition-all duration-[3s]"
@@ -53,10 +53,10 @@ const ActivitiesPage = () => {
                   <div className="absolute inset-0 bg-linear-to-t from-obsidian via-transparent to-transparent" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-display uppercase tracking-tight text-white group-hover:text-accent transition-colors">
+                  <h3 className="text-3xl font-display uppercase tracking-tight text-silk-white group-hover:text-accent transition-colors">
                     {activity.title}
                   </h3>
-                  <p className="text-lg font-light text-white/50 leading-relaxed max-w-xl">
+                  <p className="text-lg font-light text-silk-white/50 leading-relaxed max-w-xl">
                     {activity.desc}
                   </p>
                 </div>

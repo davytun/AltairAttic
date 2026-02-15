@@ -31,7 +31,7 @@ const EventsPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative flex flex-col md:flex-row gap-8 md:gap-12 p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] bg-obsidian-surface border border-white/5 hover:border-accent/30 transition-all duration-700"
+                className="group relative flex flex-col md:flex-row gap-8 md:gap-12 p-6 md:p-12 rounded-4xl md:rounded-[3rem] bg-obsidian-surface border border-border-dim hover:border-accent/30 transition-all duration-700"
               >
                 <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-2xl overflow-hidden relative">
                   <img
@@ -44,7 +44,7 @@ const EventsPage = () => {
 
                 <div className="flex-1 flex flex-col justify-between">
                   <div>
-                    <div className="flex flex-wrap gap-6 mb-8 text-[10px] uppercase tracking-widest text-white/40">
+                    <div className="flex flex-wrap gap-6 mb-8 text-[10px] uppercase tracking-widest text-silk-white/40">
                       <span className="flex items-center gap-2">
                         <Calendar className="w-3 h-3 text-accent" />
                         {event.date}
@@ -58,10 +58,10 @@ const EventsPage = () => {
                         {event.location}
                       </span>
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-display uppercase tracking-tight mb-6 group-hover:text-white transition-colors">
+                    <h2 className="text-3xl md:text-5xl font-display uppercase tracking-tight mb-6 group-hover:text-silk-white transition-colors text-silk-white">
                       {event.title}
                     </h2>
-                    <p className="text-lg font-light text-white/30 max-w-2xl leading-relaxed mb-12">
+                    <p className="text-lg font-light text-silk-white/30 max-w-2xl leading-relaxed mb-12">
                       {event.description}
                     </p>
                   </div>

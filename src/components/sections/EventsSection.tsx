@@ -8,7 +8,7 @@ export const EventsSection = () => {
   const featured = eventsData.slice(0, 3);
 
   return (
-    <section className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-white/5">
+    <section className="bg-obsidian py-20 md:py-32 relative overflow-hidden border-t border-border-dim">
       <DotBackground
         dotSize={1}
         gap={38}
@@ -22,17 +22,17 @@ export const EventsSection = () => {
             <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black mb-8 block">
               / The Calendar
             </span>
-            <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none">
+            <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none text-silk-white">
               Culture & <br />{" "}
-              <span className="text-white/40 italic font-serif lowercase tracking-normal">
+              <span className="text-silk-white/40 italic font-serif lowercase tracking-normal">
                 Momentum.
               </span>
             </h2>
           </div>
           <Link to="/events" className="group">
-            <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black">
+            <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black text-silk-white">
               View All Events
-              <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-obsidian transition-all duration-700">
+              <div className="w-16 h-16 rounded-full border border-border-dim flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-obsidian transition-all duration-700">
                 <ArrowUpRight className="w-6 h-6" />
               </div>
             </button>
@@ -49,7 +49,7 @@ export const EventsSection = () => {
               viewport={{ once: true }}
               className="group cursor-pointer"
             >
-              <div className="relative aspect-4/5 rounded-4xl overflow-hidden mb-10 border border-white/5 group-hover:border-accent/30 transition-all duration-1000">
+              <div className="relative aspect-4/5 rounded-4xl overflow-hidden mb-10 border border-border-dim group-hover:border-accent/30 transition-all duration-1000">
                 <motion.img
                   src={item.image}
                   initial={{ filter: "grayscale(100%)", scale: 1.1 }}
@@ -62,14 +62,14 @@ export const EventsSection = () => {
                 <div className="absolute inset-0 bg-linear-to-t from-obsidian via-transparent to-transparent opacity-60" />
 
                 <div className="absolute top-8 left-8">
-                  <span className="px-4 py-2 bg-black/50 backdrop-blur-md rounded-full text-[8px] uppercase tracking-widest text-accent border border-accent/20">
+                  <span className="px-4 py-2 bg-obsidian/50 backdrop-blur-md rounded-full text-[8px] uppercase tracking-widest text-accent border border-accent/20">
                     {item.category}
                   </span>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest text-white/70">
+                <div className="flex items-center gap-6 text-[10px] uppercase tracking-widest text-silk-white/70">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3 h-3 text-accent" />
                     {item.date}
@@ -82,11 +82,11 @@ export const EventsSection = () => {
                 <motion.h3
                   initial={{ opacity: 0.8 }}
                   whileInView={{ opacity: 1 }}
-                  className="text-2xl font-display uppercase tracking-tight group-hover:text-accent transition-colors"
+                  className="text-2xl font-display uppercase tracking-tight text-silk-white group-hover:text-accent transition-colors"
                 >
                   {item.title}
                 </motion.h3>
-                <p className="text-sm font-light text-white/70 leading-relaxed group-hover:text-white transition-colors">
+                <p className="text-sm font-light text-silk-white/70 leading-relaxed group-hover:text-silk-white transition-colors">
                   {item.description}
                 </p>
               </div>

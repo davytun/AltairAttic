@@ -68,18 +68,18 @@ export const AboutHero = () => {
             Digital Architecture
           </motion.span>
 
-          <h1 className="text-huge font-display font-black leading-[0.75] tracking-tighter uppercase mb-12 md:mb-20 text-balance">
+          <h1 className="text-huge font-display font-black leading-[0.75] tracking-tighter uppercase mb-12 md:mb-20 text-balance text-silk-white">
             At the <br />
-            <span className="text-white/20 italic font-serif lowercase tracking-normal">
+            <span className="text-silk-white/20 italic font-serif lowercase tracking-normal">
               forefront
             </span>
             <br /> <span className="text-accent">of tech.</span>
           </h1>
 
-          <div className="max-w-4xl pt-10 md:pt-16 border-t border-white/10 relative">
+          <div className="max-w-4xl pt-10 md:pt-16 border-t border-border-dim relative">
             <div className="absolute -top-px left-1/2 -translate-x-1/2 w-40 h-px bg-accent" />
 
-            <p className="text-xl md:text-3xl font-light text-white/60 leading-relaxed italic mb-10">
+            <p className="text-xl md:text-3xl font-light text-silk-white/60 leading-relaxed italic mb-10">
               "Altair Attic Limited is at the forefront of technological
               innovation, delivering cutting-edge solutions in smart home
               automation, software development, IoT, and embedded systems
@@ -88,13 +88,13 @@ export const AboutHero = () => {
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-12">
               <div className="flex flex-col items-center gap-2">
-                <span className="text-[10px] uppercase tracking-[0.4em] text-white/30">
+                <span className="text-[10px] uppercase tracking-[0.4em] text-silk-white/30">
                   Established
                 </span>
                 <span className="text-xl font-display text-accent">MMXXIV</span>
               </div>
-              <div className="w-px h-12 bg-white/10 hidden md:block" />
-              <p className="max-w-md text-sm text-white/30 uppercase tracking-[0.2em] font-medium">
+              <div className="w-px h-12 bg-silk-white/10 hidden md:block" />
+              <p className="max-w-md text-sm text-silk-white/30 uppercase tracking-[0.2em] font-medium">
                 Seamlessly integrating advanced technology into the fabric of
                 everyday life.
               </p>
@@ -110,7 +110,7 @@ export const AboutHero = () => {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4"
       >
-        <span className="text-[10px] uppercase tracking-[0.5em] text-white/20 font-bold">
+        <span className="text-[10px] uppercase tracking-[0.5em] text-silk-white/20 font-bold">
           Discover
         </span>
         <div className="w-px h-24 bg-linear-to-b from-accent to-transparent animate-pulse" />

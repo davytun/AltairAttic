@@ -1,16 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  /* New Brand Palette: Electric Blue & Deep Obsidian */
-  --color-obsidian: #010916;
-  --color-obsidian-surface: #020d1f;
-  --color-obsidian-muted: #05152d;
-  --color-accent: #009fff;
-  --color-accent-dim: rgba(0, 159, 255, 0.2);
-  --color-light-gray: #f9fafb;
-  --color-silk-white: #ffffff;
-  --color-text-muted: rgba(255, 255, 255, 0.7);
-  --color-border-dim: rgba(255, 255, 255, 0.08);
+  /* New Brand Palette: Electric Blue & Deep Obsidian (Mapped to semantics) */
+  --color-obsidian: var(--bg-main);
+  --color-obsidian-surface: var(--bg-surface);
+  --color-obsidian-muted: var(--bg-muted);
+  --color-accent: var(--color-brand);
+  --color-accent-dim: var(--color-brand-dim);
+  --color-light-gray: var(--text-secondary);
+  --color-silk-white: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border-dim: var(--border-dim);
+
+  /* Aliases for likely copy-pasted components */
+  --color-primary: var(--color-brand);
+  --color-secondary: var(--color-brand);
 
   /* Architectural Typography - Premium Curation */
   --font-display: "Outfit", "Plus Jakarta Sans", sans-serif;
@@ -23,7 +27,48 @@
 }
 
 :root {
+  /* Default Dark Mode (Obsidian) */
+  --bg-main: #010916;
+  --bg-surface: #020d1f;
+  --bg-muted: #05152d;
+
+  --color-brand: #009fff;
+  --color-brand-dim: rgba(0, 159, 255, 0.2);
+
+  /* Softer white to reduce harshness on dark background - Brightened for visibility */
+  --text-main: #f3f4f6;
+  --text-secondary: #f9fafb; /* slightly off-white */
+  --text-muted: rgba(243, 244, 246, 0.8);
+
+  --border-dim: rgba(255, 255, 255, 0.08);
+
+  /* Missing definitions for Button.tsx compatibility */
+  --color-primary: var(--color-brand);
+  --color-secondary: var(--color-brand);
+
   color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  /* Light Mode (Opposite of Obsidian) */
+  --bg-main: #ffffff;
+  --bg-surface: #f9f9f9;
+  --bg-muted: #f1f5f9;
+
+  --color-brand: #0066cc;
+  --color-brand-dim: rgba(0, 102, 204, 0.05);
+
+  --text-main: #020617;
+  --text-secondary: #334155;
+  --text-muted: #475569; /* Crisper, darker gray to replace the "wack" light gray */
+
+  --border-dim: rgba(15, 23, 42, 0.06);
+
+  /* Missing definitions for Button.tsx compatibility */
+  --color-primary: var(--color-brand);
+  --color-secondary: var(--color-brand);
+
+  color-scheme: light;
 }
 
 body {
@@ -52,6 +97,11 @@ body::before {
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+  opacity: 1;
+}
+
+:root[data-theme="light"] body::before {
+  opacity: 0; /* Disable grain in light mode to keep it crisp */
 }
 
 /* 
@@ -183,4 +233,56 @@ body::before {
 /* Magnetic Hover Cursor Target */
 .magnetic-btn {
   @apply transition-transform duration-500 ease-out;
+}
+
+/* 
+   RICH TEXT TYPOGRAPHY (PROSE)
+   Modern, spacious typography for product descriptions.
+*/
+@utility prose-silk {
+  & p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+  & ul,
+  & ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.25rem;
+  }
+  & li {
+    margin-bottom: 0.5rem;
+  }
+  & ul {
+    list-style-type: disc;
+  }
+  & ol {
+    list-style-type: decimal;
+  }
+  & strong {
+    color: var(--color-silk-white);
+    font-weight: 700;
+  }
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    color: var(--color-silk-white);
+    font-family: var(--font-display);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  & h1 {
+    font-size: 2.25rem;
+  }
+  & h2 {
+    font-size: 1.875rem;
+  }
+  & h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.prose {
+  max-width: 65ch;
 }

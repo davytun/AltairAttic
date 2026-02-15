@@ -12,7 +12,7 @@ export const ContactFormBuilder = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<"success" | "error" | null>(
-    null
+    null,
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,7 +32,7 @@ export const ContactFormBuilder = () => {
         "service_hoyq6xf",
         "template_2zbt1dc",
         emailData,
-        "xTVbm4gOtEOKY8Lx9"
+        "xTVbm4gOtEOKY8Lx9",
       )
       .then(() => {
         setFormStatus("success");
@@ -48,14 +48,14 @@ export const ContactFormBuilder = () => {
   };
 
   const inputClasses =
-    "w-full bg-transparent border-b border-white/10 py-6 text-xl font-light text-white focus:border-accent focus:outline-hidden transition-all duration-700 placeholder:text-white/10";
+    "w-full bg-transparent border-b border-border-dim py-6 text-xl font-light text-silk-white focus:border-accent focus:outline-hidden transition-all duration-700 placeholder:text-silk-white/10";
 
   return (
     <div className="relative">
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+            <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
               Full Name
             </span>
             <input
@@ -71,7 +71,7 @@ export const ContactFormBuilder = () => {
             />
           </div>
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+            <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
               Electronic Mail
             </span>
             <input
@@ -89,7 +89,7 @@ export const ContactFormBuilder = () => {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+          <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
             Telecommunication
           </span>
           <input
@@ -106,7 +106,7 @@ export const ContactFormBuilder = () => {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+          <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
             Manifesto / Inquiry
           </span>
           <textarea
@@ -126,13 +126,13 @@ export const ContactFormBuilder = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="group relative flex items-center gap-6 px-12 py-6 border border-white/10 rounded-full overflow-hidden transition-all duration-700 hover:border-accent disabled:opacity-50"
+            className="group relative flex items-center gap-6 px-12 py-6 border border-border-dim rounded-full overflow-hidden transition-all duration-700 hover:border-accent disabled:opacity-50"
           >
             <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-            <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-obsidian transition-colors">
+            <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-obsidian transition-colors text-silk-white">
               {isSubmitting ? "Processing..." : "Submit Inquiry"}
             </span>
-            <Send className="relative z-10 w-4 h-4 text-white group-hover:text-obsidian group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-700" />
+            <Send className="relative z-10 w-4 h-4 text-silk-white group-hover:text-obsidian group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-700" />
           </button>
         </div>
       </form>

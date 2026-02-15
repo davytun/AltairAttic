@@ -3,19 +3,36 @@ import productsData from "../../data/products.json";
 import ProductCard from "./ProductCard";
 import { Product } from "../../store/useCartStore";
 import { motion, AnimatePresence } from "framer-motion";
-import { Filter, ChevronDown, Check } from "lucide-react";
+import { Filter, ChevronDown, Check, Loader2 } from "lucide-react";
+import { productService } from "@/services/productService";
 
 type SortOption = "recommended" | "price-low" | "price-high" | "newest";
 
 const ProductCatalogGrid: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
   const [selectedOffers, setSelectedOffers] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>("recommended");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // Cast JSON data
-  const products = productsData as unknown as Product[];
+  React.useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productService.getProducts();
+        // Since useCartStore's Product has slightly different fields than what the API might return after transformation,
+        // we might need to ensure compatibility. But productService.transformProduct should handle it.
+        // We'll cast to any for now to avoid strict type issues if they differ slightly.
+        setProducts(data as any);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   // Extract unique categories
   const categories = ["All", ...new Set(products.map((p) => p.category))];
@@ -103,22 +120,22 @@ const ProductCatalogGrid: React.FC = () => {
   }, [products, selectedCategory, selectedPriceRanges, selectedOffers, sortBy]);
 
   return (
-    <section className="py-12 bg-[#0B0F19] min-h-screen">
+    <section className="py-12 bg-obsidian min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile Filter Toggle */}
         <div className="lg:hidden mb-6 flex justify-between items-center">
           <button
             onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-            className="flex items-center gap-2 text-white border border-white/10 px-4 py-2 rounded-lg"
+            className="flex items-center gap-2 text-silk-white border border-border-dim px-4 py-2 rounded-lg"
           >
             <Filter size={18} /> Filters
           </button>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-400">Sort:</span>
+            <span className="text-sm text-text-muted">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="bg-white/5 border border-white/10 text-white text-sm rounded-lg p-2 outline-none"
+              className="bg-white/5 border border-border-dim text-silk-white text-sm rounded-lg p-2 outline-none"
             >
               <option value="recommended">Recommended</option>
               <option value="price-low">Price: Low to High</option>
@@ -135,14 +152,14 @@ const ProductCatalogGrid: React.FC = () => {
           >
             <div className="sticky top-24 space-y-8">
               {/* Sidebar Header with Clear All */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <div className="flex items-center justify-between border-b border-border-dim pb-4">
+                <h3 className="text-xl font-bold text-silk-white flex items-center gap-2">
                   <Filter size={20} className="text-accent" /> Filters
                 </h3>
                 {hasActiveFilters && (
                   <button
                     onClick={clearAllFilters}
-                    className="text-xs text-red-400 hover:text-white transition-colors uppercase font-bold tracking-wider"
+                    className="text-xs text-red-500 hover:text-silk-white transition-colors uppercase font-bold tracking-wider"
                   >
                     Clear All
                   </button>
@@ -151,7 +168,7 @@ const ProductCatalogGrid: React.FC = () => {
 
               {/* Category Filter */}
               <div>
-                <h3 className="text-sm font-bold text-white/60 uppercase tracking-widest mb-4">
+                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
                   Categories
                 </h3>
                 <div className="space-y-2">
@@ -161,8 +178,8 @@ const ProductCatalogGrid: React.FC = () => {
                       onClick={() => setSelectedCategory(category)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between group ${
                         selectedCategory === category
-                          ? "bg-blue-600 text-white"
-                          : "text-gray-400 hover:text-white hover:bg-white/5"
+                          ? "bg-accent text-white"
+                          : "text-text-muted hover:text-silk-white hover:bg-white/5"
                       }`}
                     >
                       {category}
@@ -174,7 +191,7 @@ const ProductCatalogGrid: React.FC = () => {
 
               {/* Price Range */}
               <div>
-                <h3 className="text-sm font-bold text-white/60 uppercase tracking-widest mb-4">
+                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
                   Price Range
                 </h3>
                 <div className="space-y-2">
@@ -186,13 +203,13 @@ const ProductCatalogGrid: React.FC = () => {
                   ].map((range, idx) => (
                     <label
                       key={idx}
-                      className="flex items-center gap-3 text-gray-400 hover:text-white cursor-pointer select-none"
+                      className="flex items-center gap-3 text-text-muted hover:text-silk-white cursor-pointer select-none"
                     >
                       <input
                         type="checkbox"
                         checked={selectedPriceRanges.includes(range)}
                         onChange={() => togglePriceRange(range)}
-                        className="form-checkbox bg-transparent border-white/20 rounded text-blue-600 focus:ring-0 w-4 h-4"
+                        className="form-checkbox bg-transparent border-white/20 rounded text-accent focus:ring-0 w-4 h-4"
                       />
                       <span>{range}</span>
                     </label>
@@ -202,7 +219,7 @@ const ProductCatalogGrid: React.FC = () => {
 
               {/* Special Offers */}
               <div>
-                <h3 className="text-sm font-bold text-white/60 uppercase tracking-widest mb-4">
+                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
                   Special Offers
                 </h3>
                 <div className="space-y-2">
@@ -210,13 +227,13 @@ const ProductCatalogGrid: React.FC = () => {
                     (offer, idx) => (
                       <label
                         key={idx}
-                        className="flex items-center gap-3 text-gray-400 hover:text-white cursor-pointer select-none"
+                        className="flex items-center gap-3 text-text-muted hover:text-silk-white cursor-pointer select-none"
                       >
                         <input
                           type="checkbox"
                           checked={selectedOffers.includes(offer)}
                           onChange={() => toggleOffer(offer)}
-                          className="form-checkbox bg-transparent border-white/20 rounded text-blue-600 focus:ring-0 w-4 h-4"
+                          className="form-checkbox bg-transparent border-white/20 rounded text-accent focus:ring-0 w-4 h-4"
                         />
                         <span>{offer}</span>
                       </label>
@@ -230,18 +247,18 @@ const ProductCatalogGrid: React.FC = () => {
           {/* Product Grid Area */}
           <div className="flex-1">
             {/* Desktop Sort Bar */}
-            <div className="hidden lg:flex justify-between items-center mb-6 border-b border-white/5 pb-4">
-              <p className="text-gray-400">
+            <div className="hidden lg:flex justify-between items-center mb-6 border-b border-border-dim pb-4">
+              <p className="text-text-muted">
                 Showing{" "}
-                <span className="text-white font-bold">
+                <span className="text-silk-white font-bold">
                   {filteredProducts.length}
                 </span>{" "}
                 results
               </p>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-gray-400">Sort by:</span>
+                <span className="text-sm text-text-muted">Sort by:</span>
                 <div className="relative group">
-                  <button className="flex items-center gap-2 text-white bg-white/5 border border-white/10 px-4 py-2 rounded-lg hover:border-white/30 transition-all">
+                  <button className="flex items-center gap-2 text-silk-white bg-white/5 border border-border-dim px-4 py-2 rounded-lg hover:border-white/30 transition-all">
                     {sortBy === "recommended"
                       ? "Recommended"
                       : sortBy === "price-low"
@@ -251,7 +268,7 @@ const ProductCatalogGrid: React.FC = () => {
                           : "Newest"}
                     <ChevronDown size={14} />
                   </button>
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-[#151925] border border-white/10 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-obsidian-surface border border-border-dim rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
                     {[
                       { label: "Recommended", value: "recommended" },
                       { label: "Price: Low to High", value: "price-low" },
@@ -261,7 +278,7 @@ const ProductCatalogGrid: React.FC = () => {
                       <button
                         key={option.value}
                         onClick={() => setSortBy(option.value as SortOption)}
-                        className={`block w-full text-left px-4 py-3 text-sm hover:bg-white/5 first:rounded-t-xl last:rounded-b-xl ${sortBy === option.value ? "text-blue-400" : "text-white"}`}
+                        className={`block w-full text-left px-4 py-3 text-sm hover:bg-white/5 first:rounded-t-xl last:rounded-b-xl ${sortBy === option.value ? "text-accent" : "text-silk-white"}`}
                       >
                         {option.label}
                       </button>
@@ -273,29 +290,38 @@ const ProductCatalogGrid: React.FC = () => {
 
             {/* Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <AnimatePresence>
-                {filteredProducts.map((product) => (
-                  <motion.div
-                    key={product.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+              {isLoading ? (
+                <div className="col-span-full flex flex-col items-center justify-center py-20 text-silk-white/50">
+                  <Loader2 className="w-12 h-12 animate-spin mb-4" />
+                  <p className="uppercase tracking-widest text-xs font-bold">
+                    Synchronizing Hardware...
+                  </p>
+                </div>
+              ) : (
+                <AnimatePresence>
+                  {filteredProducts.map((product) => (
+                    <motion.div
+                      key={product.id}
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ProductCard product={product} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              )}
 
               {filteredProducts.length === 0 && (
                 <div className="col-span-full text-center py-20">
-                  <p className="text-white/50 text-lg">
+                  <p className="text-silk-white/50 text-lg">
                     No products found matching your filters.
                   </p>
                   <button
                     onClick={clearAllFilters}
-                    className="mt-4 text-blue-400 hover:text-blue-300 underline"
+                    className="mt-4 text-accent hover:text-accent-dim underline"
                   >
                     Clear Filters
                   </button>

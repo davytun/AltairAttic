@@ -54,7 +54,7 @@ export const Contact = ({
   return (
     <section
       id="contact"
-      className="bg-obsidian py-20 md:py-32 relative border-t border-white/5 overflow-hidden"
+      className="bg-obsidian py-20 md:py-32 relative border-t border-border-dim overflow-hidden"
     >
       <GridBackground
         gridSize={55}
@@ -71,14 +71,14 @@ export const Contact = ({
           <div className="lg:col-span-5 space-y-12 md:space-y-16">
             <div className="space-y-8">
               <span className="text-label block">Next Steps</span>
-              <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter">
+              <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter text-silk-white">
                 Let's Talk <br />{" "}
-                <span className="text-white/40 italic font-serif lowercase">
+                <span className="text-text-muted italic font-serif lowercase">
                   Solutions
                 </span>
                 .
               </h2>
-              <p className="text-lg font-light text-white/70 leading-relaxed max-w-sm">
+              <p className="text-lg font-light text-light-gray leading-relaxed max-w-sm">
                 Ready to stop struggling with tech and start growing your
                 vision?
               </p>
@@ -90,10 +90,10 @@ export const Contact = ({
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="text-[9px] uppercase tracking-widest text-white/50 block mb-2 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-text-muted block mb-2 font-black">
                     Location
                   </span>
-                  <p className="text-sm font-light text-white/80 group-hover:text-white transition-colors">
+                  <p className="text-sm font-light text-light-gray group-hover:text-silk-white transition-colors">
                     3rd floor, Opposite Cathedral of St. Peter Ang. Sec. Sch,
                     Along Oba Ademola Maternity Hospital, Ake, Abeokuta.{" "}
                   </p>
@@ -102,23 +102,23 @@ export const Contact = ({
 
               <div className="grid grid-cols-1 gap-8 pt-4">
                 <div className="space-y-2 group">
-                  <span className="text-[9px] uppercase tracking-widest text-white/50 flex items-center gap-4 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-text-muted flex items-center gap-4 font-black">
                     <Mail className="w-3 h-3 text-accent" /> Email
                   </span>
                   <a
                     href="mailto:hello@altair-attic.com"
-                    className="text-xl font-display uppercase tracking-tight text-white group-hover:text-accent transition-colors flex items-center gap-3"
+                    className="text-xl font-display uppercase tracking-tight text-silk-white group-hover:text-accent transition-colors flex items-center gap-3"
                   >
                     hello@altair-attic.com
                   </a>
                 </div>
                 <div className="space-y-2 group">
-                  <span className="text-[9px] uppercase tracking-widest text-white/50 flex items-center gap-4 font-black">
+                  <span className="text-[9px] uppercase tracking-widest text-text-muted flex items-center gap-4 font-black">
                     <Phone className="w-3 h-3 text-accent" /> Line
                   </span>
                   <a
                     href="tel:+2347077195098"
-                    className="text-xl font-display uppercase tracking-tight text-white group-hover:text-accent transition-colors flex items-center gap-3"
+                    className="text-xl font-display uppercase tracking-tight text-silk-white group-hover:text-accent transition-colors flex items-center gap-3"
                   >
                     +234 707 719 5098
                   </a>
@@ -134,7 +134,7 @@ export const Contact = ({
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
               viewport={{ once: true, amount: 0.2 }}
-              className="bg-obsidian-surface border border-white/5 p-8 md:p-16 lg:p-20 rounded-[2rem] md:rounded-[3rem] shadow-[0_50px_100px_rgba(0,0,0,0.8)] relative overflow-hidden group w-full max-w-[700px] ml-auto"
+              className="bg-obsidian-surface border border-border-dim p-8 md:p-16 lg:p-20 rounded-4xl md:rounded-[3rem] shadow-2xl relative overflow-hidden group w-full max-w-[700px] ml-auto"
             >
               <motion.div
                 initial={{ opacity: 0.1, scale: 0.8 }}
@@ -160,17 +160,17 @@ export const Contact = ({
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-display uppercase tracking-tight text-white">
+                      <h3 className="text-2xl font-display uppercase tracking-tight text-silk-white">
                         Inquiry Received
                       </h3>
-                      <p className="text-white/50 text-sm">
+                      <p className="text-silk-white/50 text-sm">
                         We'll get back to you within 24 hours.
                       </p>
                     </div>
                     <Button
                       onClick={() => setIsSuccess(false)}
                       variant="outline"
-                      className="border-white/10 text-white/50 hover:text-white"
+                      className="border-border-dim text-silk-white/50 hover:text-silk-white"
                     >
                       Send Another
                     </Button>
@@ -181,7 +181,7 @@ export const Contact = ({
                     className="space-y-12 relative z-10 w-full"
                   >
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
                         Identity
                       </label>
                       <input
@@ -191,12 +191,12 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-silk-white/10 text-silk-white"
                         placeholder="Enter name"
                       />
                     </div>
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
                         Electronic Mail
                       </label>
                       <input
@@ -206,12 +206,12 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-white/5"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-silk-white/10 text-silk-white"
                         placeholder="your@email.com"
                       />
                     </div>
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
                         Briefing
                       </label>
                       <textarea
@@ -221,7 +221,7 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-white/10 py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-white/5"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/20 text-silk-white"
                         placeholder="Tell us your biggest tech challenge"
                       />
                     </div>
@@ -236,10 +236,10 @@ export const Contact = ({
                         <button
                           disabled={isSubmitting}
                           type="submit"
-                          className="h-16 md:h-20 px-8 md:px-12 bg-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center md:justify-start gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
+                          className="h-16 md:h-20 px-8 md:px-12 bg-silk-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center md:justify-start gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
                         >
                           {isSubmitting ? "Dispatching..." : "Send My Inquiry"}{" "}
-                          <div className="p-2 bg-obsidian text-white rounded-full group-hover/btn:bg-white group-hover/btn:text-obsidian transition-all">
+                          <div className="p-2 bg-obsidian text-silk-white rounded-full group-hover/btn:bg-silk-white group-hover/btn:text-obsidian transition-all">
                             <Send className="w-3 h-3" />
                           </div>
                         </button>

@@ -21,12 +21,12 @@ export const TeamGrid = () => {
             <span className="text-label mb-8 block tracking-[0.6em]">
               Our Architects
             </span>
-            <h2 className="text-huge font-display uppercase tracking-tight leading-none text-balance">
-              The Minds <br /> <span className="text-white/40">Driving</span>{" "}
+            <h2 className="text-huge font-display uppercase tracking-tight leading-none text-balance text-silk-white">
+              The Minds <br /> <span className="text-text-muted">Driving</span>{" "}
               <br /> <span className="text-accent">Innovation.</span>
             </h2>
           </div>
-          <p className="text-lg md:text-xl font-light text-white/70 max-w-sm border-l border-accent/20 pl-8 md:pl-10 mb-6 italic">
+          <p className="text-lg md:text-xl font-light text-silk-white/70 max-w-sm border-l border-accent/20 pl-8 md:pl-10 mb-6 italic">
             "Meet the architects of innovation driving Altair Attic forward."
           </p>
         </div>
@@ -45,7 +45,7 @@ export const TeamGrid = () => {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="aspect-3/4 overflow-hidden rounded-4xl bg-obsidian-surface border border-white/5 transition-all duration-1000 relative group-hover:border-accent">
+              <div className="aspect-3/4 overflow-hidden rounded-4xl bg-obsidian-surface border border-border-dim transition-all duration-1000 relative group-hover:border-accent">
                 <motion.img
                   src={member.image}
                   alt={member.name}
@@ -74,14 +74,14 @@ export const TeamGrid = () => {
                   >
                     / 0{index + 1}
                   </motion.span>
-                  <h3 className="text-2xl font-display uppercase text-white/90">
+                  <h3 className="text-2xl font-display uppercase text-silk-white/90">
                     {member.name}
                   </h3>
                 </div>
               </div>
 
               <div className="mt-8 space-y-4">
-                <p className="text-sm font-light tracking-[0.3em] uppercase text-white/70">
+                <p className="text-sm font-light tracking-[0.3em] uppercase text-silk-white/70">
                   {member.title}
                 </p>
                 <motion.div
@@ -89,7 +89,7 @@ export const TeamGrid = () => {
                   whileInView={{ scaleX: 1 }}
                   transition={{ duration: 1.2, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="h-px bg-white/10 w-full origin-left group-hover:bg-accent transition-colors"
+                  className="h-px bg-silk-white/10 w-full origin-left group-hover:bg-accent transition-colors"
                 />
               </div>
             </motion.div>

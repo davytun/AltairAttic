@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import logo from "/public/logo.png";
-
-import { useCartStore } from "@/store/useCartStore";
-import { ShoppingCart } from "lucide-react";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const getCartCount = useCartStore((state) => state.getCartCount);
-  const cartCount = getCartCount();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,13 +27,17 @@ const Navbar = () => {
     { name: "About", path: "/about" },
   ];
 
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
     <>
       <nav
         className={cn(
           "fixed top-0 left-0 right-0 z-100 transition-all duration-700",
           isScrolled
-            ? "py-3 bg-obsidian/95 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-b border-white/5"
+            ? "py-3 bg-obsidian/95 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-b border-border-dim"
             : "py-6 bg-obsidian/0 backdrop-blur-none",
         )}
       >
@@ -61,40 +62,45 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="relative text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] text-white/50 hover:text-white transition-all duration-300 group py-2"
+                className="relative text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] text-text-muted hover:text-silk-white transition-all duration-300 group py-2"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 right-0 h-px bg-accent scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
               </Link>
             ))}
 
-            <Link to="/cart" className="relative group p-2">
-              <ShoppingCart className="w-5 h-5 text-white/70 group-hover:text-accent transition-colors" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-accent text-obsidian text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartCount}
-                </span>
+            <button
+              onClick={toggleTheme}
+              className="relative group p-2 text-silk-white/70 hover:text-accent transition-colors"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
               )}
-            </Link>
+            </button>
 
             <Link to="/contact">
-              <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500">
+              <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500 text-silk-white">
                 Contact Us
               </button>
             </Link>
           </div>
 
           <div className="lg:hidden flex items-center gap-4">
-            <Link to="/cart" className="relative p-2">
-              <ShoppingCart className="w-5 h-5 text-white/70" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-accent text-obsidian text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
             <button
-              className="p-2.5 rounded-lg bg-white/5 border border-white/10 hover:border-accent hover:bg-accent/10 text-white hover:text-accent transition-all duration-300"
+              onClick={toggleTheme}
+              className="p-2 text-silk-white/70 hover:text-accent transition-colors"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
+
+            <button
+              className="p-2.5 rounded-lg bg-silk-white/5 border border-border-dim hover:border-accent hover:bg-accent/10 text-silk-white hover:text-accent transition-all duration-300"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -117,7 +123,7 @@ const Navbar = () => {
             {/* Close button */}
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-8 right-8 p-3 rounded-lg bg-white/5 border border-white/10 hover:border-accent hover:bg-accent/10 text-white hover:text-accent transition-all duration-300 z-20"
+              className="absolute top-8 right-8 p-3 rounded-lg bg-silk-white/5 border border-border-dim hover:border-accent hover:bg-accent/10 text-silk-white hover:text-accent transition-all duration-300 z-20"
             >
               <X size={24} />
             </button>
@@ -132,7 +138,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className="text-5xl font-display font-black uppercase tracking-tight text-white hover:text-accent transition-colors"
+                    className="text-5xl font-display font-black uppercase tracking-tight text-silk-white hover:text-accent transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}

@@ -35,7 +35,7 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
       >
         <div className="flex h-6 items-center">
           <div
-            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "cod" ? "border-accent" : "border-white/20"}`}
+            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "cod" ? "border-accent" : "border-silk-white/20"}`}
           >
             {selectedMethod === "cod" && (
               <div className="w-2.5 h-2.5 bg-accent rounded-full" />
@@ -45,16 +45,16 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
         <div className="ml-4 flex-1">
           <div className="flex justify-between items-center mb-1">
             <label
-              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "cod" ? "text-white" : "text-white/60 group-hover:text-white transition-colors"}`}
+              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "cod" ? "text-silk-white" : "text-silk-white/60 group-hover:text-silk-white transition-colors"}`}
             >
               Cash on Delivery
             </label>
             <Banknote
-              className={`w-5 h-5 ${selectedMethod === "cod" ? "text-accent" : "text-white/20"}`}
+              className={`w-5 h-5 ${selectedMethod === "cod" ? "text-accent" : "text-silk-white/20"}`}
             />
           </div>
 
-          <p className="text-sm text-white/40 mb-3">
+          <p className="text-sm text-silk-white/40 mb-3">
             Pay securely with cash upon delivery.
           </p>
 
@@ -88,7 +88,7 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
       >
         <div className="flex h-6 items-center">
           <div
-            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "card" ? "border-accent" : "border-white/20"}`}
+            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "card" ? "border-accent" : "border-silk-white/20"}`}
           >
             {selectedMethod === "card" && (
               <div className="w-2.5 h-2.5 bg-accent rounded-full" />
@@ -98,15 +98,15 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
         <div className="ml-4 flex-1">
           <div className="flex justify-between items-center mb-1">
             <label
-              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "card" ? "text-white" : "text-white/60 group-hover:text-white transition-colors"}`}
+              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "card" ? "text-silk-white" : "text-silk-white/60 group-hover:text-silk-white transition-colors"}`}
             >
               Credit / Debit Card
             </label>
             <CreditCard
-              className={`w-5 h-5 ${selectedMethod === "card" ? "text-accent" : "text-white/20"}`}
+              className={`w-5 h-5 ${selectedMethod === "card" ? "text-accent" : "text-silk-white/20"}`}
             />
           </div>
-          <p className="text-sm text-white/40 mb-3">
+          <p className="text-sm text-silk-white/40 mb-3">
             Secure transfer via Stripe/Paystack.
           </p>
 
@@ -118,7 +118,7 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden space-y-4 pt-2"
               >
-                <div className="p-4 bg-black/20 rounded-xl border border-white/5 space-y-4">
+                <div className="p-4 bg-black/20 rounded-xl border border-border-dim space-y-4">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-yellow-500 mb-2 bg-yellow-500/10 p-2 rounded">
                     <ShieldAlert className="w-4 h-4" />
                     Gateway Integration Pending
@@ -128,20 +128,20 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
                     <input
                       type="text"
                       placeholder="0000 0000 0000 0000"
-                      className="block w-full bg-obsidian border border-white/10 rounded-lg text-white px-3 py-2 text-sm"
+                      className="block w-full bg-obsidian border border-border-dim rounded-lg text-silk-white px-3 py-2 text-sm"
                       disabled
                     />
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="text"
                         placeholder="MM / YY"
-                        className="block w-full bg-obsidian border border-white/10 rounded-lg text-white px-3 py-2 text-sm"
+                        className="block w-full bg-obsidian border border-border-dim rounded-lg text-silk-white px-3 py-2 text-sm"
                         disabled
                       />
                       <input
                         type="text"
                         placeholder="CVC"
-                        className="block w-full bg-obsidian border border-white/10 rounded-lg text-white px-3 py-2 text-sm"
+                        className="block w-full bg-obsidian border border-border-dim rounded-lg text-silk-white px-3 py-2 text-sm"
                         disabled
                       />
                     </div>
@@ -162,7 +162,7 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
       >
         <div className="flex h-6 items-center">
           <div
-            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "mobile" ? "border-accent" : "border-white/20"}`}
+            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedMethod === "mobile" ? "border-accent" : "border-silk-white/20"}`}
           >
             {selectedMethod === "mobile" && (
               <div className="w-2.5 h-2.5 bg-accent rounded-full" />
@@ -172,15 +172,17 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
         <div className="ml-4 flex-1">
           <div className="flex justify-between items-center mb-1">
             <label
-              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "mobile" ? "text-white" : "text-white/60 group-hover:text-white transition-colors"}`}
+              className={`font-display font-medium text-lg cursor-pointer ${selectedMethod === "mobile" ? "text-silk-white" : "text-silk-white/60 group-hover:text-silk-white transition-colors"}`}
             >
               Mobile Payment
             </label>
             <Wallet
-              className={`w-5 h-5 ${selectedMethod === "mobile" ? "text-accent" : "text-white/20"}`}
+              className={`w-5 h-5 ${selectedMethod === "mobile" ? "text-accent" : "text-silk-white/20"}`}
             />
           </div>
-          <p className="text-sm text-white/40">Apple Pay, Google Pay, USSD.</p>
+          <p className="text-sm text-silk-white/40">
+            Apple Pay, Google Pay, USSD.
+          </p>
 
           <AnimatePresence>
             {selectedMethod === "mobile" && (
@@ -190,7 +192,7 @@ const PaymentGatewayUI: React.FC<PaymentGatewayUIProps> = ({
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden pt-3"
               >
-                <div className="text-xs text-white/30 italic">
+                <div className="text-xs text-silk-white/30 italic">
                   Integration coming soon...
                 </div>
               </motion.div>

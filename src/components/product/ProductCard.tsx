@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Product } from "../../store/useCartStore";
-import AddToCartModal from "../cart/AddToCartModal";
+import { formatCurrency } from "@/lib/formatCurrency";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
       <motion.div
@@ -18,12 +16,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="group relative bg-[#0B0F19] rounded-2xl border border-white/5 hover:border-blue-500/30 overflow-hidden transition-all duration-300 flex flex-col h-full"
+        className="group relative bg-obsidian-surface rounded-2xl border border-border-dim hover:border-accent/30 overflow-hidden transition-all duration-300 flex flex-col h-full"
       >
         {/* Image & Badges */}
         <Link
-          to={`/product/${product.id}`}
-          className="block relative aspect-square overflow-hidden bg-[#151925]"
+          to={`/product/${product.slug || product.id}`}
+          className="block relative aspect-square overflow-hidden bg-obsidian"
         >
           <img
             src={product.images[0]}
@@ -41,7 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product.badges?.map((badge, idx) => (
               <span
                 key={idx}
-                className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white shadow-lg ${badge.color === "red" ? "bg-red-600" : badge.color === "green" ? "bg-green-600" : "bg-blue-600"}`}
+                className={`inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide text-white shadow-lg ${badge.color === "red" ? "bg-red-600" : badge.color === "green" ? "bg-green-600" : "bg-accent"}`}
               >
                 {badge.text}
               </span>
@@ -70,75 +68,70 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Content */}
         <div className="p-4 flex flex-col grow">
-          {/* Category & Rating */}
+          {/* Category */}
           <div className="flex justify-between items-start mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-white/40">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-silk-white/40">
               {product.category}
             </span>
-            {product.socialProof && (
-              <div className="flex items-center gap-1">
-                <span className="text-yellow-400 text-xs">★</span>
-                <span className="text-white/80 text-xs font-medium">
-                  {product.socialProof.rating}
-                </span>
-                <span className="text-white/30 text-[10px]">
-                  ({product.socialProof.reviewCount})
-                </span>
-              </div>
-            )}
           </div>
 
           <Link
-            to={`/product/${product.id}`}
-            className="block group-hover:text-blue-400 transition-colors mb-2"
+            to={`/product/${product.slug || product.id}`}
+            className="block group-hover:text-accent transition-colors mb-2"
           >
-            <h3 className="text-lg font-bold text-white line-clamp-2 leading-snug">
+            <h3 className="text-lg font-bold text-silk-white line-clamp-2 leading-snug">
               {product.name}
             </h3>
           </Link>
 
+          {/* Rating - Moved to next line */}
+          {product.socialProof && (
+            <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    className={`text-[10px] ${star <= Math.round(product.socialProof?.rating ?? 0) ? "text-yellow-400" : "text-silk-white/10"}`}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <span className="text-silk-white/40 text-[10px] font-mono">
+                ({product.socialProof.rating} /{" "}
+                {product.socialProof.reviewCount} reviews)
+              </span>
+            </div>
+          )}
+
           {/* Price Section */}
           <div className="mt-auto pt-4">
             <div className="flex items-end gap-2 mb-1">
-              <div className="text-2xl font-bold text-white">
-                ₦{product.price.toFixed(2)}
+              <div className="text-2xl font-bold text-silk-white">
+                {formatCurrency(product.price)}
               </div>
               {product.originalPrice && (
-                <div className="text-sm text-white/30 line-through mb-1">
-                  ₦{product.originalPrice.toFixed(2)}
+                <div className="text-sm text-silk-white/30 line-through mb-1">
+                  {formatCurrency(product.originalPrice)}
                 </div>
               )}
             </div>
             {product.discount && (
               <p className="text-xs text-green-400 font-medium mb-4">
-                You save: ₦{product.discount.amount.toFixed(2)}
+                You save: {formatCurrency(product.discount.amount)}
               </p>
             )}
 
-            {/* CTAs */}
-            <div className="grid grid-cols-2 gap-2 mt-2">
-              <Link
-                to={`/product/${product.id}`}
-                className="flex items-center justify-center px-3 py-2.5 border border-white/10 bg-white/5 text-white text-xs font-bold uppercase tracking-wide rounded-lg hover:bg-white/10 transition-colors"
-              >
-                View
-              </Link>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex items-center justify-center px-3 py-2.5 bg-blue-600 text-white text-xs font-bold uppercase tracking-wide rounded-lg hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/20"
-              >
-                Add to Cart
-              </button>
-            </div>
+            {/* CTA */}
+            <Link
+              to={`/product/${product.slug || product.id}`}
+              className="w-full flex items-center justify-center px-3 py-2.5 bg-accent text-white text-xs font-bold uppercase tracking-wide rounded-lg hover:bg-accent/80 transition-colors shadow-lg shadow-accent/20"
+            >
+              Order Now
+            </Link>
           </div>
         </div>
       </motion.div>
-
-      <AddToCartModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        product={product}
-      />
     </>
   );
 };

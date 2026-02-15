@@ -52,7 +52,7 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[100svh] py-20 md:py-0 flex flex-col justify-center items-center bg-obsidian overflow-hidden"
+      className="relative min-h-svh py-20 md:py-0 flex flex-col justify-center items-center bg-obsidian overflow-hidden"
     >
       {/* Cinematic Background Media */}
       <motion.div
@@ -60,13 +60,13 @@ export const Hero = () => {
         style={{ scale }}
         className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-obsidian/40 z-10" />
+        <div className="absolute inset-0 bg-obsidian-surface/60 z-10" />
         <img
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2400"
           alt="Sustainable Smart Architecture"
           className="w-full h-full object-cover filter grayscale-20 opacity-70"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-obsidian/20 to-obsidian z-20" />
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-obsidian-surface/20 to-obsidian z-20" />
       </motion.div>
 
       {/* Dot Background Pattern */}
@@ -85,14 +85,14 @@ export const Hero = () => {
           className="flex flex-col items-start gap-12"
         >
           {/* <div className="overflow-hidden">
-            <span className="text-[10px] uppercase tracking-[1em] text-accent font-black mb-4 block">
+                  <span className="text-[9px] uppercase tracking-widest text-text-muted block mb-2 font-black">
               Altair Attic Limited
             </span>
           </div> */}
 
           <h1
             ref={titleRef}
-            className="relative perspective-[1000px] text-white font-display font-black leading-[0.8] tracking-tighter uppercase text-[clamp(2.5rem,5.5vw,9rem)]"
+            className="relative perspective-[1000px] text-silk-white font-display font-black leading-[0.8] tracking-tighter uppercase text-[clamp(2.5rem,5.5vw,9rem)]"
           >
             <div className="overflow-hidden mb-[1vw]">
               {splitText("YOU BUILD THE VISION.")}
@@ -104,7 +104,7 @@ export const Hero = () => {
           </h1>
 
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between w-full gap-12 lg:gap-20 mt-8">
-            <p className="max-w-xl text-lg md:text-xl font-light text-white/50 leading-relaxed border-l border-accent/30 pl-8">
+            <p className="max-w-xl text-lg md:text-xl font-light text-text-muted leading-relaxed border-l border-accent/30 pl-8">
               Technology should serve your life, not complicate it. We design
               smart systems and custom software that actually work—fast,
               reliable, and human-centered.
@@ -117,7 +117,7 @@ export const Hero = () => {
                   href="https://wa.me/2347077195098?text=Hi%2C%20I%20need%20help%20with%20my%20tech%20project"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative h-16 px-10 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center overflow-hidden"
+                  className="group relative h-16 px-10 rounded-xl bg-accent text-obsidian hover:bg-silk-white transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center gap-3">
                     <svg
@@ -129,14 +129,14 @@ export const Hero = () => {
                     </svg>
                     Quick Chat
                   </span>
-                  <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-silk-white opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
                 </a>
 
                 <a
                   href="https://calendly.com/davytun/book-a-call"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group h-16 px-10 rounded-xl border-2 border-white/20 text-white hover:border-accent hover:bg-accent/10 transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center"
+                  className="group h-16 px-10 rounded-xl border-2 border-silk-white/20 text-silk-white hover:border-accent hover:bg-accent/10 transition-all duration-500 font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center"
                 >
                   <span className="flex items-center gap-3">
                     <svg
@@ -158,7 +158,7 @@ export const Hero = () => {
               </div>
 
               {/* Social Proof */}
-              <div className="flex items-center gap-6 text-white/40">
+              <div className="flex items-center gap-6 text-text-muted">
                 <div className="flex -space-x-3">
                   <div className="w-8 h-8 rounded-full bg-accent/20 border-2 border-obsidian flex items-center justify-center text-xs font-bold">
                     A
@@ -181,12 +181,12 @@ export const Hero = () => {
 
       {/* Decorative Grid / Lines */}
       <div className="absolute inset-0 z-10 opacity-10 pointer-events-none">
-        <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff1a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff1a_1px,transparent_1px)] bg-size-[100px_100px]" />
+        <div className="w-full h-full bg-[linear-gradient(to_right,var(--color-border-dim)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border-dim)_1px,transparent_1px)] bg-size-[100px_100px]" />
       </div>
 
       {/* Scroll Anchor */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-        <div className="w-px h-12 bg-linear-to-b from-white to-transparent animate-bounce" />
+        <div className="w-px h-12 bg-linear-to-b from-silk-white to-transparent animate-bounce" />
       </div>
     </section>
   );

@@ -3,6 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export interface Product {
   id: number;
+  slug?: string;
   name: string;
   category: string;
   shortDescription: string;
@@ -26,7 +27,11 @@ export interface Product {
     threshold: number;
   };
   specifications: Record<string, string>;
-  features: string[]; // Keeping as string[] for now, will migrate or dual-support
+  features: string[];
+  benefits?: string;
+  howToUse?: string;
+  badgeText?: string;
+  stockNote?: string;
   badges?: {
     type: string;
     text: string;
@@ -76,6 +81,24 @@ export interface Product {
   faqs?: {
     question: string;
     answer: string;
+  }[];
+  contentSections?: {
+    type: 'rich_text' | 'video_text' | 'image_text' | 'gallery' | 'gif' | 'media_list';
+    order: number;
+    heading?: string;
+    body?: string;
+    text?: string;
+    video_url?: string;
+    image_url?: string;
+    layout?: 'side_by_side' | 'stacked';
+    media?: string[];
+    caption?: string;
+    url?: string;
+    items?: {
+      url: string;
+      media_type: string;
+      caption?: string;
+    }[];
   }[];
 }
 

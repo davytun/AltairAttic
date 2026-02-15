@@ -37,10 +37,10 @@ export const ProjectsHero = () => {
             <span className="text-label mb-12 block tracking-[0.8em] text-accent uppercase">
               Archive / Works
             </span>
-            <h1 className="text-huge font-display font-black leading-[0.85] tracking-tighter uppercase mb-16">
+            <h1 className="text-huge font-display font-black leading-[0.85] tracking-tighter uppercase mb-16 text-silk-white">
               Our <br />
               Completed <br />
-              <span className="text-white/10 italic font-serif lowercase tracking-normal">
+              <span className="text-silk-white/10 italic font-serif lowercase tracking-normal">
                 Projects.
               </span>
             </h1>
@@ -57,7 +57,7 @@ export const ProjectsHero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
-            className="max-w-2xl text-lg md:text-xl font-light text-white/70 leading-relaxed uppercase tracking-widest text-balance"
+            className="max-w-2xl text-lg md:text-xl font-light text-silk-white/70 leading-relaxed uppercase tracking-widest text-balance"
           >
             A curated showcase of technological excellence and architectural
             precision.
@@ -67,7 +67,7 @@ export const ProjectsHero = () => {
 
       {/* Side Decorative Text */}
       <div className="absolute right-[2vw] top-1/2 -translate-y-1/2 hidden lg:block vertical-text">
-        <span className="text-[10px] font-black tracking-[1em] text-white/5 uppercase">
+        <span className="text-[10px] font-black tracking-[1em] text-silk-white/5 uppercase">
           ALTAIR ARCHIVE COLLECTION
         </span>
       </div>

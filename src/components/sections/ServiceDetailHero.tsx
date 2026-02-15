@@ -16,7 +16,7 @@ export const ServiceDetailHero = ({ service }: Props) => {
   const filter = useTransform(
     scrollYProgress,
     [0, 0.5],
-    ["grayscale(100%)", "grayscale(0%)"]
+    ["grayscale(100%)", "grayscale(0%)"],
   );
 
   return (
@@ -45,7 +45,7 @@ export const ServiceDetailHero = ({ service }: Props) => {
           <span className="text-label mb-8 block tracking-[0.5em] text-accent">
             Expertise / {service.name}
           </span>
-          <h1 className="text-huge md:text-8xl! font-display uppercase tracking-tighter leading-none mb-12">
+          <h1 className="text-huge md:text-8xl! font-display uppercase tracking-tighter leading-none mb-12 text-silk-white">
             {service.detail}
           </h1>
           <div className="w-24 h-px bg-accent" />

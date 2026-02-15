@@ -19,10 +19,10 @@ const ProductsPage = () => {
             transition={{ duration: 1 }}
           >
             <span className="text-label mb-8 block">Hardware Ecosystem</span>
-            <h1 className="text-huge font-display leading-[0.85] mb-8">
+            <h1 className="text-huge font-display leading-[0.85] mb-8 text-silk-white">
               The <span className="text-accent">Collection.</span>
             </h1>
-            <p className="text-xl md:text-2xl font-light text-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+            <p className="text-xl md:text-2xl font-light text-silk-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
               Engineering the physical layer of your environment.
               Precision-crafted hardware designed to integrate flawlessly with
               your life.
@@ -41,7 +41,7 @@ const ProductsPage = () => {
       </section>
 
       {/* Product Grid */}
-      <div className="border-t border-white/5 bg-[#0B0F19]">
+      <div className="border-t border-border-dim bg-obsidian-surface">
         <ProductCatalogGrid />
       </div>
 
