@@ -1,14 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Product } from "../../store/useCartStore";
+import { useCartStore, Product } from "../../store/useCartStore";
 import { formatCurrency } from "@/lib/formatCurrency";
+import { ShoppingCart, CheckCircle2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
+  variant?: "business" | "shop";
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  variant = "shop",
+}) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const [isAdding, setIsAdding] = React.useState(false);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsAdding(true);
+    addToCart(product);
+    setTimeout(() => setIsAdding(false), 2000);
+  };
+  const productLink =
+    variant === "shop"
+      ? `/shop/${product.slug || product.id}`
+      : `/product/${product.slug || product.id}`;
+
   return (
     <>
       <motion.div
@@ -20,7 +40,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       >
         {/* Image & Badges */}
         <Link
-          to={`/product/${product.slug || product.id}`}
+          to={productLink}
           className="block relative aspect-square overflow-hidden bg-obsidian"
         >
           <img
@@ -76,7 +96,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
 
           <Link
-            to={`/product/${product.slug || product.id}`}
+            to={productLink}
             className="block group-hover:text-accent transition-colors mb-2"
           >
             <h3 className="text-lg font-bold text-silk-white line-clamp-2 leading-snug">
@@ -123,12 +143,44 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             )}
 
             {/* CTA */}
-            <Link
-              to={`/product/${product.slug || product.id}`}
-              className="w-full flex items-center justify-center px-3 py-2.5 bg-accent text-white text-xs font-bold uppercase tracking-wide rounded-lg hover:bg-accent/80 transition-colors shadow-lg shadow-accent/20"
-            >
-              Order Now
-            </Link>
+            {variant === "shop" ? (
+              <div className="flex gap-2">
+                <Link
+                  to={productLink}
+                  className="flex-1 flex items-center justify-center px-3 py-2.5 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase tracking-wide rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  View
+                </Link>
+                <button
+                  onClick={handleAddToCart}
+                  className={cn(
+                    "flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-[10px] font-bold uppercase tracking-wide rounded-lg transition-all hover:scale-[1.02] shadow-lg shadow-accent/20",
+                    isAdding
+                      ? "bg-green-500 text-white"
+                      : "bg-accent text-white hover:bg-accent/80",
+                  )}
+                >
+                  {isAdding ? (
+                    <>
+                      <CheckCircle2 size={14} />
+                      Added!
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={14} />
+                      Add
+                    </>
+                  )}
+                </button>
+              </div>
+            ) : (
+              <Link
+                to={productLink}
+                className="w-full flex items-center justify-center px-3 py-4 bg-accent/10 border border-accent/30 text-accent text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-accent hover:text-obsidian transition-all duration-500"
+              >
+                Learn More
+              </Link>
+            )}
           </div>
         </div>
       </motion.div>

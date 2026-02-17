@@ -1,14 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowLeft,
   Loader2,
   CheckCircle2,
   Star,
   X,
-  ChevronLeft,
-  ChevronRight,
+  Zap,
+  ShieldCheck,
+  Truck,
+  MessageCircle,
+  HelpCircle,
+  ArrowRight,
+  ShoppingCart,
+  Users,
+  Eye,
+  Lock,
+  Minus,
+  Plus,
+  Clock,
+  Smartphone,
+  Info,
+  ZapOff,
+  ChevronDown,
+  ThumbsUp,
+  Award,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -18,13 +40,39 @@ import { ProductContentSections } from "@/components/product/ProductContentSecti
 
 import { productService } from "@/services/productService";
 import { orderService, CreateOrderData } from "@/services/orderService";
-import { Product } from "@/store/useCartStore";
-import { useViewingCount } from "@/hooks/useProductPageEffects";
+import { useCartStore, Product } from "@/store/useCartStore";
 import { formatCurrency } from "@/lib/formatCurrency";
+import { NIGERIAN_STATES } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 import NotFoundPage from "@/pages/NotFoundPage";
+
+const SMART_SWITCH_MODELS = [
+  {
+    id: "2-gang",
+    name: "2-Gang WiFi Switch",
+    price: 25000,
+    desc: "Independent control for two circuits. Perfect for bedrooms.",
+    img: "/assets/smart-switches/1.jpg",
+  },
+  {
+    id: "3-gang",
+    name: "3-Gang WiFi Switch",
+    price: 32000,
+    desc: "Our gold standard. Ideal for living rooms and kitchens.",
+    img: "/assets/smart-switches/2.jpg",
+  },
+  {
+    id: "4-gang",
+    name: "4-Gang WiFi Switch",
+    price: 40000,
+    desc: "The Command Center. Maximum flexibility for master lounges.",
+    img: "/assets/smart-switches/3.jpg",
+  },
+];
 
 const ProductDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -32,16 +80,15 @@ const ProductDetailPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
-  const [showImageModal, setShowImageModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<
-    "description" | "features" | "reviews"
-  >("description");
+  const [isAdding, setIsAdding] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(SMART_SWITCH_MODELS[1]);
 
-  const viewingCount = useViewingCount();
+  const addToCart = useCartStore((state) => state.addToCart);
 
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
+    whatsapp: "",
     email: "",
     address: "",
     state: "",
@@ -52,7 +99,6 @@ const ProductDetailPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       if (!slug) return;
-
       try {
         setIsLoading(true);
         const data = await productService.getProductBySlug(slug);
@@ -64,63 +110,66 @@ const ProductDetailPage = () => {
         setIsLoading(false);
       }
     };
-
     fetchProduct();
   }, [slug]);
 
   const handleFormChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleAddToCart = () => {
+    if (!product) return;
+    setIsAdding(true);
+    // If it's a smart switch, we use the selected model price/name
+    const cartProduct =
+      slug === "smart-wifi-switch"
+        ? {
+            ...product,
+            price: selectedModel.price,
+            name: `${product.name} (${selectedModel.name})`,
+          }
+        : product;
+
+    for (let i = 0; i < quantity; i++) {
+      addToCart(cartProduct);
+    }
+    setTimeout(() => setIsAdding(false), 2000);
+  };
+
   const handleDirectOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!product) return;
-
     setIsSubmitting(true);
-    setError(null);
 
     try {
       const orderData: CreateOrderData = {
         customer_name: formData.fullName,
         customer_email: formData.email,
         customer_phone: formData.phone,
-        customer_address: `${formData.address}, ${formData.city}, ${formData.state}`,
-        notes: formData.notes,
+        customer_address: `${formData.address}, ${formData.city}, ${formData.state} State`,
+        notes: `FUNNEL ORDER. ${slug === "smart-wifi-switch" ? `Model: ${selectedModel.name}. ` : ""}WhatsApp: ${formData.whatsapp}. ${formData.notes}`,
         items: [{ product_id: product.id, quantity }],
       };
 
       await orderService.createOrder(orderData);
       setOrderSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
+      setTimeout(() => navigate("/shop"), 6000);
     } catch (err: any) {
       console.error("Direct Order Failed:", err);
-      setError("Failed to place order. Please check your details.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const nextImage = () => {
-    if (product) {
-      setSelectedImage((prev) => (prev + 1) % product.images.length);
-    }
-  };
-
-  const prevImage = () => {
-    if (product) {
-      setSelectedImage(
-        (prev) => (prev - 1 + product.images.length) % product.images.length,
-      );
-    }
-  };
-
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-obsidian flex items-center justify-center">
-        <Navbar />
+      <div className="min-h-screen bg-obsidian flex items-center justify-center">
         <Loader2 className="w-12 h-12 text-accent animate-spin" />
       </div>
     );
@@ -130,573 +179,960 @@ const ProductDetailPage = () => {
     return <NotFoundPage />;
   }
 
-  const totalPrice = product.price * quantity;
+  const isFunnel = product.template === "funnel";
+  const isSmartSwitch = slug === "smart-wifi-switch";
 
   return (
-    <>
+    <div className="bg-obsidian text-silk-white selection:bg-accent selection:text-obsidian min-h-screen font-sans">
       <Helmet>
-        <title>{product.name} | Altair Attic</title>
-        <meta
-          name="description"
-          content={product.shortDescription?.replace(/<[^>]*>/g, "")}
-        />
+        <title>{product.name} — Control Your World | Altair Attic</title>
       </Helmet>
+      <Navbar />
 
-      <div className="min-h-screen bg-white dark:bg-obsidian">
-        <Navbar />
-
-        {/* Success Message */}
-        <AnimatePresence>
-          {orderSuccess && (
-            <motion.div
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-green-500 text-white px-8 py-4 rounded-2xl shadow-2xl flex items-center gap-3"
-            >
-              <CheckCircle2 className="w-6 h-6" />
-              <span className="font-bold">
-                Order placed successfully! We'll contact you soon.
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Image Modal */}
-        <AnimatePresence>
-          {showImageModal && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
-              onClick={() => setShowImageModal(false)}
-            >
-              <button
-                onClick={() => setShowImageModal(false)}
-                className="absolute top-4 right-4 text-white hover:text-accent transition-colors"
+      {isFunnel ? (
+        <main className="relative overflow-x-hidden">
+          <AnimatePresence>
+            {orderSuccess && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-3xl flex items-center justify-center p-6 text-center"
               >
-                <X className="w-8 h-8" />
-              </button>
-              <img
-                src={product.images[selectedImage]}
+                <div className="max-w-xl">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", damping: 10 }}
+                  >
+                    <CheckCircle2
+                      size={100}
+                      className="text-accent mx-auto mb-8"
+                    />
+                  </motion.div>
+                  <h2 className="text-5xl font-display font-black uppercase mb-4 text-white leading-[0.85]">
+                    Lead <br />
+                    <span className="text-accent">Synchronized.</span>
+                  </h2>
+                  <p className="text-xl text-text-muted mb-12 font-light">
+                    Your hardware allocation request has been received. Our
+                    implementation team will contact you via WhatsApp shortly.
+                  </p>
+                  <button
+                    onClick={() => navigate("/shop")}
+                    className="px-12 py-5 bg-white text-obsidian rounded-full font-black uppercase tracking-[0.3em] text-[10px] hover:scale-105 transition-transform"
+                  >
+                    Back to Catalog
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* HERO */}
+          <section className="relative min-h-screen flex flex-col justify-center py-20 overflow-hidden">
+            <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 bg-linear-to-b from-obsidian/40 via-obsidian/80 to-obsidian z-10" />
+              <motion.img
+                initial={{ scale: 1.1, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.15 }}
+                transition={{ duration: 2 }}
+                src={isSmartSwitch ? selectedModel.img : product.images[0]}
                 alt={product.name}
-                className="max-w-full max-h-[90vh] object-contain"
-                onClick={(e) => e.stopPropagation()}
+                className="w-full h-full object-cover grayscale"
               />
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent/20 blur-[150px] rounded-full animate-pulse" />
+            </div>
 
-        <main className="pt-20 pb-20">
-          {/* Breadcrumb */}
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
-            <Link
-              to="/products"
-              className="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-silk-white/60 hover:text-gray-900 dark:hover:text-accent transition-colors group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Back to Shop
-            </Link>
-          </div>
-
-          {/* Product Hero */}
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-              {/* Left: Images */}
-              <div className="space-y-4">
-                {/* Main Image */}
-                <div
-                  className="relative aspect-square bg-gray-50 dark:bg-obsidian-surface rounded-2xl overflow-hidden cursor-zoom-in group"
-                  onClick={() => setShowImageModal(true)}
+            <div className="container-luxury relative z-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1 }}
                 >
-                  <img
-                    src={product.images[selectedImage]}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-
-                  {/* Navigation */}
-                  {product.images.length > 1 && (
-                    <>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          prevImage();
-                        }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white dark:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-black transition-all opacity-0 group-hover:opacity-100 shadow-lg"
-                      >
-                        <ChevronLeft className="w-5 h-5 text-gray-900 dark:text-white" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          nextImage();
-                        }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white dark:bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gray-100 dark:hover:bg-black transition-all opacity-0 group-hover:opacity-100 shadow-lg"
-                      >
-                        <ChevronRight className="w-5 h-5 text-gray-900 dark:text-white" />
-                      </button>
-                    </>
-                  )}
-
-                  {/* Discount Badge */}
-                  {product.discount && (
-                    <div className="absolute top-4 right-4 bg-accent text-white px-3 py-1.5 rounded-full font-bold text-sm">
-                      -{product.discount.percentage}%
+                  <div className="aspect-square rounded-[64px] bg-white/[0.03] border border-white/10 p-12 flex items-center justify-center relative group overflow-hidden">
+                    <img
+                      src={
+                        isSmartSwitch
+                          ? selectedModel.img
+                          : product.images[selectedImage]
+                      }
+                      className="w-full h-full object-contain drop-shadow-3xl transform group-hover:scale-105 transition-transform duration-1000"
+                      alt={product.name}
+                    />
+                    <div className="absolute inset-0 bg-accent/5 blur-[80px] rounded-full scale-50" />
+                  </div>
+                  {!isSmartSwitch && (
+                    <div className="flex gap-4 mt-8 overflow-x-auto pb-4 scrollbar-hide">
+                      {product.images.map((img, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedImage(i)}
+                          className={cn(
+                            "w-20 h-20 rounded-2xl border transition-all shrink-0",
+                            selectedImage === i
+                              ? "border-accent bg-accent/10"
+                              : "border-white/5 bg-white/5 opacity-50",
+                          )}
+                        >
+                          <img
+                            src={img}
+                            className="w-full h-full object-contain p-2"
+                            alt="thumb"
+                          />
+                        </button>
+                      ))}
                     </div>
                   )}
-                </div>
+                </motion.div>
 
-                {/* Thumbnails */}
-                {product.images.length > 1 && (
-                  <div className="grid grid-cols-5 gap-3">
-                    {product.images.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedImage(idx)}
-                        className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                          selectedImage === idx
-                            ? "border-accent ring-2 ring-accent/20"
-                            : "border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30"
-                        }`}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                >
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="flex text-accent gap-1">
+                      {[1, 2, 3, 4, 5].map((i) => (
+                        <Star key={i} size={14} fill="currentColor" />
+                      ))}
+                    </div>
+                    <span className="text-[10px] uppercase font-black tracking-widest text-silk-white/40">
+                      Highly Rated in Nigeria
+                    </span>
+                  </div>
+
+                  <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-display font-black leading-[0.9] uppercase tracking-tighter mb-8">
+                    {product.name} <br />
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-accent via-blue-400 to-accent animate-gradient">
+                      Elite Automation
+                    </span>
+                  </h1>
+
+                  {isSmartSwitch && (
+                    <div className="grid grid-cols-3 gap-4 mb-12">
+                      {SMART_SWITCH_MODELS.map((model) => (
+                        <button
+                          key={model.id}
+                          onClick={() => setSelectedModel(model)}
+                          className={cn(
+                            "p-4 rounded-2xl border text-center transition-all",
+                            selectedModel.id === model.id
+                              ? "border-accent bg-accent/10"
+                              : "border-white/10 bg-white/5 opacity-60",
+                          )}
+                        >
+                          <div className="text-[10px] font-black uppercase tracking-tight mb-1">
+                            {model.id}
+                          </div>
+                          <div className="text-sm font-black text-accent">
+                            {formatCurrency(model.price)}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-8 mb-12">
+                    <span className="text-5xl font-display font-black text-accent">
+                      {formatCurrency(
+                        isSmartSwitch ? selectedModel.price : product.price,
+                      )}
+                    </span>
+                    {product.originalPrice && (
+                      <span className="text-2xl text-silk-white/20 line-through decoration-red-500/50">
+                        {formatCurrency(product.originalPrice)}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="space-y-6 mb-12">
+                    {[
+                      { icon: Truck, text: "Express Delivery (Lagos/Abuja)" },
+                      { icon: ShieldCheck, text: "Best in Nigeria Warranty" },
+                      { icon: Lock, text: "Secure Hardware Synchronization" },
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-4 text-silk-white/60"
                       >
-                        <img
-                          src={img}
-                          alt=""
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
+                        <item.icon size={20} className="text-accent" />
+                        <span className="text-xs uppercase font-black tracking-[0.2em]">
+                          {item.text}
+                        </span>
+                      </div>
                     ))}
                   </div>
-                )}
+
+                  <button
+                    onClick={() =>
+                      document
+                        .getElementById("funnel-form")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="w-full h-20 bg-accent text-obsidian rounded-2xl font-display font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,159,255,0.4)]"
+                  >
+                    Secure Your Unit Now
+                  </button>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* BENEFIT CARDS */}
+          <section className="py-32 bg-obsidian-surface border-y border-white/5">
+            <div className="container-luxury">
+              <div className="max-w-4xl mx-auto text-center mb-24">
+                <h2 className="text-huge mb-6">
+                  Why You'll <br />
+                  <span className="text-accent underline underline-offset-[16px] decoration-accent/20">
+                    Love It.
+                  </span>
+                </h2>
+                <p className="text-2xl text-text-muted font-light leading-relaxed">
+                  The hardware upgrade your home has been waiting for. Precision
+                  engineered for the modern lifestyle.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                {[
+                  {
+                    icon: ThumbsUp,
+                    title: "Effortless Control",
+                    desc: "No more manual checking. Everything is accessible from your palm, anywhere in the world.",
+                  },
+                  {
+                    icon: Zap,
+                    title: "Energy Efficient",
+                    desc: "Slash up to 30% off your monthly electricity bills with automated logic and scheduling.",
+                  },
+                  {
+                    icon: Award,
+                    title: "Elite Durability",
+                    desc: "Built with premium fire-retardant materials and stress-tested for 110V-240V grids.",
+                  },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="p-12 rounded-[48px] bg-white/[0.03] border border-white/5 hover:border-accent/30 transition-all group"
+                  >
+                    <div className="w-20 h-20 rounded-3xl bg-accent/10 flex items-center justify-center text-accent mb-10 group-hover:scale-110 transition-transform">
+                      <item.icon size={40} />
+                    </div>
+                    <h3 className="text-2xl font-display font-black uppercase mb-4 leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-lg text-text-muted font-light leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* CONTENT SECTIONS */}
+          <section className="py-64 relative">
+            <div className="container-luxury">
+              {product.contentSections && (
+                <div className="space-y-64">
+                  <ProductContentSections sections={product.contentSections} />
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* COMPARISON TABLE */}
+          <section className="py-48 bg-obsidian-surface">
+            <div className="container-luxury">
+              <div className="text-center mb-32">
+                <h2 className="text-huge mb-6 text-accent italic">
+                  The Difference.
+                </h2>
+                <p className="text-text-muted uppercase font-black tracking-widest text-xs">
+                  Unmatched quality engineered for the Nigerian market.
+                </p>
+              </div>
+              <div className="max-w-5xl mx-auto rounded-[64px] border border-white/10 bg-black/40 overflow-hidden shadow-3xl">
+                <div className="grid grid-cols-2 md:grid-cols-3 border-b border-white/10">
+                  <div className="p-10 text-[10px] uppercase font-black tracking-widest text-white/30 flex items-end">
+                    Feature Set
+                  </div>
+                  <div className="p-10 text-center bg-accent/10 border-x border-white/10">
+                    <div className="text-accent font-display font-black text-2xl uppercase italic">
+                      Altair Attic
+                    </div>
+                    <div className="text-[8px] uppercase font-black tracking-widest text-accent/60 mt-2">
+                      Premium Experience
+                    </div>
+                  </div>
+                  <div className="p-10 text-center hidden md:flex flex-col justify-end">
+                    <div className="text-white/40 font-display font-black text-xl uppercase">
+                      Others
+                    </div>
+                    <div className="text-[8px] uppercase font-black tracking-widest text-white/20 mt-2">
+                      Standard Hardware
+                    </div>
+                  </div>
+                </div>
+                {[
+                  {
+                    f: "Relay Safety",
+                    a: "Latching Relay (Cold)",
+                    o: "Cheap Relay (Heats up)",
+                  },
+                  {
+                    f: "Installation",
+                    a: "No Capacitor Needed",
+                    o: "Capacitor needed",
+                  },
+                  {
+                    f: "App Stability",
+                    a: "Zero Latency Sync",
+                    o: "Frequent Drops",
+                  },
+                  {
+                    f: "Power Ready",
+                    a: "Surge Hardened",
+                    o: "Voltage Sensitive",
+                  },
+                  {
+                    f: "Warranty",
+                    a: "2 Years Replacement",
+                    o: "None / 3 Months",
+                  },
+                ].map((row, i) => (
+                  <div
+                    key={i}
+                    className="grid grid-cols-2 md:grid-cols-3 border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors"
+                  >
+                    <div className="p-10 font-black uppercase text-xs tracking-widest leading-none flex items-center">
+                      {row.f}
+                    </div>
+                    <div className="p-10 text-center bg-accent/5 border-x border-white/5 text-accent font-bold">
+                      <span className="flex items-center justify-center gap-3">
+                        <CheckCircle2 size={16} /> {row.a}
+                      </span>
+                    </div>
+                    <div className="p-10 text-center hidden md:flex items-center justify-center text-white/20 text-xs uppercase tracking-widest lead-none italic font-light">
+                      {row.o}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* REVIEWS */}
+          <section className="py-48 bg-obsidian">
+            <div className="container-luxury">
+              <div className="text-center mb-32">
+                <h2 className="text-huge mb-6">Obsessed Results.</h2>
+                <div className="flex flex-col items-center gap-4">
+                  <div className="text-6xl font-display font-black text-white leading-none">
+                    4.9/5
+                  </div>
+                  <div className="flex text-accent gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} size={24} fill="currentColor" />
+                    ))}
+                  </div>
+                  <div className="text-xs uppercase font-black tracking-[0.4em] text-white/30">
+                    From 1,200+ Smart Homes in Lagos & Abuja
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  {
+                    u: "Chinedu O.",
+                    d: "Lagos, NG",
+                    r: "Installation was a breeze. No more fighting with my wife about who goes down to turn off the lights at midnight. Best upgrade so far!",
+                    s: 5,
+                  },
+                  {
+                    u: "Amina A.",
+                    d: "Abuja, NG",
+                    r: "The app is super responsive. I love that I can set timers for my porch lights. Saved me a lot on NEPA bills this month.",
+                    s: 5,
+                  },
+                  {
+                    u: "Tunde E.",
+                    d: "Lekki, NG",
+                    r: "The design is very premium. Fits my living room perfectly. Delivery to Lekki took only 4 hours. Incredible service.",
+                    s: 5,
+                  },
+                  {
+                    u: "Emeka K.",
+                    d: "Enugu, NG",
+                    r: "Finally a smart switch that doesn't burn out with Nigerian power. The relay technology really works. Highly recommended.",
+                    s: 5,
+                  },
+                ].map((review, i) => (
+                  <div
+                    key={i}
+                    className="p-12 rounded-[56px] bg-white/[0.03] border border-white/10 relative overflow-hidden group"
+                  >
+                    <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:rotate-12 transition-transform">
+                      <MessageCircle size={80} className="text-accent" />
+                    </div>
+                    <div className="flex gap-1 mb-8">
+                      {[1, 2, 3, 4, 5].map((j) => (
+                        <Star
+                          key={j}
+                          size={14}
+                          className={
+                            j <= review.s ? "text-accent" : "text-white/10"
+                          }
+                          fill="currentColor"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-2xl font-light text-silk-white/80 leading-relaxed mb-10 italic">
+                      "{review.r}"
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center font-display font-black text-accent text-xl">
+                        {review.u[0]}
+                      </div>
+                      <div>
+                        <div className="font-black uppercase tracking-widest text-sm">
+                          {review.u}
+                        </div>
+                        <div className="text-[10px] uppercase font-black tracking-widest text-accent/60 mt-1">
+                          {review.d}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* FORM */}
+          <section
+            id="funnel-form"
+            className="py-64 bg-obsidian-surface relative"
+          >
+            <div className="container-luxury relative z-10">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-24">
+                  <h2 className="text-[clamp(3rem,10vw,7.5rem)] font-display font-black uppercase leading-[0.8] mb-8 italic">
+                    The Sync-Lock.
+                  </h2>
+                  <p className="text-2xl text-text-muted font-light max-w-2xl mx-auto italic">
+                    Enroll your home address below to synchronize your order
+                    lead with our logistics hub.
+                  </p>
+                </div>
+                <div className="bg-white/[0.02] backdrop-blur-3xl rounded-[64px] border border-white/5 overflow-hidden shadow-3xl p-8 md:p-16">
+                  <form
+                    onSubmit={handleDirectOrder}
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-24"
+                  >
+                    <div className="space-y-10">
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                            Identity Proof
+                          </label>
+                          <input
+                            type="text"
+                            name="fullName"
+                            required
+                            value={formData.fullName}
+                            onChange={handleFormChange}
+                            placeholder="Enter Full Name"
+                            className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all font-display"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                            Synchronization Terminal
+                          </label>
+                          <input
+                            type="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange={handleFormChange}
+                            placeholder="Enter Email Address"
+                            className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all font-display"
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                              Contact Line
+                            </label>
+                            <input
+                              type="tel"
+                              name="phone"
+                              required
+                              value={formData.phone}
+                              onChange={handleFormChange}
+                              placeholder="+234..."
+                              className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all font-display"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                              WhatsApp Direct
+                            </label>
+                            <input
+                              type="tel"
+                              name="whatsapp"
+                              required
+                              value={formData.whatsapp}
+                              onChange={handleFormChange}
+                              placeholder="+234..."
+                              className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all font-display"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="space-y-10">
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                              Logistics Hub (City)
+                            </label>
+                            <input
+                              type="text"
+                              name="city"
+                              required
+                              value={formData.city}
+                              onChange={handleFormChange}
+                              placeholder="e.g. Lagos"
+                              className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all font-display"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                              Regional Sector
+                            </label>
+                            <select
+                              name="state"
+                              required
+                              value={formData.state}
+                              onChange={handleFormChange}
+                              className="w-full h-20 bg-obsidian-surface border border-white/10 rounded-2xl px-8 text-white focus:border-accent outline-none appearance-none cursor-pointer custom-select transition-all font-display"
+                            >
+                              <option value="">Select State</option>
+                              {NIGERIAN_STATES.map((s) => (
+                                <option key={s} value={s}>
+                                  {s}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[9px] uppercase font-black tracking-widest text-white/30 ml-4 italic">
+                            Deployment Hub (Full Address)
+                          </label>
+                          <textarea
+                            name="address"
+                            required
+                            rows={2}
+                            value={formData.address}
+                            onChange={handleFormChange}
+                            placeholder="Enter your full street address..."
+                            className="w-full bg-obsidian-surface border border-white/10 rounded-2xl px-8 py-6 text-white focus:border-accent outline-none placeholder:text-white/10 transition-all resize-none font-display"
+                          />
+                        </div>
+                        <div className="flex items-center gap-8 py-8 px-10 bg-accent/5 border border-accent/20 rounded-3xl">
+                          <span className="text-[10px] uppercase font-black tracking-widest text-accent italic">
+                            Units Allocation
+                          </span>
+                          <div className="flex items-center border border-accent/30 rounded-2xl overflow-hidden h-14 bg-obsidian">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setQuantity(Math.max(1, quantity - 1))
+                              }
+                              className="w-16 h-full hover:bg-white/5 transition-colors text-accent"
+                            >
+                              <Minus size={18} />
+                            </button>
+                            <span className="w-16 text-center font-display font-black text-2xl text-accent">
+                              {quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => setQuantity(quantity + 1)}
+                              className="w-16 h-full hover:bg-white/5 transition-colors text-accent"
+                            >
+                              <Plus size={18} />
+                            </button>
+                          </div>
+                        </div>
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full h-24 bg-accent text-obsidian rounded-3xl font-display font-black uppercase tracking-[0.4em] flex items-center justify-center gap-4 hover:bg-white hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,159,255,0.4)] disabled:opacity-50 group"
+                        >
+                          {isSubmitting ? (
+                            <Loader2 className="animate-spin" />
+                          ) : (
+                            "Synchronize Order Lead"
+                          )}
+                          <ArrowRight
+                            size={24}
+                            className="group-hover:translate-x-2 transition-transform"
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className="py-48 bg-obsidian-surface border-t border-white/5">
+            <div className="container-luxury max-w-4xl mx-auto">
+              <div className="text-center mb-24">
+                <h2 className="text-huge mb-6 text-accent italic">
+                  The Dossier.
+                </h2>
+                <p className="text-text-muted uppercase font-black tracking-widest text-xs">
+                  Everything you need to verify before the hardware upgrade.
+                </p>
+              </div>
+              <div className="space-y-6">
+                {[
+                  {
+                    q: "Is it safe for Nigeria's voltage?",
+                    a: "Yes. Our hardware is stress-tested for 110V-240V and has built-in surge protection. We use fire-retardant PC materials and tempered glass that withstand high temperatures.",
+                  },
+                  {
+                    q: "Do I need to rewire my house?",
+                    a: "No. These switches fit standard Nigerian 86mm gang boxes. They support both Neutral and No-Neutral wiring methods. You just swap the switch.",
+                  },
+                  {
+                    q: "What if my WiFi goes down?",
+                    a: "The switches have physical glass touch buttons. They work exactly like regular manual switches when offline. You only need WiFi for the App and Voice features.",
+                  },
+                  {
+                    q: "Do you provide installation?",
+                    a: "We provide detailed step-by-step video guides. For larger projects in Lagos or Abuja, we have a network of certified smart-home installers available.",
+                  },
+                ].map((item, i) => (
+                  <details
+                    key={i}
+                    className="group bg-obsidian rounded-[40px] border border-white/5 overflow-hidden transition-all duration-500 open:bg-white/[0.05]"
+                  >
+                    <summary className="p-12 pl-14 flex justify-between items-center cursor-pointer list-none">
+                      <span className="text-2xl font-display font-black uppercase tracking-tight pr-8">
+                        {item.q}
+                      </span>
+                      <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-accent group-open:rotate-180 transition-transform">
+                        <ChevronDown size={24} />
+                      </div>
+                    </summary>
+                    <div className="px-14 pb-12 text-xl text-text-muted font-light leading-relaxed antialiased italic">
+                      {item.a}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+      ) : (
+        /* RETAIL LAYOUT */
+        <main className="pt-48 pb-32">
+          <div className="container-luxury">
+            <div className="flex items-center gap-3 mb-16 text-[10px] uppercase font-black tracking-[0.4em] text-silk-white/40">
+              <Link
+                to="/shop"
+                className="hover:text-accent transition-colors flex items-center gap-2"
+              >
+                <ArrowLeft size={12} /> Catalog
+              </Link>
+              <div className="w-8 h-px bg-white/10" />
+              <span className="text-silk-white/60">{product.category}</span>
+              <div className="w-8 h-px bg-white/10" />
+              <span className="text-accent">{product.name}</span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-start">
+              <div className="space-y-8">
+                <motion.div
+                  layoutId="main-product-image"
+                  className="aspect-square rounded-[64px] bg-white/5 border border-white/5 overflow-hidden group relative flex items-center justify-center p-20"
+                >
+                  <img
+                    src={
+                      isSmartSwitch
+                        ? selectedModel.img
+                        : product.images[selectedImage]
+                    }
+                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-1000 drop-shadow-3xl"
+                    alt={product.name}
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-obsidian/40 to-transparent pointer-events-none" />
+                </motion.div>
+                <div className="grid grid-cols-4 gap-6">
+                  {isSmartSwitch
+                    ? SMART_SWITCH_MODELS.map((model, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedModel(model)}
+                          className={cn(
+                            "aspect-square rounded-[32px] border transition-all overflow-hidden bg-white/5 p-4 flex items-center justify-center",
+                            selectedModel.id === model.id
+                              ? "border-accent scale-95 bg-accent/10"
+                              : "border-white/5 opacity-40 hover:opacity-100",
+                          )}
+                        >
+                          <img
+                            src={model.img}
+                            className="w-full h-full object-contain"
+                            alt="thumbnail"
+                          />
+                        </button>
+                      ))
+                    : product.images.map((img, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedImage(i)}
+                          className={cn(
+                            "aspect-square rounded-[32px] border transition-all overflow-hidden bg-white/5 p-4 flex items-center justify-center",
+                            selectedImage === i
+                              ? "border-accent scale-95 bg-accent/10"
+                              : "border-white/5 opacity-40 hover:opacity-100",
+                          )}
+                        >
+                          <img
+                            src={img}
+                            className="w-full h-full object-contain"
+                            alt="thumbnail"
+                          />
+                        </button>
+                      ))}
+                </div>
               </div>
 
-              {/* Right: Product Info */}
-              <div className="space-y-6">
-                {/* Rating */}
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1">
+              <div className="flex flex-col">
+                <div className="inline-flex items-center gap-4 mb-10">
+                  <div className="flex text-accent gap-1">
                     {[1, 2, 3, 4, 5].map((i) => (
-                      <Star
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i <= Math.round(product.socialProof?.rating ?? 0)
-                            ? "fill-yellow-400 text-yellow-400"
-                            : "text-gray-300 dark:text-white/20"
-                        }`}
-                      />
+                      <Star key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600 dark:text-silk-white/60">
-                    {product.socialProof?.rating ?? 5} (
-                    {product.socialProof?.reviewCount ?? 0} reviews)
+                  <span className="text-[10px] uppercase font-black tracking-[0.4em] text-silk-white/40">
+                    {product.socialProof?.reviewCount || 120} Expert
+                    Recommendations
                   </span>
                 </div>
 
-                {/* Title */}
-                <div>
-                  <h1 className="text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-silk-white">
-                    {product.name}
-                  </h1>
-                  <div
-                    className="text-gray-600 dark:text-silk-white/70 leading-relaxed"
+                <h1 className="text-huge mb-8">
+                  {product.name}{" "}
+                  {isSmartSwitch && (
+                    <span className="text-accent block text-3xl mt-4 italic">
+                      ({selectedModel.name})
+                    </span>
+                  )}
+                </h1>
+
+                <div className="flex items-center gap-8 mb-12">
+                  <span className="text-6xl font-display font-black text-accent">
+                    {formatCurrency(
+                      isSmartSwitch ? selectedModel.price : product.price,
+                    )}
+                  </span>
+                  {product.originalPrice && (
+                    <span className="text-2xl text-silk-white/30 line-through decoration-red-500/50">
+                      {formatCurrency(product.originalPrice)}
+                    </span>
+                  )}
+                </div>
+
+                <div className="prose-silk mb-16 max-w-2xl border-l-[3px] border-accent pl-10">
+                  <p
+                    className="text-2xl font-light text-text-muted leading-relaxed italic"
                     dangerouslySetInnerHTML={{
                       __html: product.shortDescription,
                     }}
                   />
                 </div>
 
-                {/* Price */}
-                <div className="flex items-baseline gap-3 py-4 border-y border-gray-200 dark:border-white/10">
-                  <span className="text-3xl font-bold text-gray-900 dark:text-accent">
-                    {formatCurrency(product.price)}
-                  </span>
-                  {product.originalPrice && (
-                    <span className="text-xl text-gray-400 dark:text-silk-white/40 line-through">
-                      {formatCurrency(product.originalPrice)}
-                    </span>
-                  )}
-                </div>
+                {isSmartSwitch && (
+                  <div className="space-y-4 mb-12">
+                    <label className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30">
+                      Select Configuration
+                    </label>
+                    <div className="grid grid-cols-3 gap-6">
+                      {SMART_SWITCH_MODELS.map((model) => (
+                        <button
+                          key={model.id}
+                          onClick={() => setSelectedModel(model)}
+                          className={cn(
+                            "p-6 rounded-[32px] border transition-all text-center group",
+                            selectedModel.id === model.id
+                              ? "border-accent bg-accent/5 ring-1 ring-accent"
+                              : "border-white/10 hover:border-white/20",
+                          )}
+                        >
+                          <div className="text-xs font-black uppercase tracking-tight group-hover:text-accent transition-colors">
+                            {model.id}
+                          </div>
+                          <div className="text-accent font-display font-black text-lg mt-1">
+                            {formatCurrency(model.price)}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                {/* Key Features */}
-                {product.features && product.features.length > 0 && (
-                  <div className="space-y-2.5">
-                    {product.features.slice(0, 5).map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                        <span className="text-gray-700 dark:text-silk-white/80 text-sm leading-relaxed">
-                          {feature}
-                        </span>
+                <div className="space-y-12 mb-16">
+                  <div className="flex flex-col sm:flex-row items-stretch gap-6">
+                    <div className="flex items-center bg-white/5 border border-white/10 rounded-3xl overflow-hidden h-20">
+                      <button
+                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                        className="w-20 h-full flex items-center justify-center hover:bg-white/5 transition-colors text-accent"
+                      >
+                        <Minus size={20} />
+                      </button>
+                      <span className="w-16 text-center font-display font-black text-2xl">
+                        {quantity}
+                      </span>
+                      <button
+                        onClick={() => setQuantity(quantity + 1)}
+                        className="w-20 h-full flex items-center justify-center hover:bg-white/5 transition-colors text-accent"
+                      >
+                        <Plus size={20} />
+                      </button>
+                    </div>
+                    <button
+                      onClick={handleAddToCart}
+                      className={cn(
+                        "flex-1 h-20 rounded-3xl font-display font-black uppercase tracking-[0.4em] text-xs flex items-center justify-center gap-4 transition-all shadow-2xl overflow-hidden group relative",
+                        isAdding
+                          ? "bg-green-500 text-white"
+                          : "bg-accent text-obsidian hover:bg-white",
+                      )}
+                    >
+                      {isAdding ? (
+                        <>
+                          <CheckCircle2 size={24} /> <span>Secured in Bag</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCart size={20} />{" "}
+                          <span>Synchronize with Cart</span>
+                        </>
+                      )}
+                      {!isAdding && (
+                        <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 -z-1" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-2 gap-6">
+                    {[
+                      {
+                        icon: Users,
+                        label: "Live Interaction",
+                        value: `${product.socialProof?.viewingNow || 14} Elite Prospects Viewing`,
+                      },
+                      {
+                        icon: Lock,
+                        label: "Hardware Status",
+                        value: "Verified In Stock",
+                      },
+                    ].map((stat, i) => (
+                      <div
+                        key={i}
+                        className="p-8 rounded-3xl bg-white/5 border border-white/5 flex gap-6 items-center"
+                      >
+                        <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                          <stat.icon size={24} />
+                        </div>
+                        <div>
+                          <div className="text-[8px] uppercase font-black text-silk-white/40 tracking-[0.3em] mb-1 font-display">
+                            {stat.label}
+                          </div>
+                          <div className="text-xs font-black uppercase text-white/80">
+                            {stat.value}
+                          </div>
+                        </div>
                       </div>
                     ))}
                   </div>
-                )}
-
-                {/* Quantity */}
-                <div className="space-y-3 pt-4">
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-silk-white/60">
-                    Quantity
-                  </label>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-10 h-10 rounded-lg border border-gray-300 dark:border-white/20 hover:border-accent dark:hover:border-accent hover:bg-gray-50 dark:hover:bg-accent/10 transition-all flex items-center justify-center text-lg font-semibold text-gray-900 dark:text-silk-white"
-                    >
-                      −
-                    </button>
-                    <span className="text-xl font-semibold w-12 text-center text-gray-900 dark:text-silk-white">
-                      {quantity}
-                    </span>
-                    <button
-                      onClick={() => setQuantity(quantity + 1)}
-                      className="w-10 h-10 rounded-lg border border-gray-300 dark:border-white/20 hover:border-accent dark:hover:border-accent hover:bg-gray-50 dark:hover:bg-accent/10 transition-all flex items-center justify-center text-lg font-semibold text-gray-900 dark:text-silk-white"
-                    >
-                      +
-                    </button>
-                  </div>
                 </div>
 
-                {/* CTA */}
-                <button
-                  onClick={() => {
-                    const form = document.getElementById("order-form");
-                    form?.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }}
-                  className="w-full py-4 bg-accent text-white font-bold rounded-xl hover:bg-accent/90 transition-all transform hover:scale-[1.01] shadow-lg"
-                >
-                  Order Now — Cash on Delivery
-                </button>
-
-                {/* Social Proof */}
-                {viewingCount > 0 && (
-                  <div className="flex items-center gap-2.5 text-sm text-gray-600 dark:text-silk-white/60 bg-orange-50 dark:bg-orange-500/10 px-4 py-3 rounded-lg border border-orange-100 dark:border-orange-500/20">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-                    <span>
-                      <strong className="text-gray-900 dark:text-silk-white">
-                        {viewingCount}
-                      </strong>{" "}
-                      people viewing right now
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Tabs Section */}
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
-            {/* Tab Navigation */}
-            <div className="border-b border-gray-200 dark:border-white/10">
-              <div className="flex gap-8 justify-center">
-                {[
-                  { key: "description", label: "Description" },
-                  { key: "features", label: "How to Use" },
-                  { key: "reviews", label: "Ingredient" },
-                ].map((tab) => (
-                  <button
-                    key={tab.key}
-                    onClick={() => setActiveTab(tab.key as any)}
-                    className={`pb-4 text-sm font-medium transition-colors relative ${
-                      activeTab === tab.key
-                        ? "text-gray-900 dark:text-accent"
-                        : "text-gray-500 dark:text-silk-white/40 hover:text-gray-700 dark:hover:text-silk-white/70"
-                    }`}
-                  >
-                    {tab.label}
-                    {activeTab === tab.key && (
-                      <motion.div
-                        layoutId="activeTabUnderline"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gray-900 dark:bg-accent"
+                <div className="space-y-4 pt-12 border-t border-white/10">
+                  <details className="group" open>
+                    <summary className="flex justify-between items-center cursor-pointer list-none py-6 border-b border-white/5">
+                      <span className="text-xs uppercase font-black tracking-[0.4em] text-accent">
+                        Functional Overview
+                      </span>
+                      <Plus
+                        size={16}
+                        className="group-open:rotate-45 transition-transform text-accent"
                       />
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Tab Content */}
-            <div className="py-12">
-              {activeTab === "description" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="space-y-12 max-w-4xl mx-auto"
-                >
-                  {(product.fullDescription || product.shortDescription) && (
-                    <div
-                      className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-silk-white/80 leading-relaxed"
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          product.fullDescription || product.shortDescription,
-                      }}
-                    />
-                  )}
-                </motion.div>
-              )}
-
-              {activeTab === "features" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="max-w-4xl mx-auto"
-                >
-                  {product.howToUse ? (
-                    <div
-                      className="prose prose-gray dark:prose-invert max-w-none text-gray-700 dark:text-silk-white/80 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: product.howToUse }}
-                    />
-                  ) : (
-                    <div className="space-y-4">
-                      {product.features?.map((feature, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                            <span className="text-accent text-sm font-bold">
-                              {idx + 1}
-                            </span>
-                          </div>
-                          <p className="text-gray-700 dark:text-silk-white/80 leading-relaxed">
-                            {feature}
-                          </p>
-                        </div>
-                      ))}
+                    </summary>
+                    <div className="py-8 text-xl text-silk-white/60 font-light leading-relaxed prose-silk antialiased">
+                      {product.fullDescription}
                     </div>
-                  )}
-                </motion.div>
-              )}
-
-              {activeTab === "reviews" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="max-w-4xl mx-auto"
-                >
-                  {product.reviews && product.reviews.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {product.reviews.map((review) => (
-                        <div
-                          key={review.id}
-                          className="p-6 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10"
-                        >
-                          <div className="flex items-center gap-1 mb-3">
-                            {[1, 2, 3, 4, 5].map((i) => (
-                              <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i <= review.rating
-                                    ? "fill-yellow-400 text-yellow-400"
-                                    : "text-gray-300 dark:text-white/20"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <p className="text-gray-700 dark:text-silk-white/80 leading-relaxed mb-4">
-                            {review.content}
-                          </p>
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-600 dark:text-silk-white/60 font-medium">
-                              {review.author}
-                            </span>
-                            {review.verified && (
-                              <span className="text-accent flex items-center gap-1 text-xs">
-                                <CheckCircle2 className="w-3.5 h-3.5" />
-                                Verified
+                  </details>
+                  {product.specifications && (
+                    <details className="group">
+                      <summary className="flex justify-between items-center cursor-pointer list-none py-6 border-b border-white/5">
+                        <span className="text-xs uppercase font-black tracking-[0.4em]">
+                          Technical Specifications
+                        </span>
+                        <Plus
+                          size={16}
+                          className="group-open:rotate-45 transition-transform"
+                        />
+                      </summary>
+                      <div className="py-8 space-y-6">
+                        {Object.entries(product.specifications).map(
+                          ([k, v]: any) => (
+                            <div
+                              key={k}
+                              className="flex justify-between items-center py-4 border-b border-white/5"
+                            >
+                              <span className="text-[10px] uppercase text-white/30 font-black tracking-[0.4em] font-display">
+                                {k}
                               </span>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-center text-gray-500 dark:text-silk-white/40 py-12">
-                      No reviews yet
-                    </p>
+                              <span className="font-bold text-silk-white/80 uppercase text-xs tracking-widest">
+                                {v}
+                              </span>
+                            </div>
+                          ),
+                        )}
+                      </div>
+                    </details>
                   )}
-                </motion.div>
-              )}
-            </div>
-          </div>
-
-          {/* Content Sections */}
-          {product.contentSections && (
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 mt-20">
-              <ProductContentSections sections={product.contentSections} />
-            </div>
-          )}
-
-          {/* Order Form */}
-          <div
-            id="order-form"
-            className="max-w-7xl mx-auto px-6 lg:px-12 mt-20"
-          >
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-10">
-                <h2 className="text-3xl font-bold mb-3 text-gray-900 dark:text-silk-white">
-                  Complete Your Order
-                </h2>
-                <p className="text-gray-600 dark:text-silk-white/60">
-                  Fill in your details for cash on delivery
-                </p>
-              </div>
-
-              <div className="bg-gray-50 dark:bg-obsidian-surface rounded-2xl p-8 lg:p-10 border border-gray-200 dark:border-white/10">
-                <form onSubmit={handleDirectOrder} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        required
-                        value={formData.fullName}
-                        onChange={handleFormChange}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleFormChange}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
-                        placeholder="+1234567890"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleFormChange}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        Address *
-                      </label>
-                      <textarea
-                        name="address"
-                        required
-                        value={formData.address}
-                        onChange={handleFormChange}
-                        rows={3}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors resize-none text-gray-900 dark:text-silk-white"
-                        placeholder="Street address"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        City *
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        required
-                        value={formData.city}
-                        onChange={handleFormChange}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        State *
-                      </label>
-                      <input
-                        type="text"
-                        name="state"
-                        required
-                        value={formData.state}
-                        onChange={handleFormChange}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors text-gray-900 dark:text-silk-white"
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-silk-white/60">
-                        Order Notes (Optional)
-                      </label>
-                      <textarea
-                        name="notes"
-                        value={formData.notes}
-                        onChange={handleFormChange}
-                        rows={2}
-                        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-obsidian border border-gray-300 dark:border-white/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-colors resize-none text-gray-900 dark:text-silk-white"
-                        placeholder="Any special instructions?"
-                      />
-                    </div>
-                  </div>
-
-                  {error && (
-                    <div className="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg text-red-600 dark:text-red-400">
-                      <X className="w-5 h-5 shrink-0" />
-                      <p className="text-sm">{error}</p>
-                    </div>
-                  )}
-
-                  {/* Order Summary */}
-                  <div className="bg-white dark:bg-white/5 rounded-xl p-6 space-y-3 border border-gray-200 dark:border-white/10">
-                    <div className="flex justify-between text-gray-700 dark:text-silk-white/70">
-                      <span>Subtotal</span>
-                      <span className="font-semibold text-gray-900 dark:text-silk-white">
-                        {formatCurrency(totalPrice)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-gray-700 dark:text-silk-white/70">
-                      <span>Shipping</span>
-                      <span className="font-semibold text-green-500">Free</span>
-                    </div>
-                    <div className="border-t border-gray-200 dark:border-white/10 pt-3 flex justify-between items-baseline">
-                      <span className="text-lg font-bold text-gray-900 dark:text-silk-white">
-                        Total
-                      </span>
-                      <span className="text-2xl font-bold text-accent">
-                        {formatCurrency(totalPrice)}
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full py-4 bg-accent text-white font-bold rounded-xl transition-all transform hover:scale-[1.01] shadow-lg ${
-                      isSubmitting
-                        ? "opacity-70 cursor-wait"
-                        : "hover:bg-accent/90"
-                    }`}
-                  >
-                    {isSubmitting
-                      ? "Processing..."
-                      : "Place Order — Cash on Delivery"}
-                  </button>
-
-                  <p className="text-center text-sm text-gray-500 dark:text-silk-white/40">
-                    <CheckCircle2 className="w-4 h-4 inline mr-1" />
-                    Your information is secure and will never be shared
-                  </p>
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </main>
+      )}
 
-        <Footer />
-      </div>
-    </>
+      <Footer />
+
+      <style>{`
+        @keyframes float { 0%, 100% { transform: translate(-50%, -50%) translateY(0) scale(1); } 50% { transform: translate(-50%, -50%) translateY(-50px) scale(1.1); } }
+        .animate-float { animation: float 20s infinite ease-in-out; }
+        .custom-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23009fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1.5rem center; }
+        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .animate-gradient { animation: gradient 3s ease infinite; background-size: 200% auto; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+    </div>
   );
 };
 

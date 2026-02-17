@@ -8,7 +8,13 @@ import { productService } from "@/services/productService";
 
 type SortOption = "recommended" | "price-low" | "price-high" | "newest";
 
-const ProductCatalogGrid: React.FC = () => {
+interface ProductCatalogGridProps {
+  variant?: "business" | "shop";
+}
+
+const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
+  variant = "shop",
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -308,7 +314,7 @@ const ProductCatalogGrid: React.FC = () => {
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <ProductCard product={product} />
+                      <ProductCard product={product} variant={variant} />
                     </motion.div>
                   ))}
                 </AnimatePresence>

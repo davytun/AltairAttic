@@ -1,5 +1,6 @@
 import apiClient from "@/lib/api";
 import { Product } from "@/store/useCartStore";
+import productsData from "../data/products.json";
 
 const defaultImage = "https://i.ebayimg.com/images/g/NtwAAeSw1khoGv4e/s-l1600.webp";
 
@@ -65,9 +66,12 @@ const transformProduct = (apiProduct: any): Product => {
     badges.push({ text: apiProduct.badge_text, color: "accent" });
   }
 
+  // Merge with local data if available (for funnel content, slugs, etc.)
+  const localProduct = (productsData as any[]).find(p => p.id === Number(apiProduct.id));
+
   return {
     id: Number(apiProduct.id),
-    slug: apiProduct.slug || apiProduct.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+    slug: localProduct?.slug || apiProduct.slug || apiProduct.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
     name: apiProduct.name,
     category: apiProduct.category_name || "Product",
     price: displayPrice,
@@ -103,7 +107,7 @@ const transformProduct = (apiProduct: any): Product => {
       viewingNow: 0,
     },
     reviews: reviewsMapped.length ? reviewsMapped : undefined,
-    contentSections: Array.isArray(apiProduct.content_sections)
+    contentSections: localProduct?.contentSections || (Array.isArray(apiProduct.content_sections)
       ? apiProduct.content_sections.map((section: any) => {
         const resolvedSection = { ...section };
         if (resolvedSection.image_url) resolvedSection.image_url = resolveImageUrl(resolvedSection.image_url);
@@ -117,7 +121,7 @@ const transformProduct = (apiProduct: any): Product => {
         }
         return resolvedSection;
       })
-      : undefined,
+      : undefined),
   } as Product;
 };
 

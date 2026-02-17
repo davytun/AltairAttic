@@ -1,9 +1,11 @@
 [
   {
     "id": 1,
+    "slug": "smart-led-bulb-kit",
     "name": "Smart LED Bulb Kit (4-Pack)",
     "category": "Smart Lighting",
-    "shortDescription": "Control your lights from anywhere, anytime",
+    "template": "retail",
+    "shortDescription": "Control your lights from anywhere, anytime. 16 million colors at your fingertips.",
     "fullDescription": "Transform your home lighting with our premium Smart LED Bulb Kit. These WiFi-enabled bulbs offer 16 million colors, voice control compatibility, and energy-efficient performance. Control your lights from anywhere using our mobile app, set schedules, and create the perfect ambiance for any occasion. Save up to 80% on energy costs compared to traditional bulbs.",
     "price": 45000,
     "originalPrice": 60000,
@@ -25,363 +27,97 @@
     "specifications": {
       "wattage": "9W (60W equivalent)",
       "connectivity": "WiFi 2.4GHz",
-      "compatibility": "Alexa, Google Home, Siri",
-      "lifespan": "25,000 hours",
       "voltage": "AC 110-240V",
-      "warranty": "2 years",
-      "certification": "UL Listed, FCC Approved"
+      "warranty": "2 years"
     },
     "features": [
       "16 million color options",
       "Dimmable and adjustable brightness",
       "Schedule and timer functions",
-      "Group control for multiple bulbs",
-      "Energy efficient LED technology"
-    ],
-    "badges": [
-      { "type": "bestseller", "text": "🔥 BESTSELLER", "color": "red" },
-      { "type": "trending", "text": "📈 TRENDING", "color": "orange" }
+      "Group control for multiple bulbs"
     ],
     "socialProof": {
       "rating": 4.8,
       "reviewCount": 234,
       "purchaseCount": 1547,
-      "viewingNow": 23,
-      "recentPurchase": {
-        "name": "John from Lagos",
-        "time": "3 minutes ago"
-      }
-    },
-    "trustSignals": [
-      "30-Day Money-Back Guarantee",
-      "Free Shipping",
-      "2-Year Warranty",
-      "Expert Installation Available",
-      "24/7 Customer Support"
-    ],
-    "urgency": {
-      "type": "stock",
-      "message": "Only 7 left in stock!",
-      "countdown": null
-    },
-    "shipping": {
-      "free": true,
-      "sameDay": true,
-      "sameDayDeadline": "14:00",
-      "estimatedDays": "1-2"
-    },
-    "bundles": [
-      {
-        "name": "Smart Home Starter Kit",
-        "products": [1, 5, 3],
-        "discount": 20,
-        "savings": 150000
-      }
-    ],
-    "frequentlyBoughtWith": [2, 5],
-    "relatedProducts": [2, 3, 4],
-    "reviews": [
-      {
-        "id": 1,
-        "author": "Sarah M.",
-        "verified": true,
-        "rating": 5,
-        "date": "2024-01-15",
-        "title": "Best smart bulbs ever!",
-        "content": "Setup was incredibly easy. The app is intuitive and the color options are amazing. Energy bills already going down!",
-        "helpfulVotes": 156
-      },
-      {
-        "id": 2,
-        "author": "Mike T.",
-        "verified": true,
-        "rating": 5,
-        "date": "2024-01-20",
-        "title": "Works perfectly with Alexa",
-        "content": "Voice control is seamless. 'Alexa, dim the living room' works every time. Installation took literally 2 minutes.",
-        "helpfulVotes": 89
-      }
-    ],
-    "faqs": [
-      {
-        "question": "Is installation difficult?",
-        "answer": "Not at all! Simply screw in like a regular bulb."
-      },
-      {
-        "question": "Hub required?",
-        "answer": "No hub required, connects directly to WiFi."
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Video Doorbell Pro",
-    "category": "Security",
-    "shortDescription": "1080p HD video doorbell with motion detection",
-    "fullDescription": "Never miss a visitor with our Video Doorbell Pro. Features crystal-clear 1080p HD video, two-way audio communication, and advanced motion detection. Night vision ensures 24/7 monitoring, while cloud storage keeps your recordings safe. Easy installation and smartphone alerts keep you connected to your home's entrance.",
-    "price": 65000,
-    "originalPrice": 85000,
-    "discount": {
-      "percentage": 24,
-      "amount": 20000,
-      "label": "SAVE ₦20,000"
-    },
-    "images": [
-      "https://m.media-amazon.com/images/I/61hIo8IhftL._AC_UF894,1000_QL80_.jpg",
-      "https://m.media-amazon.com/images/I/616OTBTRvjL._AC_UF894,1000_QL80_.jpg",
-      "https://images.ctfassets.net/v6awd0kabi65/5Sw0Nt2dn8zUeMF2MSfPAb/224aca6d04ba5842c840f48ca5eb73f7/VDP_Carousel_1.jpg?w=800&h=800&q=50&fm=webp"
-    ],
-    "stock": 15,
-    "stockDetails": { "status": "in-stock", "threshold": 20 },
-    "specifications": {
-      "resolution": "1080p Full HD",
-      "fieldOfView": "160° diagonal",
-      "connectivity": "WiFi 2.4GHz/5GHz",
-      "powerSource": "Hardwired or battery",
-      "storage": "Cloud storage (subscription)",
-      "warranty": "1 year"
-    },
-    "features": [
-      "Two-way audio communication",
-      "Motion-activated alerts",
-      "Night vision up to 30 feet",
-      "Weather-resistant design",
-      "Smartphone app control"
-    ],
-    "badges": [{ "type": "new", "text": "🆕 NEW ARRIVAL", "color": "green" }],
-    "socialProof": {
-      "rating": 4.6,
-      "reviewCount": 189,
-      "purchaseCount": 890,
-      "viewingNow": 15
-    },
-    "trustSignals": [
-      "1-Year Warranty",
-      "Free 30-Day Cloud Trial",
-      "Easy Installation"
-    ],
-    "urgency": {
-      "type": "demand",
-      "message": "High demand - 12 people viewing this now"
-    },
-    "shipping": {
-      "free": true,
-      "sameDay": false,
-      "estimatedDays": "3-5"
-    },
-    "frequentlyBoughtWith": [4, 6],
-    "relatedProducts": [4, 6],
-    "reviews": [
-      {
-        "id": 1,
-        "author": "James L.",
-        "verified": true,
-        "rating": 5,
-        "date": "2024-02-01",
-        "title": "Great picture quality",
-        "content": "Even at night, the video is crisp. Two-way audio is loud and clear.",
-        "helpfulVotes": 42
-      }
-    ],
-    "faqs": [
-      {
-        "question": "Does it need wires?",
-        "answer": "Can use existing doorbell wires or the included battery."
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Smart Thermostat",
-    "category": "Climate Control",
-    "shortDescription": "Energy-saving thermostat with learning capabilities",
-    "fullDescription": "Optimize your home's comfort and energy efficiency with our Smart Thermostat. This intelligent device learns your schedule and preferences to automatically adjust temperatures. Remote control via smartphone, energy usage reports, and compatibility with major HVAC systems make it the perfect upgrade for any home.",
-    "price": 120000,
-    "originalPrice": 150000,
-    "discount": {
-      "percentage": 20,
-      "amount": 30000,
-      "label": "SAVE ₦30,000"
-    },
-    "images": [
-      "https://m.media-amazon.com/images/I/51Ceejf+6kL._AC_UF894,1000_QL80_.jpg",
-      "https://acsystemsofjax.com/wp-content/uploads/2025/02/smart-thermostat-ac-systems-jax.jpg",
-      "https://sigcox.com/wp-content/uploads/2018/08/Digital-Smart-Thermostat-1.jpg"
-    ],
-    "stock": 20,
-    "stockDetails": { "status": "in-stock", "threshold": 10 },
-    "specifications": {
-      "display": "Full-color touchscreen",
-      "connectivity": "WiFi",
-      "compatibility": "Most 24V HVAC systems",
-      "sensors": "Temperature, humidity, occupancy",
-      "powerSource": "Hardwired with C-wire",
-      "warranty": "2 years"
-    },
-    "features": [
-      "Auto-schedule learning",
-      "Energy usage reports",
-      "Remote control via app",
-      "Voice assistant compatible",
-      "Geofencing technology"
-    ],
-    "badges": [{ "type": "eco", "text": "🌱 ECO SAVER", "color": "green" }],
-    "socialProof": {
-      "rating": 4.9,
-      "reviewCount": 312,
-      "purchaseCount": 2100,
-      "viewingNow": 45
-    },
-    "shipping": { "free": true, "sameDay": true, "estimatedDays": "1-2" },
-    "reviews": [
-      {
-        "id": 1,
-        "author": "Elena R.",
-        "verified": true,
-        "rating": 5,
-        "date": "2024-01-25",
-        "title": "Saved me money instantly",
-        "content": "My heating bill dropped by 15% in the first month. Pays for itself!",
-        "helpfulVotes": 120
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Smart Door Lock",
-    "category": "Security",
-    "shortDescription": "Keyless entry with fingerprint and code access",
-    "fullDescription": "Experience ultimate convenience and security with our Smart Door Lock. Multiple access methods including fingerprint recognition, PIN codes, smartphone app, and traditional key backup ensure you'll never be locked out. Monitor access history, grant temporary access to guests, and receive real-time alerts on your phone.",
-    "price": 135000,
-    "originalPrice": 180000,
-    "discount": {
-      "percentage": 25,
-      "amount": 45000,
-      "label": "SAVE ₦45,000"
-    },
-    "images": [
-      "https://m.media-amazon.com/images/I/61OBEnUAfeL._AC_UF894,1000_QL80_.jpg",
-      "https://m.media-amazon.com/images/I/61oGY269tPL._AC_UF1000,1000_QL80_.jpg",
-      "https://m.media-amazon.com/images/I/71Xd5LTPrTL._AC_UF894,1000_QL80_.jpg"
-    ],
-    "stock": 12,
-    "stockDetails": { "status": "low", "threshold": 15 },
-    "specifications": {
-      "accessMethods": "Fingerprint, PIN, App, Key",
-      "fingerprintCapacity": "100 fingerprints",
-      "codeCapacity": "50 PIN codes",
-      "connectivity": "Bluetooth, WiFi",
-      "battery": "8x AA batteries (1 year)",
-      "warranty": "1 year"
-    },
-    "features": [
-      "Multiple access methods",
-      "Auto-lock function",
-      "Access history log",
-      "Temporary guest codes",
-      "Low battery alerts"
-    ],
-    "badges": [
-      { "type": "secure", "text": "🛡️ HIGH SECURITY", "color": "blue" }
-    ],
-    "socialProof": {
-      "rating": 4.7,
-      "reviewCount": 145,
-      "purchaseCount": 560,
-      "viewingNow": 18
-    },
-    "urgency": {
-      "type": "stock",
-      "message": "Only 12 remaining",
-      "countdown": null
+      "viewingNow": 23
     }
   },
   {
-    "id": 5,
-    "name": "Motion Sensor Pack (4-Pack)",
-    "category": "Sensors",
-    "shortDescription": "Wireless motion sensors for automation",
-    "fullDescription": "Enhance your smart home automation with our Motion Sensor Pack. These wireless sensors detect movement and trigger automated actions like turning on lights, sending alerts, or starting camera recordings. Perfect for security, energy savings, and convenience throughout your home.",
-    "price": 35000,
-    "originalPrice": 50000,
+    "id": 10,
+    "slug": "smart-wifi-switch",
+    "name": "Luxury Smart WiFi Switch",
+    "category": "Smart Control",
+    "template": "funnel",
+    "shortDescription": "The last switch you'll ever touch. Control your entire home from your phone.",
+    "fullDescription": "Experience the ultimate in home automation. Our tempered glass smart switches aren't just hardware—they're the brain of your modern home. No more getting up at midnight to check the porch lights.",
+    "price": 32000,
+    "originalPrice": 45000,
     "discount": {
-      "percentage": 30,
-      "amount": 15000,
-      "label": "SAVE 30%"
+      "percentage": 28,
+      "amount": 13000,
+      "label": "PROMO"
     },
     "images": [
-      "https://m.media-amazon.com/images/I/7111W5v5gkL._AC_UF894,1000_QL80_.jpg",
-      "https://www.ooma.com/wp-content/themes/ooma/images/home-security/shop/ooma-starter-pack.jpg"
+      "/assets/smart-switches/how/8b7d07c85cbdb231fc1d4457a403ab36.jpg",
+      "/Smart Switches/1.jpg",
+      "/Smart Switches/2.jpg",
+      "/Smart Switches/3.jpg",
+      "/Smart Switches/4.jpg",
+      "/Smart Switches/5.jpg"
     ],
-    "stock": 30,
-    "stockDetails": { "status": "in-stock", "threshold": 10 },
+    "stock": 42,
     "specifications": {
-      "detectionRange": "25 feet",
-      "detectionAngle": "110°",
-      "connectivity": "Zigbee/WiFi hub",
-      "battery": "CR2450 (2 years)",
-      "mounting": "Adhesive or screw",
-      "warranty": "1 year"
+      "Relay Type": "Magnetic Latching (Ultra Low Heat)",
+      "Panel Material": "4mm Tempered Glass",
+      "Wiring": "Neutral + Live or Live Only (No Capacitor Needed)",
+      "Connectivity": "WiFi 2.4GHz (IEEE 802.11 b/g/n)",
+      "App": "Smart Life / Tuya / Altair Attic Sync",
+      "Voltage": "AC 110V-240V 50/60Hz",
+      "Load Power": "3-500W / Gang (Max 2000W total)",
+      "Standby Power": "≤0.5W",
+      "Working Temp": "-20°C to 50°C"
     },
+    "contentSections": [
+      {
+        "type": "image_text",
+        "order": 1,
+        "heading": "The 11:47 PM Problem",
+        "text": "It's 11:47 PM. You're finally comfortable — tucked in, phone down, eyes heavy. Then it hits you: 'Did I leave the living room lights on?' With the Smart WiFi Switch, you never have to drag yourself out of bed again. Control everything from your smartphone.",
+        "image_url": "/assets/smart-switches/how/923fd4c92db64aa0e227e3f0d3094dc3.jpg",
+        "layout": "side_by_side"
+      },
+      {
+        "type": "video_text",
+        "order": 2,
+        "heading": "Military-Grade Reliability",
+        "text": "Designed to withstand Nigerian power fluctuations, our switches use Magnetic Latching Relays that cost 3x more but provide 10x the reliability. They don't just work—they last. Experience zero static power consumption and ultra-low heat generation.",
+        "image_url": "/Smart Switches/5.jpg",
+        "layout": "list"
+      }
+    ],
     "features": [
-      "Instant motion detection",
-      "Adjustable sensitivity",
-      "Pet-immune mode",
-      "Low battery indicator",
-      "Easy installation"
+      "Magnetic Latching Relay (Safety First)",
+      "Two-Way Wiring Support",
+      "Fully Open/Closed App Function",
+      "Offline Automatic Reminders",
+      "Customizable Backlight Options",
+      "3 Power-On Restart States"
     ],
-    "badges": [{ "type": "value", "text": "💰 VALUE PACK", "color": "purple" }]
-  },
-  {
-    "id": 6,
-    "name": "4K Security Camera System",
-    "category": "Security",
-    "shortDescription": "4-camera wireless security system with cloud storage",
-    "fullDescription": "Protect your property with our professional-grade 4K Security Camera System. Four weatherproof cameras provide ultra-HD video coverage with night vision up to 100 feet. Advanced AI detection distinguishes between people, vehicles, and animals. Cloud storage and local recording options ensure your footage is always accessible.",
-    "price": 250000,
-    "originalPrice": 350000,
-    "discount": {
-      "percentage": 29,
-      "amount": 100000,
-      "label": "SAVE ₦100,000"
-    },
-    "images": [
-      "http://www.lorex.com/cdn/shop/files/22636bab1a4b4a197255ed354e1d518b085c116c950fae3f8b70b3f33da4fb3d.png?v=1709905844",
-      "https://m.media-amazon.com/images/I/51aXY-IjLfL._AC_UF894,1000_QL80_.jpg",
-      "https://cdn.thewirecutter.com/wp-content/media/2024/07/outdoorsecuritycameras-2048px-3518.jpg",
-      "https://m.media-amazon.com/images/I/51J+WF70gUL._AC_UF894,1000_QL80_.jpg"
-    ],
-    "stock": 8,
-    "stockDetails": { "status": "low", "threshold": 10 },
-    "specifications": {
-      "resolution": "4K Ultra HD (3840×2160)",
-      "cameras": "4 weatherproof cameras",
-      "nightVision": "Color night vision up to 100ft",
-      "storage": "Cloud + local NVR",
-      "connectivity": "WiFi 2.4GHz/5GHz",
-      "warranty": "2 years"
-    },
-    "features": [
-      "AI person/vehicle detection",
-      "Two-way audio on all cameras",
-      "Mobile app with live view",
-      "Motion-activated recording",
-      "IP66 weatherproof rating"
-    ],
-    "badges": [
-      { "type": "premium", "text": "� PREMIUM", "color": "obsidian" },
-      { "type": "stock", "text": "⚡ LOW STOCK", "color": "orange" }
+    "faqs": [
+      {
+        "question": "Do I need a neutral wire?",
+        "answer": "No. These switches support both Neutral and No-Neutral wiring methods. No capacitor is required for the No-Neutral setup."
+      },
+      {
+        "question": "What happens if WiFi goes down?",
+        "answer": "The physical glass buttons still work as regular manual switches. Smart features only require WiFi for remote and voice control."
+      }
     ],
     "socialProof": {
       "rating": 4.9,
-      "reviewCount": 85,
-      "purchaseCount": 320,
-      "viewingNow": 30
-    },
-    "urgency": {
-      "type": "stock",
-      "message": "Only 8 systems left!",
-      "countdown": null
+      "reviewCount": 854,
+      "viewingNow": 18
     }
   }
 ]

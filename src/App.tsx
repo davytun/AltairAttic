@@ -13,13 +13,21 @@ import BlogPage from "@/pages/BlogPage";
 import BlogDetailPage from "@/pages/BlogDetailPage";
 import ShoppingCartPage from "@/pages/ShoppingCartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
+import ShopDetailPage from "@/pages/ShopDetailPage";
+import ShopPage from "@/pages/ShopPage";
+import SmartSwitchSalesPage from "@/pages/SmartSwitchSalesPage";
 import NotFoundPage from "@/pages/NotFoundPage";
+import FloatingCart from "@/components/cart/FloatingCart";
 
 function App() {
   return (
     <div className="min-h-screen bg-obsidian text-silk-white selection:bg-accent selection:text-obsidian">
+      <FloatingCart />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/smart-switches" element={<SmartSwitchSalesPage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/shop/:slug" element={<ShopDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:url" element={<ServiceDetailPage />} />

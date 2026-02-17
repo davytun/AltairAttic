@@ -1,0 +1,415 @@
+{
+  "SHARED_SALES_COPY": "One switch. Infinite control. No more midnight trips across the house. No more appliances bleeding money while you're away. The Smart WiFi Switch turns your ordinary walls into the command centre of a fully automated home, installed in 10 minutes, life-changing forever",
+  "MODELS": [
+    {
+      "id": "1-gang",
+      "name": "1-Gang WiFi Switch",
+      "price": 18000,
+      "desc": "The essential smart upgrade. Perfect for single lights or fan circuits in any room. Simple, sleek, and powerful control for your most used spaces.",
+      "img": "/assets/smart-switches/1.jpg"
+    },
+    {
+      "id": "2-gang",
+      "name": "2-Gang WiFi Switch",
+      "price": 25000,
+      "desc": "Perfect for rooms with two independent light circuits — like a bedroom with a ceiling light and a reading lamp. Controls 2 appliances independently from one sleek panel.",
+      "img": "/assets/smart-switches/2.jpg"
+    },
+    {
+      "id": "3-gang",
+      "name": "3-Gang WiFi Switch",
+      "price": 32000,
+      "desc": "Our most popular model. Perfect for larger living spaces, open-plan rooms, or hallways with three lighting circuits. Three independent controls, one elegant panel.",
+      "img": "/assets/smart-switches/3.jpg"
+    },
+    {
+      "id": "4-gang",
+      "name": "4-Gang WiFi Switch",
+      "price": 40000,
+      "desc": "Maximum control for power users and large rooms. A single panel replaces four switches — perfect for main living rooms, offices, or entertainment spaces.",
+      "img": "/assets/smart-switches/4.jpg"
+    }
+  ],
+  "HERO": {
+    "titlePrefix": "WiFi Smart",
+    "titleSuffix": "Touch Switch.",
+    "reviewsLabel": "1,567 Reviews",
+    "engineeringHighlights": [
+      "Remote App Control",
+      "Smart Scheduling",
+      "Voice Control Ready",
+      "Energy Monitoring",
+      "Away Mode Safety",
+      "Manual Priority Mode"
+    ],
+    "orderButtonText": "Order Now — Cash on Delivery",
+    "trustItems": [
+      {
+        "title": "Quick Ship",
+        "subtitle": "Lagos Logist."
+      },
+      {
+        "title": "Insured",
+        "subtitle": "24M Warranty"
+      }
+    ]
+  },
+  "NARRATIVE": {
+    "badge": "The Friction",
+    "titlePrefix": "Control Your World",
+    "titleSuffix": "From Your Phone.",
+    "quote": "\"Did I leave the living room lights on? Is the iron still plugged in? What about the kitchen fan?\"",
+    "paragraphs": [
+      "It's 11:47 PM. You're finally tucked in. Your body is heavy, your mind is drifting. Then the doubt hits you.",
+      "Either you drag yourself through a cold, dark house to check, or yourself lie awake worrying about the bill.",
+      "In an analog home, you never truly rest."
+    ]
+  },
+  "FRICTION": {
+    "badge": "The Cost of Inaction",
+    "title": "Every Day You Wait",
+    "titleSubtitle": "Is Money Burning.",
+    "description": "Every forgotten light, every appliance left on, every unnecessary trip up the stairs — it all adds up. And not just in frustration.",
+    "billBleed": "₦480,000+",
+    "billBleedNote": "*Based on average Nigerian grid rates and residential consumption patterns.",
+    "points": [
+      {
+        "icon": "💡",
+        "title": "The Light Bleed",
+        "text": "Lights left on for 8+ hours a day can add ₦15,000–₦40,000 to your monthly electricity bill — unnecessarily."
+      },
+      {
+        "icon": "🌀",
+        "title": "Ghost Consumption",
+        "text": "Air conditioners and fans running in empty rooms? That's money burning every single hour."
+      },
+      {
+        "icon": "⏰",
+        "title": "Broken Rest",
+        "text": "Getting up 2–3 times a night to check switches? That's broken sleep, disrupted rest, and real health consequences."
+      },
+      {
+        "icon": "📱",
+        "title": "Analog Friction",
+        "text": "Being unable to control your home from your phone means your home controls you — not the other way around."
+      }
+    ]
+  },
+  "BENEFITS": {
+    "title": "Why You'll",
+    "titleAccent": "Love It.",
+    "description": "The hardware upgrade your home has been waiting for. Precision engineered for the Nigerian environment.",
+    "items": [
+      {
+        "id": "effortless",
+        "title": "Effortless Control",
+        "desc": "No more manual checking. Everything is accessible from your palm, anywhere in the world."
+      },
+      {
+        "id": "energy",
+        "title": "Energy Efficient",
+        "desc": "Slash up to 30% off your monthly electricity bills with automated logic and scheduling."
+      },
+      {
+        "id": "durability",
+        "title": "Elite Durability",
+        "desc": "Built with premium fire-retardant materials and stress-tested for 110V-240V grids."
+      }
+    ]
+  },
+  "BENTO": {
+    "badge": "Always in reach",
+    "title": "Total control.",
+    "titleAccent": "Zero effort.",
+    "description": "We've designed every feature to fit seamlessly into your life. No complicated setups—just a home that finally works for you.",
+    "features": {
+      "remote": {
+        "title": "Control your home",
+        "titleAccent": "from anywhere.",
+        "desc": "Turn lights on or off from the airport, the office, or halfway around the world.",
+        "badge": "Works Everywhere"
+      },
+      "voice": {
+        "title": "\"Alexa, Night Mode.\"",
+        "desc": "Siri, Alexa, & Google Home. Hands-free living."
+      },
+      "security": {
+        "title": "Peace of Mind.",
+        "desc": "Deter intruders while traveling with randomized lighting patterns."
+      },
+      "memory": {
+        "title": "Remembers State",
+        "desc": "Returns to previous status instantly after any power cut."
+      },
+      "energy": {
+        "title": "Save on bills",
+        "desc": "Track consumption in real-time and stop wasting energy."
+      },
+      "safety": {
+        "title": "Safety Lock",
+        "desc": "Disable physical touch to keep curious hands safe."
+      },
+      "timing": {
+        "title": "Smart Timing",
+        "desc": "Set easy Sleep/Wake scenes that fit your routine."
+      }
+    }
+  },
+  "COMPARISON": {
+    "title": "The",
+    "titleAccent": "Difference.",
+    "badge": "Why homes in Nigeria choose Altair Attic.",
+    "table": [
+      {
+        "f": "Safety",
+        "a": "Stays cool always",
+        "o": "Heats up fast"
+      },
+      {
+        "f": "Setup",
+        "a": "No capacitor needed",
+        "o": "Messy wiring"
+      },
+      {
+        "f": "Sync",
+        "a": "Instant response",
+        "o": "Frequent drops"
+      },
+      {
+        "f": "Power",
+        "a": "Surge hardened",
+        "o": "Fragile build"
+      },
+      {
+        "f": "Glass",
+        "a": "4mm G3 Glass",
+        "o": "Cheap plastic"
+      }
+    ],
+    "guarantee": "Verified for long-term luxury performance."
+  },
+  "SPECIFICATIONS": {
+    "badge": "Tier-1 Hardware",
+    "title": "Technical",
+    "titleAccent": "Brilliance.",
+    "description": "Engineered to withstand the rigors of the Nigerian power grid while maintaining sub-millisecond response times.",
+    "items": [
+      { "label": "Protocol", "value": "WiFi 2.4GHz IEEE 802.11 b/g/n" },
+      { "label": "Voltage Range", "value": "AC 110V - 240V (50/60Hz)" },
+      { "label": "Max Load", "value": "600W / Gang (Inductive)" },
+      { "label": "Panel", "value": "Scratch-Resistant Toughened Glass" },
+      { "label": "Operational Temp", "value": "-20°C to 75°C" },
+      { "label": "Certifications", "value": "CE, FCC, RoHS Global Protocol" },
+      { "label": "Standby Power", "value": "< 0.5W Ultra-Efficiency" },
+      { "label": "Voice Engine", "value": "Alexa, Google Home, Siri Shortcuts" }
+    ]
+  },
+  "UNBOXING": {
+    "badge": "Made for you",
+    "titlePrefix": "Everything you",
+    "titleAccent": "actually need.",
+    "description": "We're building for people, not just for power users. Every box is carefully packed to ensure your transition to a smart home is as smooth as possible.",
+    "checkedLabel": "Checked personally.",
+    "certifiedLabel": "Certified for your home safety.",
+    "items": [
+      {
+        "name": "Your New Smart Switch",
+        "desc": "Beautifully designed with a smooth glass finish that feels premium in any room."
+      },
+      {
+        "name": "The Installation Set",
+        "desc": "Everything you need—screws, anchors, and tools—packed so you don't have to go looking."
+      },
+      {
+        "name": "The No-Struggle Guide",
+        "desc": "A simple, friendly guide that makes your 10-minute setup remarkably easy."
+      },
+      {
+        "name": "Our Personal Promise",
+        "desc": "A 1-year warranty and a team ready to help you whenever you need it."
+      }
+    ]
+  },
+  "REVIEWS": {
+    "badge": "Verified Social Proof",
+    "titlePrefix": "See Why",
+    "titleAccent": "They’re Obsessed.",
+    "description": "Real stories from real homes in Nigeria. This is the new way of living.",
+    "stats": [
+      { "label": "Happy Clients", "value": "1,200+" },
+      { "label": "Avg. Rating", "value": "4.9/5" }
+    ],
+    "items": [
+      {
+        "u": "Adaeze M.",
+        "d": "Lekki, Lagos",
+        "r": "My electricity bill dropped by almost ₦18k in the first month. I didn't realize how much we were wasting. The app is so smooth.",
+        "s": 5,
+        "title": "Real savings",
+        "date": "2d ago",
+        "model": "3-Gang WiFi",
+        "hasImage": true
+      },
+      {
+        "u": "Babatunde O.",
+        "d": "GRA, Port Harcourt",
+        "r": "My kids used to forget to turn off the AC. Now I just set a 2-hour timer from my phone. Best investment this year.",
+        "s": 5,
+        "title": "The Kids' Fix",
+        "date": "1w ago",
+        "model": "4-Gang WiFi"
+      },
+      {
+        "u": "The Fatunmibi Family",
+        "d": "Ibadan, Oyo",
+        "r": "Installed 4 of these in our new house. The 'Scene' mode for when guests arrive is a huge hit. One tap and the house lights up.",
+        "s": 5,
+        "title": "Living Room Pro",
+        "date": "3w ago",
+        "model": "Multiple",
+        "hasImage": true
+      },
+      {
+        "u": "Arch. Emmanuel",
+        "d": "Maitama, Abuja",
+        "r": "Clean design. As an architect, I'm picky. These fit perfectly into standard wall boxes. No messy wiring. Instant sync with Alexa.",
+        "s": 5,
+        "title": "Architect Approved",
+        "date": "1m ago",
+        "model": "1-Gang WiFi"
+      },
+      {
+        "u": "Chidi K.",
+        "d": "Enugu",
+        "r": "Best part is how it remembers state after power cuts. Even when NEPA brings light back, it doesn't just turn everything on randomly.",
+        "s": 5,
+        "title": "Power recovery",
+        "date": "2m ago",
+        "model": "2-Gang WiFi"
+      },
+      {
+        "u": "Engr. Funmi",
+        "d": "Gbagada, Lagos",
+        "r": "I love that I can lock the physical touch panels. My toddler kept playing with them, but now I've disabled physical touch.",
+        "s": 5,
+        "title": "Toddler-proof!",
+        "date": "2m ago",
+        "model": "4-Gang WiFi"
+      }
+    ]
+  },
+  "LEAD_FORM": {
+    "titlePrefix": "Your Home",
+    "titleAccent": "Deserves this.",
+    "description": "Stop paying for electricity you're not using manually.",
+    "accentBadge": "Secure Processing",
+    "accentTitle": "Fast & Verified.",
+    "accentText": "We process all orders manually to ensure you get the right hardware for your specific home layout. Cash on Delivery accepted nationwide."
+  },
+  "RELATED_GEAR": {
+    "title": "Sync with",
+    "titleAccent": "Successors.",
+    "badge": "Expand your ecosystem with elite hardware",
+    "items": [
+      {
+        "name": "Smart LED Bulb Kit",
+        "price": 45000,
+        "img": "https://m.media-amazon.com/images/I/511hdAqgLTL._AC_UF894,1000_QL80_.jpg",
+        "slug": "smart-led-bulb-kit"
+      },
+      {
+        "name": "Elite Smart Lock v2",
+        "price": 185000,
+        "img": "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=800&auto=format&fit=crop",
+        "slug": "elite-smart-lock"
+      },
+      {
+        "name": "Motion Sensor Pro",
+        "price": 12000,
+        "img": "https://images.unsplash.com/photo-1591130901221-c66254779268?q=80&w=800&auto=format&fit=crop",
+        "slug": "motion-sensor"
+      }
+    ]
+  },
+  "TABS": {
+    "badge": "Product Knowledge",
+    "items": [
+      {
+        "id": "description",
+        "label": "Description",
+        "title": "Picture Your Life With Total Control",
+        "content": [
+          {
+            "title": "Morning — Wake Up Ready",
+            "desc": "Your lights turn on gradually at 6:00 AM. The living room fan kicks on at 6:30. No fumbling in the dark."
+          },
+          {
+            "title": "At Work — Peace of Mind",
+            "desc": "Did I leave the bathroom light on? One glance at your phone — tap — it's off. Crisis averted."
+          },
+          {
+            "title": "Evening — One Tap Wind Down",
+            "desc": "Set a 'Goodnight' scene that turns off every switch in the house with a single tap."
+          },
+          {
+            "title": "Vacation — Stay Occupied",
+            "desc": "Program your lights to turn on and off while you're away. Burglars see lights changing — and move on."
+          }
+        ]
+      },
+      {
+        "id": "specifications",
+        "label": "Specs",
+        "content": [
+          { "label": "Hardware Protocol", "value": "WiFi 2.4GHz" },
+          { "label": "Voltage Resilience", "value": "AC 110V - 240V" },
+          { "label": "Safety Rating", "value": "Surge Protected" },
+          { "label": "Panel Material", "value": "Tempered Glass" },
+          { "label": "Manual Life", "value": "100,000+ Cycles" },
+          { "label": "Standby Power", "value": "< 0.5W" },
+          { "label": "Voice Support", "value": "Alexa, Google, Siri" },
+          { "label": "Certifications", "value": "CE, FCC, RoHS" }
+        ]
+      },
+      {
+        "id": "setup",
+        "label": "Setup",
+        "content": [
+          {
+            "step": "Step 1",
+            "title": "Replace",
+            "desc": "Swap your existing wall switch. Fits standard boxes flawlessly. Done in 10-15 mins."
+          },
+          {
+            "step": "Step 2",
+            "title": "Connect",
+            "desc": "Download the free app and pair to your WiFi. No special hub required."
+          },
+          {
+            "step": "Step 3",
+            "title": "Control",
+            "desc": "Total command: turn lights on/off, set timers, and use voice control."
+          }
+        ]
+      },
+      {
+        "id": "faq",
+        "label": "FAQ",
+        "content": [
+          {
+            "q": "Need an electrician?",
+            "a": "Most don't! Our guide walks you through every wire. Or any pro can do it in 30 mins."
+          },
+          {
+            "q": "WiFi compatibility?",
+            "a": "Works with any standard 2.4GHz WiFi—99% of home routers in Nigeria."
+          },
+          {
+            "q": "Internet blackout?",
+            "a": "Touch panel works manually just like a regular switch. You're never locked out."
+          }
+        ]
+      }
+    ]
+  }
+}

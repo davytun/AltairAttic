@@ -6,6 +6,7 @@ export interface Product {
   slug?: string;
   name: string;
   category: string;
+  template?: 'retail' | 'funnel';
   shortDescription: string;
   fullDescription: string;
   price: number;

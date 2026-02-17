@@ -1,11 +1,11 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ProductCatalogGrid from "@/components/product/ProductCatalogGrid";
-import { Contact } from "@/components/sections/Contact";
 import { motion } from "framer-motion";
 import { DotBackground } from "@/components/ui/DotBackground";
+import { ShoppingBag } from "lucide-react";
 
-const ProductsPage = () => {
+const ShopPage = () => {
   return (
     <main className="bg-obsidian selection:bg-accent selection:text-obsidian">
       <Navbar />
@@ -18,14 +18,19 @@ const ProductsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <span className="text-label mb-8 block">Hardware Ecosystem</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8 backdrop-blur-md">
+              <ShoppingBag size={14} className="text-accent" />
+              <span className="text-accent text-[10px] uppercase font-black tracking-[0.3em]">
+                Official Store
+              </span>
+            </div>
             <h1 className="text-huge font-display leading-[0.85] mb-8 text-silk-white">
-              The <span className="text-accent">Collection.</span>
+              Browse <br />
+              <span className="text-accent">Hardware.</span>
             </h1>
             <p className="text-xl md:text-2xl font-light text-silk-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
-              Engineering the physical layer of your environment.
-              Precision-crafted hardware designed to integrate flawlessly with
-              your life.
+              Select premium Altair Attic products for your space. Order now for
+              expert installation and full warranty support across Nigeria.
             </p>
           </motion.div>
         </div>
@@ -42,14 +47,12 @@ const ProductsPage = () => {
 
       {/* Product Grid */}
       <div className="border-t border-border-dim bg-obsidian-surface">
-        <ProductCatalogGrid variant="business" />
+        <ProductCatalogGrid variant="shop" />
       </div>
-
-      <Contact />
 
       <Footer />
     </main>
   );
 };
 
-export default ProductsPage;
+export default ShopPage;
