@@ -103,7 +103,7 @@ const SmartSwitchSalesPage = () => {
 
     try {
       const orderData: CreateOrderData = {
-        product_id: 4, // Updated to match ID from your backend
+        product_id: product?.id ?? 1,
         quantity,
         first_name: formData.firstName,
         last_name: formData.lastName,
@@ -113,13 +113,13 @@ const SmartSwitchSalesPage = () => {
         address: formData.address,
         city: formData.city,
         state: formData.state,
-        notes: `DIRECT SALES PAGE. Backend ID: 4. Model: ${selectedModel.name}. ${formData.additionalNotes}`,
+        notes: `DIRECT SALES PAGE. Model: ${selectedModel.name}. ${formData.additionalNotes ?? ""}`.trim(),
       };
 
       await orderService.createOrder(orderData);
       setOrderSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => navigate("/shop"), 6000);
+      setTimeout(() => navigate("/catalogue/smart-wifi-switch"), 10000);
     } catch (err: any) {
       console.error("Lead submission failed:", err);
     } finally {
