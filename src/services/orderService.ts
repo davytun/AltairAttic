@@ -30,7 +30,7 @@ function toOrderBody(data: CreateOrderData): Record<string, string | number> {
   if (data.unit != null && data.unit !== "") body.unit = data.unit;
   if (data.whatsapp != null && data.whatsapp !== "") body.whatsapp = data.whatsapp;
   if (data.email != null && data.email !== "") body.email = data.email;
-  if (data.notes != null && data.notes !== "") body.notes = data.notes;
+  if (data.notes != null && data.notes !== "") body.note = data.notes;
   return body;
 }
 
