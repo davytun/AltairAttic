@@ -13,7 +13,6 @@ import BlogPage from "@/pages/BlogPage";
 import BlogDetailPage from "@/pages/BlogDetailPage";
 import ShoppingCartPage from "@/pages/ShoppingCartPage";
 import CheckoutPage from "@/pages/CheckoutPage";
-import ShopDetailPage from "@/pages/ShopDetailPage";
 import ShopPage from "@/pages/ShopPage";
 import SmartSwitchSalesPage from "@/pages/SmartSwitchSalesPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -26,10 +25,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route
-          path="/shop/smart-wifi-switch"
-          element={<SmartSwitchSalesPage />}
-        />
         <Route path="/shop/:slug" element={<ProductDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
