@@ -119,7 +119,7 @@ const SmartSwitchSalesPage = () => {
       await orderService.createOrder(orderData);
       setOrderSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
-      setTimeout(() => navigate("/catalogue/smart-wifi-switch"), 10000);
+      setTimeout(() => navigate("/catalogue/smart-wifi-switch"), 6000);
     } catch (err: any) {
       console.error("Lead submission failed:", err);
     } finally {
