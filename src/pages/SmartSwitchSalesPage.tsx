@@ -47,11 +47,12 @@ const SmartSwitchSalesPage = () => {
     setTheme("light");
   }, [setTheme]);
 
-  // Fetch backend product data for ID 4
+  // Fetch backend product data by slug (API has slug "smart-wifi-switch", not id 4)
+  const SMART_SWITCH_SLUG = "smart-wifi-switch";
   React.useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const data = await productService.getProductById(4);
+        const data = await productService.getProductBySlug(SMART_SWITCH_SLUG);
         setProduct(data);
 
         // Update model prices if backend provides a base price

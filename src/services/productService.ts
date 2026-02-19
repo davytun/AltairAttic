@@ -112,12 +112,23 @@ export const productService = {
   },
 
   async getProductBySlug(slug: string) {
-    const response = await apiClient.get<any>(`/products/${slug}`);
-    let rawData = response.data;
-    if (response.data && response.data.data) {
-      rawData = response.data.data;
+    try {
+      const response = await apiClient.get<any>(`/products/${slug}`);
+      let rawData = response.data;
+      if (response.data && response.data.data) {
+        rawData = response.data.data;
+      }
+      return transformProduct(rawData);
+    } catch (err: any) {
+      // If API has no single-product-by-slug endpoint (e.g. 404), fall back to list + find by slug
+      if (err?.response?.status === 404) {
+        const listRes = await apiClient.get<any>("/products");
+        const rawList = Array.isArray(listRes.data) ? listRes.data : Array.isArray(listRes.data?.data) ? listRes.data.data : [];
+        const found = rawList.find((p: any) => (p.slug || "").toLowerCase() === slug.toLowerCase());
+        if (found) return transformProduct(found);
+      }
+      throw err;
     }
-    return transformProduct(rawData);
   },
 
   async getCatalogue() {
