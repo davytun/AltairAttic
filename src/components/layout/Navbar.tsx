@@ -1,15 +1,34 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import logo from "/public/logo.png";
 import { useTheme } from "@/components/providers/ThemeProvider";
+
+const fullNavLinks = [
+  { name: "Home", path: "/" },
+  { name: "Services", path: "/services" },
+  { name: "Shop", path: "/shop" },
+  { name: "Projects", path: "/projects" },
+  { name: "About", path: "/about" },
+];
+
+const catalogueNavLinks = [
+  { name: "Home", path: "/" },
+  { name: "Shop", path: "/shop" },
+  { name: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
+
+  const isCatalogueRoute =
+    location.pathname === "/catalogue" || location.pathname.startsWith("/catalogue/");
+  const navLinks = isCatalogueRoute ? catalogueNavLinks : fullNavLinks;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,14 +37,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: "Shop", path: "/shop" },
-    { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" },
-  ];
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -80,11 +91,13 @@ const Navbar = () => {
               )}
             </button>
 
-            <Link to="/contact">
-              <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500 text-silk-white">
-                Contact Us
-              </button>
-            </Link>
+            {!isCatalogueRoute && (
+              <Link to="/contact">
+                <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500 text-silk-white">
+                  Contact Us
+                </button>
+              </Link>
+            )}
           </div>
 
           <div className="lg:hidden flex items-center gap-4">
@@ -145,17 +158,19 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-              >
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white">
-                    Start Inquiry
-                  </button>
-                </Link>
-              </motion.div>
+              {!isCatalogueRoute && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: navLinks.length * 0.1 }}
+                >
+                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white">
+                      Start Inquiry
+                    </button>
+                  </Link>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         )}
