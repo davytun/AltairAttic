@@ -221,7 +221,7 @@ const ShopDetailPage = () => {
                       "flex-1 h-24 rounded-[32px] font-display font-black uppercase tracking-[0.4em] text-xs flex items-center justify-center gap-5 transition-all shadow-3xl overflow-hidden group relative",
                       isAdding
                         ? "bg-green-500 text-white"
-                        : "bg-accent text-obsidian hover:bg-white hover:scale-[1.02] active:scale-95 shadow-[0_20px_50px_-15px_rgba(0,159,255,0.4)]",
+                        : "bg-accent text-obsidian rounded-[32px] font-display font-black uppercase tracking-[0.4em] text-xs flex items-center justify-center gap-5 transition-all shadow-3xl overflow-hidden group relative hover:bg-white hover:scale-[1.02] active:scale-95 shadow-[0_20px_50px_-15px_rgba(0,159,255,0.4)] [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white",
                     )}
                   >
                     {isAdding ? (
@@ -230,12 +230,11 @@ const ShopDetailPage = () => {
                       </>
                     ) : (
                       <>
-                        <ShoppingCart size={24} />{" "}
-                        <span>Synchronize Order</span>
+                        <ShoppingCart size={24} /> <span>Add to Bag</span>
                       </>
                     )}
                     {!isAdding && (
-                      <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 -z-1" />
+                      <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 -z-1 [html[data-theme='light']_&]:bg-obsidian" />
                     )}
                   </button>
                 </div>
@@ -246,11 +245,11 @@ const ShopDetailPage = () => {
                     {
                       icon: Users,
                       label: "Live Interaction",
-                      value: `${product.socialProof?.viewingNow || 14} Elite Prospects Online`,
+                      value: `${product.socialProof?.viewingNow || 14} People Online Now`,
                     },
                     {
                       icon: Lock,
-                      label: "Asset Protection",
+                      label: "Safe Guarantee",
                       value: "2-Year Hardware Warranty",
                     },
                   ].map((stat, i) => (
@@ -279,7 +278,7 @@ const ShopDetailPage = () => {
                 <details className="group" open>
                   <summary className="flex justify-between items-center cursor-pointer list-none py-8 border-b border-white/5 group">
                     <span className="text-xs uppercase font-black tracking-[0.4em] text-accent group-hover:pl-2 transition-all">
-                      Functional Overview
+                      Product Info
                     </span>
                     <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-open:rotate-45 transition-transform">
                       <Plus size={16} className="text-accent" />
@@ -294,7 +293,7 @@ const ShopDetailPage = () => {
                   <details className="group">
                     <summary className="flex justify-between items-center cursor-pointer list-none py-8 border-b border-white/5 group">
                       <span className="text-xs uppercase font-black tracking-[0.4em] group-hover:pl-2 transition-all">
-                        Technical Dossier
+                        Product Details
                       </span>
                       <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-open:rotate-45 transition-transform">
                         <Plus size={16} />

@@ -23,8 +23,8 @@ export const CaseStudy = () => {
                 Tender <br /> App.
               </h2>
               <p className="text-sm text-silk-white/70 font-light leading-relaxed">
-                Buy Airtime and Data Plan, Pay Bills, and Trade Crypto and
-                Giftcard on Tender App.
+                A fintech app that lets you buy airtime, pay bills, and trade
+                crypto — all in one place, in seconds.
               </p>
               <div className="pt-8 flex flex-col gap-4">
                 <div className="h-px w-full bg-border-dim" />
@@ -59,10 +59,10 @@ export const CaseStudy = () => {
               <div className="absolute inset-0 bg-linear-to-t from-obsidian/80 to-transparent" />
               <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10">
                 <span className="text-[10px] text-silk-white/70 tracking-widest uppercase mb-2 block">
-                  Core Functionality
+                  Key Feature
                 </span>
                 <h4 className="text-xl font-display uppercase tracking-tight text-silk-white">
-                  Real-time Notifications
+                  Instant Notifications
                 </h4>
               </div>
             </motion.div>
@@ -84,11 +84,10 @@ export const CaseStudy = () => {
 
               <div className="space-y-6 lg:pl-8">
                 <p className="text-xl font-light text-silk-white/80 leading-snug">
-                  A digital procurement platform designed to simplify tender
-                  discovery, submission, and management. The app enables
-                  real-time tender notifications, secure document uploads, user
-                  authentication, and payment processing—helping suppliers and
-                  organizations manage procurement transparently and efficiently
+                  We built Tender App from the ground up — a fast, secure
+                  fintech platform for buying airtime, paying bills, and trading
+                  crypto and gift cards. Real-time alerts, clean UX, and zero
+                  friction from start to finish.
                 </p>
                 <button
                   onClick={() =>
@@ -99,7 +98,7 @@ export const CaseStudy = () => {
                   }
                   className="flex items-center gap-4 text-xs font-black uppercase tracking-[0.4em] text-accent group"
                 >
-                  Full Study
+                  View on Play Store
                   <div className="w-10 h-10 rounded-full border cursor-pointer border-border-dim flex items-center justify-center group-hover:bg-accent group-hover:text-obsidian transition-all">
                     <ArrowUpRight className="w-4 h-4" />
                   </div>

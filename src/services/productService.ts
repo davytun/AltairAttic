@@ -24,8 +24,7 @@ function resolveImageUrl(url: string | null | undefined): string {
 }
 
 const transformProduct = (apiProduct: any): Product => {
-  const rawImage = apiProduct.image_url || apiProduct.product_image;
-  const mainImageUrl = resolveImageUrl(rawImage);
+  const mainImageUrl = resolveImageUrl(apiProduct.product_image || apiProduct.image_url);
 
   // Map all images if provide in the images array, otherwise fallback to main image
   const images = Array.isArray(apiProduct.images) && apiProduct.images.length > 0
@@ -33,12 +32,10 @@ const transformProduct = (apiProduct: any): Product => {
     : [mainImageUrl];
 
   const price = Number(apiProduct.price) || 0;
-  const salePrice = apiProduct.sale_price != null && apiProduct.sale_price !== "" ? Number(apiProduct.sale_price) : null;
-  const displayPrice = salePrice != null ? salePrice : price;
-  const originalPrice = salePrice != null ? price : undefined;
+  const originalPrice = apiProduct.original_price != null ? Number(apiProduct.original_price) : undefined;
+
   const rating = apiProduct.rating != null ? Number(apiProduct.rating) : undefined;
   const reviews = apiProduct.reviews || [];
-  const reviewCount = reviews.length;
 
   const reviewsMapped = reviews.map((r: any) => ({
     id: r.id,
@@ -66,104 +63,80 @@ const transformProduct = (apiProduct: any): Product => {
     badges.push({ text: apiProduct.badge_text, color: "accent" });
   }
 
-  // Merge with local data if available (for funnel content, slugs, etc.)
-  const localProduct = (productsData as any[]).find(p => p.id === Number(apiProduct.id));
+  // Merge with local data if available (for funnel content, etc.)
+  const localProduct = (productsData as any[]).find(p => p.id === Number(apiProduct.id) || p.slug === apiProduct.slug);
 
   return {
     id: Number(apiProduct.id),
-    slug: localProduct?.slug || apiProduct.slug || apiProduct.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+    slug: apiProduct.slug || localProduct?.slug,
     name: apiProduct.name,
-    category: apiProduct.category_name || "Product",
-    price: displayPrice,
+    category: apiProduct.category?.name || apiProduct.category_name || "Product",
+    price,
     originalPrice,
     discount:
-      originalPrice != null && originalPrice > displayPrice
+      originalPrice != null && originalPrice > price
         ? {
-          percentage: Math.round(((originalPrice - displayPrice) / originalPrice) * 100),
-          amount: originalPrice - displayPrice,
-          label: `Save ${Math.round(((originalPrice - displayPrice) / originalPrice) * 100)}%`,
+          percentage: Math.round(((originalPrice - price) / originalPrice) * 100),
+          amount: originalPrice - price,
+          label: `Save ${Math.round(((originalPrice - price) / originalPrice) * 100)}%`,
         }
         : undefined,
-    shortDescription: apiProduct.description || "No description available.",
+    shortDescription: apiProduct.short_description || apiProduct.description || "No description available.",
     fullDescription: apiProduct.description || "No detailed description available.",
     images,
     image: images[0],
     stock: stockQty,
-    specifications: {},
+    specifications: apiProduct.specifications || {},
     features,
-    benefits: apiProduct.benefits ?? undefined,
-    howToUse: apiProduct.how_to_use ?? undefined,
-    badgeText: apiProduct.badge_text ?? undefined,
     badges,
-    stockNote: apiProduct.stock_note ?? undefined,
-    stockDetails: {
-      status: stockStatus,
-      threshold: 5,
-    },
     socialProof: {
       rating: rating ?? 4.8,
-      reviewCount: reviewCount || 0,
+      reviewCount: apiProduct.socialProof?.reviewCount || reviewsMapped.length || 0,
       purchaseCount: 0,
-      viewingNow: 0,
+      viewingNow: (Math.floor(Math.random() * 21) + 12),
     },
     reviews: reviewsMapped.length ? reviewsMapped : undefined,
-    contentSections: localProduct?.contentSections || (Array.isArray(apiProduct.content_sections)
-      ? apiProduct.content_sections.map((section: any) => {
-        const resolvedSection = { ...section };
-        if (resolvedSection.image_url) resolvedSection.image_url = resolveImageUrl(resolvedSection.image_url);
-        if (Array.isArray(resolvedSection.media)) resolvedSection.media = resolvedSection.media.map((m: string) => resolveImageUrl(m));
-        if (resolvedSection.url) resolvedSection.url = resolveImageUrl(resolvedSection.url);
-        if (Array.isArray(resolvedSection.items)) {
-          resolvedSection.items = resolvedSection.items.map((item: any) => ({
-            ...item,
-            url: resolveImageUrl(item.url)
-          }));
-        }
-        return resolvedSection;
-      })
-      : undefined),
+    contentSections: apiProduct.content_sections || localProduct?.contentSections,
   } as Product;
 };
 
 export const productService = {
   async getProducts() {
     const response = await apiClient.get<any>("/products");
-
     let rawData = response.data;
     if (response.data && Array.isArray(response.data.data)) {
       rawData = response.data.data;
     }
-
-    // Ensure rawData is an array before mapping
     if (!Array.isArray(rawData)) return [];
-
     return rawData.map(transformProduct);
   },
 
   async getProductBySlug(slug: string) {
-    // Backend doesn't support slug-based lookup, so we fetch all products
-    // and find the one with matching slug
-    const response = await apiClient.get<any>('/products');
+    const response = await apiClient.get<any>(`/products/${slug}`);
     let rawData = response.data;
     if (response.data && response.data.data) {
       rawData = response.data.data;
     }
+    return transformProduct(rawData);
+  },
 
-    // Ensure rawData is an array
-    if (!Array.isArray(rawData)) {
-      throw new Error('Invalid products data');
+  async getCatalogue() {
+    const response = await apiClient.get<any>("/catalogue");
+    let rawData = response.data;
+    if (response.data && Array.isArray(response.data.data)) {
+      rawData = response.data.data;
     }
+    if (!Array.isArray(rawData)) return [];
+    return rawData; // Catalogue list is simpler
+  },
 
-    // Transform all products and find the simple one by slug
-    const products = rawData.map(transformProduct);
-    const productBrief = products.find(p => p.slug === slug);
-
-    if (!productBrief) {
-      throw new Error(`Product with slug "${slug}" not found`);
+  async getCatalogueBySlug(slug: string) {
+    const response = await apiClient.get<any>(`/catalogue/${slug}`);
+    let rawData = response.data;
+    if (response.data && response.data.data) {
+      rawData = response.data.data;
     }
-
-    // Crucial: Fetch full detail (reviews, content sections) by ID
-    return this.getProductById(productBrief.id);
+    return transformProduct(rawData);
   },
 
   async getProductById(id: number | string) {

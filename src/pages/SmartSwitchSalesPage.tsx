@@ -24,8 +24,10 @@ import FloatingCTA from "@/components/sections/smart-switch/FloatingCTA";
 
 import salesData from "@/data/smart-switch-sales.json";
 import { useTheme } from "@/components/providers/ThemeProvider";
+import { productService } from "@/services/productService";
+import { Product } from "@/store/useCartStore";
 
-const { MODELS } = salesData;
+const { MODELS: STATIC_MODELS } = salesData;
 
 const SmartSwitchSalesPage = () => {
   const { setTheme } = useTheme();
@@ -34,12 +36,41 @@ const SmartSwitchSalesPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [selectedModel, setSelectedModel] = useState(MODELS[1]);
 
-  // Removed theme force to allow the mode button (theme switcher) to function correctly
+  // Start with static models but ideally we merge with backend price
+  const [models, setModels] = useState(STATIC_MODELS);
+  const [selectedModel, setSelectedModel] = useState(STATIC_MODELS[1]);
+  const [product, setProduct] = useState<Product | null>(null);
+
+  // Sync theme
   React.useEffect(() => {
     setTheme("light");
   }, [setTheme]);
+
+  // Fetch backend product data for ID 4
+  React.useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const data = await productService.getProductById(4);
+        setProduct(data);
+
+        // Update model prices if backend provides a base price
+        if (data && data.price) {
+          const updatedModels = STATIC_MODELS.map((m) => ({
+            ...m,
+            // You can implement custom pricing logic here,
+            // e.g. base price + offset for more gangs
+            price: data.price + (parseInt(m.id) - 1) * 2000,
+          }));
+          setModels(updatedModels);
+          setSelectedModel(updatedModels[1]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch product data:", err);
+      }
+    };
+    fetchProduct();
+  }, []);
 
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
 
@@ -61,7 +92,7 @@ const SmartSwitchSalesPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToForm = (model?: (typeof MODELS)[0]) => {
+  const scrollToForm = (model?: (typeof STATIC_MODELS)[0]) => {
     if (model) setSelectedModel(model);
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -71,12 +102,17 @@ const SmartSwitchSalesPage = () => {
 
     try {
       const orderData: CreateOrderData = {
-        customer_name: `${formData.firstName} ${formData.lastName}`,
-        customer_email: formData.email,
-        customer_phone: formData.phone,
-        customer_address: `${formData.address}, ${formData.city}, ${formData.state} State`,
-        notes: `DIRECT SALES PAGE. Model: ${selectedModel.name}. WhatsApp: ${formData.whatsapp}. ${formData.additionalNotes}`,
-        items: [{ product_id: 10, quantity }], // ID matches the Smart Switch in products.json
+        product_id: 4, // Updated to match ID from your backend
+        quantity,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        phone: formData.phone,
+        whatsapp: formData.whatsapp,
+        email: formData.email,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        notes: `DIRECT SALES PAGE. Backend ID: 4. Model: ${selectedModel.name}. ${formData.additionalNotes}`,
       };
 
       await orderService.createOrder(orderData);
@@ -89,6 +125,18 @@ const SmartSwitchSalesPage = () => {
       setIsSubmitting(false);
     }
   };
+
+  // Map backend reviews to ReviewsSection format
+  const dynamicReviews = product?.reviews?.map((r) => ({
+    u: r.author,
+    d: "Verified Buyer",
+    r: r.content,
+    s: r.rating,
+    title: "Verified Response",
+    date: r.date || "Recently",
+    model: "Smart Switch",
+    hasImage: false,
+  }));
 
   return (
     <div className="bg-obsidian text-silk-white selection:bg-accent min-h-screen font-sans transition-colors duration-500">
@@ -110,7 +158,7 @@ const SmartSwitchSalesPage = () => {
         />
 
         <HeroSection
-          models={MODELS}
+          models={models}
           selectedModel={selectedModel}
           setSelectedModel={(model) => setSelectedModel(model)}
           quantity={quantity}
@@ -118,18 +166,18 @@ const SmartSwitchSalesPage = () => {
           scrollToForm={scrollToForm}
         />
 
-        <ProductInfoTabs />
+        <ProductInfoTabs customSpecs={product?.specifications} />
         <NarrativeSection />
         <FrictionSection />
         <BenefitsSection />
         <BentoSection />
         <ComparisonSection />
         <UnboxingSection />
-        <ReviewsSection />
+        <ReviewsSection customReviews={dynamicReviews} />
 
         <LeadFormSection
           ref={formRef}
-          models={MODELS}
+          models={models}
           selectedModel={selectedModel}
           setSelectedModel={(model) => setSelectedModel(model)}
           quantity={quantity}

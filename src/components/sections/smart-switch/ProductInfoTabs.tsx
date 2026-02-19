@@ -6,8 +6,17 @@ import salesData from "@/data/smart-switch-sales.json";
 
 const { TABS } = salesData;
 
-const ProductInfoTabs = () => {
+interface ProductInfoTabsProps {
+  customSpecs?: Record<string, string>;
+}
+
+const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
   const [activeTab, setActiveTab] = React.useState(TABS.items[0].id);
+
+  // Map custom specs to the format the UI expects if they exist
+  const displaySpecs = customSpecs
+    ? Object.entries(customSpecs).map(([label, value]) => ({ label, value }))
+    : TABS.items.find((t: any) => t.id === "specifications")?.content || [];
 
   const containerVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -77,7 +86,7 @@ const ProductInfoTabs = () => {
             exit="exit"
             className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-24 gap-y-4 lg:gap-y-6"
           >
-            {tab.content.map((spec: any, i: number) => (
+            {displaySpecs.map((spec: any, i: number) => (
               <div
                 key={i}
                 className="flex justify-between items-center py-4 lg:py-6 border-b border-border-dim group hover:border-accent/30 transition-colors"

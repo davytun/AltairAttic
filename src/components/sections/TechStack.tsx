@@ -14,7 +14,7 @@ const groups = [
     pos: "bottom-0 left-0",
   },
   {
-    name: "Execution Stack",
+    name: "Software Tech",
     items: [
       "Node.js",
       "Flutter",
@@ -28,7 +28,7 @@ const groups = [
     pos: "top-0 right-0",
   },
   {
-    name: "Industrial I/O",
+    name: "Hardware Connect",
     items: ["PLC Integration", "Modbus", "MQTT", "ESP32"],
     pos: "bottom-0 right-0",
   },
@@ -57,14 +57,14 @@ export const TechStack = () => {
 
       <div className="container-luxury relative z-10">
         <div className="flex flex-col items-start md:items-center justify-start md:justify-center text-left md:text-center mb-24 md:mb-48 space-y-8">
-          <span className="text-label">System Architecture</span>
+          <span className="text-label">Under the Hood</span>
           <h2 className="text-6xl md:text-9xl font-display uppercase tracking-tighter leading-none mb-4 text-silk-white">
-            The <span className="text-text-muted">Digital</span> <br />{" "}
-            Foundation.
+            Built to <span className="text-text-muted">Last</span> <br /> &
+            Scale.
           </h2>
           <p className="max-w-2xl text-lg md:text-xl font-light text-light-gray leading-relaxed md:mx-auto">
-            We architect intelligence from the electrical impulse to the final
-            user interaction. Zero compromises on industrial-grade reliability.
+            We use battle-tested tools and protocols — so your system stays
+            fast, secure, and reliable for years to come.
           </p>
         </div>
 
@@ -155,10 +155,10 @@ export const TechStack = () => {
         {/* System Stats (Million Dollar Detail) */}
         <div className="mt-24 md:mt-48 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-border-dim pt-16">
           {[
-            { label: "Stability Rate", val: "99.98%" },
-            { label: "Nodes Managed", val: "140k+" },
-            { label: "Deployment Speed", val: "2.4ms" },
-            { label: "Security Level", val: "EAL6+" },
+            { label: "Uptime Guarantee", val: "99.98%" },
+            { label: "Devices Managed", val: "140k+" },
+            { label: "Avg. Response Time", val: "2.4ms" },
+            { label: "Security Standard", val: "EAL6+" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}

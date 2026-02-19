@@ -79,8 +79,8 @@ const ShoppingCartPage: React.FC = () => {
               collection yet.
             </p>
             <Link
-              to="/products"
-              className="px-8 py-4 bg-accent text-white font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-white/90 hover:text-obsidian transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              to="/shop"
+              className="px-8 py-4 bg-accent text-white font-bold uppercase tracking-widest text-xs rounded-xl hover:bg-white/90 hover:text-obsidian transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white"
             >
               Explore Collection
             </Link>
@@ -216,7 +216,7 @@ const ShoppingCartPage: React.FC = () => {
                 <Trash2 className="w-4 h-4" /> Clear Cart
               </button>
               <Link
-                to="/products"
+                to="/catalogue"
                 className="text-xs font-bold uppercase tracking-widest text-silk-white/50 hover:text-accent transition-colors"
               >
                 Continue Shopping

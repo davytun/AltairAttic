@@ -5,23 +5,23 @@ import { GridBackground } from "@/components/ui/GridBackground";
 const values = [
   {
     title: "Innovation",
-    desc: "We don't just follow trends. We build what's next for your business.",
+    desc: "We don't copy what's already out there. We build what your business actually needs next.",
   },
   {
     title: "Quality",
-    desc: "Every system we build is designed for industrial-grade reliability.",
+    desc: "We'd rather take longer and get it right than ship something that breaks in six months.",
   },
   {
     title: "Human Focus",
-    desc: "Technology that works with you, not against you. Simple and intuitive.",
+    desc: "If it's hard to use, it's not done yet. We build tech that feels natural from day one.",
   },
   {
     title: "Integrity",
-    desc: "Transparent pricing and honest advice. We build for the long term.",
+    desc: "No hidden fees, no upsells you don't need. Just honest work and straight talk.",
   },
   {
     title: "Stability",
-    desc: "Systems that stay up so you can stay focused on your work.",
+    desc: "Your system should work quietly in the background — always on, never in the way.",
   },
 ];
 
@@ -53,26 +53,22 @@ export const AboutValues = () => {
           >
             {[1, 2].map((loop) => (
               <div key={loop} className="flex items-center gap-20">
-                {[
-                  "Legacy",
-                  "Innovation",
-                  "Future",
-                  "Human",
-                  "Intelligence",
-                ].map((word) => (
-                  <motion.span
-                    key={word}
-                    whileHover={{
-                      scale: 1.1,
-                      color: "var(--color-accent)",
-                      textShadow: "0 0 20px rgba(205, 127, 50, 0.4)",
-                    }}
-                    className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-silk-white/10 tracking-tighter leading-none cursor-default transition-colors duration-500"
-                  >
-                    {word}{" "}
-                    <span className="text-silk-white/5 opacity-50">—</span>
-                  </motion.span>
-                ))}
+                {["Legacy", "Innovation", "Future", "Human", "Living"].map(
+                  (word) => (
+                    <motion.span
+                      key={word}
+                      whileHover={{
+                        scale: 1.1,
+                        color: "var(--color-accent)",
+                        textShadow: "0 0 20px rgba(205, 127, 50, 0.4)",
+                      }}
+                      className="text-[12vw] md:text-[15vw] font-display font-black uppercase text-silk-white/10 tracking-tighter leading-none cursor-default transition-colors duration-500"
+                    >
+                      {word}{" "}
+                      <span className="text-silk-white/5 opacity-50">—</span>
+                    </motion.span>
+                  ),
+                )}
               </div>
             ))}
           </motion.div>
@@ -84,15 +80,16 @@ export const AboutValues = () => {
           {/* Narrative Core */}
           <div className="lg:col-span-6 space-y-16">
             <div>
-              <span className="text-label mb-8 block">Our Philosophy</span>
+              <span className="text-label mb-8 block">Who We Are</span>
               <h3 className="text-huge text-6xl! md:text-8xl! mb-12 text-silk-white">
-                Human <br /> <span className="text-text-muted">Centered</span>{" "}
-                <br /> Tech.
+                Built Around <br />{" "}
+                <span className="text-text-muted">People,</span> <br /> Not
+                Products.
               </h3>
               <p className="text-xl font-light text-silk-white/70 leading-relaxed max-w-xl mb-12">
-                Altair Attic Limited is dedicated to bridging the gap between
-                complexity and daily life. We believe technology should be felt,
-                not seen.
+                We started Altair Attic because we were tired of tech that
+                complicates life instead of improving it. Everything we build is
+                designed to be simple, reliable, and worth your trust.
               </p>
 
               <div className="grid grid-cols-2 gap-6 items-end">

@@ -126,134 +126,13 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
   }, [products, selectedCategory, selectedPriceRanges, selectedOffers, sortBy]);
 
   return (
-    <section className="py-12 bg-obsidian min-h-screen">
+    <section className="py-12 bg-obsidian min-h-screen [html[data-theme='light']_&]:bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mobile Filter Toggle */}
-        <div className="lg:hidden mb-6 flex justify-between items-center">
-          <button
-            onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-            className="flex items-center gap-2 text-silk-white border border-border-dim px-4 py-2 rounded-lg"
-          >
-            <Filter size={18} /> Filters
-          </button>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-text-muted">Sort:</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="bg-white/5 border border-border-dim text-silk-white text-sm rounded-lg p-2 outline-none"
-            >
-              <option value="recommended">Recommended</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="newest">Newest Arrivals</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Filters (Desktop) */}
-          <aside
-            className={`lg:w-64 shrink-0 ${isMobileFilterOpen ? "block" : "hidden lg:block"}`}
-          >
-            <div className="sticky top-24 space-y-8">
-              {/* Sidebar Header with Clear All */}
-              <div className="flex items-center justify-between border-b border-border-dim pb-4">
-                <h3 className="text-xl font-bold text-silk-white flex items-center gap-2">
-                  <Filter size={20} className="text-accent" /> Filters
-                </h3>
-                {hasActiveFilters && (
-                  <button
-                    onClick={clearAllFilters}
-                    className="text-xs text-red-500 hover:text-silk-white transition-colors uppercase font-bold tracking-wider"
-                  >
-                    Clear All
-                  </button>
-                )}
-              </div>
-
-              {/* Category Filter */}
-              <div>
-                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
-                  Categories
-                </h3>
-                <div className="space-y-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between group ${
-                        selectedCategory === category
-                          ? "bg-accent text-white"
-                          : "text-text-muted hover:text-silk-white hover:bg-white/5"
-                      }`}
-                    >
-                      {category}
-                      {selectedCategory === category && <Check size={14} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Price Range */}
-              <div>
-                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
-                  Price Range
-                </h3>
-                <div className="space-y-2">
-                  {[
-                    "Under ₦75,000",
-                    "₦75,000 - ₦150,000",
-                    "₦150,000 - ₦300,000",
-                    "₦300,000+",
-                  ].map((range, idx) => (
-                    <label
-                      key={idx}
-                      className="flex items-center gap-3 text-text-muted hover:text-silk-white cursor-pointer select-none"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedPriceRanges.includes(range)}
-                        onChange={() => togglePriceRange(range)}
-                        className="form-checkbox bg-transparent border-white/20 rounded text-accent focus:ring-0 w-4 h-4"
-                      />
-                      <span>{range}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Special Offers */}
-              <div>
-                <h3 className="text-sm font-bold text-silk-white/60 uppercase tracking-widest mb-4">
-                  Special Offers
-                </h3>
-                <div className="space-y-2">
-                  {["On Sale", "Best Sellers", "New Arrivals"].map(
-                    (offer, idx) => (
-                      <label
-                        key={idx}
-                        className="flex items-center gap-3 text-text-muted hover:text-silk-white cursor-pointer select-none"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedOffers.includes(offer)}
-                          onChange={() => toggleOffer(offer)}
-                          className="form-checkbox bg-transparent border-white/20 rounded text-accent focus:ring-0 w-4 h-4"
-                        />
-                        <span>{offer}</span>
-                      </label>
-                    ),
-                  )}
-                </div>
-              </div>
-            </div>
-          </aside>
-
+        <div className="flex flex-col gap-8">
           {/* Product Grid Area */}
           <div className="flex-1">
             {/* Desktop Sort Bar */}
-            <div className="hidden lg:flex justify-between items-center mb-6 border-b border-border-dim pb-4">
+            <div className="flex justify-between items-center mb-6 border-b border-border-dim pb-4 [html[data-theme='light']_&]:border-black/10">
               <p className="text-text-muted">
                 Showing{" "}
                 <span className="text-silk-white font-bold">
@@ -264,7 +143,7 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
               <div className="flex items-center gap-3">
                 <span className="text-sm text-text-muted">Sort by:</span>
                 <div className="relative group">
-                  <button className="flex items-center gap-2 text-silk-white bg-white/5 border border-border-dim px-4 py-2 rounded-lg hover:border-white/30 transition-all">
+                  <button className="flex items-center gap-2 text-silk-white bg-white/5 border border-border-dim px-4 py-2 rounded-lg hover:border-white/30 transition-all [html[data-theme='light']_&]:bg-black/5 [html[data-theme='light']_&]:border-black/10 [html[data-theme='light']_&:hover]:border-black/30">
                     {sortBy === "recommended"
                       ? "Recommended"
                       : sortBy === "price-low"
@@ -274,7 +153,7 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
                           : "Newest"}
                     <ChevronDown size={14} />
                   </button>
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-obsidian-surface border border-border-dim rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-obsidian-surface border border-border-dim rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20 [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:border-black/10">
                     {[
                       { label: "Recommended", value: "recommended" },
                       { label: "Price: Low to High", value: "price-low" },
@@ -284,7 +163,7 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
                       <button
                         key={option.value}
                         onClick={() => setSortBy(option.value as SortOption)}
-                        className={`block w-full text-left px-4 py-3 text-sm hover:bg-white/5 first:rounded-t-xl last:rounded-b-xl ${sortBy === option.value ? "text-accent" : "text-silk-white"}`}
+                        className={`block w-full text-left px-4 py-3 text-sm hover:bg-white/5 first:rounded-t-xl last:rounded-b-xl [html[data-theme='light']_&:hover]:bg-black/5 ${sortBy === option.value ? "text-accent" : "text-silk-white"}`}
                       >
                         {option.label}
                       </button>
@@ -295,12 +174,12 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {isLoading ? (
                 <div className="col-span-full flex flex-col items-center justify-center py-20 text-silk-white/50">
                   <Loader2 className="w-12 h-12 animate-spin mb-4" />
                   <p className="uppercase tracking-widest text-xs font-bold">
-                    Synchronizing Hardware...
+                    Loading Products...
                   </p>
                 </div>
               ) : (
@@ -323,14 +202,8 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
               {filteredProducts.length === 0 && (
                 <div className="col-span-full text-center py-20">
                   <p className="text-silk-white/50 text-lg">
-                    No products found matching your filters.
+                    No products found.
                   </p>
-                  <button
-                    onClick={clearAllFilters}
-                    className="mt-4 text-accent hover:text-accent-dim underline"
-                  >
-                    Clear Filters
-                  </button>
                 </div>
               )}
             </div>

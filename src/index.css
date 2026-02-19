@@ -56,13 +56,13 @@
   --bg-muted: #f1f5f9;
 
   --color-brand: #0066cc;
-  --color-brand-dim: rgba(0, 102, 204, 0.05);
+  --color-brand-dim: rgba(0, 102, 204, 0.1);
 
   --text-main: #020617;
   --text-secondary: #334155;
-  --text-muted: #475569; /* Crisper, darker gray to replace the "wack" light gray */
+  --text-muted: #64748b; /* Standard Slate 500 for better secondary readability */
 
-  --border-dim: rgba(15, 23, 42, 0.06);
+  --border-dim: rgba(15, 23, 42, 0.08);
 
   /* Missing definitions for Button.tsx compatibility */
   --color-primary: var(--color-brand);

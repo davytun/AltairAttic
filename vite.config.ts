@@ -11,14 +11,15 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api/uploads': {
-        target: 'http://localhost:8000',
+      '/uploads': {
+        target: 'https://demo.altairattic.net/altair-attic/api/public',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/uploads/, ''),
       },
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://demo.altairattic.net/altair-attic/api/public',
         changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
   },

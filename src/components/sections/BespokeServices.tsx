@@ -7,7 +7,7 @@ const services = [
     id: "01",
     label: "Automation",
     title: "Smarter Homes",
-    desc: "Tired of tech that feels like a full-time job? We design invisible automation that simplifies your life, energy, and security.",
+    desc: "Imagine walking in and your home just knows — lights adjust, security arms, energy saves. We make that real.",
     image:
       "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=1200",
     icon: Home,
@@ -16,7 +16,7 @@ const services = [
     id: "02",
     label: "Development",
     title: "Custom Software",
-    desc: "Off-the-shelf software holding you back? We build custom digital tools that solve your specific business bottlenecks.",
+    desc: "Generic tools slow you down. We build software that fits your exact workflow and gets out of your way.",
     image:
       "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
     icon: Code2,
@@ -25,7 +25,7 @@ const services = [
     id: "03",
     label: "Integration",
     title: "Connected Devices",
-    desc: "Drowning in data you can't use? We sync your hardware and software for real-time clarity and total system control.",
+    desc: "All your devices, finally talking to each other. We connect your hardware and software into one seamless system.",
     image:
       "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?auto=format&fit=crop&q=80&w=1200",
     icon: Cpu,
@@ -87,7 +87,7 @@ const ServiceCard = ({
             onClick={() => onInquire?.(s.title)}
             className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black group/btn text-accent cursor-pointer"
           >
-            Explore Solution
+            Start a Project
             <div className="w-16 h-16 rounded-full border border-border-dim flex items-center justify-center group-hover:border-accent group-hover:bg-accent group-hover:text-obsidian transition-all duration-700">
               <ArrowUpRight className="w-6 h-6" />
             </div>
@@ -117,17 +117,17 @@ export const BespokeServices = ({
       <div className="container-luxury relative z-10 w-full">
         <div className="mb-20 md:mb-32 flex flex-col xl:flex-row justify-between items-start xl:items-end gap-16 xl:gap-24">
           <div className="max-w-5xl">
-            <span className="text-label mb-8 block">Disciplines</span>
+            <span className="text-label mb-8 block">What We Do</span>
             <h2 className="text-huge font-display leading-[0.85] mb-8 text-silk-white">
-              Bridging <br />{" "}
-              <span className="text-text-muted">Digital & Life.</span>
+              Tech That <br />{" "}
+              <span className="text-text-muted">Works For You.</span>
             </h2>
           </div>
           <div className="xl:w-1/3 pt-0 pb-4">
             <p className="text-xl font-light text-text-muted leading-relaxed border-l border-accent/30 pl-10 mb-8 max-w-lg">
-              We help you skip the frustration of generic tech. Altair Attic
-              Limited builds custom intelligence that fits your life and scales
-              your business.
+              We cut through the noise of generic tech. Altair Attic builds
+              solutions that fit your life, grow your business, and actually
+              make sense to use.
             </p>
           </div>
         </div>

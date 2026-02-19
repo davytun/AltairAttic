@@ -4,23 +4,23 @@ import { DotBackground } from "@/components/ui/DotBackground";
 const steps = [
   {
     num: "01",
-    title: "Site Discovery",
-    desc: "Understanding the architectural intent and daily human rhythms.",
+    title: "Discovery",
+    desc: "We learn your space, your goals, and how you actually live or work day to day.",
   },
   {
     num: "02",
-    title: "Digital Blueprint",
-    desc: "Crafting a bespoke system architecture that remains invisible.",
+    title: "Design",
+    desc: "We map out a custom system built around your needs — nothing off-the-shelf.",
   },
   {
     num: "03",
-    title: "deployment",
-    desc: "Precision engineering on-site, where code meets physical reality.",
+    title: "Installation",
+    desc: "Our team handles everything on-site, cleanly and on schedule.",
   },
   {
     num: "04",
-    title: "remote orchestration",
-    desc: "Proactive support and system evolution for decades of living.",
+    title: "Ongoing Support",
+    desc: "We stay with you — monitoring, updating, and improving your system over time.",
   },
 ];
 
@@ -36,10 +36,10 @@ export const Process = () => {
 
       <div className="container-luxury relative z-10">
         <div className="mb-20 md:mb-32 space-y-8 text-center md:text-left text-balance">
-          <span className="text-label mb-8 block">Methodology</span>
+          <span className="text-label mb-8 block">How We Work</span>
           <h2 className="text-huge font-display font-black leading-[0.85] uppercase tracking-tighter text-silk-white">
-            Blueprint to <br />{" "}
-            <span className="text-text-muted">Execution.</span>
+            From Idea to <br />{" "}
+            <span className="text-text-muted">Reality.</span>
           </h2>
         </div>
 

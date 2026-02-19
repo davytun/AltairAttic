@@ -4,20 +4,20 @@ const services = [
   {
     index: "01",
     label: "Automation",
-    title: "Ecosystem Orchestration",
-    desc: "We don't just connect devices; we design unified systems that learn and adapt to your presence.",
+    title: "Smart Home Setup",
+    desc: "We design systems that control your lights, security, and energy — all from one place, automatically.",
   },
   {
     index: "02",
     label: "Development",
-    title: "Bespoke Digital Core",
-    desc: "Custom software foundations engineered for reliability, security, and effortless human interaction.",
+    title: "Custom Software",
+    desc: "We build apps and tools tailored to your business — reliable, easy to use, and built to grow with you.",
   },
   {
     index: "03",
     label: "Consultancy",
-    title: "Strategic Intelligence",
-    desc: "Guiding the architectural evolution of smart environments from blueprint to execution.",
+    title: "Expert Guidance",
+    desc: "Not sure where to start? We help you plan the right tech strategy and avoid costly mistakes.",
   },
 ];
 
@@ -27,14 +27,12 @@ export const LuxuryServices = () => {
       <div className="container-luxury">
         <div className="flex flex-col md:flex-row justify-between items-start mb-32 border-b border-white/5 pb-12">
           <h2 className="text-4xl md:text-6xl max-w-xl">
-            Elevating the <span className="text-muted">Standards</span> of
-            Intelligence.
+            The Smarter Way to <span className="text-muted">Live</span> & Work.
           </h2>
           <div className="md:w-1/3 mt-8 md:mt-0">
             <p className="text-editorial">
-              Our expertise lies at the intersection of architecture,
-              engineering, and digital empathy. We provide a full-spectrum
-              approach to modern living.
+              We bring together automation, software, and expert advice to
+              create tech that fits your life — not the other way around.
             </p>
           </div>
         </div>

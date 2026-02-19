@@ -46,7 +46,7 @@ const ShopPage = () => {
       </section>
 
       {/* Product Grid */}
-      <div className="border-t border-border-dim bg-obsidian-surface">
+      <div className="border-t border-border-dim bg-obsidian-surface [html[data-theme='light']_&]:bg-obsidian">
         <ProductCatalogGrid variant="shop" />
       </div>
 

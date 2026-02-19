@@ -151,7 +151,7 @@ const BlogPage = () => {
             <div className="flex flex-col items-center justify-center py-40">
               <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6" />
               <p className="text-silk-white/40 font-display uppercase tracking-widest text-xs">
-                Syncing Insights...
+                Loading Stories...
               </p>
             </div>
           ) : (

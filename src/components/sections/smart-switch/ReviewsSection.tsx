@@ -12,19 +12,35 @@ import {
 import salesData from "@/data/smart-switch-sales.json";
 const { REVIEWS } = salesData;
 
-const ReviewsSection = () => {
+interface Review {
+  u: string;
+  d: string;
+  r: string;
+  s: number;
+  title: string;
+  date: string;
+  model: string;
+  hasImage?: boolean;
+}
+
+interface ReviewsSectionProps {
+  customReviews?: Review[];
+}
+
+const ReviewsSection: React.FC<ReviewsSectionProps> = ({ customReviews }) => {
+  const displayReviews = customReviews || REVIEWS.items;
   const [helpfulCounts, setHelpfulCounts] = useState<
     { up: number; down: number }[]
   >([]);
 
   useEffect(() => {
-    // Initialize helpful counts based on JSON data
-    const initialCounts = REVIEWS.items.map(() => ({
+    // Initialize helpful counts based on provided reviews
+    const initialCounts = displayReviews.map(() => ({
       up: Math.floor(Math.random() * 50) + 10,
       down: Math.floor(Math.random() * 5),
     }));
     setHelpfulCounts(initialCounts);
-  }, []);
+  }, [displayReviews]);
 
   const handleHelpful = (index: number, type: "up" | "down") => {
     setHelpfulCounts((prev) => {
@@ -79,7 +95,7 @@ const ReviewsSection = () => {
 
         {/* REVIEWS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {REVIEWS.items.map((review: any, i: number) => (
+          {displayReviews.map((review: any, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}

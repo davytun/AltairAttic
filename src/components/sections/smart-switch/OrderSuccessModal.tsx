@@ -27,11 +27,11 @@ const OrderSuccessModal: React.FC<OrderSuccessModalProps> = () => {
         </motion.div>
         <h2 className="text-5xl font-display font-black uppercase mb-4 text-white leading-[0.85]">
           Experience <br />
-          <span className="text-accent">Synchronized.</span>
+          <span className="text-accent">Confirmed.</span>
         </h2>
         <p className="text-xl text-text-muted mb-12 font-light">
-          Your hardware allocation has been reserved. A sales engineer will
-          contact you via WhatsApp shortly to finalize your delivery.
+          Your order has been reserved. A support representative will contact
+          you via WhatsApp shortly to finalize your delivery.
         </p>
         <button
           onClick={() => navigate("/shop")}

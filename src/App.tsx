@@ -25,14 +25,21 @@ function App() {
       <FloatingCart />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/smart-switches" element={<SmartSwitchSalesPage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="/shop/:slug" element={<ShopDetailPage />} />
+        <Route
+          path="/shop/smart-wifi-switch"
+          element={<SmartSwitchSalesPage />}
+        />
+        <Route path="/shop/:slug" element={<ProductDetailPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:url" element={<ServiceDetailPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/catalogue" element={<ProductsPage />} />
+        <Route
+          path="/catalogue/smart-wifi-switch"
+          element={<SmartSwitchSalesPage />}
+        />
+        <Route path="/catalogue/:slug" element={<ProductDetailPage />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/activities" element={<ActivitiesPage />} />

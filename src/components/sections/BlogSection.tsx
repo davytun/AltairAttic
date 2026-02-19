@@ -37,18 +37,18 @@ export const BlogSection = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
           <div className="max-w-2xl">
             <span className="text-[10px] uppercase tracking-[0.5em] text-accent font-black mb-8 block">
-              / Insights & Intel
+              / Tips, Guides & Updates
             </span>
             <h2 className="text-5xl md:text-8xl font-display uppercase tracking-tighter leading-none text-silk-white">
-              Thought <br />{" "}
+              Stay in the <br />{" "}
               <span className="text-text-muted italic font-serif lowercase tracking-normal">
-                Leadership.
+                Loop.
               </span>
             </h2>
           </div>
           <Link to="/blog" className="group">
             <button className="flex items-center gap-6 text-[10px] uppercase tracking-[0.4em] font-black text-silk-white">
-              View All Articles
+              View All Posts
               <div className="w-16 h-16 rounded-full border border-border-dim flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-obsidian transition-all duration-700">
                 <ArrowUpRight className="w-6 h-6" />
               </div>

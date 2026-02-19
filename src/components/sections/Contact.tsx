@@ -70,17 +70,17 @@ export const Contact = ({
           {/* Narrative Content: Reduced width for safety */}
           <div className="lg:col-span-5 space-y-12 md:space-y-16">
             <div className="space-y-8">
-              <span className="text-label block">Next Steps</span>
+              <span className="text-label block">Get in Touch</span>
               <h2 className="text-6xl md:text-8xl font-display leading-[0.8] uppercase tracking-tighter text-silk-white">
-                Let's Talk <br />{" "}
+                Let's Make <br />{" "}
                 <span className="text-text-muted italic font-serif lowercase">
-                  Solutions
+                  it Happen
                 </span>
                 .
               </h2>
               <p className="text-lg font-light text-light-gray leading-relaxed max-w-sm">
-                Ready to stop struggling with tech and start growing your
-                vision?
+                Tell us what you need. We'll get back to you within 24 hours
+                with a clear plan and honest advice.
               </p>
             </div>
 
@@ -161,10 +161,10 @@ export const Contact = ({
                     </div>
                     <div className="space-y-2">
                       <h3 className="text-2xl font-display uppercase tracking-tight text-silk-white">
-                        Inquiry Received
+                        Message Sent!
                       </h3>
                       <p className="text-silk-white/50 text-sm">
-                        We'll get back to you within 24 hours.
+                        Thanks for reaching out. We'll reply within 24 hours.
                       </p>
                     </div>
                     <Button
@@ -182,7 +182,7 @@ export const Contact = ({
                   >
                     <div className="space-y-4">
                       <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
-                        Identity
+                        Your Name
                       </label>
                       <input
                         required
@@ -197,7 +197,7 @@ export const Contact = ({
                     </div>
                     <div className="space-y-4">
                       <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
-                        Electronic Mail
+                        Email Address
                       </label>
                       <input
                         required
@@ -212,7 +212,7 @@ export const Contact = ({
                     </div>
                     <div className="space-y-4">
                       <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
-                        Briefing
+                        Your Message
                       </label>
                       <textarea
                         required
@@ -238,7 +238,7 @@ export const Contact = ({
                           type="submit"
                           className="h-16 md:h-20 px-8 md:px-12 bg-silk-white text-obsidian rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center md:justify-start gap-6 hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-700 shadow-2xl group/btn"
                         >
-                          {isSubmitting ? "Dispatching..." : "Send My Inquiry"}{" "}
+                          {isSubmitting ? "Sending..." : "Send Message"}{" "}
                           <div className="p-2 bg-obsidian text-silk-white rounded-full group-hover/btn:bg-silk-white group-hover/btn:text-obsidian transition-all">
                             <Send className="w-3 h-3" />
                           </div>

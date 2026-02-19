@@ -64,16 +64,22 @@ const CheckoutPage: React.FC = () => {
     setError(null);
 
     try {
+      const firstName = formData.fullName.split(" ")[0] || "";
+      const lastName =
+        formData.fullName.split(" ").slice(1).join(" ") || "Customer";
+
       const orderData: CreateOrderData = {
-        customer_name: formData.fullName,
-        customer_email: formData.email,
-        customer_phone: formData.phone,
-        customer_address: `${formData.address}, ${formData.city}, ${formData.state} State, Nigeria`,
-        notes: `WhatsApp: ${formData.whatsapp}. ${formData.notes}`,
-        items: cartItems.map((item) => ({
-          product_id: item.id,
-          quantity: item.quantity,
-        })),
+        product_id: cartItems[0]?.id || 0,
+        quantity: cartItems[0]?.quantity || 1,
+        first_name: firstName,
+        last_name: lastName,
+        phone: formData.phone,
+        whatsapp: formData.whatsapp,
+        email: formData.email,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        notes: `FULL CART ORDER. Items: ${cartItems.map((item) => `${item.name} (x${item.quantity})`).join(", ")}. ${formData.notes}`,
       };
 
       const response = await orderService.createOrder(orderData);
@@ -102,9 +108,9 @@ const CheckoutPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-obsidian min-h-screen selection:bg-accent selection:text-obsidian text-silk-white font-sans">
+    <div className="bg-obsidian min-h-screen selection:bg-accent selection:text-obsidian text-silk-white font-sans [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:text-silk-white/90">
       <Helmet>
-        <title>Finalize Synchronization — Altair Attic</title>
+        <title>Complete Order — Altair Attic</title>
       </Helmet>
       <Navbar />
 
@@ -124,14 +130,14 @@ const CheckoutPage: React.FC = () => {
               Secure Terminal v2.0
             </span>
             <h1 className="text-[clamp(2.5rem,8vw,5.5rem)] font-display font-black leading-[0.85] uppercase tracking-tighter mb-8">
-              Finalize Your <br />
+              Complete Your <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-accent to-blue-400">
-                Synchronization.
+                Order.
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-text-muted font-light max-w-2xl leading-relaxed">
-              Complete your deployment request. Our elite logistics team will
-              orchestrate your hardware delivery upon lead validation.
+              Complete your order request. Our team will handle your hardware
+              delivery after checking your details.
             </p>
           </motion.div>
 
@@ -150,7 +156,7 @@ const CheckoutPage: React.FC = () => {
                       01
                     </div>
                     <h2 className="text-3xl font-display font-black uppercase tracking-tight">
-                      Identity & Comms
+                      Contact Details
                     </h2>
                   </div>
 
@@ -199,7 +205,7 @@ const CheckoutPage: React.FC = () => {
                     </div>
                     <div className="md:col-span-2 space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 ml-4 italic">
-                        Transmission Terminal (Email)
+                        Email Address
                       </label>
                       <input
                         type="email"
@@ -224,14 +230,14 @@ const CheckoutPage: React.FC = () => {
                       02
                     </div>
                     <h2 className="text-3xl font-display font-black uppercase tracking-tight">
-                      Logistics Hub
+                      Shipping Details
                     </h2>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="md:col-span-2 space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 ml-4 italic">
-                        Deployment Address
+                        Shipping Address
                       </label>
                       <textarea
                         name="address"
@@ -291,12 +297,12 @@ const CheckoutPage: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-black uppercase tracking-widest mb-2">
-                      Secure Data Synchronization
+                      Secure Order Processing
                     </h4>
                     <p className="text-xs text-text-muted font-light leading-relaxed">
-                      Your personal communications and logistics data are
-                      encrypted via AES-256 protocols and used only for order
-                      orchestration. We do not store financial data.
+                      Your personal and shipping data are protected and used
+                      only to process your order. We do not store credit card
+                      info.
                     </p>
                   </div>
                 </div>
@@ -310,7 +316,7 @@ const CheckoutPage: React.FC = () => {
                   <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 blur-[80px] pointer-events-none" />
 
                   <h3 className="text-2xl font-display font-black uppercase tracking-tight mb-10 pb-6 border-b border-white/5 flex justify-between items-center">
-                    Sync Summary
+                    Order Summary
                     <span className="text-[10px] px-3 py-1 bg-white/5 rounded-full text-accent border border-accent/20">
                       {cartItems.length} Units
                     </span>
@@ -348,12 +354,12 @@ const CheckoutPage: React.FC = () => {
 
                   <div className="space-y-4 mb-12">
                     <div className="flex justify-between items-center text-sm uppercase font-black tracking-widest text-white/40">
-                      <span>Logistics Fee</span>
+                      <span>Shipping Fee</span>
                       <span className="text-white">FREE</span>
                     </div>
                     <div className="flex justify-between items-center pt-6 border-t border-white/10">
                       <span className="text-xl font-display font-black uppercase">
-                        Total Valuation
+                        Total Amount
                       </span>
                       <span className="text-4xl font-display font-black text-accent">
                         {formatCurrency(total)}
@@ -365,10 +371,10 @@ const CheckoutPage: React.FC = () => {
                     type="submit"
                     form="checkout-form"
                     disabled={isSubmitting}
-                    className="w-full h-24 bg-accent text-obsidian rounded-[32px] font-display font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-4 hover:bg-white hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,159,255,0.4)] group disabled:opacity-50 overflow-hidden relative"
+                    className="w-full h-24 bg-accent text-obsidian rounded-[32px] font-display font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-4 hover:bg-white hover:scale-[1.02] transition-all shadow-[0_20px_50px_rgba(0,159,255,0.4)] group disabled:opacity-50 overflow-hidden relative [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white"
                   >
                     <span className="relative z-10">
-                      {isSubmitting ? "Orchestrating..." : "Place Shop Order"}
+                      {isSubmitting ? "Processing..." : "Place Shop Order"}
                     </span>
                     {!isSubmitting && (
                       <ArrowRight
@@ -376,7 +382,7 @@ const CheckoutPage: React.FC = () => {
                         className="relative z-10 group-hover:translate-x-2 transition-transform"
                       />
                     )}
-                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 [html[data-theme='light']_&]:bg-obsidian" />
                   </button>
 
                   <div className="mt-8 flex items-center justify-center gap-6 text-[8px] font-black uppercase tracking-[0.4em] text-white/20 whitespace-nowrap">
@@ -392,22 +398,22 @@ const CheckoutPage: React.FC = () => {
                 {/* Logistics Advantage Card */}
                 <div className="p-10 rounded-[40px] bg-accent/5 border border-accent/10">
                   <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-4">
-                    Implementation Hub
+                    Shipping Info
                   </h5>
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
                       <Truck size={18} />
                     </div>
                     <p className="text-sm font-bold">
-                      4-Hour Logistics Dispatch (Lagos)
+                      4-Hour Fast Delivery (Lagos)
                     </p>
                   </div>
                   <p className="text-xs text-text-muted font-light leading-relaxed mb-6">
-                    Orders within Lagos State are eligible for same-day hardware
-                    deployment. Regional states range from 2-4 business days.
+                    Orders within Lagos State are eligible for same-day
+                    delivery. Other states take 2-4 business days.
                   </p>
                   <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-accent italic">
-                    <Info size={14} /> Available Hub Status: Online
+                    <Info size={14} /> Shipping Status: Online
                   </div>
                 </div>
               </div>
@@ -442,16 +448,15 @@ const CheckoutPage: React.FC = () => {
               <div className="space-y-4">
                 <h2 className="text-6xl md:text-8xl font-display font-black uppercase leading-[0.8] mb-4">
                   Order <br />
-                  <span className="text-accent">Synchronized.</span>
+                  <span className="text-accent">Confirmed.</span>
                 </h2>
                 <div className="px-6 py-2 bg-accent/10 border border-accent/20 rounded-full w-fit mx-auto text-accent text-[10px] font-black uppercase tracking-widest mb-8">
                   Sequence: #{orderSuccess.orderNumber}
                 </div>
                 <p className="text-xl text-text-muted font-light leading-relaxed max-w-md mx-auto">
-                  Your procurement request has been validated. Our
-                  implementation team will contact you via{" "}
-                  <span className="text-white font-bold">WhatsApp</span> within
-                  the hour.
+                  Your order has been started. Our support team will contact you
+                  via <span className="text-white font-bold">WhatsApp</span>{" "}
+                  within the hour.
                 </p>
               </div>
 

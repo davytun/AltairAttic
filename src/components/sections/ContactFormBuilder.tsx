@@ -72,7 +72,7 @@ export const ContactFormBuilder = () => {
           </div>
           <div className="space-y-2">
             <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
-              Electronic Mail
+              Email Address
             </span>
             <input
               type="email"
@@ -90,7 +90,7 @@ export const ContactFormBuilder = () => {
 
         <div className="space-y-2">
           <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
-            Telecommunication
+            Phone Number
           </span>
           <input
             type="tel"
@@ -107,11 +107,11 @@ export const ContactFormBuilder = () => {
 
         <div className="space-y-2">
           <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
-            Manifesto / Inquiry
+            Your Message
           </span>
           <textarea
             name="message"
-            placeholder="Architecture your vision here..."
+            placeholder="How can we help you?"
             rows={4}
             className={`${inputClasses} resize-none`}
             value={formData.message}
@@ -156,8 +156,8 @@ export const ContactFormBuilder = () => {
             )}
             <p className="text-sm font-medium tracking-wide">
               {formStatus === "success"
-                ? "Inquiry transmitted successfully. We will architecture a response shortly."
-                : "Transmission failure. Please re-initiate or contact us via telecommunication."}
+                ? "Message sent successfully. We will get back to you soon."
+                : "Failed to send. Please try again or call us."}
             </p>
           </motion.div>
         )}

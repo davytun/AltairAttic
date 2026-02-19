@@ -18,14 +18,15 @@ const ProductsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <span className="text-label mb-8 block">Hardware Ecosystem</span>
+            <span className="text-label mb-8 block [html[data-theme='light']_&]:text-accent">
+              Smart Living, Curated
+            </span>
             <h1 className="text-huge font-display leading-[0.85] mb-8 text-silk-white">
-              The <span className="text-accent">Collection.</span>
+              The <span className="text-accent uppercase">Catalogue.</span>
             </h1>
             <p className="text-xl md:text-2xl font-light text-silk-white/50 max-w-2xl leading-relaxed mx-auto lg:mx-0">
-              Engineering the physical layer of your environment.
-              Precision-crafted hardware designed to integrate flawlessly with
-              your life.
+              Every product we carry is hand-picked for quality, reliability,
+              and seamless integration into your home or workspace.
             </p>
           </motion.div>
         </div>
@@ -41,7 +42,7 @@ const ProductsPage = () => {
       </section>
 
       {/* Product Grid */}
-      <div className="border-t border-border-dim bg-obsidian-surface">
+      <div className="border-t border-border-dim bg-obsidian-surface [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:border-black/5">
         <ProductCatalogGrid variant="business" />
       </div>
 

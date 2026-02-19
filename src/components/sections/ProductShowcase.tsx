@@ -36,7 +36,7 @@ export const ProductShowcase = ({
   };
 
   return (
-    <section className="bg-obsidian-surface py-20 md:py-32 relative border-y border-border-dim overflow-hidden">
+    <section className="bg-obsidian-surface py-20 md:py-32 relative border-y border-border-dim overflow-hidden [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:border-gray-200">
       {/* Grid Background Pattern */}
       <GridBackground
         gridSize={70}
@@ -48,16 +48,16 @@ export const ProductShowcase = ({
       <div className="container-luxury relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12 mb-20 md:mb-32">
           <div className="max-w-3xl">
-            <span className="text-label mb-8 block">Hardware Collection</span>
+            <span className="text-label mb-8 block">Shop Our Products</span>
             <h2 className="text-5xl md:text-8xl font-display uppercase tracking-tighter leading-[0.85] text-silk-white">
-              Premier <span className="text-accent">Hardware</span> for <br />
-              <span className="text-text-muted">Smarter Living.</span>
+              Gear That <span className="text-accent">Actually</span> <br />
+              <span className="text-text-muted">Makes a Difference.</span>
             </h2>
           </div>
           <div className="lg:max-w-sm text-left lg:text-right">
-            <p className="text-lg font-light text-silk-white/50 leading-relaxed italic">
-              Our hand-picked ecosystem of devices designed for peak performance
-              and absolute reliability.
+            <p className="text-lg font-light text-silk-white/50 leading-relaxed italic [html[data-theme='light']_&]:text-gray-500">
+              Every device we sell is tested, trusted, and ready to plug into
+              your home or office — no guesswork required.
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export const ProductShowcase = ({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="group relative bg-obsidian p-8 md:p-10 rounded-4xl md:rounded-[2.5rem] border border-border-dim hover:border-accent/30 transition-all duration-700 overflow-hidden"
+              className="group relative bg-obsidian p-8 md:p-10 rounded-4xl md:rounded-[2.5rem] border border-border-dim hover:border-accent/30 transition-all duration-700 overflow-hidden [html[data-theme='light']_&]:bg-gray-50 [html[data-theme='light']_&]:border-gray-200"
             >
               {/* Product Label */}
               <div className="flex justify-between items-start mb-12">
@@ -86,15 +86,15 @@ export const ProductShowcase = ({
 
               {/* Image Container */}
               <Link
-                to={`/product/${p.id}`}
-                className="block aspect-square rounded-4xl overflow-hidden mb-12 relative bg-obsidian-muted group/img"
+                to={`/catalogue/${p.slug}`}
+                className="block aspect-square rounded-4xl overflow-hidden mb-12 relative bg-obsidian-muted group/img [html[data-theme='light']_&]:bg-gray-100"
               >
                 <img
                   src={p.images[0]} // Use first image
                   alt={p.name}
                   className="w-full h-full object-cover grayscale opacity-40 group-hover/img:grayscale-0 group-hover/img:opacity-100 group-hover/img:scale-110 transition-all duration-1000"
                 />
-                <div className="absolute top-6 right-6 px-4 py-2 bg-obsidian/80 backdrop-blur-md rounded-full border border-border-dim">
+                <div className="absolute top-6 right-6 px-4 py-2 bg-obsidian/80 backdrop-blur-md rounded-full border border-border-dim [html[data-theme='light']_&]:bg-white/90 [html[data-theme='light']_&]:border-gray-200">
                   <span className="text-xs font-black text-accent">
                     ₦{p.price.toLocaleString()}
                   </span>
@@ -124,17 +124,17 @@ export const ProductShowcase = ({
                   ))}
                 </div>
 
-                <div className="pt-4 border-t border-border-dim flex items-center justify-between">
+                <div className="pt-4 border-t border-border-dim flex items-center justify-between [html[data-theme='light']_&]:border-gray-200">
                   <button
                     onClick={() => onInquire?.(p.name)}
                     className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-black text-accent hover:text-silk-white transition-colors cursor-pointer"
                   >
-                    Inquire Now <ArrowRight className="w-3 h-3" />
+                    Get a Quote <ArrowRight className="w-3 h-3" />
                   </button>
-                  <Link to={`/product/${p.id}`}>
+                  <Link to={`/catalogue/${p.slug}`}>
                     <Button
                       size="icon"
-                      className="w-12 h-12 bg-silk-white/5 hover:bg-accent text-silk-white hover:text-obsidian rounded-full transition-all"
+                      className="w-12 h-12 bg-silk-white/5 hover:bg-accent text-silk-white hover:text-obsidian rounded-full transition-all [html[data-theme='light']_&]:bg-gray-100"
                     >
                       <ShoppingCart className="w-4 h-4" />
                     </Button>

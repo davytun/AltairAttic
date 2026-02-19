@@ -30,7 +30,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           <div>
             <h3 className="text-xl font-display font-medium text-silk-white mb-1">
               <Link
-                to={`/product/${item.id}`}
+                to={`/catalogue/${item.slug || item.id}`}
                 className="hover:text-accent transition-colors"
                 title={item.name}
               >

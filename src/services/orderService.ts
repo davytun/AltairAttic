@@ -1,27 +1,23 @@
 import apiClient from "@/lib/api";
 
-export interface OrderItem {
+export interface CreateOrderData {
   product_id: number;
   quantity: number;
-}
-
-export interface CreateOrderData {
-  customer_name: string;
-  customer_email: string;
-  customer_phone: string;
-  customer_address: string;
+  unit?: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  whatsapp?: string;
+  email?: string;
+  address: string;
+  city: string;
+  state: string;
   notes?: string;
-  items: OrderItem[];
 }
 
 export const orderService = {
   async createOrder(data: CreateOrderData) {
-    const response = await apiClient.post("/orders", data);
-    return response.data;
-  },
-
-  async getOrderByNumber(orderNumber: string) {
-    const response = await apiClient.get(`/orders/${orderNumber}`);
+    const response = await apiClient.post("/order", data);
     return response.data;
   },
 };

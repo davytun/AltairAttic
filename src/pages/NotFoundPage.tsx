@@ -68,11 +68,11 @@ const NotFoundPage = () => {
 
             <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link to="/">
-                <button className="px-10 py-4 bg-accent text-obsidian rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-xl shadow-accent/20">
+                <button className="px-10 py-4 bg-accent text-obsidian rounded-xl font-bold uppercase tracking-widest hover:bg-white transition-all transform active:scale-95 shadow-xl shadow-accent/20 [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white">
                   Return Home
                 </button>
               </Link>
-              <Link to="/products">
+              <Link to="/catalogue">
                 <button className="px-10 py-4 bg-white/5 border border-white/10 text-silk-white rounded-xl font-bold uppercase tracking-widest hover:bg-white/10 transition-all transform active:scale-95">
                   View Catalog
                 </button>

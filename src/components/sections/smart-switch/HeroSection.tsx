@@ -69,14 +69,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Professional Navigation Hierarchy */}
         <nav className="flex items-center gap-2 lg:gap-4 mb-8 lg:mb-12">
           <button
-            onClick={() => navigate("/shop")}
+            onClick={() => navigate("/catalogue")}
             className="flex items-center gap-1.5 lg:gap-2 text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-text-muted hover:text-accent transition-all group"
           >
             <ArrowLeft
               size={8}
               className="lg:w-3 lg:h-3 group-hover:-translate-x-1 transition-transform"
             />
-            Catalog
+            catalogue
           </button>
           <div className="w-0.5 h-0.5 rounded-full bg-border-dim" />
           <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-text-muted/40">
@@ -84,7 +84,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </span>
           <div className="w-0.5 h-0.5 rounded-full bg-border-dim" />
           <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-accent">
-            Signature
+            {selectedModel.name}
           </span>
         </nav>
 

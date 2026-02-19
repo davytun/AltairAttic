@@ -27,7 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const productLink =
     variant === "shop"
       ? `/shop/${product.slug || product.id}`
-      : `/product/${product.slug || product.id}`;
+      : `/catalogue/${product.slug || product.id}`;
 
   return (
     <>
@@ -36,12 +36,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="group relative bg-obsidian-surface rounded-2xl border border-border-dim hover:border-accent/30 overflow-hidden transition-all duration-300 flex flex-col h-full"
+        className="group relative bg-obsidian-surface rounded-2xl border border-border-dim hover:border-accent/30 overflow-hidden transition-all duration-300 flex flex-col h-full [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:border-black/10 [html[data-theme='light']_&:hover]:border-accent/40 [html[data-theme='light']_&]:shadow-sm"
       >
         {/* Image & Badges */}
         <Link
           to={productLink}
-          className="block relative aspect-square overflow-hidden bg-obsidian"
+          className="block relative aspect-square overflow-hidden bg-obsidian [html[data-theme='light']_&]:bg-black/5"
         >
           <img
             src={product.images[0]}
@@ -77,10 +77,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
 
           {/* Bottom: Social Proof Overlay (on hover) */}
-          {product.socialProof && (
+          {product.socialProof && product.socialProof.viewingNow > 0 && (
             <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm p-2 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-              <p className="text-[10px] text-white flex items-center justify-center gap-1">
-                🔥 {product.socialProof.viewingNow} people viewing now
+              <p className="text-[10px] text-white flex items-center justify-center gap-1 font-bold uppercase tracking-widest">
+                🔥 {product.socialProof.viewingNow} people watching now
               </p>
             </div>
           )}
@@ -147,7 +147,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               <div className="flex gap-2">
                 <Link
                   to={productLink}
-                  className="flex-1 flex items-center justify-center px-3 py-2.5 bg-white/5 border border-white/10 text-white text-[10px] font-bold uppercase tracking-wide rounded-lg hover:bg-white/10 transition-colors"
+                  className="flex-1 flex items-center justify-center px-3 py-2.5 bg-white/5 border border-white/10 text-silk-white text-[10px] font-bold uppercase tracking-wide rounded-lg hover:bg-white/10 transition-colors [html[data-theme='light']_&]:bg-black/5 [html[data-theme='light']_&]:border-black/10"
                 >
                   View
                 </Link>
@@ -176,7 +176,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             ) : (
               <Link
                 to={productLink}
-                className="w-full flex items-center justify-center px-3 py-4 bg-accent/10 border border-accent/30 text-accent text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-accent hover:text-obsidian transition-all duration-500"
+                className="w-full flex items-center justify-center px-3 py-4 bg-accent/10 border border-accent/30 text-accent text-xs font-black uppercase tracking-[0.2em] rounded-xl hover:bg-accent hover:text-obsidian transition-all duration-500 [html[data-theme='light']_&]:bg-accent/5 [html[data-theme='light']_&]:border-accent/20"
               >
                 Learn More
               </Link>

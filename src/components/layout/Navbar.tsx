@@ -50,7 +50,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="Altair Attic Limited"
-                  className="h-9 md:h-11 w-auto object-contain relative z-10 group-hover:scale-105 transition-transform duration-500"
+                  className="h-9 md:h-11 w-auto object-contain relative z-10 group-hover:scale-105 transition-transform duration-500 [html[data-theme='light']_&]:brightness-0"
                 />
               </div>
             </div>
@@ -116,7 +116,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-999 bg-obsidian backdrop-blur-xl flex flex-col items-center justify-center gap-10 px-8"
+            className="fixed inset-0 z-999 bg-obsidian backdrop-blur-xl flex flex-col items-center justify-center gap-10 px-8 [html[data-theme='light']_&]:bg-white"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.1),transparent_70%)] z-0" />
 
@@ -151,7 +151,7 @@ const Navbar = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
               >
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500">
+                  <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white">
                     Start Inquiry
                   </button>
                 </Link>

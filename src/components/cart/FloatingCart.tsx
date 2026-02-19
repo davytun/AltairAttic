@@ -57,14 +57,14 @@ const FloatingCart = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-obsidian/80 backdrop-blur-md z-100"
+              className="fixed inset-0 bg-obsidian/80 backdrop-blur-md z-100 [html[data-theme='light']_&]:bg-white/80"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-screen w-full max-w-md bg-obsidian-surface border-l border-border-dim z-101 flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 h-screen w-full max-w-md bg-obsidian-surface border-l border-border-dim z-101 flex flex-col shadow-2xl [html[data-theme='light']_&]:bg-white [html[data-theme='light']_&]:border-black/5"
             >
               {/* Header */}
               <div className="p-8 border-b border-border-dim flex items-center justify-between">
@@ -113,7 +113,7 @@ const FloatingCart = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex justify-between mb-1">
-                          <h4 className="font-bold text-sm line-clamp-1">
+                          <h4 className="font-bold text-sm line-clamp-1 text-silk-white">
                             {item.name}
                           </h4>
                           <button
@@ -161,7 +161,7 @@ const FloatingCart = () => {
                   <span className="text-xs uppercase font-black tracking-widest text-text-muted">
                     Subtotal
                   </span>
-                  <span className="text-3xl font-display font-black text-white">
+                  <span className="text-3xl font-display font-black text-silk-white">
                     {formatCurrency(getCartTotal())}
                   </span>
                 </div>
@@ -173,7 +173,7 @@ const FloatingCart = () => {
                 >
                   <button
                     disabled={cartItems.length === 0}
-                    className="w-full h-16 bg-accent text-obsidian rounded-2xl font-display font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="w-full h-16 bg-accent text-obsidian rounded-2xl font-display font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-white hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all [html[data-theme='light']_&:hover]:bg-black [html[data-theme='light']_&:hover]:text-white"
                   >
                     Proceed to Checkout
                     <ArrowRight size={18} />
