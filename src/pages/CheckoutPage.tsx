@@ -7,14 +7,9 @@ import Footer from "@/components/layout/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle,
-  Package,
   Truck,
-  AlertCircle,
-  X,
-  Send,
   Info,
   ArrowRight,
-  ShieldCheck,
   CreditCard,
   ChevronDown,
 } from "lucide-react";
@@ -75,10 +70,21 @@ const CheckoutPage: React.FC = () => {
       const firstName = formData.fullName.split(" ")[0] || "";
       const lastName =
         formData.fullName.split(" ").slice(1).join(" ") || "Customer";
+      const products = cartItems
+        .map((item) => ({
+          id: Number(item.id),
+          quantity: Math.max(1, Number(item.quantity) || 1),
+        }))
+        .filter(
+          (item) => Number.isFinite(item.id) && item.id > 0 && item.quantity >= 1,
+        );
+
+      if (products.length === 0) {
+        throw new Error("Cart is empty or has invalid items");
+      }
 
       const orderData: CreateOrderData = {
-        product_id: cartItems[0]?.id || 0,
-        quantity: cartItems[0]?.quantity || 1,
+        products,
         first_name: firstName,
         last_name: lastName,
         phone: formData.phone,
@@ -93,6 +99,7 @@ const CheckoutPage: React.FC = () => {
       const response = await orderService.createOrder(orderData);
       const orderNumber =
         response.order_number ||
+        String(response.order_id || "") ||
         response.data?.order_number ||
         `ORD-${Math.floor(Math.random() * 900000) + 100000}`;
 
