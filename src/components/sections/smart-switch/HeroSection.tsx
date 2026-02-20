@@ -70,7 +70,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <nav className="flex items-center gap-2 lg:gap-4 mb-8 lg:mb-12">
           <button
             onClick={() => navigate("/catalogue")}
-            className="flex items-center gap-1.5 lg:gap-2 text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-text-muted hover:text-accent transition-all group"
+            className="flex items-center gap-1.5 lg:gap-2 text-[10px] lg:text-[10px] font-black uppercase tracking-[0.16em] lg:tracking-[0.3em] text-text-muted hover:text-accent transition-all group"
           >
             <ArrowLeft
               size={8}
@@ -79,11 +79,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             catalogue
           </button>
           <div className="w-0.5 h-0.5 rounded-full bg-border-dim" />
-          <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-text-muted/40">
+          <span className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.16em] lg:tracking-[0.3em] text-text-muted">
             Hardware
           </span>
           <div className="w-0.5 h-0.5 rounded-full bg-border-dim" />
-          <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.3em] text-accent">
+          <span className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.16em] lg:tracking-[0.3em] text-accent">
             {selectedModel.name}
           </span>
         </nav>
@@ -114,11 +114,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   <div className="absolute bottom-4 lg:bottom-12 left-4 lg:left-12 z-20 flex flex-col gap-0.5 lg:gap-1.5 bg-obsidian/40 backdrop-blur-xl border border-border-dim p-2.5 lg:p-5 rounded-lg lg:rounded-2xl shadow-2xl">
                     <div className="flex items-center gap-1.5 lg:gap-2">
                       <div className="w-1 h-1 rounded-full bg-accent animate-pulse" />
-                      <span className="text-[6px] lg:text-[8px] font-black uppercase tracking-[0.3em] lg:tracking-[0.4em] text-text-muted">
+                      <span className="text-[9px] lg:text-[8px] font-black uppercase tracking-[0.22em] lg:tracking-[0.4em] text-text-muted">
                         Hardware Profile
                       </span>
                     </div>
-                    <span className="text-[9px] lg:text-xs font-display font-black uppercase tracking-widest text-silk-white leading-none">
+                    <span className="text-[12px] lg:text-xs font-display font-black uppercase tracking-widest text-silk-white leading-none">
                       {selectedModel.id.replace("-", " ")}
                     </span>
                   </div>
@@ -129,30 +129,30 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             {/* 2. CONFIGURATION MATRIX */}
             <div className="space-y-4 lg:space-y-8 bg-obsidian-muted/30 border border-border-dim p-5 lg:p-8 rounded-[20px] lg:rounded-[32px] backdrop-blur-3xl shadow-xl">
               <div className="flex justify-between items-end">
-                <label className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.4em] text-accent">
+                <label className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.16em] lg:tracking-[0.4em] text-accent">
                   Configuration
                 </label>
-                <span className="text-[7px] lg:text-[10px] font-bold text-text-muted/20 uppercase tracking-widest">
+                <span className="text-[10px] lg:text-[10px] font-bold text-text-muted uppercase tracking-[0.12em] lg:tracking-widest">
                   {selectedModel.id.toUpperCase()}
                 </span>
               </div>
 
-              <div className="grid grid-cols-4 gap-2 lg:gap-3">
+              <div className="grid grid-cols-4 gap-2.5 lg:gap-3">
                 {models.map((model) => (
                   <button
                     key={model.id}
                     onClick={() => setSelectedModel(model)}
                     className={cn(
-                      "relative h-12 lg:h-20 rounded-lg lg:rounded-2xl border transition-all duration-500 group overflow-hidden",
+                      "relative h-14 lg:h-20 rounded-xl lg:rounded-2xl border transition-all duration-500 group overflow-hidden",
                       selectedModel.id === model.id
-                        ? "bg-accent border-accent shadow-xl scale-[1.05]"
+                        ? "bg-accent border-accent shadow-xl scale-[1.02]"
                         : "bg-obsidian-muted border-border-dim hover:bg-obsidian-muted/80",
                     )}
                   >
                     <div className="relative z-10 flex flex-col items-center justify-center">
                       <span
                         className={cn(
-                          "text-[8px] lg:text-[9px] font-black uppercase tracking-widest transition-colors",
+                          "text-[13px] lg:text-[15px] font-black uppercase tracking-[0.03em] lg:tracking-widest leading-none transition-colors",
                           selectedModel.id === model.id
                             ? "text-white dark:text-obsidian"
                             : "text-text-muted",
@@ -182,7 +182,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     />
                   ))}
                 </div>
-                <span className="text-[8px] lg:text-[10px] font-black uppercase tracking-widest text-text-muted border-l border-border-dim pl-3">
+                <span className="text-[11px] lg:text-[10px] font-black uppercase tracking-[0.08em] lg:tracking-widest text-text-muted border-l border-border-dim pl-3">
                   {HERO.reviewsLabel}
                 </span>
               </div>
@@ -209,12 +209,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 </motion.div>
               </AnimatePresence>
               <div className="pb-1">
-                <span className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest text-text-muted/40 block leading-none">
+                <span className="text-[10px] lg:text-[9px] font-black uppercase tracking-[0.08em] lg:tracking-widest text-text-muted block leading-none">
                   {quantity > 1
                     ? `@ ${formatCurrency(selectedModel.price)}`
                     : "VAT Incl."}
                 </span>
-                <span className="text-[7px] lg:text-[9px] font-black uppercase tracking-widest text-accent leading-none mt-1 block">
+                <span className="text-[10px] lg:text-[9px] font-black uppercase tracking-[0.08em] lg:tracking-widest text-accent leading-none mt-1 block">
                   In Stock
                 </span>
               </div>
@@ -229,7 +229,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* 4.5 KEY BENEFITS GRID */}
             <div className="py-2">
-              <label className="text-[7px] lg:text-[10px] font-black uppercase tracking-[0.2em] lg:tracking-[0.4em] text-accent mb-4 lg:mb-6 block">
+              <label className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.16em] lg:tracking-[0.4em] text-accent mb-4 lg:mb-6 block">
                 Engineering Highlights
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 lg:gap-y-4 lg:gap-x-8">
@@ -244,7 +244,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                         className="text-accent lg:w-[10px] lg:h-[10px]"
                       />
                     </div>
-                    <span className="text-[10px] lg:text-[11px] font-medium text-text-muted/80 group-hover:text-silk-white transition-colors">
+                    <span className="text-[13px] lg:text-[15px] font-medium text-text-muted group-hover:text-silk-white transition-colors">
                       {benefit}
                     </span>
                   </div>
@@ -258,7 +258,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="w-1.5 h-1.5 rounded-full bg-accent animate-ping absolute inset-0" />
                 <div className="w-1.5 h-1.5 rounded-full bg-accent relative" />
               </div>
-              <span className="text-[7px] lg:text-[10px] font-black uppercase tracking-widest lg:tracking-[0.2em] text-text-muted flex items-center gap-1.5">
+              <span className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.08em] lg:tracking-[0.2em] text-text-muted flex items-center gap-1.5">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={viewingCount}
@@ -278,11 +278,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             {/* 5. ACTION SUITE */}
             <div className="space-y-6">
               {/* Delivery Status */}
-              <div className="flex items-center gap-3 text-text-muted/40 px-1">
+              <div className="flex items-center gap-3 text-text-muted px-1">
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[7px] lg:text-[9px] font-black uppercase tracking-[0.2em] text-accent">
+                <span className="text-[10px] lg:text-[9px] font-black uppercase tracking-[0.14em] text-accent">
                   Order today{" "}
-                  <span className="text-text-muted/60">
+                  <span className="text-text-muted">
                     for quick fulfillment
                   </span>
                 </span>
@@ -310,7 +310,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   </div>
 
                   <div className="flex flex-col justify-center px-4 bg-obsidian-muted/20 border border-border-dim rounded-xl lg:rounded-2xl h-14 lg:h-20">
-                    <span className="text-[7px] uppercase font-black tracking-widest text-text-muted/40 mb-0.5">
+                    <span className="text-[10px] uppercase font-black tracking-[0.08em] text-text-muted mb-0.5">
                       Subtotal
                     </span>
                     <span className="text-sm font-display font-black text-silk-white tracking-widest">
@@ -321,7 +321,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
                 <button
                   onClick={() => scrollToForm()}
-                  className="h-16 lg:h-20 bg-accent text-white dark:text-obsidian rounded-xl lg:rounded-2xl font-display font-black uppercase tracking-[0.2em] lg:tracking-[0.4em] text-[9px] lg:text-[10px] hover:shadow-[0_20px_50px_rgba(0,159,255,0.3)] lg:hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-3 lg:gap-4 group px-4 w-full"
+                  className="h-16 lg:h-20 bg-accent text-white dark:text-obsidian rounded-xl lg:rounded-2xl font-display font-black uppercase tracking-[0.12em] lg:tracking-[0.4em] text-[11px] lg:text-[10px] hover:shadow-[0_20px_50px_rgba(0,159,255,0.3)] lg:hover:scale-[1.02] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-3 lg:gap-4 group px-4 w-full"
                 >
                   <ShoppingCart size={14} className="lg:w-4 lg:h-4" />
                   <span className="whitespace-nowrap">
@@ -350,10 +350,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                     )}
                   </div>
                   <div>
-                    <div className="text-[7px] lg:text-[10px] font-black uppercase tracking-widest text-silk-white">
+                    <div className="text-[10px] lg:text-[10px] font-black uppercase tracking-[0.08em] lg:tracking-widest text-silk-white">
                       {item.title}
                     </div>
-                    <div className="text-[6px] lg:text-[8px] font-bold text-text-muted uppercase tracking-widest opacity-60">
+                    <div className="text-[9px] lg:text-[8px] font-bold text-text-muted uppercase tracking-[0.08em] lg:tracking-widest opacity-60">
                       {item.subtitle}
                     </div>
                   </div>

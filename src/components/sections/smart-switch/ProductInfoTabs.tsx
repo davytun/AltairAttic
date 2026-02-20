@@ -1,6 +1,6 @@
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Info } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronDown, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import salesData from "@/data/smart-switch-sales.json";
 
@@ -11,7 +11,7 @@ interface ProductInfoTabsProps {
 }
 
 const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
-  const [activeTab, setActiveTab] = React.useState(TABS.items[0].id);
+  const [openFaqIndex, setOpenFaqIndex] = React.useState<number | null>(0);
 
   // Map custom specs to the format the UI expects if they exist
   const displaySpecs = customSpecs
@@ -32,11 +32,11 @@ const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
     },
   };
 
-  const renderTabContent = () => {
-    const tab = TABS.items.find((t: any) => t.id === activeTab);
+  const renderTabContent = (tabId: string) => {
+    const tab = TABS.items.find((t: any) => t.id === tabId);
     if (!tab) return null;
 
-    switch (activeTab) {
+    switch (tabId) {
       case "description":
         return (
           <motion.div
@@ -91,7 +91,7 @@ const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
                 key={i}
                 className="flex justify-between items-center py-4 lg:py-6 border-b border-border-dim group hover:border-accent/30 transition-colors"
               >
-                <span className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-text-muted/40">
+                <span className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-text-muted">
                   {spec.label}
                 </span>
                 <span className="text-sm lg:text-base font-bold text-silk-white group-hover:text-accent transition-colors">
@@ -110,19 +110,27 @@ const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="max-w-4xl mx-auto space-y-12 lg:space-y-16"
+            className="max-w-5xl mx-auto"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               {tab.content.map((step: any, i: number) => (
-                <div key={i} className="relative group">
-                  <div className="text-6xl lg:text-8xl font-display font-black text-accent/10 absolute -top-10 -left-6 group-hover:text-accent/20 transition-colors">
-                    {step.step.replace("Step ", "")}
+                <div
+                  key={i}
+                  className="rounded-2xl lg:rounded-3xl border border-border-dim bg-obsidian-muted/30 p-5 lg:p-7 shadow-xl hover:border-accent/30 transition-all"
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-8 h-8 lg:w-9 lg:h-9 rounded-full border border-accent/30 bg-accent/10 text-accent flex items-center justify-center text-xs lg:text-sm font-black">
+                      {i + 1}
+                    </span>
+                    <span className="text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] text-accent">
+                      {step.step}
+                    </span>
                   </div>
-                  <div className="relative z-10 pt-4 px-2">
-                    <h3 className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-silk-white mb-3">
+                  <div className="space-y-2">
+                    <h3 className="text-sm lg:text-base font-black uppercase tracking-[0.08em] text-silk-white">
                       {step.title}
                     </h3>
-                    <p className="text-xs lg:text-sm text-text-muted leading-relaxed font-light">
+                    <p className="text-sm lg:text-base text-text-muted leading-relaxed font-light">
                       {step.desc}
                     </p>
                   </div>
@@ -140,19 +148,47 @@ const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="max-w-3xl mx-auto space-y-6 lg:space-y-8"
+            className="max-w-4xl mx-auto space-y-3 lg:space-y-4"
           >
             {tab.content.map((item: any, i: number) => (
               <div
                 key={i}
-                className="p-8 lg:p-10 rounded-[32px] bg-obsidian-muted/30 border border-border-dim hover:border-accent/20 transition-all group shadow-xl"
+                className={cn(
+                  "rounded-2xl lg:rounded-3xl border bg-obsidian-muted/30 transition-all shadow-xl overflow-hidden",
+                  openFaqIndex === i
+                    ? "border-accent/35"
+                    : "border-border-dim hover:border-accent/20",
+                )}
               >
-                <h4 className="text-lg lg:text-xl font-bold text-silk-white mb-4 group-hover:text-accent transition-colors">
-                  {item.q}
-                </h4>
-                <p className="text-[13px] lg:text-base text-text-muted leading-relaxed font-light">
-                  {item.a}
-                </p>
+                <button
+                  onClick={() =>
+                    setOpenFaqIndex((prev) => (prev === i ? null : i))
+                  }
+                  className="w-full px-5 lg:px-7 py-5 lg:py-6 flex items-center justify-between gap-4 text-left"
+                >
+                  <h4 className="text-base lg:text-lg font-bold text-silk-white">
+                    {item.q}
+                  </h4>
+                  <ChevronDown
+                    size={18}
+                    className={cn(
+                      "shrink-0 text-accent transition-transform duration-300",
+                      openFaqIndex === i && "rotate-180",
+                    )}
+                  />
+                </button>
+                <div
+                  className={cn(
+                    "grid transition-[grid-template-rows] duration-300 ease-out",
+                    openFaqIndex === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-5 lg:px-7 pb-5 lg:pb-6 text-sm lg:text-base text-text-muted leading-relaxed font-light border-t border-border-dim">
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
               </div>
             ))}
           </motion.div>
@@ -173,26 +209,17 @@ const ProductInfoTabs: React.FC<ProductInfoTabsProps> = ({ customSpecs }) => {
               {TABS.badge}
             </span>
           </div>
-          <div className="flex flex-wrap justify-center gap-3 lg:gap-8 bg-obsidian-muted/40 p-2 lg:p-4 rounded-full border border-border-dim w-fit mx-auto backdrop-blur-3xl shadow-2xl">
-            {TABS.items.map((tab: any) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  "px-6 lg:px-10 py-3 lg:py-4 rounded-full text-[10px] lg:text-xs font-black uppercase tracking-widest transition-all",
-                  activeTab === tab.id
-                    ? "bg-accent text-white dark:text-obsidian shadow-xl scale-105"
-                    : "text-text-muted hover:text-silk-white",
-                )}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
         </div>
 
-        <div className="min-h-[400px] lg:min-h-[600px] relative">
-          <AnimatePresence mode="wait">{renderTabContent()}</AnimatePresence>
+        <div className="space-y-16 lg:space-y-24">
+          {TABS.items.map((tab: any) => (
+            <div key={tab.id} className="space-y-6 lg:space-y-8">
+              <h3 className="text-sm lg:text-lg font-black uppercase tracking-[0.2em] text-accent">
+                {tab.label}
+              </h3>
+              {renderTabContent(tab.id)}
+            </div>
+          ))}
         </div>
       </div>
     </section>

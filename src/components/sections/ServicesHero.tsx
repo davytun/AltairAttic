@@ -28,7 +28,7 @@ export const ServicesHero = () => {
             </span>
             <h1 className="text-huge md:text-[14vw] font-display font-black leading-[0.75] tracking-tighter uppercase mb-20 text-silk-white">
               Our <br />
-              <span className="text-silk-white/10 italic font-serif lowercase tracking-normal">
+              <span className="text-silk-white/60 italic font-serif lowercase tracking-normal">
                 expertise.
               </span>
             </h1>

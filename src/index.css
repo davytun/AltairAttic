@@ -59,8 +59,8 @@
   --color-brand-dim: rgba(0, 102, 204, 0.1);
 
   --text-main: #020617;
-  --text-secondary: #334155;
-  --text-muted: #64748b; /* Standard Slate 500 for better secondary readability */
+  --text-secondary: #1e293b;
+  --text-muted: #334155; /* Darker slate for stronger contrast on white backgrounds */
 
   --border-dim: rgba(15, 23, 42, 0.08);
 

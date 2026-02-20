@@ -201,7 +201,7 @@ export const Hero = () => {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
-        <span className="text-[8px] uppercase tracking-[0.4em] text-text-muted/50 font-black">
+        <span className="text-[8px] uppercase tracking-[0.4em] text-text-muted font-black">
           Scroll
         </span>
         <div className="w-px h-10 bg-linear-to-b from-accent/50 to-transparent animate-bounce" />

@@ -170,7 +170,7 @@ export const Contact = ({
                     <Button
                       onClick={() => setIsSuccess(false)}
                       variant="outline"
-                      className="border-border-dim text-silk-white/50 hover:text-silk-white"
+                      className="border-border-dim text-text-muted hover:text-silk-white"
                     >
                       Send Another
                     </Button>
@@ -181,7 +181,7 @@ export const Contact = ({
                     className="space-y-12 relative z-10 w-full"
                   >
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-text-muted font-black">
                         Your Name
                       </label>
                       <input
@@ -191,12 +191,12 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-silk-white/10 text-silk-white"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
                         placeholder="Enter name"
                       />
                     </div>
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-text-muted font-black">
                         Email Address
                       </label>
                       <input
@@ -206,12 +206,12 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-silk-white/10 text-silk-white"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
                         placeholder="your@email.com"
                       />
                     </div>
                     <div className="space-y-4">
-                      <label className="text-[9px] uppercase tracking-[0.4em] text-silk-white/20 font-black">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-text-muted font-black">
                         Your Message
                       </label>
                       <textarea
@@ -221,8 +221,8 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/20 text-silk-white"
-                        placeholder="Tell us your biggest tech challenge"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
+                        placeholder="Tell us your biggest tech challenge" 
                       />
                     </div>
 

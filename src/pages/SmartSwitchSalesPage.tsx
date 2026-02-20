@@ -73,26 +73,6 @@ const SmartSwitchSalesPage = () => {
     fetchProduct();
   }, []);
 
-  const [showFloatingCTA, setShowFloatingCTA] = useState(false);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      // Show floating CTA after scrolling past hero (approx 700px)
-      // and hide it when near the form
-      const scrollY = window.scrollY;
-      const formTop = formRef.current?.offsetTop || 0;
-
-      if (scrollY > 700 && scrollY < formTop - 600) {
-        setShowFloatingCTA(true);
-      } else {
-        setShowFloatingCTA(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const scrollToForm = (model?: (typeof STATIC_MODELS)[0]) => {
     if (model) setSelectedModel(model);
     formRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -155,7 +135,7 @@ const SmartSwitchSalesPage = () => {
           selectedModel={selectedModel}
           quantity={quantity}
           scrollToForm={() => scrollToForm()}
-          show={showFloatingCTA}
+          show={true}
         />
 
         <HeroSection

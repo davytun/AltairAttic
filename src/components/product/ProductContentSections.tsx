@@ -194,7 +194,7 @@ export const ProductContentSections: React.FC<ProductContentSectionsProps> = ({
                   ))}
                 </div>
                 {section.caption && (
-                  <p className="text-center text-base text-text-muted/50 font-medium italic">
+                  <p className="text-center text-base text-text-muted font-medium italic">
                     {section.caption}
                   </p>
                 )}
@@ -212,7 +212,7 @@ export const ProductContentSections: React.FC<ProductContentSectionsProps> = ({
                   />
                 </div>
                 {section.caption && (
-                  <p className="text-center text-base text-text-muted/50 font-medium italic">
+                  <p className="text-center text-base text-text-muted font-medium italic">
                     {section.caption}
                   </p>
                 )}

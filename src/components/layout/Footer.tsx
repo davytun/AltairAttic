@@ -2,19 +2,16 @@ import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Twitter, ArrowUp } from "lucide-react";
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   return (
-    <footer className="bg-obsidian py-16 md:py-32 border-t border-border-dim">
+    <footer className="bg-obsidian py-12 sm:py-16 md:py-32 border-t border-border-dim">
       <div className="container-luxury">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-20 mb-20 md:mb-32 items-end">
-          <div className="md:col-span-6 space-y-12">
-            <h2 className="text-4xl md:text-7xl font-display leading-[0.9] uppercase tracking-tighter text-silk-white">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 sm:gap-16 md:gap-20 mb-16 sm:mb-20 md:mb-32 items-end">
+          <div className="md:col-span-6 space-y-8 sm:space-y-12 text-center md:text-left">
+            <h2 className="text-3xl sm:text-4xl md:text-7xl font-display leading-[0.9] uppercase tracking-tighter text-silk-white">
               Empowering <br /> Your World.
             </h2>
-            <div className="flex gap-8">
+            <div className="flex gap-8 justify-center md:justify-start">
               {[Instagram, Linkedin, Twitter].map((Icon, i) => (
                 <a
                   key={i}
@@ -27,7 +24,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="md:col-span-6 grid grid-cols-2 gap-12">
+          <div className="md:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12 text-center sm:text-left">
             <div className="space-y-8">
               <span className="text-[10px] uppercase tracking-[0.4em] text-text-muted font-bold block">
                 Company
@@ -58,7 +55,8 @@ const Footer = () => {
                 Office
               </span>
               <p className="text-xs text-text-muted leading-relaxed uppercase tracking-widest">
-                3rd floor, Opposite Cathedral of St. Peter Ang. Sec. Sch, <br />
+                3rd floor, Opposite Cathedral of St. Peter Ang. Sec. Sch,{" "}
+                <br className="hidden sm:block" />
                 Along Oba Ademola Maternity Hospital, Ake, Abeokuta.
               </p>
               <div className="space-y-2">
@@ -73,29 +71,27 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-border-dim flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-6">
+        <div className="pt-10 sm:pt-12 border-t border-border-dim flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left">
             <Link to="/" className="block">
               <img
-                src="/logo.png"
+                src="/fLogo.png"
                 alt="Altair Logo"
-                className="h-6 w-auto object-contain"
+                className="h-10 w-auto object-contain sm:hidden"
+              />
+              <img
+                src="/logo.png"
+                alt="Altair Attic"
+                className="hidden h-8 sm:block sm:h-10 w-auto object-contain"
               />
             </Link>
-            <p className="text-[10px] uppercase tracking-widest text-text-muted">
-              © 2025 Altair Attic Limited. All Rights Reserved.
+            <p className="text-[10px] uppercase tracking-[0.2em] sm:tracking-widest text-text-muted">
+              © 2025 Altair Attic Limited.
+            </p>
+            <p className="text-[10px] uppercase tracking-[0.2em] sm:tracking-widest text-text-muted">
+              All Rights Reserved.
             </p>
           </div>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-3 text-[10px] uppercase tracking-widest text-text-muted hover:text-silk-white transition-colors group"
-          >
-            Back to Top{" "}
-            <div className="p-3 rounded-full border border-border-dim group-hover:bg-accent group-hover:text-obsidian transition-all">
-              <ArrowUp className="w-3 h-3" />
-            </div>
-          </button>
         </div>
       </div>
     </footer>

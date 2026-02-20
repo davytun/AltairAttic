@@ -25,7 +25,7 @@ const ComparisonSection = () => {
                 {COMPARISON.titleAccent}
               </span>
             </h2>
-            <p className="text-text-muted mt-4 lg:mt-6 text-[8px] lg:text-[10px] uppercase font-black tracking-[0.3em] lg:tracking-[0.4em]">
+            <p className="text-text-muted mt-4 lg:mt-6 text-[10px] lg:text-[10px] uppercase font-black tracking-[0.16em] lg:tracking-[0.4em]">
               {COMPARISON.badge}
             </p>
           </motion.div>
@@ -47,10 +47,10 @@ const ComparisonSection = () => {
               </div>
             </div>
             <div className="p-4 lg:p-10 text-center hidden md:flex flex-col justify-end">
-              <div className="text-text-muted font-display font-black text-xl uppercase opacity-60">
+              <div className="text-text-muted font-display font-black text-xl uppercase">
                 Others
               </div>
-              <div className="text-[8px] uppercase font-black tracking-widest text-text-muted/60 mt-2 italic">
+              <div className="text-[10px] uppercase font-black tracking-widest text-text-muted mt-2 italic">
                 Generic
               </div>
             </div>
@@ -67,7 +67,7 @@ const ComparisonSection = () => {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="grid grid-cols-2 md:grid-cols-3 hover:bg-obsidian-surface transition-colors group"
               >
-                <div className="p-4 lg:p-10 font-bold text-[11px] lg:text-sm text-text-muted/60 group-hover:text-silk-white transition-colors flex items-center">
+                <div className="p-4 lg:p-10 font-bold text-[11px] lg:text-sm text-text-muted group-hover:text-silk-white transition-colors flex items-center">
                   {row.f}
                 </div>
 
@@ -81,9 +81,9 @@ const ComparisonSection = () => {
                   </div>
                 </div>
 
-                <div className="p-4 lg:p-10 hidden md:flex items-center justify-center text-text-muted/60 text-[11px] italic font-light">
+                <div className="p-4 lg:p-10 hidden md:flex items-center justify-center text-text-muted text-[11px] italic font-light">
                   <div className="flex items-center gap-2">
-                    <XCircle size={12} className="opacity-40 text-red-500/50" />
+                    <XCircle size={12} className="text-red-500" />
                     {row.o}
                   </div>
                 </div>
@@ -93,7 +93,7 @@ const ComparisonSection = () => {
 
           {/* Footer Quality Guarantee */}
           <div className="p-6 lg:p-8 border-t border-border-dim bg-obsidian-muted/40 text-center">
-            <p className="text-[8px] lg:text-[10px] uppercase font-black tracking-[0.2em] lg:tracking-[0.3em] text-text-muted/40 italic">
+            <p className="text-[10px] lg:text-[10px] uppercase font-black tracking-[0.16em] lg:tracking-[0.3em] text-text-muted italic">
               {COMPARISON.guarantee}
             </p>
           </div>

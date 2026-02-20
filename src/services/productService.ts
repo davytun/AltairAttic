@@ -4,6 +4,15 @@ import productsData from "../data/products.json";
 
 const defaultImage = "https://i.ebayimg.com/images/g/NtwAAeSw1khoGv4e/s-l1600.webp";
 
+function generateFallbackId(slug?: string): number {
+  if (!slug) return Date.now();
+  let hash = 0;
+  for (let i = 0; i < slug.length; i += 1) {
+    hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) || Date.now();
+}
+
 function resolveImageUrl(url: string | null | undefined): string {
   if (!url) return defaultImage;
   if (url.startsWith("http://") || url.startsWith("https://")) return url;
@@ -67,7 +76,7 @@ const transformProduct = (apiProduct: any): Product => {
   const localProduct = (productsData as any[]).find(p => p.id === Number(apiProduct.id) || p.slug === apiProduct.slug);
 
   return {
-    id: Number(apiProduct.id),
+    id: Number(apiProduct.id) || generateFallbackId(apiProduct.slug),
     slug: apiProduct.slug || localProduct?.slug,
     name: apiProduct.name,
     category: apiProduct.category?.name || apiProduct.category_name || "Product",
@@ -138,7 +147,16 @@ export const productService = {
       rawData = response.data.data;
     }
     if (!Array.isArray(rawData)) return [];
-    return rawData; // Catalogue list is simpler
+    return rawData.map((item: any) =>
+      transformProduct({
+        ...item,
+        id: item.id ?? generateFallbackId(item.slug),
+        image_url: item.image_url || item.product_image,
+        stock_quantity: item.stock_quantity ?? 10,
+        specifications: item.specifications || {},
+        features: item.features || [],
+      }),
+    );
   },
 
   async getCatalogueBySlug(slug: string) {

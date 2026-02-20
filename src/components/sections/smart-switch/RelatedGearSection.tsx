@@ -9,6 +9,9 @@ const { RELATED_GEAR } = salesData;
 
 const RelatedGearSection = () => {
   const navigate = useNavigate();
+  const hasItems = Array.isArray(RELATED_GEAR.items) && RELATED_GEAR.items.length > 0;
+
+  if (!hasItems) return null;
 
   return (
     <section className="py-24 lg:py-48 bg-obsidian relative overflow-hidden transition-colors duration-500">
@@ -72,9 +75,11 @@ const RelatedGearSection = () => {
                     {formatCurrency(item.price)}
                   </span>
                 </div>
-                <div className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-text-muted/40">
-                  Signature Hardware Line
-                </div>
+                {item.label && (
+                  <div className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-text-muted">
+                    {item.label}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

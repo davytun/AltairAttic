@@ -118,7 +118,7 @@ const FloatingCart = () => {
                           </h4>
                           <button
                             onClick={() => removeFromCart(item.id)}
-                            className="text-white/20 hover:text-red-500 transition-colors"
+                            className="text-white/20 hover:text-red-500"
                           >
                             <Trash2 size={14} />
                           </button>

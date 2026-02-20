@@ -49,7 +49,7 @@ const FloatingCTA: React.FC<FloatingCTAProps> = ({
                 <div className="text-base font-display font-black text-silk-white leading-none">
                   {formatCurrency(selectedModel.price * quantity)}
                   {quantity > 1 && (
-                    <span className="text-[10px] text-text-muted/40 ml-2 font-black uppercase tracking-widest">
+                    <span className="text-[10px] text-text-muted ml-2 font-black uppercase tracking-widest">
                       ({quantity} Units)
                     </span>
                   )}

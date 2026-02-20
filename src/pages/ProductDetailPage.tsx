@@ -19,7 +19,7 @@ import { ProductContentSections } from "@/components/product/ProductContentSecti
 
 import { productService } from "@/services/productService";
 import { orderService, CreateOrderData } from "@/services/orderService";
-import { Product } from "@/store/useCartStore";
+import { Product, useCartStore } from "@/store/useCartStore";
 import { formatCurrency } from "@/lib/formatCurrency";
 import { NIGERIAN_STATES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -105,6 +105,7 @@ const ProductDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const formRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -114,6 +115,9 @@ const ProductDetailPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const cartItems = useCartStore((state) => state.cartItems);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -129,6 +133,10 @@ const ProductDetailPage = () => {
   const scrollToOrderForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  const isCurrentProductInCart = product
+    ? cartItems.some((item) => item.id === product.id)
+    : false;
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -158,18 +166,20 @@ const ProductDetailPage = () => {
   }, [slug]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const formTop = formRef.current?.offsetTop || 0;
-      if (scrollY > 700 && scrollY < formTop - 600) {
-        setShowFloatingCTA(true);
-      } else {
+    const updateFloatingCTA = () => {
+      if (isCurrentProductInCart) {
         setShowFloatingCTA(false);
+        return;
       }
+
+      const heroTop = heroRef.current?.offsetTop ?? 0;
+      setShowFloatingCTA(window.scrollY >= Math.max(0, heroTop - 140));
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    updateFloatingCTA();
+    window.addEventListener("scroll", updateFloatingCTA);
+    return () => window.removeEventListener("scroll", updateFloatingCTA);
+  }, [isCurrentProductInCart, product?.id]);
 
   const handleFormChange = (
     e: React.ChangeEvent<
@@ -210,6 +220,14 @@ const ProductDetailPage = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    setIsAddingToCart(true);
+    addToCart(product, quantity);
+    setShowFloatingCTA(false);
+    setTimeout(() => setIsAddingToCart(false), 1200);
   };
 
   if (isLoading) {
@@ -271,7 +289,7 @@ const ProductDetailPage = () => {
 
         {/* FLOATING CTA: IMMERSIVE ACTION BAR */}
         <AnimatePresence>
-          {showFloatingCTA && (
+          {showFloatingCTA && !isCurrentProductInCart && (
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -295,7 +313,7 @@ const ProductDetailPage = () => {
                     <div className="text-base font-display font-bold text-silk-white leading-none">
                       {formatCurrency(product.price * quantity)}
                       {quantity > 1 && (
-                        <span className="text-xs text-text-muted/40 ml-2">
+                        <span className="text-xs text-text-muted ml-2">
                           ({quantity} Items)
                         </span>
                       )}
@@ -326,7 +344,10 @@ const ProductDetailPage = () => {
         </AnimatePresence>
 
         {/* HERO SECTION */}
-        <section className="relative py-12 lg:py-16 border-b border-border-dim">
+        <section
+          ref={heroRef}
+          className="relative py-12 lg:py-16 border-b border-border-dim"
+        >
           <div className="container-luxury relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Image Matrix */}
@@ -418,7 +439,7 @@ const ProductDetailPage = () => {
                 <div className="p-6 lg:p-10 rounded-3xl bg-obsidian-surface border border-border-dim space-y-8">
                   <div className="flex items-baseline justify-between">
                     <div>
-                      <div className="text-xs uppercase tracking-wider text-text-muted/60 mb-1">
+                      <div className="text-xs uppercase tracking-wider text-text-muted mb-1">
                         Price
                       </div>
                       <div className="text-3xl lg:text-4xl font-display font-bold text-silk-white tabular-nums">
@@ -427,7 +448,7 @@ const ProductDetailPage = () => {
                     </div>
                     {product.originalPrice && (
                       <div className="text-right">
-                        <div className="text-sm text-text-muted/40 line-through tabular-nums">
+                        <div className="text-sm text-text-muted line-through tabular-nums">
                           {formatCurrency(product.originalPrice)}
                         </div>
                       </div>
@@ -461,7 +482,18 @@ const ProductDetailPage = () => {
                         className="group-hover:translate-x-1 transition-transform"
                       />
                     </button>
-                    <div className="text-center text-xs text-text-muted/50">
+                    <button
+                      onClick={handleAddToCart}
+                      className={cn(
+                        "w-full h-12 rounded-xl font-bold uppercase tracking-wide text-xs transition-all active:scale-[0.98] border",
+                        isAddingToCart
+                          ? "bg-green-500/15 text-green-400 border-green-500/40"
+                          : "bg-obsidian-muted text-silk-white border-border-dim hover:border-accent/40 hover:text-accent",
+                      )}
+                    >
+                      {isAddingToCart ? "Added to Cart" : "Add to Cart"}
+                    </button>
+                    <div className="text-center text-xs text-text-muted">
                       Dispatched within 24 hours.
                     </div>
                   </div>
@@ -491,11 +523,10 @@ const ProductDetailPage = () => {
                     ([key, value], idx, arr) => (
                       <div
                         key={idx}
-                        className={`grid grid-cols-2 p-5 ${
-                          idx !== arr.length - 1
+                        className={`grid grid-cols-2 p-5 ${idx !== arr.length - 1
                             ? "border-b border-border-dim"
                             : ""
-                        }`}
+                          }`}
                       >
                         <dt className="text-xs uppercase tracking-wider text-text-muted font-semibold">
                           {key}
@@ -560,7 +591,7 @@ const ProductDetailPage = () => {
                       <div className="text-xs font-bold text-silk-white uppercase tracking-wide">
                         {review.author}
                       </div>
-                      <div className="text-[10px] text-text-muted/50">
+                      <div className="text-[10px] text-text-muted">
                         Verified Buyer
                       </div>
                     </div>
@@ -601,7 +632,7 @@ const ProductDetailPage = () => {
                         value={formData.fullName}
                         onChange={handleFormChange}
                         placeholder="Your Name"
-                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted/50"
+                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
                     <div className="space-y-2">
@@ -614,7 +645,7 @@ const ProductDetailPage = () => {
                         value={formData.phone}
                         onChange={handleFormChange}
                         placeholder="+234..."
-                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted/50"
+                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
                     <div className="space-y-2">
@@ -627,7 +658,7 @@ const ProductDetailPage = () => {
                         value={formData.whatsapp}
                         onChange={handleFormChange}
                         placeholder="+234..."
-                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted/50"
+                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
                     <div className="space-y-2">
@@ -641,7 +672,7 @@ const ProductDetailPage = () => {
                         value={formData.email}
                         onChange={handleFormChange}
                         placeholder="your@email.com"
-                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted/50"
+                        className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
                     <div className="space-y-2">
@@ -690,7 +721,7 @@ const ProductDetailPage = () => {
                         onChange={handleFormChange}
                         rows={3}
                         placeholder="Full street address..."
-                        className="w-full bg-obsidian-surface border border-border-dim rounded-xl p-4 outline-none focus:border-accent transition-colors resize-none text-sm text-silk-white placeholder:text-text-muted/50"
+                        className="w-full bg-obsidian-surface border border-border-dim rounded-xl p-4 outline-none focus:border-accent transition-colors resize-none text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
                     <div className="md:col-span-2 space-y-2">

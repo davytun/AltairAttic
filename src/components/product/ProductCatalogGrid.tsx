@@ -26,10 +26,10 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
   React.useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await productService.getProducts();
-        // Since useCartStore's Product has slightly different fields than what the API might return after transformation,
-        // we might need to ensure compatibility. But productService.transformProduct should handle it.
-        // We'll cast to any for now to avoid strict type issues if they differ slightly.
+        const data =
+          variant === "business"
+            ? await productService.getCatalogue()
+            : await productService.getProducts();
         setProducts(data as any);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -38,7 +38,7 @@ const ProductCatalogGrid: React.FC<ProductCatalogGridProps> = ({
       }
     };
     fetchProducts();
-  }, []);
+  }, [variant]);
 
   // Extract unique categories
   const categories = ["All", ...new Set(products.map((p) => p.category))];

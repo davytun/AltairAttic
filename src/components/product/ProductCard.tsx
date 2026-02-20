@@ -6,6 +6,9 @@ import { formatCurrency } from "@/lib/formatCurrency";
 import { ShoppingCart, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const FALLBACK_PRODUCT_IMAGE =
+  "https://i.ebayimg.com/images/g/NtwAAeSw1khoGv4e/s-l1600.webp";
+
 interface ProductCardProps {
   product: Product;
   variant?: "business" | "shop";
@@ -45,6 +48,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         >
           <img
             src={product.images[0]}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = FALLBACK_PRODUCT_IMAGE;
+            }}
             alt={product.name}
             className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
           />
@@ -109,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div className="flex items-center gap-2 mb-2">
               <div className="flex items-center gap-0.5">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <span
+                  <span 
                     key={star}
                     className={`text-[10px] ${star <= Math.round(product.socialProof?.rating ?? 0) ? "text-yellow-400" : "text-silk-white/10"}`}
                   >

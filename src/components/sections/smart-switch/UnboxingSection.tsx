@@ -54,7 +54,7 @@ const UnboxingSection = () => {
                   <p className="text-[13px] lg:text-sm font-bold text-silk-white mb-1">
                     {UNBOXING.checkedLabel}
                   </p>
-                  <p className="text-[11px] lg:text-xs text-text-muted/40 italic">
+                  <p className="text-[11px] lg:text-xs text-text-muted italic">
                     {UNBOXING.certifiedLabel}
                   </p>
                 </div>
@@ -97,7 +97,7 @@ const UnboxingSection = () => {
                 <h3 className="text-base lg:text-lg font-bold text-silk-white mb-2 lg:mb-3">
                   {item.name}
                 </h3>
-                <p className="text-[12px] lg:text-[13px] text-text-muted/40 font-light leading-relaxed">
+                <p className="text-[12px] lg:text-[13px] text-text-muted font-light leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>

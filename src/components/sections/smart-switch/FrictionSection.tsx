@@ -16,7 +16,7 @@ const FrictionSection = () => {
             </div>
             <h2 className="text-3xl lg:text-5xl font-display font-black uppercase mb-6 lg:mb-8 leading-[1.1] text-silk-white">
               {FRICTION.title} <br />
-              <span className="text-text-muted/30">
+              <span className="text-text-muted">
                 {FRICTION.titleSubtitle}
               </span>
             </h2>
@@ -38,7 +38,7 @@ const FrictionSection = () => {
               <div className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-silk-white mb-4 tracking-tighter">
                 {FRICTION.billBleed}
               </div>
-              <p className="text-[10px] lg:text-sm text-text-muted/40 italic leading-tight">
+              <p className="text-[10px] lg:text-sm text-text-muted italic leading-tight">
                 {FRICTION.billBleedNote}
               </p>
             </div>
@@ -60,7 +60,7 @@ const FrictionSection = () => {
                 <h3 className="text-[10px] lg:text-xs font-black uppercase tracking-widest text-silk-white mb-3 lg:mb-4">
                   {point.title}
                 </h3>
-                <p className="text-[11px] lg:text-sm text-text-muted/40 font-light leading-relaxed">
+                <p className="text-[11px] lg:text-sm text-text-muted font-light leading-relaxed">
                   {point.text}
                 </p>
               </motion.div>

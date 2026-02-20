@@ -84,7 +84,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ customReviews }) => {
                   <span className="text-3xl lg:text-4xl font-display font-black text-silk-white leading-none mb-2 tabular-nums">
                     {stat.value}
                   </span>
-                  <span className="text-[9px] lg:text-[11px] font-black uppercase tracking-widest text-text-muted/40">
+                  <span className="text-[9px] lg:text-[11px] font-black uppercase tracking-widest text-text-muted">
                     {stat.label}
                   </span>
                 </div>
@@ -159,14 +159,14 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ customReviews }) => {
                         <div className="text-sm font-bold text-silk-white mb-1">
                           {review.u}
                         </div>
-                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted/40">
+                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-muted">
                           <MapPin size={10} />
                           {review.d}
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-[8px] uppercase font-black tracking-widest text-text-muted/20 mb-1">
+                      <div className="text-[8px] uppercase font-black tracking-widest text-text-muted mb-1">
                         Model
                       </div>
                       <div className="text-[10px] font-bold text-accent/60 uppercase">
@@ -177,7 +177,7 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ customReviews }) => {
 
                   {/* Interaction Footer */}
                   <div className="flex items-center justify-between gap-4">
-                    <span className="text-[9px] font-black uppercase tracking-widest text-text-muted/40">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">
                       Helpful?
                     </span>
                     <div className="flex items-center gap-2">
@@ -199,9 +199,9 @@ const ReviewsSection: React.FC<ReviewsSectionProps> = ({ customReviews }) => {
                       >
                         <ThumbsDown
                           size={12}
-                          className="text-text-muted/40 group-hover/btn:scale-110 transition-transform"
+                          className="text-text-muted group-hover/btn:scale-110 transition-transform"
                         />
-                        <span className="text-[11px] font-bold text-text-muted/40 tabular-nums">
+                        <span className="text-[11px] font-bold text-text-muted tabular-nums">
                           {helpfulCounts[i]?.down || 0}
                         </span>
                       </button>

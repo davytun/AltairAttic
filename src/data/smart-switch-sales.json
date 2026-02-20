@@ -310,26 +310,7 @@
     "title": "Sync with",
     "titleAccent": "Successors.",
     "badge": "Expand your ecosystem with elite hardware",
-    "items": [
-      {
-        "name": "Smart LED Bulb Kit",
-        "price": 45000,
-        "img": "https://m.media-amazon.com/images/I/511hdAqgLTL._AC_UF894,1000_QL80_.jpg",
-        "slug": "smart-led-bulb-kit"
-      },
-      {
-        "name": "Elite Smart Lock v2",
-        "price": 185000,
-        "img": "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=800&auto=format&fit=crop",
-        "slug": "elite-smart-lock"
-      },
-      {
-        "name": "Motion Sensor Pro",
-        "price": 12000,
-        "img": "https://images.unsplash.com/photo-1591130901221-c66254779268?q=80&w=800&auto=format&fit=crop",
-        "slug": "motion-sensor"
-      }
-    ]
+    "items": []
   },
   "TABS": {
     "badge": "Product Knowledge",
