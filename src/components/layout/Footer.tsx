@@ -80,7 +80,7 @@ const Footer = () => {
                 className="h-10 w-auto object-contain sm:hidden"
               />
               <img
-                src="/logo.png"
+                src="/fLogo.png"
                 alt="Altair Attic"
                 className="hidden h-8 sm:block sm:h-10 w-auto object-contain"
               />
