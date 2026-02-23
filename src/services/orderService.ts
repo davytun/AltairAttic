@@ -6,16 +6,14 @@ export interface OrderProductItem {
 }
 
 interface OrderCustomerFields {
-  first_name: string;
-  last_name: string;
+  name: string;
   phone: string;
   address: string;
   city: string;
   state: string;
-  whatsapp?: string;
   email?: string;
+  whatsapp?: string;
   notes?: string;
-  unit?: string;
 }
 
 export interface CreateSingleOrderData extends OrderCustomerFields {
@@ -57,8 +55,7 @@ function toOrderBody(
   data: CreateOrderData,
 ): Record<string, string | number | OrderProductItem[]> {
   const body: Record<string, string | number | OrderProductItem[]> = {
-    first_name: data.first_name ?? "",
-    last_name: data.last_name ?? "",
+    name: (data.name ?? "").trim(),
     phone: data.phone ?? "",
     address: data.address ?? "",
     city: data.city ?? "",
@@ -72,9 +69,8 @@ function toOrderBody(
     body.quantity = Math.max(1, Number(data.quantity) || 1);
   }
 
-  if (data.unit != null && data.unit !== "") body.unit = data.unit;
-  if (data.whatsapp != null && data.whatsapp !== "") body.whatsapp = data.whatsapp;
   if (data.email != null && data.email !== "") body.email = data.email;
+  if (data.whatsapp != null && data.whatsapp !== "") body.whatsapp = data.whatsapp;
   if (data.notes != null && data.notes !== "") body.notes = data.notes;
   return body;
 }

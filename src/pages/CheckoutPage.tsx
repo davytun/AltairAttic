@@ -17,8 +17,10 @@ import { orderService, CreateOrderData } from "@/services/orderService";
 import { formatCurrency } from "@/lib/formatCurrency";
 import { NIGERIAN_STATES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/providers/ThemeProvider";
 
 const CheckoutPage: React.FC = () => {
+  const { theme } = useTheme();
   const cartItems = useCartStore((state) => state.cartItems);
   const getCartTotal = useCartStore((state) => state.getCartTotal);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -67,9 +69,6 @@ const CheckoutPage: React.FC = () => {
     setError(null);
 
     try {
-      const firstName = formData.fullName.split(" ")[0] || "";
-      const lastName =
-        formData.fullName.split(" ").slice(1).join(" ") || "Customer";
       const products = cartItems
         .map((item) => ({
           id: Number(item.id),
@@ -85,15 +84,14 @@ const CheckoutPage: React.FC = () => {
 
       const orderData: CreateOrderData = {
         products,
-        first_name: firstName,
-        last_name: lastName,
+        name: formData.fullName.trim(),
         phone: formData.phone,
-        whatsapp: formData.whatsapp,
-        email: formData.email,
         address: formData.address,
         city: formData.city,
         state: formData.state,
-        notes: `FULL CART ORDER. Items: ${cartItems.map((item) => `${item.name} (x${item.quantity})`).join(", ")}. ${formData.notes}`,
+        whatsapp: formData.whatsapp || undefined,
+        email: formData.email || undefined,
+        notes: formData.notes ? formData.notes.trim() : undefined,
       };
 
       const response = await orderService.createOrder(orderData);
@@ -449,7 +447,12 @@ const CheckoutPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 bg-obsidian-surface/95 backdrop-blur-2xl flex items-center justify-center p-6 text-center [html[data-theme='light']_&]:bg-white/95"
+            className={cn(
+              "fixed inset-0 z-100 backdrop-blur-2xl flex items-center justify-center p-6 text-center",
+              theme === "light"
+                ? "bg-white/95 text-slate-900"
+                : "bg-obsidian-surface/95 text-silk-white",
+            )}
           >
             <motion.div
               initial={{ scale: 0.9, y: 20 }}
@@ -466,28 +469,45 @@ const CheckoutPage: React.FC = () => {
               </motion.div>
 
               <div className="space-y-4">
-                <h2 className="text-4xl md:text-6xl font-display font-black uppercase leading-[0.85] mb-3">
+                <h2 className={cn(
+                  "text-4xl md:text-6xl font-display font-black uppercase leading-[0.85] mb-3",
+                  theme === "light" ? "text-slate-900" : "text-silk-white",
+                )}>
                   Order <br />
                   <span className="text-accent">Confirmed.</span>
                 </h2>
                 <div className="px-6 py-2 bg-accent/10 border border-accent/20 rounded-full w-fit mx-auto text-accent text-[10px] font-black uppercase tracking-widest mb-8">
                   Sequence: #{orderSuccess.orderNumber}
                 </div>
-                <p className="text-base md:text-lg text-text-muted font-light leading-relaxed max-w-md mx-auto">
-                  Your order has been started. Our support team will contact you
-                  via <span className="text-silk-white font-bold">WhatsApp</span>{" "}
-                  within the hour.
+                <p className={cn(
+                  "text-base md:text-lg font-light leading-relaxed max-w-md mx-auto",
+                  theme === "light" ? "text-slate-600" : "text-text-muted",
+                )}>
+                  Your order has been reserved. A support representative will contact you
+                  via <span className={cn("font-bold", theme === "light" ? "text-slate-900" : "text-silk-white")}>WhatsApp</span>{" "}
+                  shortly to finalize your delivery.
                 </p>
               </div>
 
-              <div className="pt-6 border-t border-border-dim">
+              <div className={cn(
+                "pt-6 border-t",
+                theme === "light" ? "border-slate-200" : "border-border-dim",
+              )}>
                 <button
                   onClick={() => navigate("/shop")}
-                  className="px-10 py-4 bg-white text-obsidian rounded-full font-display font-black uppercase tracking-[0.2em] text-[10px] hover:bg-accent hover:text-white hover:scale-105 transition-all shadow-xl"
+                  className={cn(
+                    "px-10 py-4 rounded-full font-display font-black uppercase tracking-[0.2em] text-[10px] hover:bg-accent hover:text-white hover:scale-105 transition-all shadow-xl border-2",
+                    theme === "light"
+                      ? "border-slate-300 bg-slate-50 text-slate-900 hover:bg-accent hover:text-white"
+                      : "border-slate-200 bg-white text-slate-900 hover:bg-accent hover:text-white",
+                  )}
                 >
-                  Return to Global Catalog
+                  Explore Catalog
                 </button>
-                <p className="mt-5 text-[9px] text-text-muted uppercase font-black tracking-[0.2em] animate-pulse">
+                <p className={cn(
+                  "mt-5 text-[9px] uppercase font-black tracking-[0.2em] animate-pulse",
+                  theme === "light" ? "text-slate-500" : "text-text-muted",
+                )}>
                   System Redirecting...
                 </p>
               </div>

@@ -85,15 +85,16 @@ const SmartSwitchSalesPage = () => {
       const orderData: CreateOrderData = {
         product_id: product?.id ?? 1,
         quantity,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
+        name: (formData.fullName || "").trim(),
         phone: formData.phone,
-        whatsapp: formData.whatsapp,
-        email: formData.email,
         address: formData.address,
         city: formData.city,
         state: formData.state,
-        notes: `DIRECT SALES PAGE. Model: ${selectedModel.name}. ${formData.additionalNotes ?? ""}`.trim(),
+        whatsapp: formData.whatsapp || undefined,
+        email: formData.email || undefined,
+        notes: formData.additionalNotes
+          ? `DIRECT SALES PAGE. Model: ${selectedModel.name}. ${formData.additionalNotes}`.trim()
+          : undefined,
       };
 
       await orderService.createOrder(orderData);

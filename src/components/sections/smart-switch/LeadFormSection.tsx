@@ -52,8 +52,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
       "w-full bg-obsidian border border-border-dim rounded-lg lg:rounded-xl px-4 lg:px-5 py-3.5 lg:py-4 text-sm lg:text-base text-silk-white placeholder:text-text-muted focus:border-accent/50 focus:ring-1 focus:ring-accent/50 outline-none transition-all shadow-inner resize-none [html[data-theme='light']_&]:bg-slate-50 [html[data-theme='light']_&]:border-slate-300 [html[data-theme='light']_&]:placeholder:text-slate-500";
 
     const [formData, setFormData] = React.useState({
-      firstName: "",
-      lastName: "",
+      fullName: "",
       email: "",
       phone: "",
       whatsapp: "",
@@ -174,35 +173,19 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
-                    <div className="space-y-2">
-                      <label className={labelClass}>
-                        First Name
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="e.g. Samuel"
-                        className={inputClass}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className={labelClass}>
-                        Last Name
-                      </label>
-                      <input
-                        required
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder="e.g. Okon"
-                        className={inputClass}
-                      />
-                    </div>
+                  <div className="space-y-2">
+                    <label className={labelClass}>
+                      Full name
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="e.g. Samuel Okon"
+                      className={inputClass}
+                    />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">

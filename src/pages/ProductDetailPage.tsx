@@ -117,6 +117,7 @@ const ProductDetailPage = () => {
   const [showFloatingCTA, setShowFloatingCTA] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const addToCart = useCartStore((state) => state.addToCart);
+  const updateQuantity = useCartStore((state) => state.updateQuantity);
   const cartItems = useCartStore((state) => state.cartItems);
 
   const [formData, setFormData] = useState({
@@ -137,6 +138,12 @@ const ProductDetailPage = () => {
   const isCurrentProductInCart = product
     ? cartItems.some((item) => item.id === product.id)
     : false;
+
+  const cartQuantityForProduct = product
+    ? (cartItems.find((item) => item.id === product.id)?.quantity ?? 0)
+    : 0;
+
+  const orderFormQuantity = isCurrentProductInCart ? cartQuantityForProduct : quantity;
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -190,6 +197,17 @@ const ProductDetailPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleOrderQuantityChange = (delta: number) => {
+    if (!product) return;
+    if (isCurrentProductInCart) {
+      const next = cartQuantityForProduct + delta;
+      if (next < 1) updateQuantity(product.id, 0);
+      else updateQuantity(product.id, next);
+    } else {
+      setQuantity((q) => Math.max(1, q + delta));
+    }
+  };
+
   const handleDirectOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!product) return;
@@ -198,17 +216,15 @@ const ProductDetailPage = () => {
     try {
       const orderData: CreateOrderData = {
         product_id: product.id,
-        quantity,
-        first_name: formData.fullName.split(" ")[0] || "",
-        last_name:
-          formData.fullName.split(" ").slice(1).join(" ") || "Customer",
+        quantity: orderFormQuantity,
+        name: formData.fullName.trim(),
         phone: formData.phone,
-        whatsapp: formData.whatsapp,
-        email: formData.email,
         address: formData.address,
         city: formData.city || "Lagos",
         state: formData.state,
-        notes: formData.notes,
+        whatsapp: formData.whatsapp || undefined,
+        email: formData.email || undefined,
+        notes: formData.notes || undefined,
       };
 
       await orderService.createOrder(orderData);
@@ -748,17 +764,17 @@ const ProductDetailPage = () => {
                       <div className="flex items-center gap-4 bg-obsidian-surface border border-border-dim p-2 rounded-xl">
                         <button
                           type="button"
-                          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                          onClick={() => handleOrderQuantityChange(-1)}
                           className="w-8 h-8 rounded-lg bg-obsidian-surface hover:bg-obsidian-muted flex items-center justify-center text-silk-white transition-all"
                         >
                           <Minus size={14} />
                         </button>
                         <span className="text-lg font-display font-bold text-silk-white w-8 text-center tabular-nums">
-                          {quantity}
+                          {orderFormQuantity}
                         </span>
                         <button
                           type="button"
-                          onClick={() => setQuantity(quantity + 1)}
+                          onClick={() => handleOrderQuantityChange(1)}
                           className="w-8 h-8 rounded-lg bg-obsidian-surface hover:bg-obsidian-muted flex items-center justify-center text-silk-white transition-all"
                         >
                           <Plus size={14} />
