@@ -80,16 +80,18 @@ const Navbar = () => {
               </Link>
             ))}
 
-            <button
-              onClick={toggleTheme}
-              className="relative group p-2 text-silk-white/70 hover:text-accent transition-colors"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            {!isCatalogueRoute && (
+              <button
+                onClick={toggleTheme}
+                className="relative group p-2 text-silk-white/70 hover:text-accent transition-colors"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            )}
 
             {!isCatalogueRoute && (
               <Link to="/contact">
@@ -101,16 +103,18 @@ const Navbar = () => {
           </div>
 
           <div className="lg:hidden flex items-center gap-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-silk-white/70 hover:text-accent transition-colors"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            {!isCatalogueRoute && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-silk-white/70 hover:text-accent transition-colors"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            )}
 
             <button
               className="p-2.5 rounded-lg bg-silk-white/5 border border-border-dim hover:border-accent hover:bg-accent/10 text-silk-white hover:text-accent transition-all duration-300"
