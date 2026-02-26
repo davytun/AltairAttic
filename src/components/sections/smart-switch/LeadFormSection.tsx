@@ -124,9 +124,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                   className="space-y-4 lg:space-y-5"
                 >
                   <div className="space-y-2.5">
-                    <label className={labelClass}>
-                      Target Hardware
-                    </label>
+                    <label className={labelClass}>Target Hardware</label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 lg:gap-3">
                       {models.map((model) => (
                         <button
@@ -174,9 +172,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                   </div>
 
                   <div className="space-y-2">
-                    <label className={labelClass}>
-                      Name
-                    </label>
+                    <label className={labelClass}>Name</label>
                     <input
                       required
                       type="text"
@@ -190,9 +186,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        Phone Number
-                      </label>
+                      <label className={labelClass}>Phone Number</label>
                       <input
                         required
                         type="tel"
@@ -204,9 +198,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        WhatsApp (Optional)
-                      </label>
+                      <label className={labelClass}>WhatsApp (Optional)</label>
                       <input
                         type="tel"
                         name="whatsapp"
@@ -233,25 +225,21 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                   </div>
 
                   <div className="space-y-2">
-                    <label className={labelClass}>
-                      Full Delivery Address
-                    </label>
+                    <label className={labelClass}>Full Delivery Address</label>
                     <input
                       required
                       type="text"
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
-                      placeholder="House No, Street Name..."
+                      placeholder="e.g. 15 Ikoyi Road, Flat 2"
                       className={inputClass}
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        City
-                      </label>
+                      <label className={labelClass}>City</label>
                       <input
                         required
                         type="text"
@@ -263,9 +251,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        State
-                      </label>
+                      <label className={labelClass}>State</label>
                       <div className="relative">
                         <select
                           name="state"
@@ -307,7 +293,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
                       name="additionalNotes"
                       value={formData.additionalNotes}
                       onChange={handleChange}
-                      placeholder="Special delivery instructions..."
+                      placeholder="e.g. Deliver to the back entrance"
                       rows={3}
                       className={textareaClass}
                     />

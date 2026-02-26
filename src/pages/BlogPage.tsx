@@ -138,7 +138,7 @@ const BlogPage = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
-                placeholder="Search articles..."
+                placeholder="e.g. smart locks or design tips"
                 className="w-full bg-obsidian-muted border border-border-dim rounded-xl py-3 pl-12 pr-4 text-sm text-silk-white placeholder:text-silk-white/20 focus:outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/40 transition-all font-light"
               />
             </div>

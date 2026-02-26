@@ -143,7 +143,9 @@ const ProductDetailPage = () => {
     ? (cartItems.find((item) => item.id === product.id)?.quantity ?? 0)
     : 0;
 
-  const orderFormQuantity = isCurrentProductInCart ? cartQuantityForProduct : quantity;
+  const orderFormQuantity = isCurrentProductInCart
+    ? cartQuantityForProduct
+    : quantity;
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -539,10 +541,11 @@ const ProductDetailPage = () => {
                     ([key, value], idx, arr) => (
                       <div
                         key={idx}
-                        className={`grid grid-cols-2 p-5 ${idx !== arr.length - 1
+                        className={`grid grid-cols-2 p-5 ${
+                          idx !== arr.length - 1
                             ? "border-b border-border-dim"
                             : ""
-                          }`}
+                        }`}
                       >
                         <dt className="text-xs uppercase tracking-wider text-text-muted font-semibold">
                           {key}
@@ -647,7 +650,7 @@ const ProductDetailPage = () => {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleFormChange}
-                        placeholder="Your Name"
+                        placeholder="e.g. John Doe"
                         className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
@@ -660,7 +663,7 @@ const ProductDetailPage = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleFormChange}
-                        placeholder="+234..."
+                        placeholder="e.g. +234 800 000 0000"
                         className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
@@ -673,7 +676,7 @@ const ProductDetailPage = () => {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={handleFormChange}
-                        placeholder="+234..."
+                        placeholder="e.g. +234 800 000 0000"
                         className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
@@ -687,7 +690,7 @@ const ProductDetailPage = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleFormChange}
-                        placeholder="your@email.com"
+                        placeholder="e.g. john@example.com"
                         className="w-full h-12 bg-obsidian-surface border border-border-dim rounded-xl px-4 outline-none focus:border-accent transition-colors text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
@@ -736,7 +739,7 @@ const ProductDetailPage = () => {
                         value={formData.address}
                         onChange={handleFormChange}
                         rows={3}
-                        placeholder="Full street address..."
+                        placeholder="e.g. 123 Main St, Apartment 4B"
                         className="w-full bg-obsidian-surface border border-border-dim rounded-xl p-4 outline-none focus:border-accent transition-colors resize-none text-sm text-silk-white placeholder:text-text-muted"
                       />
                     </div>
@@ -750,7 +753,7 @@ const ProductDetailPage = () => {
                         value={formData.notes}
                         onChange={handleFormChange}
                         rows={3}
-                        placeholder="Notes..."
+                        placeholder="Any special instructions for your delivery"
                         className="w-full bg-obsidian border border-border-dim rounded-xl p-4 outline-none focus:border-accent transition-colors resize-none text-sm text-silk-white"
                       />
                     </div>

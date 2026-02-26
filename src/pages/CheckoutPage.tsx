@@ -184,7 +184,7 @@ const CheckoutPage: React.FC = () => {
                         value={formData.fullName}
                         onChange={handleChange}
                         className={inputClass}
-                        placeholder="Your name"
+                        placeholder="e.g. Alexander Sterling"
                       />
                     </div>
                     <div className="space-y-2">
@@ -196,7 +196,7 @@ const CheckoutPage: React.FC = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         className={inputClass}
-                        placeholder="Your phone number"
+                        placeholder="e.g. +234 812 345 6789"
                       />
                     </div>
                     <div className="space-y-2">
@@ -208,7 +208,7 @@ const CheckoutPage: React.FC = () => {
                         value={formData.whatsapp}
                         onChange={handleChange}
                         className={inputClass}
-                        placeholder="Your WhatsApp number"
+                        placeholder="e.g. +234 812 345 6789"
                       />
                     </div>
                     <div className="md:col-span-2 space-y-2">
@@ -220,7 +220,7 @@ const CheckoutPage: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         className={inputClass}
-                        placeholder="Your email address"
+                        placeholder="e.g. alex@example.com"
                       />
                     </div>
                   </div>
@@ -250,7 +250,7 @@ const CheckoutPage: React.FC = () => {
                         value={formData.address}
                         onChange={handleChange}
                         className={textareaClass}
-                        placeholder="Your delivery address"
+                        placeholder="e.g. 45 Marine Road, Apapa"
                       />
                     </div>
                     <div className="space-y-2">
@@ -262,13 +262,11 @@ const CheckoutPage: React.FC = () => {
                         value={formData.city}
                         onChange={handleChange}
                         className={inputClass}
-                        placeholder="Your city"
+                        placeholder="e.g. Lagos"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        State
-                      </label>
+                      <label className={labelClass}>State</label>
                       <div className="relative">
                         <select
                           name="state"

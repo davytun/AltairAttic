@@ -192,7 +192,7 @@ export const Contact = ({
                           setFormData({ ...formData, name: e.target.value })
                         }
                         className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
-                        placeholder="Enter name"
+                        placeholder="e.g. John Doe"
                       />
                     </div>
                     <div className="space-y-4">
@@ -207,7 +207,7 @@ export const Contact = ({
                           setFormData({ ...formData, email: e.target.value })
                         }
                         className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
-                        placeholder="your@email.com"
+                        placeholder="e.g. john@example.com"
                       />
                     </div>
                     <div className="space-y-4">
@@ -222,7 +222,7 @@ export const Contact = ({
                           setFormData({ ...formData, message: e.target.value })
                         }
                         className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
-                        placeholder="Tell us your biggest tech challenge" 
+                        placeholder="Tell us your biggest tech challenge"
                       />
                     </div>
 

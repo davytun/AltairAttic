@@ -77,7 +77,7 @@ export const ContactFormBuilder = () => {
             <input
               type="email"
               name="email"
-              placeholder="alex@domain.com"
+              placeholder="e.g. alexander@example.com"
               className={inputClasses}
               value={formData.email}
               onChange={(e) =>
@@ -95,7 +95,7 @@ export const ContactFormBuilder = () => {
           <input
             type="tel"
             name="phone"
-            placeholder="+234 000 000 0000"
+            placeholder="e.g. +234 812 345 6789"
             className={inputClasses}
             value={formData.phone}
             onChange={(e) =>
@@ -111,7 +111,7 @@ export const ContactFormBuilder = () => {
           </span>
           <textarea
             name="message"
-            placeholder="How can we help you?"
+            placeholder="How can we help you today?"
             rows={4}
             className={`${inputClasses} resize-none`}
             value={formData.message}

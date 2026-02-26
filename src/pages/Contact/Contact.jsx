@@ -32,7 +32,7 @@ const Contact = () => {
         "service_hoyq6xf", // Your email.js Service ID
         "template_2zbt1dc", // Your email.js Template ID
         emailData,
-        "xTVbm4gOtEOKY8Lx9" // Your email.js User ID
+        "xTVbm4gOtEOKY8Lx9", // Your email.js User ID
       )
       .then((response) => {
         console.log("Email sent:", response.status, response.text);
@@ -112,7 +112,7 @@ const Contact = () => {
           type="text"
           className="input-field"
           name="name"
-          placeholder="Your Name"
+          placeholder="e.g. Jane Smith"
           value={formData.name}
           onChange={handleChange}
           required
@@ -121,7 +121,7 @@ const Contact = () => {
           type="email"
           className="input-field"
           name="email"
-          placeholder="Your Email"
+          placeholder="e.g. jane@example.com"
           value={formData.email}
           onChange={handleChange}
           required
@@ -130,7 +130,7 @@ const Contact = () => {
           type="text"
           className="input-field"
           name="phone"
-          placeholder="Your Phone Number"
+          placeholder="e.g. +234 812 345 6789"
           value={formData.phone}
           onChange={handleChange}
           required
@@ -138,7 +138,7 @@ const Contact = () => {
         <textarea
           className="textarea-field"
           name="message"
-          placeholder="Your Message"
+          placeholder="How can we help you today?"
           value={formData.message}
           onChange={handleChange}
           required
