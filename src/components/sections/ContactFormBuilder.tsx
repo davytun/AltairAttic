@@ -56,7 +56,7 @@ export const ContactFormBuilder = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-2">
             <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
-              Full Name
+              Name
             </span>
             <input
               type="text"

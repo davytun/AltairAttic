@@ -175,7 +175,7 @@ const LeadFormSection = React.forwardRef<HTMLDivElement, LeadFormSectionProps>(
 
                   <div className="space-y-2">
                     <label className={labelClass}>
-                      Full name
+                      Name
                     </label>
                     <input
                       required
