@@ -75,7 +75,8 @@ const CheckoutPage: React.FC = () => {
           quantity: Math.max(1, Number(item.quantity) || 1),
         }))
         .filter(
-          (item) => Number.isFinite(item.id) && item.id > 0 && item.quantity >= 1,
+          (item) =>
+            Number.isFinite(item.id) && item.id > 0 && item.quantity >= 1,
         );
 
       if (products.length === 0) {
@@ -175,9 +176,7 @@ const CheckoutPage: React.FC = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                     <div className="md:col-span-2 space-y-2">
-                      <label className={labelClass}>
-                        Full Legal Name
-                      </label>
+                      <label className={labelClass}>Name</label>
                       <input
                         type="text"
                         name="fullName"
@@ -189,9 +188,7 @@ const CheckoutPage: React.FC = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        Primary Line
-                      </label>
+                      <label className={labelClass}>Phone number </label>
                       <input
                         type="tel"
                         name="phone"
@@ -203,9 +200,7 @@ const CheckoutPage: React.FC = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        WhatsApp Direct
-                      </label>
+                      <label className={labelClass}>WhatsApp number</label>
                       <input
                         type="tel"
                         name="whatsapp"
@@ -217,9 +212,7 @@ const CheckoutPage: React.FC = () => {
                       />
                     </div>
                     <div className="md:col-span-2 space-y-2">
-                      <label className={labelClass}>
-                        Email Address
-                      </label>
+                      <label className={labelClass}>Email Address</label>
                       <input
                         type="email"
                         name="email"
@@ -249,9 +242,7 @@ const CheckoutPage: React.FC = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                     <div className="md:col-span-2 space-y-2">
-                      <label className={labelClass}>
-                        Shipping Address
-                      </label>
+                      <label className={labelClass}>Shipping Address</label>
                       <textarea
                         name="address"
                         required
@@ -263,9 +254,7 @@ const CheckoutPage: React.FC = () => {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>
-                        City Hub
-                      </label>
+                      <label className={labelClass}>City Hub</label>
                       <input
                         type="text"
                         name="city"
@@ -278,7 +267,7 @@ const CheckoutPage: React.FC = () => {
                     </div>
                     <div className="space-y-2">
                       <label className={labelClass}>
-                        Regional Sector (State)
+                        State
                       </label>
                       <div className="relative">
                         <select
@@ -303,7 +292,6 @@ const CheckoutPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
               </form>
             </div>
 
@@ -469,30 +457,44 @@ const CheckoutPage: React.FC = () => {
               </motion.div>
 
               <div className="space-y-4">
-                <h2 className={cn(
-                  "text-4xl md:text-6xl font-display font-black uppercase leading-[0.85] mb-3",
-                  theme === "light" ? "text-slate-900" : "text-silk-white",
-                )}>
+                <h2
+                  className={cn(
+                    "text-4xl md:text-6xl font-display font-black uppercase leading-[0.85] mb-3",
+                    theme === "light" ? "text-slate-900" : "text-silk-white",
+                  )}
+                >
                   Order <br />
                   <span className="text-accent">Confirmed.</span>
                 </h2>
                 <div className="px-6 py-2 bg-accent/10 border border-accent/20 rounded-full w-fit mx-auto text-accent text-[10px] font-black uppercase tracking-widest mb-8">
                   Sequence: #{orderSuccess.orderNumber}
                 </div>
-                <p className={cn(
-                  "text-base md:text-lg font-light leading-relaxed max-w-md mx-auto",
-                  theme === "light" ? "text-slate-600" : "text-text-muted",
-                )}>
-                  Your order has been reserved. A support representative will contact you
-                  via <span className={cn("font-bold", theme === "light" ? "text-slate-900" : "text-silk-white")}>WhatsApp</span>{" "}
+                <p
+                  className={cn(
+                    "text-base md:text-lg font-light leading-relaxed max-w-md mx-auto",
+                    theme === "light" ? "text-slate-600" : "text-text-muted",
+                  )}
+                >
+                  Your order has been reserved. A support representative will
+                  contact you via{" "}
+                  <span
+                    className={cn(
+                      "font-bold",
+                      theme === "light" ? "text-slate-900" : "text-silk-white",
+                    )}
+                  >
+                    WhatsApp
+                  </span>{" "}
                   shortly to finalize your delivery.
                 </p>
               </div>
 
-              <div className={cn(
-                "pt-6 border-t",
-                theme === "light" ? "border-slate-200" : "border-border-dim",
-              )}>
+              <div
+                className={cn(
+                  "pt-6 border-t",
+                  theme === "light" ? "border-slate-200" : "border-border-dim",
+                )}
+              >
                 <button
                   onClick={() => navigate("/shop")}
                   className={cn(
@@ -504,10 +506,12 @@ const CheckoutPage: React.FC = () => {
                 >
                   Explore Catalog
                 </button>
-                <p className={cn(
-                  "mt-5 text-[9px] uppercase font-black tracking-[0.2em] animate-pulse",
-                  theme === "light" ? "text-slate-500" : "text-text-muted",
-                )}>
+                <p
+                  className={cn(
+                    "mt-5 text-[9px] uppercase font-black tracking-[0.2em] animate-pulse",
+                    theme === "light" ? "text-slate-500" : "text-text-muted",
+                  )}
+                >
                   System Redirecting...
                 </p>
               </div>
