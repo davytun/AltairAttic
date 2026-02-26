@@ -27,7 +27,8 @@ const Navbar = () => {
   const location = useLocation();
 
   const isCatalogueRoute =
-    location.pathname === "/catalogue" || location.pathname.startsWith("/catalogue/");
+    location.pathname === "/catalogue" ||
+    location.pathname.startsWith("/catalogue/");
   const navLinks = isCatalogueRoute ? catalogueNavLinks : fullNavLinks;
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const Navbar = () => {
 
             {!isCatalogueRoute && (
               <Link to="/contact">
-                <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500 text-silk-white">
+                <button className="text-[9px] lg:text-[10px] uppercase font-black tracking-[0.4em] px-6 lg:px-8 py-2.5 lg:py-3 rounded-xl bg-accent/10 border border-accent/30 hover:bg-accent hover:border-accent hover:text-obsidian hover:shadow-[0_0_20px_rgba(139,92,246,0.4)] transition-all duration-500 text-silk-white [html[data-theme='light']_&]:bg-accent/5 [html[data-theme='light']_&]:border-accent/20">
                   Contact Us
                 </button>
               </Link>
@@ -155,7 +156,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.path}
-                    className="text-5xl font-display font-black uppercase tracking-tight text-silk-white hover:text-accent transition-colors"
+                    className="text-5xl font-display font-black uppercase tracking-tight text-silk-white hover:text-accent transition-colors [html[data-theme='light']_&]:text-obsidian"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -168,7 +169,10 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
                 >
-                  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     <button className="text-[10px] uppercase font-black tracking-[0.4em] mt-12 px-16 py-5 rounded-xl bg-accent text-obsidian hover:bg-white transition-all duration-500 [html[data-theme='light']_&:hover]:bg-obsidian [html[data-theme='light']_&:hover]:text-silk-white">
                       Start Inquiry
                     </button>

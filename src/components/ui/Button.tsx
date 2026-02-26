@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-secondary text-[#0A1128] hover:shadow-[0_0_20px_rgba(0,212,255,0.5)] active:scale-95",
+          "bg-secondary text-obsidian hover:shadow-[0_0_20px_var(--color-brand-dim)] active:scale-95",
         secondary:
-          "bg-silk-white/5 border border-border-dim text-silk-white hover:bg-silk-white/10 backdrop-blur-md active:scale-95",
+          "bg-obsidian-muted border border-border-dim text-silk-white hover:bg-obsidian-surface backdrop-blur-md active:scale-95",
         outline:
-          "border-2 border-secondary text-secondary hover:bg-secondary hover:text-[#0A1128] active:scale-95",
+          "border-2 border-secondary text-secondary hover:bg-secondary hover:text-obsidian active:scale-95",
         ghost:
           "hover:bg-silk-white/5 text-silk-white/60 hover:text-silk-white active:scale-95",
         link: "text-secondary underline-offset-4 hover:underline",

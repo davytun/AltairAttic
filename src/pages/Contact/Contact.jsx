@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import emailjs from "emailjs-com";
+import { contactService } from "../../services/contactService";
 import "./Contact.css";
 
 const Contact = () => {
@@ -17,34 +17,18 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const emailData = {
-      from_name: formData.name,
-      email: formData.email, // Corresponds to {{email}} in the template
-      number: formData.phone, // Corresponds to {{number}} in the template
-      message: formData.message,
-    };
-
-    emailjs
-      .send(
-        "service_hoyq6xf", // Your email.js Service ID
-        "template_2zbt1dc", // Your email.js Template ID
-        emailData,
-        "xTVbm4gOtEOKY8Lx9", // Your email.js User ID
-      )
-      .then((response) => {
-        console.log("Email sent:", response.status, response.text);
-        setFormStatus("success");
-      })
-      .catch((error) => {
-        console.error("Email error:", error);
-        setFormStatus("error");
-      });
-
-    // Clear form fields after submission
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    try {
+      await contactService.submitContact(formData);
+      setFormStatus("success");
+      // Clear form fields after submission
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Contact submission error:", error);
+      setFormStatus("error");
+    }
   };
 
   return (

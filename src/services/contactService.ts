@@ -3,6 +3,7 @@ import apiClient from "@/lib/api";
 export interface ContactData {
   name: string;
   email: string;
+  phone?: string;
   message: string;
 }
 

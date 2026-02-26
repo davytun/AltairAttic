@@ -6,7 +6,7 @@ export const ContactHero = () => {
       {/* Background Decor */}
       <div className="absolute inset-0 z-0 opacity-20">
         <div className="absolute top-0 right-0 w-[60vw] h-[60vw] bg-accent/10 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-accent/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
       </div>
 
       <div className="container-luxury relative z-10 px-[4vw]">
@@ -17,13 +17,13 @@ export const ContactHero = () => {
             transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
             className="flex flex-col items-center"
           >
-            <span className="text-label mb-10 px-8 py-2 border border-white/10 rounded-full tracking-[0.5em] uppercase text-[10px] font-black">
+            <span className="text-label mb-10 px-8 py-2 border border-border-dim rounded-full tracking-[0.5em] uppercase text-[10px] font-black">
               Seamless Engagement
             </span>
             <h1 className="text-huge md:text-[12vw] font-display font-black leading-none uppercase tracking-tighter mb-12">
               Initiate <br /> <span className="text-accent">Dialogue.</span>
             </h1>
-            <p className="max-w-2xl text-xl text-white/30 font-light leading-relaxed tracking-wide text-balance">
+            <p className="max-w-2xl text-xl text-text-muted font-light leading-relaxed tracking-wide text-balance">
               Whether you're looking to automate your environment or engineer a
               bespoke software solution, our team is ready to architecture your
               vision.

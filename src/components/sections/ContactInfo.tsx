@@ -29,25 +29,25 @@ export const ContactInfo = () => {
   ];
 
   return (
-    <section className="bg-obsidian py-32 border-t border-white/5">
+    <section className="bg-obsidian py-32 border-t border-border-dim">
       <div className="container-luxury px-[4vw]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {contactDetails.map((detail, i) => (
             <div
               key={i}
-              className="group p-10 rounded-[2.5rem] bg-obsidian-surface border border-white/5 hover:border-accent/30 transition-all duration-700"
+              className="group p-10 rounded-[2.5rem] bg-obsidian-surface border border-border-dim hover:border-accent/30 transition-all duration-700"
             >
               <div className="w-12 h-12 rounded-2xl bg-accent/5 flex items-center justify-center mb-8 group-hover:bg-accent group-hover:rotate-12 transition-all duration-700">
                 <detail.icon className="w-5 h-5 text-accent group-hover:text-obsidian transition-colors" />
               </div>
               <div className="space-y-2">
-                <span className="text-[10px] font-black uppercase tracking-widest text-white/20">
+                <span className="text-[10px] font-black uppercase tracking-widest text-text-muted/40">
                   {detail.label}
                 </span>
-                <h4 className="text-xl font-display uppercase tracking-tight text-white/90">
+                <h4 className="text-xl font-display uppercase tracking-tight text-silk-white">
                   {detail.value}
                 </h4>
-                <p className="text-xs text-white/40 font-light">
+                <p className="text-xs text-text-muted font-light">
                   {detail.subValue}
                 </p>
               </div>

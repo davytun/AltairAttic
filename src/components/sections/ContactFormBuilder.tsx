@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import emailjs from "emailjs-com";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { contactService } from "@/services/contactService";
 
 export const ContactFormBuilder = () => {
   const [formData, setFormData] = useState({
@@ -15,47 +15,32 @@ export const ContactFormBuilder = () => {
     null,
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setFormStatus(null);
 
-    const emailData = {
-      from_name: formData.name,
-      email: formData.email,
-      number: formData.phone,
-      message: formData.message,
-    };
-
-    emailjs
-      .send(
-        "service_hoyq6xf",
-        "template_2zbt1dc",
-        emailData,
-        "xTVbm4gOtEOKY8Lx9",
-      )
-      .then(() => {
-        setFormStatus("success");
-        setFormData({ name: "", email: "", phone: "", message: "" });
-      })
-      .catch((error) => {
-        console.error("Email error:", error);
-        setFormStatus("error");
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+    try {
+      await contactService.submitContact(formData);
+      setFormStatus("success");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Contact submission error:", error);
+      setFormStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inputClasses =
-    "w-full bg-transparent border-b border-border-dim py-6 text-xl font-light text-silk-white focus:border-accent focus:outline-hidden transition-all duration-700 placeholder:text-silk-white/10";
+    "w-full bg-transparent border-b border-border-dim py-6 text-xl font-light text-silk-white focus:border-accent focus:outline-hidden transition-all duration-700 placeholder:text-text-muted/50";
 
   return (
     <div className="relative">
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
+            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted/60">
               Name
             </span>
             <input
@@ -71,7 +56,7 @@ export const ContactFormBuilder = () => {
             />
           </div>
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
+            <span className="text-[10px] font-black uppercase tracking-widest text-text-muted/60">
               Email Address
             </span>
             <input
@@ -89,7 +74,7 @@ export const ContactFormBuilder = () => {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
+          <span className="text-[10px] font-black uppercase tracking-widest text-text-muted/60">
             Phone Number
           </span>
           <input
@@ -106,7 +91,7 @@ export const ContactFormBuilder = () => {
         </div>
 
         <div className="space-y-2">
-          <span className="text-[10px] font-black uppercase tracking-widest text-silk-white/20">
+          <span className="text-[10px] font-black uppercase tracking-widest text-text-muted/60">
             Your Message
           </span>
           <textarea
@@ -145,8 +130,8 @@ export const ContactFormBuilder = () => {
             exit={{ opacity: 0, y: 20 }}
             className={`mt-12 p-8 rounded-3xl flex items-center gap-6 border ${
               formStatus === "success"
-                ? "bg-green-500/5 border-green-500/20 text-green-400"
-                : "bg-red-500/5 border-red-500/20 text-red-400"
+                ? "bg-green-500/5 border-green-500/20 text-green-600 dark:text-green-400"
+                : "bg-red-500/5 border-red-500/20 text-red-600 dark:text-red-400"
             }`}
           >
             {formStatus === "success" ? (

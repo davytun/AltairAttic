@@ -22,6 +22,7 @@ export const Contact = ({
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: initialSubject,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -41,7 +42,7 @@ export const Contact = ({
     try {
       await contactService.submitContact(formData);
       setIsSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (err: any) {
       setError("Failed to send message. Please try again.");
@@ -78,7 +79,7 @@ export const Contact = ({
                 </span>
                 .
               </h2>
-              <p className="text-lg font-light text-light-gray leading-relaxed max-w-sm">
+              <p className="text-lg font-light text-text-muted leading-relaxed max-w-sm">
                 Tell us what you need. We'll get back to you within 24 hours
                 with a clear plan and honest advice.
               </p>
@@ -163,7 +164,7 @@ export const Contact = ({
                       <h3 className="text-2xl font-display uppercase tracking-tight text-silk-white">
                         Message Sent!
                       </h3>
-                      <p className="text-silk-white/50 text-sm">
+                      <p className="text-text-muted text-sm">
                         Thanks for reaching out. We'll reply within 24 hours.
                       </p>
                     </div>
@@ -191,7 +192,7 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/40 text-silk-white [html[data-theme='light']_&]:border-black/20"
                         placeholder="e.g. John Doe"
                       />
                     </div>
@@ -206,8 +207,23 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, email: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/40 text-silk-white [html[data-theme='light']_&]:border-black/20"
                         placeholder="e.g. john@example.com"
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <label className="text-[9px] uppercase tracking-[0.4em] text-text-muted font-black">
+                        Phone Number
+                      </label>
+                      <input
+                        required
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all placeholder:text-text-muted/40 text-silk-white [html[data-theme='light']_&]:border-black/20"
+                        placeholder="e.g. +234 812 345 6789"
                       />
                     </div>
                     <div className="space-y-4">
@@ -221,7 +237,7 @@ export const Contact = ({
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
                         }
-                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/70 text-silk-white [html[data-theme='light']_&]:border-black/20"
+                        className="w-full bg-transparent border-b border-border-dim py-4 text-xl font-light focus:outline-none focus:border-accent transition-all resize-none placeholder:text-text-muted/40 text-silk-white [html[data-theme='light']_&]:border-black/20"
                         placeholder="Tell us your biggest tech challenge"
                       />
                     </div>

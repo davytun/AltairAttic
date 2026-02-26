@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const DEFAULT_PROD_API_BASE_URL = "VITE_API_BASE_URL=https://demo.altairattic.net/altair-attic/api/public";
+const DEFAULT_PROD_API_BASE_URL = "https://demo.altairattic.net/altair-attic/api/public";
 const envApiBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").trim();
 const envIsLocalhost = /localhost|127\.0\.0\.1/i.test(envApiBaseUrl);
 
